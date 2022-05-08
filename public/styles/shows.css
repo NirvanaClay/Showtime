@@ -1,0 +1,66 @@
+.show-index h2 {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.show-index .shows {
+  padding: 0 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25% 25% 25% 25%;
+      grid-template-columns: 25% 25% 25% 25%;
+}
+
+.show-index .shows .show {
+  margin: 0 auto;
+}
+
+.show-index .shows .show h3 {
+  height: 50px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.show-index .shows .show img {
+  display: block;
+  width: 150px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.show-index .shows .show .stars-container {
+  width: 150px;
+  margin: 10px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.show-index .shows .show .stars-container .fa-star {
+  font-size: 1.5rem;
+  color: #ffe600;
+}
+
+.show-index .shows .show .stars-container button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  all: unset;
+}
+
+.show-index .shows .show form input[type='submit'] {
+  width: 90px;
+  height: 45px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+/*# sourceMappingURL=shows.css.map */

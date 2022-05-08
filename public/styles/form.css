@@ -1,0 +1,46 @@
+.form {
+  padding: 0 100px;
+}
+
+.form input {
+  width: 300px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.form button {
+  width: 100px;
+  height: 50px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  border-radius: 5px;
+  background: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.form .results {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25% 25% 25% 25%;
+      grid-template-columns: 25% 25% 25% 25%;
+}
+
+.form .results .result {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form .results .result img {
+  width: 200px;
+  height: 250px;
+}
+
+.form .results .result input[type='submit'] {
+  cursor: pointer;
+}
+/*# sourceMappingURL=form.css.map */

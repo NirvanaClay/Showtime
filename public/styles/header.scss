@@ -1,0 +1,111 @@
+.navbar{
+  display: flex;
+  align-items: center;
+  max-width: 100vw;
+  height: 125px;
+  background: white;
+  margin: 0;
+  // padding: 0 50px;
+  font-family: 'Source Sans Pro', sans-serif;
+  ul{
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    li{
+      a{
+        font-size: 1.3rem;
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        display: block;
+        &:hover{
+          color: red;
+          transition: color .2s ease-in-out;
+        }
+      }
+      input{
+        border: none;
+        background: white;
+        font-size: 1.3rem;
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        display: block;
+      }
+    }
+  }
+  .sandwich{
+    display: none;
+    .fas{
+      font-size: 1.7rem;
+    }
+  }
+}
+.small-menu{
+  display: none;
+  ul{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li{
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid #9e9e9e;
+      a{
+        font-size: 1.3rem;
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        display: block;
+        &:hover{
+          color: red($color: #000000);
+          transition: color .2s ease-in-out;
+        }
+      }
+      input{
+        margin: auto;
+        border: none;
+        background: white;
+        font-size: 1.3rem;
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        display: block;
+      }
+    }
+  }
+}
+
+@media(max-width: 720px) {
+  .navbar{
+    padding: 0;
+    ul{
+      display: flex;
+      flex-direction: column;
+      li{
+        width: 100%;
+      }
+    }
+    .small-container{ 
+      position: absolute;
+      right: 0;
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .cart{
+        width: 50%;
+      }
+      .sandwich{
+        color: #696969;
+        font-size: 36px;
+        display: flex;
+      }
+    }
+  }
+}
