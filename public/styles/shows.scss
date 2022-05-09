@@ -5,9 +5,11 @@
   }
   .shows{
     padding: 0 50px;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    display: flex;
+    // display: grid;
+    // grid-template-columns: 25% 25% 25% 25%;
     .show{
+      width: 25%;
       margin: 0 auto;
       h3{
         height: 50px;

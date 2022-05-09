@@ -20,7 +20,7 @@ import Greeting from './components/Greeting.js'
 import $ from 'jquery'
 import axios from 'axios';
 
-const Home = ({ loginStatus, name, userId, loggedInUser, setUser, childToParent, user }) => {
+const Home = ({ loginStatus, name, userId, loggedInUser, setUser, childToParent, user, Link }) => {
   const [results, getResults] = useState([])
   const [details, getDetails] = useState([])
   const [shows, getShows] = useState([])
@@ -30,10 +30,6 @@ const Home = ({ loginStatus, name, userId, loggedInUser, setUser, childToParent,
     setStreamingServices(streamResults)
     console.log(streamingServices)
   }
-
-  // useEffect(() => {
-  //   setStreamingServices([...streamingServices, newStreamingServices])
-  // }, [])
 
   useEffect(() => {
     console.log("On home effect user is " + loggedInUser)
@@ -58,6 +54,7 @@ const Home = ({ loginStatus, name, userId, loggedInUser, setUser, childToParent,
     e.preventDefault()
     const res = await fetch(`https://imdb-api.com/en/API/SearchSeries/k_j0x59844/${e.target[0].value}`)
     const data = await res.json()
+    console.log(data.results)
     getResults(data.results)
   }
 
@@ -73,17 +70,15 @@ const Home = ({ loginStatus, name, userId, loggedInUser, setUser, childToParent,
       {streamingServices.length > 0 &&
         <h1 className='streams-heading'>Streaming on:</h1>
       } 
-      {streamingServices.length > 0 ? 
+      {streamingServices.length > 0 &&
       streamingServices.map((streamingService, index) => (
         <div key={index}>
           <h2 className='streaming-services' key={index}>{streamingService}</h2>
         </div>
-      )) : <h1 className='streams-heading'>No streaming services</h1>} 
-      {/* <h1>{streamingService}</h1> */}
-      <Greeting loginStatus={loginStatus} name={name} />
+      ))}
+      {loggedInUser && <Greeting loginStatus={loginStatus} name={name} />}
       <Form results={results} details={details} getResults={fetchResults} getDetails={fetchDetails} shows={shows} getShows={getShows} loggedInUser={loggedInUser} setStreamingServices={setStreamingServices} streamingServices={streamingServices} getStreamResults={getStreamResults} />
-      <ShowList shows={shows} getShows={getShows} />
-      {/* <button onClick={checkStreaming}>Click me</button> */}
+      <ShowList shows={shows} getShows={getShows} Link={Link} />
     </div>
   );
 }

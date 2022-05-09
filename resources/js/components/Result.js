@@ -6,7 +6,7 @@ const axios = require("axios");
 
 const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser, setStreamingServices, streamingServices, getStreamResults }) => {
 
-  console.log(loggedInUser)
+  console.log("id is " + id)
   const myShow = async (e) => {
     e.preventDefault();
     console.log("While trying to add show user Id is " + loggedInUser.id)
@@ -41,8 +41,10 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
     e.preventDefault()
     console.log(`Keyword for stream check is ${title}`)
     // const streamLocations=[]
-    let results=[]
+    let showToCheck = null
+    let results = []
     const streamingServicesList=[
+      // 'peacock',
       'netflix',
       'hulu',
       'prime',
@@ -69,19 +71,46 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
       }).then(res =>{
         if(res.data.results.length > 0){
           for(let result of res.data.results){
-            for(let key of Object.keys(result.streamingInfo)){
-              results.push(key)
-              console.log(key)
+            if(result.imdbID == id){
+              showToCheck = result
+              console.log("Show to check info:")
+              console.log(showToCheck)
+              console.log(result)
+            }
+            console.log("After confirming show to check:")
+            console.log(showToCheck)
+            if(showToCheck !== null){
+              for(let key of Object.keys(showToCheck.streamingInfo)){
+                results.push(key)
+              }
             }
           }
           results = [...new Set(results)]
           const usableResults = results.filter(result => streamingServicesList.includes(result))
           getStreamResults(usableResults)
-          console.log(usableResults)
+          // console.log("Results are:")
+          // console.log(results)
+          // getStreamResults(results)
+          // for(let result of results){
+          //   console.log("The id we want is:")
+          //   console.log(id)
+          //   console.log("This imdbID is:")
+          //   console.log(result.imdbID)
+          // }
+          // console.log("ID we want to match is " + id)
+          // console.log(results.filter((result) => {
+          //   result.imdbID == id
+          // }))
+          // results = results.filter((result) => {
+          //   result.imdb
+          // })
+
+          // console.log(usableResults)
         }
       })
       .catch("error")
     }
+    console.log("This should be after loop.")
     // console.log("After stream service search usable results are:")
     // console.log(results)
     // return results
@@ -92,6 +121,7 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
       <h2>{title}</h2>
       <img src={image}></img>
       <p>{details}</p>
+      <p>{`The id is ${id}`}</p>
       <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
         <input type ='hidden' name='title' value={title} className='title' />
         <input type ='hidden' name='image_url' value={image} className='image_url' />
