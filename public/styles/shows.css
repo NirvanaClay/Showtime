@@ -5,13 +5,13 @@
 
 .show-index .shows {
   padding: 0 50px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 25% 25% 25% 25%;
-      grid-template-columns: 25% 25% 25% 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .show-index .shows .show {
+  width: 25%;
   margin: 0 auto;
 }
 

@@ -60,7 +60,7 @@ const App = () => {
     <Router>
       <Header Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
       <Routes>
-        <Route path="/" element={<Home loginStatus={loginStatus} name={name} loggedInUser={loggedInUser} setUser={setUser} childToParent={childToParent} user={user} />} />
+        <Route path="/" element={<Home loginStatus={loginStatus} name={name} loggedInUser={loggedInUser} setUser={setUser} childToParent={childToParent} user={user} Link={Link} />} />
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />
       </Routes>

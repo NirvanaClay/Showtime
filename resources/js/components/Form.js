@@ -8,6 +8,7 @@ const Form = ({ results, details, getResults, getDetails, shows, getShows, userI
 
   return (
     <div className='form'>
+      <h1>Search Shows, And Find Where To Stream Them</h1>
       <form 
         onSubmit={getResults}>
         <input type='text'></input>

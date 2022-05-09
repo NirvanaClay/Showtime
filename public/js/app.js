@@ -2232,7 +2232,8 @@ var Home = function Home(_ref) {
       loggedInUser = _ref.loggedInUser,
       setUser = _ref.setUser,
       childToParent = _ref.childToParent,
-      user = _ref.user;
+      user = _ref.user,
+      Link = _ref.Link;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2257,10 +2258,7 @@ var Home = function Home(_ref) {
   var getStreamResults = function getStreamResults(streamResults) {
     setStreamingServices(streamResults);
     console.log(streamingServices);
-  }; // useEffect(() => {
-  //   setStreamingServices([...streamingServices, newStreamingServices])
-  // }, [])
-
+  };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("On home effect user is " + loggedInUser);
@@ -2329,9 +2327,10 @@ var Home = function Home(_ref) {
 
             case 6:
               data = _context2.sent;
+              console.log(data.results);
               getResults(data.results);
 
-            case 8:
+            case 9:
             case "end":
               return _context2.stop();
           }
@@ -2384,17 +2383,14 @@ var Home = function Home(_ref) {
     children: [streamingServices.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h1", {
       className: "streams-heading",
       children: "Streaming on:"
-    }), streamingServices.length > 0 ? streamingServices.map(function (streamingService, index) {
+    }), streamingServices.length > 0 && streamingServices.map(function (streamingService, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h2", {
           className: "streaming-services",
           children: streamingService
         }, index)
       }, index);
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h1", {
-      className: "streams-heading",
-      children: "No streaming services"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Greeting_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), loggedInUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Greeting_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
       loginStatus: loginStatus,
       name: name
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2410,7 +2406,8 @@ var Home = function Home(_ref) {
       getStreamResults: getStreamResults
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_ShowList_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
       shows: shows,
-      getShows: getShows
+      getShows: getShows,
+      Link: Link
     })]
   });
 };
@@ -2596,7 +2593,8 @@ var App = function App() {
           loggedInUser: loggedInUser,
           setUser: setUser,
           childToParent: childToParent,
-          user: user
+          user: user,
+          Link: react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Link
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
         path: "register",
@@ -2695,7 +2693,9 @@ var Form = function Form(_ref) {
       getStreamResults = _ref.getStreamResults;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "form",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      children: "Search Shows, And Find Where To Stream Them"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       onSubmit: getResults,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
         type: "text"
@@ -3201,7 +3201,7 @@ var Result = function Result(_ref) {
       setStreamingServices = _ref.setStreamingServices,
       streamingServices = _ref.streamingServices,
       getStreamResults = _ref.getStreamResults;
-  console.log(loggedInUser);
+  console.log("id is " + id);
 
   var myShow = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
@@ -3255,7 +3255,7 @@ var Result = function Result(_ref) {
 
   var checkStreaming = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
-      var results, streamingServicesList, i;
+      var showToCheck, results, streamingServicesList, i;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -3263,8 +3263,10 @@ var Result = function Result(_ref) {
               e.preventDefault();
               console.log("Keyword for stream check is ".concat(title)); // const streamLocations=[]
 
+              showToCheck = null;
               results = [];
-              streamingServicesList = ['netflix', 'hulu', 'prime', 'disney', 'hbo'];
+              streamingServicesList = [// 'peacock',
+              'netflix', 'hulu', 'prime', 'disney', 'hbo'];
 
               for (i = 0; i < streamingServicesList.length; i++) {
                 axios.get('https://streaming-availability.p.rapidapi.com/search/basic', {
@@ -3292,10 +3294,21 @@ var Result = function Result(_ref) {
                       for (_iterator.s(); !(_step = _iterator.n()).done;) {
                         var result = _step.value;
 
-                        for (var _i = 0, _Object$keys = Object.keys(result.streamingInfo); _i < _Object$keys.length; _i++) {
-                          var key = _Object$keys[_i];
-                          results.push(key);
-                          console.log(key);
+                        if (result.imdbID == id) {
+                          showToCheck = result;
+                          console.log("Show to check info:");
+                          console.log(showToCheck);
+                          console.log(result);
+                        }
+
+                        console.log("After confirming show to check:");
+                        console.log(showToCheck);
+
+                        if (showToCheck !== null) {
+                          for (var _i = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i < _Object$keys.length; _i++) {
+                            var key = _Object$keys[_i];
+                            results.push(key);
+                          }
                         }
                       }
                     } catch (err) {
@@ -3308,16 +3321,32 @@ var Result = function Result(_ref) {
                     var usableResults = results.filter(function (result) {
                       return streamingServicesList.includes(result);
                     });
-                    getStreamResults(usableResults);
-                    console.log(usableResults);
+                    getStreamResults(usableResults); // console.log("Results are:")
+                    // console.log(results)
+                    // getStreamResults(results)
+                    // for(let result of results){
+                    //   console.log("The id we want is:")
+                    //   console.log(id)
+                    //   console.log("This imdbID is:")
+                    //   console.log(result.imdbID)
+                    // }
+                    // console.log("ID we want to match is " + id)
+                    // console.log(results.filter((result) => {
+                    //   result.imdbID == id
+                    // }))
+                    // results = results.filter((result) => {
+                    //   result.imdb
+                    // })
+                    // console.log(usableResults)
                   }
                 })["catch"]("error");
-              } // console.log("After stream service search usable results are:")
+              }
+
+              console.log("This should be after loop."); // console.log("After stream service search usable results are:")
               // console.log(results)
               // return results
 
-
-            case 5:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -3338,6 +3367,8 @@ var Result = function Result(_ref) {
       src: image
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
       children: details
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      children: "The id is ".concat(id)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       onSubmit: myShow,
       method: "POST",
@@ -3758,7 +3789,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var ShowList = function ShowList(_ref) {
   var shows = _ref.shows,
-      getShows = _ref.getShows;
+      getShows = _ref.getShows,
+      Link = _ref.Link;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "show-index",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
@@ -3778,7 +3810,15 @@ var ShowList = function ShowList(_ref) {
             getShows: getShows
           })
         }, show.id);
-      }) : "No shows"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
+          to: "/login",
+          children: "Login"
+        }), " or ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
+          to: "/register",
+          children: "register"
+        }), " to add shows, rate them, and share your thoughts."]
+      })
     })]
   });
 };
