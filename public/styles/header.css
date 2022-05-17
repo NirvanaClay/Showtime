@@ -6,7 +6,7 @@
       -ms-flex-align: center;
           align-items: center;
   max-width: 100vw;
-  height: 125px;
+  height: 100px;
   background: white;
   margin: 0;
   font-family: 'Source Sans Pro', sans-serif;
@@ -14,7 +14,7 @@
 
 .navbar ul {
   width: 100%;
-  padding: 0;
+  padding: 0 250px;
   list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -46,6 +46,13 @@
   font-weight: 700;
   text-decoration: none;
   display: block;
+  cursor: pointer;
+}
+
+.navbar ul li input:hover {
+  color: red;
+  -webkit-transition: color .2s ease-in-out;
+  transition: color .2s ease-in-out;
 }
 
 .navbar .sandwich {

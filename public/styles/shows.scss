@@ -1,54 +1,113 @@
 .show-index{
+  padding: 50px;
+  max-width: 100vw;
+  z-index: 11;
   h2{
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    margin-bottom: 30px;
   }
-  .shows{
-    padding: 0 50px;
-    display: flex;
-    // display: grid;
-    // grid-template-columns: 25% 25% 25% 25%;
-    .show{
-      width: 25%;
-      margin: 0 auto;
-      h3{
-        height: 50px;
-        // margin-bottom: auto;
-        font-size: 2rem;
-        text-align: center;
+  .shows__container{
+    width: 900px;
+    height: 450px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    .left-arrow__container{
+      position: absolute;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      left: 0;
+      top: 125px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 20;
+      .left-arrow{
+        font-size: 30px;
       }
-      img{
-        display: block;
-        width: 150px;
-        height: 200px;
+    }
+    .green{
+      color: green;
+      background: green;
+    }
+    .right-arrow__container{
+      position: absolute;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      right: 0;
+      top: 125px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 20;
+      .right-arrow{
+        font-size: 30px;
+      }
+    }
+    .inverted{
+      color: black;
+    }
+    .inverted-bg{
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .visible{
+      display: flex;
+    }
+    .shows{
+      width: 900px;
+      height: 450px;
+      display: flex;
+      position: relative;
+      left: 0;
+      margin: 25px auto 0 auto;
+      transition: .5s ease-in-out;
+      .show{
+        width: 225px;
         margin: 0 auto;
-      }
-      .stars-container{
-        width: 150px;
-        margin: 10px auto;
-        display: flex;
-        justify-content: space-between;
-        .fa-star{
+        text-align: center;
+        h3{
+          height: 40px;
           font-size: 1.5rem;
-          color: #ffe600;
+          margin-bottom: 10px;
         }
-        button{
-          display: flex;
-          all: unset;
+        img{
+          width: 150px;
+          height: 200px;
         }
-      }
-      form{
-        input[type='submit']{
-          width: 90px;
-          height: 45px;
-          display: block;
+        .stars-container{
+          width: 150px;
           margin: 10px auto;
-          border: none;
-          border-radius: 10px;
-          font-size: 1.1rem;
-          background: black;
-          color: white;
-          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          .fa-star{
+            font-size: 1.5rem;
+            color: #ffe600;
+          }
+          button{
+            display: flex;
+            all: unset;
+          }
+        }
+        form{
+          input[type='submit']{
+            width: 90px;
+            height: 45px;
+            display: block;
+            margin: 10px auto;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            background: black;
+            color: white;
+            cursor: pointer;
+          }
         }
       }
     }

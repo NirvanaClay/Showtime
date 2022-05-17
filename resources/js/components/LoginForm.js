@@ -32,11 +32,11 @@ const LoginForm = ({ setLoginStatus, setUser, childToParent, setUserId }) => {
     <div className='loginForm'>
       <h1>Login</h1>
       <form onSubmit={loginUser} method='POST' action='/login'>
-        <div class='field'>
+        <div className='field'>
           <label htmlFor='email'>Email</label>
           <input type ='text' name='email' />
         </div>
-        <div class='field'>
+        <div className='field'>
           <label htmlFor='password'>Password</label>
           <input type ='text' name='password' />
         </div>

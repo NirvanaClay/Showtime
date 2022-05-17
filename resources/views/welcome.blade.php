@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
 
+        <link rel="stylesheet" href="{{ asset('styles/reset.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/home.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/login.css') }}"> 

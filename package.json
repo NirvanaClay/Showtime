@@ -24,6 +24,9 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.1.1",
+        "@fortawesome/free-solid-svg-icons": "^6.1.1",
+        "@fortawesome/react-fontawesome": "^0.1.18",
         "@types/react-router-dom": "^5.3.3",
         "jquery": "^3.6.0",
         "react-router-dom": "^6.2.2"

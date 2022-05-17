@@ -76,7 +76,7 @@ const Show = ({ title, image, id, rating, shows, getShows }) => {
   }
 
   return (
-    <>
+    <div className='show'>
       <h3>{title}</h3>
       <img src={image} />
       <div className='stars-container' id={id}>
@@ -110,7 +110,7 @@ const Show = ({ title, image, id, rating, shows, getShows }) => {
         <input type ='hidden' name='image_url' value={image} />
         <input type='submit' value="Remove" />
       </form>
-    </>
+    </div>
   )
 }
 

@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   max-width: 100vw;
-  height: 125px;
+  height: 100px;
   background: white;
   margin: 0;
-  // padding: 0 50px;
+  // padding: 0 100px;
   font-family: 'Source Sans Pro', sans-serif;
   ul{
     width: 100%;
-    padding: 0;
+    padding: 0 250px;
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -33,6 +33,11 @@
         font-weight: 700;
         text-decoration: none;
         display: block;
+        cursor: pointer;
+        &:hover{
+          color: red;
+          transition: color .2s ease-in-out;
+        }
       }
     }
   }

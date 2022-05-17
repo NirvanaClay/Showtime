@@ -4,27 +4,18 @@ const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser, setStreamingServices, streamingServices, getStreamResults }) => {
+const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser, setStreamingServices, streamingServices, getStreamResults, getResults, fetchResults }) => {
 
   console.log("id is " + id)
   const myShow = async (e) => {
     e.preventDefault();
-    console.log("While trying to add show user Id is " + loggedInUser.id)
-    if(loggedInUser !== null){
-      console.log("Thinks there's a logged in user")
-      let data = {
-        title: title,
-        image_url: image,
-        user_id: loggedInUser.id
-      } 
-    }
-    else{
-      console.log("Thinks there's not a logged in user")
-      let data = {
-        title: title,
-        image_url: image
-      }
-    }
+    const data = {
+      title: title,
+      image_url: image,
+      user_id: loggedInUser.id
+    } 
+    console.log("Data is:")
+    console.log(data)
     await axios.post('api/shows', data)
     .then(function(response){
       getShows([...shows, {
@@ -32,8 +23,9 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
         image_url: image,
         id: response.data
       }])
-    }).catch(() => {
-      alert("You must be logged in to add a show")
+      getResults([])
+    }).catch((e) => {
+      console.log(e)
     })
   }
 
@@ -44,7 +36,7 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
     let showToCheck = null
     let results = []
     const streamingServicesList=[
-      // 'peacock',
+      'peacock',
       'netflix',
       'hulu',
       'prime',
@@ -87,33 +79,20 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
           }
           results = [...new Set(results)]
           const usableResults = results.filter(result => streamingServicesList.includes(result))
-          getStreamResults(usableResults)
-          // console.log("Results are:")
-          // console.log(results)
-          // getStreamResults(results)
-          // for(let result of results){
-          //   console.log("The id we want is:")
-          //   console.log(id)
-          //   console.log("This imdbID is:")
-          //   console.log(result.imdbID)
+          if(results.length > 0){
+            getStreamResults(usableResults)
+          }
+          // else{
+          //   getStreamResults("Not currently available through streaming.")
           // }
-          // console.log("ID we want to match is " + id)
-          // console.log(results.filter((result) => {
-          //   result.imdbID == id
-          // }))
-          // results = results.filter((result) => {
-          //   result.imdb
-          // })
-
-          // console.log(usableResults)
+        }
+        else{
+          getStreamResults("Not currently available through streaming.")
         }
       })
       .catch("error")
     }
     console.log("This should be after loop.")
-    // console.log("After stream service search usable results are:")
-    // console.log(results)
-    // return results
   }
 
   return (
@@ -121,15 +100,16 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
       <h2>{title}</h2>
       <img src={image}></img>
       <p>{details}</p>
-      <p>{`The id is ${id}`}</p>
       <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
         <input type ='hidden' name='title' value={title} className='title' />
         <input type ='hidden' name='image_url' value={image} className='image_url' />
         <input type ='hidden' name='user_id' value={loggedInUser ? loggedInUser.id : 0} className='user_id' />
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <input type='submit' className='order' name='addShowBtn' value='Add Show' />
+        {loggedInUser && 
+          <input type='submit' className='order' name='addShowBtn' value='Add Show' />
+        }
       </form>
-      <button className='streamCheck' onClick={checkStreaming}>Check Streaming</button>
+      <button className='streamCheck' onClick={checkStreaming}>Stream Check</button>
     </div>
   )
 }
