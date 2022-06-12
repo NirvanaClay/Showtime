@@ -18,7 +18,13 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries,
     if(shows){
       console.log("shows.length is:")
       console.log(shows.length)
-      setTotalPages(Math.floor(shows.length / 4) + 1)
+      const showLength = shows.length
+      if(showLength % 4 != 0){
+        setTotalPages(Math.floor(shows.length / 4) + 1)
+      }
+      else{
+        setTotalPages(Math.floor(shows.length / 4))
+      }
       setCurrentPage((sliderPosition / -900) + 1)
       console.log("totalPages is:")
       console.log(totalPages)
@@ -27,9 +33,11 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries,
       console.log("sliderPosition is:")
       console.log(sliderPosition)
       if(currentPage < totalPages){
+        console.log("Current page is less than total pages.")
         setRightArrowVisibility(true)
       }
       else{
+        console.log("Current page is not less than total pages.")
         setRightArrowVisibility(false)
       }
       if(currentPage > 1){

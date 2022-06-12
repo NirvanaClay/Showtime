@@ -2625,10 +2625,7 @@ var App = function App() {
               'netflix', 'hulu', 'prime', 'disney', 'hbo'];
               setStreamingId(imdb_id);
               console.log("In second stream function, show_type is:");
-              console.log(show_type); // show_type = show_type.toLowerCase()
-              // console.log("Now using toLowerCase, show_type is:")
-              // console.log(show_type)
-
+              console.log(show_type);
               url = 'https://streaming-availability.p.rapidapi.com/search/pro';
               headers = {
                 'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
@@ -4337,7 +4334,14 @@ var Slider = function Slider(_ref) {
     if (shows) {
       console.log("shows.length is:");
       console.log(shows.length);
-      setTotalPages(Math.floor(shows.length / 4) + 1);
+      var showLength = shows.length;
+
+      if (showLength % 4 != 0) {
+        setTotalPages(Math.floor(shows.length / 4) + 1);
+      } else {
+        setTotalPages(Math.floor(shows.length / 4));
+      }
+
       setCurrentPage(sliderPosition / -900 + 1);
       console.log("totalPages is:");
       console.log(totalPages);
@@ -4347,8 +4351,10 @@ var Slider = function Slider(_ref) {
       console.log(sliderPosition);
 
       if (currentPage < totalPages) {
+        console.log("Current page is less than total pages.");
         setRightArrowVisibility(true);
       } else {
+        console.log("Current page is not less than total pages.");
         setRightArrowVisibility(false);
       }
 

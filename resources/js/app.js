@@ -158,9 +158,6 @@ const App = () => {
     setStreamingId(imdb_id)
     console.log("In second stream function, show_type is:")
     console.log(show_type)
-    // show_type = show_type.toLowerCase()
-    // console.log("Now using toLowerCase, show_type is:")
-    // console.log(show_type)
     const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
 
     const headers = {
