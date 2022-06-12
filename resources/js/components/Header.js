@@ -1,11 +1,12 @@
 import { BrowserRouter } from "react-router-dom"
 
-const Header = ({ loginStatus, Link, LogoutForm, setName, setEmail, setUser, setLoginStatus, childToParent }) => {
+const Header = ({ resetSlider, loginStatus, Link, LogoutForm, setName, setEmail, setUser, setLoginStatus, childToParent }) => {
   return (
     <div className='navbar'>
       <ul>
         <li><Link to='/'>Home</Link></li>
-        <li>{loginStatus ? <Link to='/my-shows'>My Shows</Link> : <Link to='/register'>Register</Link>}</li>
+        <li>{loginStatus ? <Link to='/my-series' onClick={resetSlider}>My Series</Link> : <Link to='/register'>Register</Link>}</li>
+        <li>{loginStatus && <Link to='/my-movies' onClick={resetSlider}>My Movies</Link>}</li>
         <li>{loginStatus ? <LogoutForm setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} childToParent={childToParent} /> : <Link to='/login'>Login</Link>}</li>
       </ul>
     </div>

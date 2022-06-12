@@ -13,13 +13,15 @@ import Home from './Home.js'
 import Header from './components/Header.js'
 import Form from './components/Form.js'
 import Result from './components/Result.js'
-import ShowList from './components/ShowList.js'
+import SeriesList from './components/SeriesList.js'
+import MoviesList from './components/MoviesList.js'
 import RegisterForm from './components/RegisterForm.js'
 import LoginForm from './components/LoginForm.js'
 import LogoutForm from './components/LogoutForm.js'
 import Dashboard from './components/Dashboard.js'
 
 import $ from 'jquery'
+import { set } from 'lodash';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -29,33 +31,18 @@ const App = () => {
   const [userId, setUserId] = useState(0)
   const [results, getResults] = useState([])
   const [details, getDetails] = useState([])
-  const [shows, getShows] = useState([])
-  const [streamingServices, setStreamingServices] = useState([])
 
-  // const [showArrowVisibility, setShowArrowVisibility] = useState(false)
-  // const [resultArrowVisibility, setResultArrowVisibility] = useState(false)
-  const [rightArrowVisibility, setRightArrowVisibility] = useState(false)
-  const [leftArrowVisibility, setLeftArrowVisibility] = useState(false)
-  const [isLeftHovering, setIsLeftHovering] = useState(false)
-  const [isRightHovering, setIsRightHovering] = useState(false)
-  const [sliderPosition, setSliderPosition] = useState(0)
+  const [streamingServices, setStreamingServices] = useState([])
+  const [streamingId, setStreamingId] = useState('')
+
+  const [series, getSeries] = useState([])
+  const [movies, getMovies] = useState([])
 
   let loggedInUser = JSON.parse(localStorage.getItem("user"));
 
-  const moveSliderLeft = () => {
-    setSliderPosition(sliderPosition - 900)
-  }
+  const noStreaming = "This show is not currently available through streaming."
 
-  const moveSliderRight = () => {
-    setSliderPosition(sliderPosition + 900)
-  }
-
-  const getStreamResults = (streamResults) => {
-    console.log("Trying to get stream results, which are:")
-    console.log(streamResults)
-    setStreamingServices(streamResults)
-    console.log(streamingServices)
-  }
+  // const [showType, setShowType] = useState('')
 
   const childToParent = (childData) => {
     console.log("Child data is " + childData)
@@ -90,13 +77,16 @@ const App = () => {
       const data = await res.json()
       if(null !== loggedInUser){
         let userShows = data.filter(datum => datum.user_id == loggedInUser.id)
-        getShows(userShows)
-        console.log(userShows)
+        let userSeries = userShows.filter(show => show.show_type == 'series')
+        let userMovies = userShows.filter(show => show.show_type == 'movie')
+        getSeries([...userSeries])
+        getMovies([...userMovies])
         childToParent(loggedInUser)
       }
       else{
         console.log("On home effect there is no user.")
-        getShows()
+        getSeries([])
+        getMovies([])
       }
     }
     fetchShows()
@@ -104,9 +94,10 @@ const App = () => {
 
   const fetchResults = async (e) => {
     e.preventDefault()
-    const res = await fetch(`https://imdb-api.com/en/API/SearchSeries/k_j0x59844/${e.target[0].value}`)
+    const theShowType = document.querySelector('input[name="show-type"]:checked').value
+    const searchString = `https://imdb-api.com/en/API/Search${theShowType}/k_j0x59844/${e.target[2].value}`
+    const res = await fetch(searchString)
     const data = await res.json()
-    console.log(data.results)
     getResults(data.results)
   }
 
@@ -117,15 +108,198 @@ const App = () => {
     getDetails(data.plot)
   }
 
-  return(
+  const getStreamingResults = async (streamingService, imdb_id, title, results, showType) => {
+    // const getStreamingResults = (streamingService, imdb_id, title, showType) => {
+    let showToCheck = null
+    const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
+    let params = {
+      country: 'us',
+      service: streamingService,
+      type: showType,
+      order_by: 'original_title',
+      output_language: 'en',
+      language: 'en',
+      keyword: `${title}`
+    }
+
+    const headers = {
+      'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
+      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+    }
+
+    console.log("Running getStreamingResults")
+
+    // return new Promise((resolve) => {
+    //   Axios.get(url, {
+    //     params: params,
+    //     headers: headers
+    //   }).then(res =>{
+    //     console.log("res is:")
+    //     console.log(res)
+    //     resolve(res.data.results)
+    //   })
+
+    return new Promise((resolve, reject) => {
+      console.log("Inside of initial promise.")
+      Axios.get(url, {
+        params: params,
+        headers: headers
+      }).then(res =>{
+        console.log("Initial res is:")
+        console.log(res)
+        if(res.data.total_pages > 1){
+          console.log("Thinks there is more than 1 page.")
+          for(let i=0; i < res.data.total_pages; i++){
+            let page = i + 1
+            console.log("In loop, page is:")
+            console.log(page)
+            Axios.get(url, {
+              params: {
+                country: 'us',
+                service: streamingService,
+                type: showType,
+                order_by: 'original_title',
+                page: page,
+                output_language: 'en',
+                language: 'en',
+                keyword: `${title}`
+              },
+              headers: headers
+            }).then(res =>{
+              if(res.data.results.length > 0){
+                for(let result of res.data.results){
+                  if(result.imdbID == imdb_id){
+                    showToCheck = result
+                  }
+                  if(showToCheck !== null){
+                    for(let key of Object.keys(showToCheck.streamingInfo)){
+                      results.push(key)
+                    }
+                  }
+                  resolve(results)
+                }
+              }
+              else{
+                resolve()
+              }
+            })
+            .catch((e) => {
+              console.log("Catching1, with e:")
+              console.log(e)
+            })
+          }
+        }
+        else{
+          if(res.data.results.length > 0){
+            for(let result of res.data.results){
+              if(result.imdbID == imdb_id){
+                showToCheck = result
+              }
+              if(showToCheck !== null){
+                for(let key of Object.keys(showToCheck.streamingInfo)){
+                  results.push(key)
+                }
+              }
+              resolve(results)
+            }
+          }
+          else{
+            resolve()
+          }
+        }
+      }).catch(() => {
+        console.log("Catching2, with e:")
+        console.log(e)
+      }
+      )
+    })
+  // })
+}
+
+  useEffect(() => {
+    console.log("streamingServices are:")
+    console.log(streamingServices)
+  }, [streamingServices])
+
+  // function resolveAfter2Seconds() {
+  //   return new Promise(resolve => {
+  //     setTimeout(() => {
+  //       resolve('resolved');
+  //     }, 2000);
+  //   });
+  // }
+  
+  // async function asyncCall() {
+  //   console.log('calling');
+  //   const result = await resolveAfter2Seconds();
+  //   console.log(result);
+  //   // expected output: "resolved"
+  // }
+  
+  // asyncCall();
+
+  const checkStreaming = async (e) => {
+    setStreamingServices([])
+    const showType = e.target.getAttribute('show_type')
+    const imdb_id = e.target.getAttribute('imdb_id')
+    const title = e.target.title
+    let showToCheck = null
+    let results = []
+    const streamingServicesList=[
+      // 'peacock',
+      'netflix',
+      'hulu',
+      'prime',
+      // 'disney', 
+      // 'hbo'
+    ]
+    setStreamingId(imdb_id)
+    // console.log("Running checkStreaming")
+    // let streamingService = 'hulu'
+    // const theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
+    // console.log("theResult of awaiting in first loop is:")
+    // console.log(theResult)
+    for(let i=0; i < streamingServicesList.length; i++){
+      let streamingService = streamingServicesList[i]
+      console.log("Running first loop. streamingService is:")
+      console.log(streamingService)
+      let theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
+      console.log("theResult of awaiting in first loop is:")
+      console.log(theResult)
+    }
+    if(results.length > 0){
+      setStreamingServices([...results])
+    }
+    else{
+      setStreamingServices([noStreaming])
+    }
+    // setStreamingServices([...results])
+    // console.log("After loop from first function, results are:")
+    // console.log(results)
+    // console.log("With results.length being:")
+    // console.log(results.length)
+  }
+
+  const [sliderPosition, setSliderPosition] = useState(0)
+
+  const resetSlider = () => {
+    setSliderPosition(0)
+    getResults([])
+    setStreamingServices([])
+  }
+
+  return (
     <Router>
-      <Header Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
+      <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
       <Routes>
-        <Route path="/" element={<Home loginStatus={loginStatus} name={name} loggedInUser={loggedInUser} Link={Link}  results={results} details={details} getResults={getResults} fetchResults={fetchResults} fetchDetails={fetchDetails} shows={shows} getShows={getShows} setStreamingServices={setStreamingServices} streamingServices={streamingServices} getStreamResults={getStreamResults} isLeftHovering={isLeftHovering} setIsLeftHovering={setIsLeftHovering} isRightHovering={isRightHovering} setIsRightHovering={setIsRightHovering} leftArrowVisibility={leftArrowVisibility} setLeftArrowVisibility={setLeftArrowVisibility} rightArrowVisibility={rightArrowVisibility} setRightArrowVisibility={setRightArrowVisibility} moveSliderLeft={moveSliderLeft} moveSliderRight={moveSliderRight} sliderPosition={sliderPosition} />} />
+        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} />} />
+
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />
 
-        <Route path='my-shows' element={<ShowList shows={shows} getShows={getShows} Link={Link} isLeftHovering={isLeftHovering} setIsLeftHovering={setIsLeftHovering} isRightHovering={isRightHovering} setIsRightHovering={setIsRightHovering} leftArrowVisibility={leftArrowVisibility} setLeftArrowVisibility={setLeftArrowVisibility} rightArrowVisibility={rightArrowVisibility} setRightArrowVisibility={setRightArrowVisibility} moveSliderLeft={moveSliderLeft} moveSliderRight={moveSliderRight} sliderPosition={sliderPosition} />} />
+        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
+
+        <Route path='my-movies' element={<MoviesList movies={movies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} />} />
 
       </Routes>
     </Router>
