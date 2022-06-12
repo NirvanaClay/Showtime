@@ -2605,11 +2605,11 @@ var App = function App() {
 
   var checkStreaming = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
-      var show_type, imdb_id, title, showToCheck, results, streamingServicesList, promises, _loop, i;
+      var show_type, imdb_id, title, showToCheck, results, streamingServicesList, url, headers, promises, _loop, i;
 
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               setStreamingServices([]);
               show_type = e.target.getAttribute('show_type');
@@ -2622,194 +2622,242 @@ var App = function App() {
               showToCheck = null;
               results = [];
               streamingServicesList = [// 'peacock',
-              'netflix', 'hulu', 'prime' // 'disney', 
-              // 'hbo'
-              ];
-              setStreamingId(imdb_id); // console.log("Running checkStreaming")
-              // let streamingService = 'hulu'
-              // const theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
-              // console.log("theResult of awaiting in first loop is:")
-              // console.log(theResult)
+              'netflix', 'hulu', 'prime', 'disney', 'hbo'];
+              setStreamingId(imdb_id);
+              console.log("In second stream function, show_type is:");
+              console.log(show_type); // show_type = show_type.toLowerCase()
+              // console.log("Now using toLowerCase, show_type is:")
+              // console.log(show_type)
 
+              url = 'https://streaming-availability.p.rapidapi.com/search/pro';
+              headers = {
+                'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
+                'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+              };
+              console.log("Running getStreamingResults");
               promises = [];
-
-              _loop = function _loop(i) {
-                var showToCheck = null;
-                console.log("In second stream function, show_type is:");
-                console.log(show_type);
-                var streamingService = streamingServicesList[i]; // show_type = show_type.toLowerCase()
-                // console.log("Now using toLowerCase, show_type is:")
-                // console.log(show_type)
-
-                var url = 'https://streaming-availability.p.rapidapi.com/search/pro';
-                var params = {
-                  country: 'us',
-                  service: streamingService,
-                  type: show_type,
-                  order_by: 'original_title',
-                  output_language: 'en',
-                  language: 'en',
-                  keyword: "".concat(title)
-                };
-                var headers = {
-                  'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
-                  'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-                };
-                console.log("Running getStreamingResults");
-                new Promise(function (resolve, reject) {
-                  console.log("Inside of initial promise.");
-                  console.log("Searching for show with imdb_id of:");
-                  console.log(imdb_id);
-                  console.log("To see if it's streaming on:");
-                  console.log(streamingService);
-                  axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
-                    params: params,
-                    headers: headers
-                  }).then(function (res) {
-                    console.log("Initial res is:");
-                    console.log(res);
-
-                    if (res.data.total_pages > 1) {
-                      console.log("Thinks there is more than 1 page.");
-
-                      var _loop2 = function _loop2(_i2) {
-                        var page = _i2 + 1;
-                        console.log("In loop, page is:");
-                        console.log(page);
-                        axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
-                          params: {
+              _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop(i) {
+                var streamingService;
+                return _regeneratorRuntime().wrap(function _loop$(_context4) {
+                  while (1) {
+                    switch (_context4.prev = _context4.next) {
+                      case 0:
+                        streamingService = streamingServicesList[i];
+                        _context4.t0 = promises;
+                        _context4.next = 4;
+                        return new Promise(function (resolve, reject) {
+                          console.log("Inside of initial promise.");
+                          console.log("Searching for show with imdb_id of:");
+                          console.log(imdb_id);
+                          console.log("To see if it's streaming on:");
+                          console.log(streamingService);
+                          var params = {
                             country: 'us',
                             service: streamingService,
                             type: show_type,
                             order_by: 'original_title',
-                            page: page,
                             output_language: 'en',
                             language: 'en',
                             keyword: "".concat(title)
-                          },
-                          headers: headers
-                        }).then(function (res) {
-                          console.log("This is in then statement with page number of:");
-                          console.log(page);
-                          console.log("With results of:");
-                          console.log(res.data.results);
+                          };
+                          axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
+                            params: params,
+                            headers: headers
+                          }).then(function (res) {
+                            console.log("Initial res is:");
+                            console.log(res);
 
-                          if (res.data.results.length > 0) {
-                            var usableResults;
+                            if (res.data.total_pages > 1) {
+                              console.log("Thinks there is more than 1 page.");
 
-                            var _iterator = _createForOfIteratorHelper(res.data.results),
-                                _step;
+                              var _loop2 = function _loop2(_i2) {
+                                var page = _i2 + 1;
+                                console.log("In loop, page is:");
+                                console.log(page);
+                                axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
+                                  params: {
+                                    country: 'us',
+                                    service: streamingService,
+                                    type: show_type,
+                                    order_by: 'original_title',
+                                    page: page,
+                                    output_language: 'en',
+                                    language: 'en',
+                                    keyword: "".concat(title)
+                                  },
+                                  headers: headers
+                                }).then(function (res) {
+                                  console.log("This is in then statement with page number of:");
+                                  console.log(page);
+                                  console.log("With results of:");
+                                  console.log(res.data.results);
 
-                            try {
-                              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                                var result = _step.value;
+                                  if (res.data.results.length > 0) {
+                                    var usableResults;
 
-                                if (result.imdbID == imdb_id) {
-                                  console.log("Found matching show.");
-                                  showToCheck = result;
-                                }
+                                    var _iterator2 = _createForOfIteratorHelper(res.data.results),
+                                        _step2;
 
-                                if (showToCheck !== null) {
-                                  for (var _i3 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys.length; _i3++) {
-                                    var key = _Object$keys[_i3];
-                                    results.push(key);
-                                    var resultsSet = new Set([].concat(results));
-                                    console.log("resultsSet is:");
-                                    console.log(resultsSet);
-                                    var resultsArray = Array.from(resultsSet);
-                                    console.log("resultsArray is:");
-                                    console.log(resultsArray);
-                                    usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
-                                    // console.log(usableResults)
+                                    try {
+                                      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                                        var result = _step2.value;
+
+                                        if (result.imdbID == imdb_id) {
+                                          console.log("Found matching show.");
+                                          showToCheck = result;
+                                        }
+
+                                        if (showToCheck !== null) {
+                                          for (var _i3 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys.length; _i3++) {
+                                            var key = _Object$keys[_i3];
+                                            results.push(key);
+                                            var resultsSet = new Set([].concat(results));
+                                            console.log("resultsSet is:");
+                                            console.log(resultsSet);
+                                            var resultsArray = Array.from(resultsSet);
+                                            console.log("resultsArray is:");
+                                            console.log(resultsArray);
+                                            usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                            // console.log(usableResults)
+                                          }
+
+                                          console.log("Immediately before resolve, usableResults are:");
+                                          console.log(usableResults);
+                                          setStreamingServices(_toConsumableArray(usableResults));
+                                          resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                                          return;
+                                        } else {
+                                          resolve();
+                                        } // resolve(results)
+
+                                      }
+                                    } catch (err) {
+                                      _iterator2.e(err);
+                                    } finally {
+                                      _iterator2.f();
+                                    }
+                                  } else {
+                                    resolve();
                                   }
+                                })["catch"](function (e) {
+                                  console.log("Catching1, with e:");
+                                  console.log(e);
+                                });
+                              };
 
-                                  console.log("Immediately before resolve, usableResults are:");
-                                  console.log(usableResults);
-                                  setStreamingServices(_toConsumableArray(usableResults));
-                                  resolve(usableResults); // resolve(Array.from(new set([...results])))
-
-                                  return;
-                                } else {
-                                  resolve();
-                                } // resolve(results)
-
+                              for (var _i2 = 0; _i2 < res.data.total_pages; _i2++) {
+                                _loop2(_i2);
                               }
-                            } catch (err) {
-                              _iterator.e(err);
-                            } finally {
-                              _iterator.f();
-                            }
-                          } else {
-                            resolve();
-                          }
-                        })["catch"](function (e) {
-                          console.log("Catching1, with e:");
-                          console.log(e);
-                        });
-                      };
-
-                      for (var _i2 = 0; _i2 < res.data.total_pages; _i2++) {
-                        _loop2(_i2);
-                      }
-                    } else {
-                      if (res.data.results.length > 0) {
-                        var usableResults;
-
-                        var _iterator2 = _createForOfIteratorHelper(res.data.results),
-                            _step2;
-
-                        try {
-                          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                            var result = _step2.value;
-
-                            if (result.imdbID == imdb_id) {
-                              console.log("Found match for show.");
-                              showToCheck = result;
-                            }
-
-                            if (showToCheck !== null) {
-                              for (var _i4 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i4 < _Object$keys2.length; _i4++) {
-                                var key = _Object$keys2[_i4];
-                                results.push(key);
-                                usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
-                                // console.log(usableResults)
-                              }
-
-                              console.log("Immediately before resolve, usableResults are:");
-                              console.log(usableResults);
-                              setStreamingServices(_toConsumableArray(usableResults));
-                              resolve(usableResults); // resolve(Array.from(new set([...results])))
-
-                              return;
                             } else {
-                              resolve();
-                            } // resolve(results)
+                              if (res.data.results.length > 0) {
+                                var usableResults;
 
-                          }
-                        } catch (err) {
-                          _iterator2.e(err);
-                        } finally {
-                          _iterator2.f();
-                        }
-                      } else {
-                        console.log("Running resolve with no results.");
-                        resolve();
-                      }
+                                var _iterator3 = _createForOfIteratorHelper(res.data.results),
+                                    _step3;
+
+                                try {
+                                  for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                                    var result = _step3.value;
+
+                                    if (result.imdbID == imdb_id) {
+                                      console.log("Found match for show.");
+                                      showToCheck = result;
+                                    }
+
+                                    if (showToCheck !== null) {
+                                      for (var _i4 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i4 < _Object$keys2.length; _i4++) {
+                                        var key = _Object$keys2[_i4];
+                                        results.push(key);
+                                        usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                        // console.log(usableResults)
+                                      }
+
+                                      console.log("Immediately before resolve, usableResults are:");
+                                      console.log(usableResults);
+                                      setStreamingServices(_toConsumableArray(usableResults));
+                                      resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                                      return;
+                                    } else {
+                                      resolve();
+                                    } // resolve(results)
+
+                                  }
+                                } catch (err) {
+                                  _iterator3.e(err);
+                                } finally {
+                                  _iterator3.f();
+                                }
+                              } else {
+                                console.log("Running resolve with no results.");
+                                resolve();
+                              }
+                            }
+                          })["catch"](function () {
+                            console.log("Catching2, with e:");
+                            console.log(e);
+                          });
+                        });
+
+                      case 4:
+                        _context4.t1 = _context4.sent;
+
+                        _context4.t0.push.call(_context4.t0, _context4.t1);
+
+                      case 6:
+                      case "end":
+                        return _context4.stop();
                     }
-                  })["catch"](function () {
-                    console.log("Catching2, with e:");
-                    console.log(e);
-                  });
-                });
-              };
+                  }
+                }, _loop);
+              });
+              i = 0;
 
-              for (i = 0; i < streamingServicesList.length; i++) {
-                _loop(i);
+            case 20:
+              if (!(i < streamingServicesList.length)) {
+                _context5.next = 25;
+                break;
               }
 
-            case 15:
+              return _context5.delegateYield(_loop(i), "t0", 22);
+
+            case 22:
+              i++;
+              _context5.next = 20;
+              break;
+
+            case 25:
+              Promise.all(promises).then(function (responses) {
+                var validResponses = [];
+
+                var _iterator = _createForOfIteratorHelper(responses),
+                    _step;
+
+                try {
+                  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                    var response = _step.value;
+
+                    if (response == undefined) {
+                      console.log("Response is undefined.");
+                    } else {
+                      validResponses.push(response);
+                    }
+                  }
+                } catch (err) {
+                  _iterator.e(err);
+                } finally {
+                  _iterator.f();
+                }
+
+                if (validResponses.length == 0) {
+                  setStreamingServices([noStreaming]);
+                }
+              });
+
+            case 26:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
       }, _callee4);

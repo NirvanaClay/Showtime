@@ -152,48 +152,41 @@ const App = () => {
       'netflix',
       'hulu',
       'prime',
-      // 'disney', 
-      // 'hbo'
+      'disney', 
+      'hbo'
     ]
     setStreamingId(imdb_id)
-    // console.log("Running checkStreaming")
-    // let streamingService = 'hulu'
-    // const theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
-    // console.log("theResult of awaiting in first loop is:")
-    // console.log(theResult)
+    console.log("In second stream function, show_type is:")
+    console.log(show_type)
+    // show_type = show_type.toLowerCase()
+    // console.log("Now using toLowerCase, show_type is:")
+    // console.log(show_type)
+    const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
+
+    const headers = {
+      'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
+      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+    }
+
+    console.log("Running getStreamingResults")
     let promises = []
     for(let i=0; i < streamingServicesList.length; i++){
-      let showToCheck = null
-      console.log("In second stream function, show_type is:")
-      console.log(show_type)
       let streamingService = streamingServicesList[i]
-      // show_type = show_type.toLowerCase()
-      // console.log("Now using toLowerCase, show_type is:")
-      // console.log(show_type)
-      const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
-      let params = {
-        country: 'us',
-        service: streamingService,
-        type: show_type,
-        order_by: 'original_title',
-        output_language: 'en',
-        language: 'en',
-        keyword: `${title}`
-      }
-  
-      const headers = {
-        'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
-        'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-      }
-  
-      console.log("Running getStreamingResults")
-  
-      new Promise((resolve, reject) => {
+      promises.push(await new Promise((resolve, reject) => {
         console.log("Inside of initial promise.")
         console.log("Searching for show with imdb_id of:")
         console.log(imdb_id)
         console.log("To see if it's streaming on:")
         console.log(streamingService)
+        let params = {
+          country: 'us',
+          service: streamingService,
+          type: show_type,
+          order_by: 'original_title',
+          output_language: 'en',
+          language: 'en',
+          keyword: `${title}`
+        }
         Axios.get(url, {
           params: params,
           headers: headers
@@ -303,8 +296,23 @@ const App = () => {
           console.log("Catching2, with e:")
           console.log(e)
         })
-      })
+      }))
     }
+    Promise.all(promises)
+    .then((responses) => {
+      let validResponses = []
+      for(let response of responses){
+        if(response == undefined){
+          console.log("Response is undefined.")
+        }
+        else{
+          validResponses.push(response)
+        }
+      }
+      if(validResponses.length == 0){
+        setStreamingServices([noStreaming])
+      }
+    })
   }
 
   const [sliderPosition, setSliderPosition] = useState(0)
