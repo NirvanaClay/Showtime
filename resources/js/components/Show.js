@@ -4,10 +4,17 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies }) => {
 
   const [stateRating, setRating] = useState([rating || 0])
   const [previewRating, setPreviewRating] = useState(rating)
+
+  useEffect(() => {
+    console.log("In Show, series are:")
+    console.log(series)
+    console.log("Movies are:")
+    console.log(movies)
+  }, [series, movies])
 
   useEffect(() => {
     const checkRating = (e) => {
@@ -29,8 +36,12 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   const deleteShow = async (e) => {
     e.preventDefault();
     axios.delete(`/api/shows/${id}`)
-    getSeries(series.filter((show) => show.id !== id))
-    getMovies(movies.filter((movie) => movie.id !== id))
+    if(series){
+      getSeries(series.filter((show) => show.id !== id))
+    }
+    if(movies){
+      getMovies(movies.filter((movie) => movie.id !== id))
+    }
   }
 
   const addRatingPreview = (e) => {      

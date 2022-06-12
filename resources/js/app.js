@@ -99,7 +99,8 @@ const App = () => {
 
   const fetchResults = async (e) => {
     e.preventDefault()
-    const theShowType = document.querySelector('input[name="show-type"]:checked').value
+    let theShowType = document.querySelector('input[name="show-type"]:checked').value
+    theShowType = theShowType.toLowerCase()
     console.log("theShowType is:")
     console.log(theShowType)
     setShowType(theShowType)
@@ -110,157 +111,8 @@ const App = () => {
   }
 
   const getStreamingResults = async (streamingService, imdb_id, title, results, show_type) => {
-    // const getStreamingResults = (streamingService, imdb_id, title, showType) => {
-    let showToCheck = null
-    console.log("In second stream function, show_type is:")
-    console.log(show_type)
-    show_type = show_type.toLowerCase()
-    console.log("Now using toLowerCase, show_type is:")
-    console.log(show_type)
-    const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
-    let params = {
-      country: 'us',
-      service: streamingService,
-      type: show_type,
-      order_by: 'original_title',
-      output_language: 'en',
-      language: 'en',
-      keyword: `${title}`
-    }
-
-    const headers = {
-      'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
-      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-    }
-
-    console.log("Running getStreamingResults")
-
-    // return new Promise((resolve) => {
-    //   Axios.get(url, {
-    //     params: params,
-    //     headers: headers
-    //   }).then(res =>{
-    //     console.log("res is:")
-    //     console.log(res)
-    //     resolve(res.data.results)
-    //   })
-
-    return new Promise((resolve, reject) => {
-      console.log("Inside of initial promise.")
-      console.log("Searching for show with imdb_id of:")
-      console.log(imdb_id)
-      Axios.get(url, {
-        params: params,
-        headers: headers
-      }).then(res =>{
-        console.log("Initial res is:")
-        console.log(res)
-        if(res.data.total_pages > 1){
-          console.log("Thinks there is more than 1 page.")
-          for(let i=0; i < res.data.total_pages; i++){
-            let page = i + 1
-            console.log("In loop, page is:")
-            console.log(page)
-            Axios.get(url, {
-              params: {
-                country: 'us',
-                service: streamingService,
-                type: show_type,
-                order_by: 'original_title',
-                page: page,
-                output_language: 'en',
-                language: 'en',
-                keyword: `${title}`
-              },
-              headers: headers
-            }).then(res =>{
-              console.log("This is in then statement with page number of:")
-              console.log(page)
-              console.log("With results of:")
-              console.log(res.data.results)
-              if(res.data.results.length > 0){
-                let usableResults
-                for(let result of res.data.results){
-                  if(result.imdbID == imdb_id){
-                    console.log("Found matching show.")
-                    showToCheck = result
-                  }
-                  if(showToCheck !== null){
-                    for(let key of Object.keys(showToCheck.streamingInfo)){
-                      results.push(key)
-                      let resultsSet = new Set([...results])
-                      console.log("resultsSet is:")
-                      console.log(resultsSet)
-                      let resultsArray = Array.from(resultsSet)
-                      console.log("resultsArray is:")
-                      console.log(resultsArray)
-                      usableResults = Array.from(new set([...results]))
-                      // console.log("usableResults are:")
-                      // console.log(usableResults)
-                    }
-                    console.log("Immediately before resolve, usableResults are:")
-                    console.log(usableResults)
-                    setStreamingServices([usableResults])
-                    resolve(usableResults)
-                    // resolve(Array.from(new set([...results])))
-                    return
-                  }
-                  else{
-                    resolve()
-                  }
-                  // resolve(results)
-                }
-              }
-              else{
-                resolve()
-              }
-            })
-            .catch((e) => {
-              console.log("Catching1, with e:")
-              console.log(e)
-            })
-          }
-        }
-        else{
-          if(res.data.results.length > 0){
-            let usableResults
-            for(let result of res.data.results){
-              if(result.imdbID == imdb_id){
-                console.log("Found match for show.")
-                showToCheck = result
-              }
-              if(showToCheck !== null){
-                for(let key of Object.keys(showToCheck.streamingInfo)){
-                  results.push(key)
-                  usableResults = Array.from(new set([...results]))
-                  // console.log("usableResults are:")
-                  // console.log(usableResults)
-                }
-                console.log("Immediately before resolve, usableResults are:")
-                console.log(usableResults)
-                setStreamingServices([usableResults])
-                resolve(usableResults)
-                // resolve(Array.from(new set([...results])))
-                return
-              }
-              else{
-                resolve()
-              }
-              // resolve(results)
-            }
-          }
-          else{
-            resolve()
-          }
-        }
-      }).catch(() => {
-        console.log("Catching2, with e:")
-        console.log(e)
-      }
-      )
-    })
-  // })
-}
+  
+  }
 
   useEffect(() => {
     console.log("streamingServices are:")
@@ -290,6 +142,8 @@ const App = () => {
     const imdb_id = e.target.getAttribute('imdb_id')
     console.log("In checkStreaming, show_type is:")
     console.log(show_type)
+    console.log("In checkStreaming, imdb_id is:")
+    console.log(imdb_id)
     const title = e.target.title
     let showToCheck = null
     let results = []
@@ -309,35 +163,148 @@ const App = () => {
     // console.log(theResult)
     let promises = []
     for(let i=0; i < streamingServicesList.length; i++){
+      let showToCheck = null
+      console.log("In second stream function, show_type is:")
+      console.log(show_type)
       let streamingService = streamingServicesList[i]
-      console.log("Running first loop. streamingService is:")
-      console.log(streamingService)
-      let theResult = await getStreamingResults(streamingService, imdb_id, title, results, show_type)
-      // if(theResult != undefined){
-      //   console.log("Knows theResult is not undefined")
-      //   setStreamingServices([...streamingServices, theResult])
-      // }
-      // console.log("theResult of awaiting in first loop is:")
-      // console.log(theResult)
-      // promises.push(theResult)
+      // show_type = show_type.toLowerCase()
+      // console.log("Now using toLowerCase, show_type is:")
+      // console.log(show_type)
+      const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
+      let params = {
+        country: 'us',
+        service: streamingService,
+        type: show_type,
+        order_by: 'original_title',
+        output_language: 'en',
+        language: 'en',
+        keyword: `${title}`
+      }
+  
+      const headers = {
+        'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
+        'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+      }
+  
+      console.log("Running getStreamingResults")
+  
+      new Promise((resolve, reject) => {
+        console.log("Inside of initial promise.")
+        console.log("Searching for show with imdb_id of:")
+        console.log(imdb_id)
+        console.log("To see if it's streaming on:")
+        console.log(streamingService)
+        Axios.get(url, {
+          params: params,
+          headers: headers
+        }).then(res =>{
+          console.log("Initial res is:")
+          console.log(res)
+          if(res.data.total_pages > 1){
+            console.log("Thinks there is more than 1 page.")
+            for(let i=0; i < res.data.total_pages; i++){
+              let page = i + 1
+              console.log("In loop, page is:")
+              console.log(page)
+              Axios.get(url, {
+                params: {
+                  country: 'us',
+                  service: streamingService,
+                  type: show_type,
+                  order_by: 'original_title',
+                  page: page,
+                  output_language: 'en',
+                  language: 'en',
+                  keyword: `${title}`
+                },
+                headers: headers
+              }).then(res =>{
+                console.log("This is in then statement with page number of:")
+                console.log(page)
+                console.log("With results of:")
+                console.log(res.data.results)
+                if(res.data.results.length > 0){
+                  let usableResults
+                  for(let result of res.data.results){
+                    if(result.imdbID == imdb_id){
+                      console.log("Found matching show.")
+                      showToCheck = result
+                    }
+                    if(showToCheck !== null){
+                      for(let key of Object.keys(showToCheck.streamingInfo)){
+                        results.push(key)
+                        let resultsSet = new Set([...results])
+                        console.log("resultsSet is:")
+                        console.log(resultsSet)
+                        let resultsArray = Array.from(resultsSet)
+                        console.log("resultsArray is:")
+                        console.log(resultsArray)
+                        usableResults = Array.from(new set([...results]))
+                        // console.log("usableResults are:")
+                        // console.log(usableResults)
+                      }
+                      console.log("Immediately before resolve, usableResults are:")
+                      console.log(usableResults)
+                      setStreamingServices([...usableResults])
+                      resolve(usableResults)
+                      // resolve(Array.from(new set([...results])))
+                      return
+                    }
+                    else{
+                      resolve()
+                    }
+                    // resolve(results)
+                  }
+                }
+                else{
+                  resolve()
+                }
+              })
+              .catch((e) => {
+                console.log("Catching1, with e:")
+                console.log(e)
+              })
+            }
+          }
+          else{
+            if(res.data.results.length > 0){
+              let usableResults
+              for(let result of res.data.results){
+                if(result.imdbID == imdb_id){
+                  console.log("Found match for show.")
+                  showToCheck = result
+                }
+                if(showToCheck !== null){
+                  for(let key of Object.keys(showToCheck.streamingInfo)){
+                    results.push(key)
+                    usableResults = Array.from(new set([...results]))
+                    // console.log("usableResults are:")
+                    // console.log(usableResults)
+                  }
+                  console.log("Immediately before resolve, usableResults are:")
+                  console.log(usableResults)
+                  setStreamingServices([...usableResults])
+                  resolve(usableResults)
+                  // resolve(Array.from(new set([...results])))
+                  return
+                }
+                else{
+                  resolve()
+                }
+                // resolve(results)
+              }
+            }
+            else{
+              console.log("Running resolve with no results.")
+              resolve()
+            }
+          }
+        }).catch(() => {
+          console.log("Catching2, with e:")
+          console.log(e)
+        })
+      })
     }
-    // Promise.all(promises)
-    // .then((res) => {
-    //   console.log("res after .then for Promise.all is:")
-    //   console.log(res)
-    //   if(results.length > 0){
-    //     setStreamingServices([...results])
-    //   }
-    //   else{
-    //     setStreamingServices([noStreaming])
-    //   }
-    // }
-    // )
-    // setStreamingServices([...results])
-    // console.log("After loop from first function, results are:")
-    // console.log(results)
-    // console.log("With results.length being:")
-    // console.log(results.length)
   }
 
   const [sliderPosition, setSliderPosition] = useState(0)
@@ -352,14 +319,14 @@ const App = () => {
     <Router>
       <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
       <Routes>
-        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} />} />
+        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
 
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
+        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} />} />
 
       </Routes>
     </Router>

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Show from './Show'
 import Result from './Result'
 
-const Slider = ({ loggedInUser, fetchResults, results, shows, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType }) => {
+const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType }) => {
 
   const [leftArrowVisibility, setLeftArrowVisibility] = useState(false)
   const [rightArrowVisibility, setRightArrowVisibility] = useState(false)
@@ -98,12 +98,12 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, Link, checkStreami
       <div className='shows' style={seriesSliderPosition}>
       {shows && shows.map((show) => (
         <div key={show.id}>
-          <Show title={show.title} image={show.image_url} imdb_id={show.imdb_id} id={show.id} rating={show.rating} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} show_type={show.show_type} noStreaming={noStreaming} />
+          <Show title={show.title} image={show.image_url} imdb_id={show.imdb_id} id={show.id} rating={show.rating} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} show_type={show.show_type} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
         </div>
       ))}
       {results && results.map((result) => (
         <div key={result.id}>
-          <Result title={result.title} image={result.image} id={result.id} loggedInUser={loggedInUser} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} />
+          <Result title={result.title} image={result.image} id={result.id} loggedInUser={loggedInUser} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
         </div>))}  
       </div>
     </div>

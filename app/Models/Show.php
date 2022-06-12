@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Show extends Model
 {
     public $timestamps = false;
-    public $fillable = ['title', 'image_url', 'user_id'];
+    public $fillable = ['title', 'image_url', 'user_id', 'imdb_id', 'show_type'];
     public function user()
     {
         return $this->belongsTo(User::class);

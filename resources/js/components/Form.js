@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Result from './Result.js'
 import Slider from './Slider'
 
-const Form = ({ loggedInUser, Link, results, fetchResults, streamingServices, checkStreaming, sliderPosition, setSliderPosition, showType, streamingId, noStreaming } ) => {
+const Form = ({ loggedInUser, Link, results, fetchResults, streamingServices, checkStreaming, sliderPosition, setSliderPosition, showType, streamingId, noStreaming, series, getSeries, movies, getMovies }) => {
 
   return (
     <div className='form'>
@@ -26,7 +26,7 @@ const Form = ({ loggedInUser, Link, results, fetchResults, streamingServices, ch
         <button>Search</button>
       </form>
       <div className='results-container'>
-          <Slider loggedInUser={loggedInUser} results={results} fetchResults={fetchResults} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} streamingId={streamingId} noStreaming={noStreaming} /> 
+          <Slider loggedInUser={loggedInUser} results={results} fetchResults={fetchResults} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} /> 
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ class ShowController extends Controller
     {
         $show = Show::firstOrCreate(
             ['title' => $request->title],
-            ['image_url' => $request->image_url, 'user_id' => $request->user_id]
+            ['image_url' => $request->image_url, 'user_id' => $request->user_id, 'imdb_id'=> $request->imdb_id, 'show_type' => $request->show_type]
         );
         return $show->id;
     }

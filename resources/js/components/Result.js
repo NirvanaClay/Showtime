@@ -1,33 +1,49 @@
 import { useState, useEffect } from 'react'
+import SeriesList from './SeriesList';
 
 const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, getShows, shows, user, loggedInUser, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming }) => {
-
-  useEffect(() => {
-    console.log("In Result, showType is:")
-    console.log(showType)
-  }, [showType])
+const Result = ({ title, image, id, user, loggedInUser, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies }) => {
 
   const myShow = async (e) => {
     e.preventDefault();
+    showType = showType.toLowerCase()
     const data = {
       title: title,
       image_url: image,
-      user_id: loggedInUser.id
+      user_id: loggedInUser.id,
+      imdb_id: id,
+      show_type: showType
     } 
     console.log("Data is:")
     console.log(data)
     await axios.post('api/shows', data)
     .then(function(response){
-      getShows([...shows, {
-        title: title,
-        image_url: image,
-        id: response.data
-      }])
-      getResults([])
+      console.log("response from .then of myShow is:")
+      console.log(response)
+      if(showType == 'series'){
+        console.log("Knows showType is series.")
+        getSeries([...series, {
+          title: title,
+          image_url: image,
+          id: response.data,
+          imdb_id: id,
+          show_type: showType
+        }])
+      }
+      else if(showType == 'movie'){
+        console.log("Knows showType is movie")
+        getMovies([...movies, {
+          title: title,
+          image_url: image,
+          id: response.data,
+          imdb_id: id,
+          show_type: showType
+        }])
+      }
+      // getResults([])
     }).catch((e) => {
       console.log(e)
     })
@@ -43,9 +59,11 @@ const Result = ({ title, image, id, getShows, shows, user, loggedInUser, streami
         <p key={key}>{service}</p>
       ))}
       <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
-        <input type ='hidden' name='title' value={title} className='title' />
-        <input type ='hidden' name='image_url' value={image} className='image_url' />
-        <input type ='hidden' name='user_id' value={loggedInUser ? loggedInUser.id : 0} className='user_id' />
+        <input type ='hidden' name='title' value={title} />
+        <input type ='hidden' name='image_url' value={image} />
+        <input type ='hidden' name='imdb_id' value={id} />
+        <input type ='hidden' name='user_id' value={loggedInUser ? loggedInUser.id : 0} />
+        <input type ='hidden' name='sbow_type' value={showType} />
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         {loggedInUser && 
           <input type='submit' className='order' name='addShowBtn' value='Add Show' />

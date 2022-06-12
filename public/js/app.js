@@ -2218,7 +2218,11 @@ var Home = function Home(_ref) {
       setSliderPosition = _ref.setSliderPosition,
       showType = _ref.showType,
       streamingId = _ref.streamingId,
-      noStreaming = _ref.noStreaming;
+      noStreaming = _ref.noStreaming,
+      series = _ref.series,
+      getSeries = _ref.getSeries,
+      movies = _ref.movies,
+      getMovies = _ref.getMovies;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
     className: "home",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
@@ -2234,7 +2238,11 @@ var Home = function Home(_ref) {
       streamingServices: streamingServices,
       showType: showType,
       streamingId: streamingId,
-      noStreaming: noStreaming
+      noStreaming: noStreaming,
+      series: series,
+      getSeries: getSeries,
+      movies: movies,
+      getMovies: getMovies
     })]
   });
 };
@@ -2322,7 +2330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function (_e2) { function e(_x8) { return _e2.apply(this, arguments); } e.toString = function () { return _e2.toString(); }; return e; }(function (e) { throw e; }), f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function (_e3) { function e(_x9) { return _e3.apply(this, arguments); } e.toString = function () { return _e3.toString(); }; return e; }(function (e) { didErr = true; err = e; }), f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 
@@ -2529,23 +2537,24 @@ var App = function App() {
             case 0:
               e.preventDefault();
               theShowType = document.querySelector('input[name="show-type"]:checked').value;
+              theShowType = theShowType.toLowerCase();
               console.log("theShowType is:");
               console.log(theShowType);
               setShowType(theShowType);
               searchString = "https://imdb-api.com/en/API/Search".concat(theShowType, "/k_j0x59844/").concat(e.target[2].value);
-              _context2.next = 8;
+              _context2.next = 9;
               return fetch(searchString);
 
-            case 8:
+            case 9:
               res = _context2.sent;
-              _context2.next = 11;
+              _context2.next = 12;
               return res.json();
 
-            case 11:
+            case 12:
               data = _context2.sent;
               getResults(data.results);
 
-            case 13:
+            case 14:
             case "end":
               return _context2.stop();
           }
@@ -2560,186 +2569,10 @@ var App = function App() {
 
   var getStreamingResults = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(streamingService, imdb_id, title, results, show_type) {
-      var showToCheck, url, params, headers;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              // const getStreamingResults = (streamingService, imdb_id, title, showType) => {
-              showToCheck = null;
-              console.log("In second stream function, show_type is:");
-              console.log(show_type);
-              show_type = show_type.toLowerCase();
-              console.log("Now using toLowerCase, show_type is:");
-              console.log(show_type);
-              url = 'https://streaming-availability.p.rapidapi.com/search/pro';
-              params = {
-                country: 'us',
-                service: streamingService,
-                type: show_type,
-                order_by: 'original_title',
-                output_language: 'en',
-                language: 'en',
-                keyword: "".concat(title)
-              };
-              headers = {
-                'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
-                'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-              };
-              console.log("Running getStreamingResults"); // return new Promise((resolve) => {
-              //   Axios.get(url, {
-              //     params: params,
-              //     headers: headers
-              //   }).then(res =>{
-              //     console.log("res is:")
-              //     console.log(res)
-              //     resolve(res.data.results)
-              //   })
-
-              return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                console.log("Inside of initial promise.");
-                console.log("Searching for show with imdb_id of:");
-                console.log(imdb_id);
-                axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
-                  params: params,
-                  headers: headers
-                }).then(function (res) {
-                  console.log("Initial res is:");
-                  console.log(res);
-
-                  if (res.data.total_pages > 1) {
-                    console.log("Thinks there is more than 1 page.");
-
-                    var _loop = function _loop(i) {
-                      var page = i + 1;
-                      console.log("In loop, page is:");
-                      console.log(page);
-                      axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
-                        params: {
-                          country: 'us',
-                          service: streamingService,
-                          type: show_type,
-                          order_by: 'original_title',
-                          page: page,
-                          output_language: 'en',
-                          language: 'en',
-                          keyword: "".concat(title)
-                        },
-                        headers: headers
-                      }).then(function (res) {
-                        console.log("This is in then statement with page number of:");
-                        console.log(page);
-                        console.log("With results of:");
-                        console.log(res.data.results);
-
-                        if (res.data.results.length > 0) {
-                          var usableResults;
-
-                          var _iterator = _createForOfIteratorHelper(res.data.results),
-                              _step;
-
-                          try {
-                            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                              var result = _step.value;
-
-                              if (result.imdbID == imdb_id) {
-                                console.log("Found matching show.");
-                                showToCheck = result;
-                              }
-
-                              if (showToCheck !== null) {
-                                for (var _i2 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i2 < _Object$keys.length; _i2++) {
-                                  var key = _Object$keys[_i2];
-                                  results.push(key);
-                                  var resultsSet = new Set(_toConsumableArray(results));
-                                  console.log("resultsSet is:");
-                                  console.log(resultsSet);
-                                  var resultsArray = Array.from(resultsSet);
-                                  console.log("resultsArray is:");
-                                  console.log(resultsArray);
-                                  usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set(_toConsumableArray(results))); // console.log("usableResults are:")
-                                  // console.log(usableResults)
-                                }
-
-                                console.log("Immediately before resolve, usableResults are:");
-                                console.log(usableResults);
-                                setStreamingServices([usableResults]);
-                                resolve(usableResults); // resolve(Array.from(new set([...results])))
-
-                                return;
-                              } else {
-                                resolve();
-                              } // resolve(results)
-
-                            }
-                          } catch (err) {
-                            _iterator.e(err);
-                          } finally {
-                            _iterator.f();
-                          }
-                        } else {
-                          resolve();
-                        }
-                      })["catch"](function (e) {
-                        console.log("Catching1, with e:");
-                        console.log(e);
-                      });
-                    };
-
-                    for (var i = 0; i < res.data.total_pages; i++) {
-                      _loop(i);
-                    }
-                  } else {
-                    if (res.data.results.length > 0) {
-                      var usableResults;
-
-                      var _iterator2 = _createForOfIteratorHelper(res.data.results),
-                          _step2;
-
-                      try {
-                        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                          var result = _step2.value;
-
-                          if (result.imdbID == imdb_id) {
-                            console.log("Found match for show.");
-                            showToCheck = result;
-                          }
-
-                          if (showToCheck !== null) {
-                            for (var _i3 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys2.length; _i3++) {
-                              var key = _Object$keys2[_i3];
-                              results.push(key);
-                              usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set(_toConsumableArray(results))); // console.log("usableResults are:")
-                              // console.log(usableResults)
-                            }
-
-                            console.log("Immediately before resolve, usableResults are:");
-                            console.log(usableResults);
-                            setStreamingServices([usableResults]);
-                            resolve(usableResults); // resolve(Array.from(new set([...results])))
-
-                            return;
-                          } else {
-                            resolve();
-                          } // resolve(results)
-
-                        }
-                      } catch (err) {
-                        _iterator2.e(err);
-                      } finally {
-                        _iterator2.f();
-                      }
-                    } else {
-                      resolve();
-                    }
-                  }
-                })["catch"](function () {
-                  console.log("Catching2, with e:");
-                  console.log(e);
-                });
-              }));
-
-            case 11:
             case "end":
               return _context3.stop();
           }
@@ -2772,7 +2605,8 @@ var App = function App() {
 
   var checkStreaming = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
-      var show_type, imdb_id, title, showToCheck, results, streamingServicesList, promises, i, streamingService, theResult;
+      var show_type, imdb_id, title, showToCheck, results, streamingServicesList, promises, _loop, i;
+
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
@@ -2782,6 +2616,8 @@ var App = function App() {
               imdb_id = e.target.getAttribute('imdb_id');
               console.log("In checkStreaming, show_type is:");
               console.log(show_type);
+              console.log("In checkStreaming, imdb_id is:");
+              console.log(imdb_id);
               title = e.target.title;
               showToCheck = null;
               results = [];
@@ -2796,29 +2632,182 @@ var App = function App() {
               // console.log(theResult)
 
               promises = [];
-              i = 0;
 
-            case 12:
-              if (!(i < streamingServicesList.length)) {
-                _context4.next = 22;
-                break;
+              _loop = function _loop(i) {
+                var showToCheck = null;
+                console.log("In second stream function, show_type is:");
+                console.log(show_type);
+                var streamingService = streamingServicesList[i]; // show_type = show_type.toLowerCase()
+                // console.log("Now using toLowerCase, show_type is:")
+                // console.log(show_type)
+
+                var url = 'https://streaming-availability.p.rapidapi.com/search/pro';
+                var params = {
+                  country: 'us',
+                  service: streamingService,
+                  type: show_type,
+                  order_by: 'original_title',
+                  output_language: 'en',
+                  language: 'en',
+                  keyword: "".concat(title)
+                };
+                var headers = {
+                  'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
+                  'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+                };
+                console.log("Running getStreamingResults");
+                new Promise(function (resolve, reject) {
+                  console.log("Inside of initial promise.");
+                  console.log("Searching for show with imdb_id of:");
+                  console.log(imdb_id);
+                  console.log("To see if it's streaming on:");
+                  console.log(streamingService);
+                  axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
+                    params: params,
+                    headers: headers
+                  }).then(function (res) {
+                    console.log("Initial res is:");
+                    console.log(res);
+
+                    if (res.data.total_pages > 1) {
+                      console.log("Thinks there is more than 1 page.");
+
+                      var _loop2 = function _loop2(_i2) {
+                        var page = _i2 + 1;
+                        console.log("In loop, page is:");
+                        console.log(page);
+                        axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
+                          params: {
+                            country: 'us',
+                            service: streamingService,
+                            type: show_type,
+                            order_by: 'original_title',
+                            page: page,
+                            output_language: 'en',
+                            language: 'en',
+                            keyword: "".concat(title)
+                          },
+                          headers: headers
+                        }).then(function (res) {
+                          console.log("This is in then statement with page number of:");
+                          console.log(page);
+                          console.log("With results of:");
+                          console.log(res.data.results);
+
+                          if (res.data.results.length > 0) {
+                            var usableResults;
+
+                            var _iterator = _createForOfIteratorHelper(res.data.results),
+                                _step;
+
+                            try {
+                              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                                var result = _step.value;
+
+                                if (result.imdbID == imdb_id) {
+                                  console.log("Found matching show.");
+                                  showToCheck = result;
+                                }
+
+                                if (showToCheck !== null) {
+                                  for (var _i3 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys.length; _i3++) {
+                                    var key = _Object$keys[_i3];
+                                    results.push(key);
+                                    var resultsSet = new Set([].concat(results));
+                                    console.log("resultsSet is:");
+                                    console.log(resultsSet);
+                                    var resultsArray = Array.from(resultsSet);
+                                    console.log("resultsArray is:");
+                                    console.log(resultsArray);
+                                    usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                    // console.log(usableResults)
+                                  }
+
+                                  console.log("Immediately before resolve, usableResults are:");
+                                  console.log(usableResults);
+                                  setStreamingServices(_toConsumableArray(usableResults));
+                                  resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                                  return;
+                                } else {
+                                  resolve();
+                                } // resolve(results)
+
+                              }
+                            } catch (err) {
+                              _iterator.e(err);
+                            } finally {
+                              _iterator.f();
+                            }
+                          } else {
+                            resolve();
+                          }
+                        })["catch"](function (e) {
+                          console.log("Catching1, with e:");
+                          console.log(e);
+                        });
+                      };
+
+                      for (var _i2 = 0; _i2 < res.data.total_pages; _i2++) {
+                        _loop2(_i2);
+                      }
+                    } else {
+                      if (res.data.results.length > 0) {
+                        var usableResults;
+
+                        var _iterator2 = _createForOfIteratorHelper(res.data.results),
+                            _step2;
+
+                        try {
+                          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                            var result = _step2.value;
+
+                            if (result.imdbID == imdb_id) {
+                              console.log("Found match for show.");
+                              showToCheck = result;
+                            }
+
+                            if (showToCheck !== null) {
+                              for (var _i4 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i4 < _Object$keys2.length; _i4++) {
+                                var key = _Object$keys2[_i4];
+                                results.push(key);
+                                usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                // console.log(usableResults)
+                              }
+
+                              console.log("Immediately before resolve, usableResults are:");
+                              console.log(usableResults);
+                              setStreamingServices(_toConsumableArray(usableResults));
+                              resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                              return;
+                            } else {
+                              resolve();
+                            } // resolve(results)
+
+                          }
+                        } catch (err) {
+                          _iterator2.e(err);
+                        } finally {
+                          _iterator2.f();
+                        }
+                      } else {
+                        console.log("Running resolve with no results.");
+                        resolve();
+                      }
+                    }
+                  })["catch"](function () {
+                    console.log("Catching2, with e:");
+                    console.log(e);
+                  });
+                });
+              };
+
+              for (i = 0; i < streamingServicesList.length; i++) {
+                _loop(i);
               }
 
-              streamingService = streamingServicesList[i];
-              console.log("Running first loop. streamingService is:");
-              console.log(streamingService);
-              _context4.next = 18;
-              return getStreamingResults(streamingService, imdb_id, title, results, show_type);
-
-            case 18:
-              theResult = _context4.sent;
-
-            case 19:
-              i++;
-              _context4.next = 12;
-              break;
-
-            case 22:
+            case 15:
             case "end":
               return _context4.stop();
           }
@@ -2867,7 +2856,11 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingId: streamingId,
           noStreaming: noStreaming,
-          showType: showType
+          showType: showType,
+          series: series,
+          getSeries: getSeries,
+          movies: movies,
+          getMovies: getMovies
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "register",
@@ -2891,6 +2884,9 @@ var App = function App() {
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_SeriesList_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
           loggedInUser: loggedInUser,
           series: series,
+          getSeries: getSeries,
+          movies: movies,
+          getMovies: getMovies,
           Link: react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Link,
           checkStreaming: checkStreaming,
           sliderPosition: sliderPosition,
@@ -2903,6 +2899,9 @@ var App = function App() {
         path: "my-movies",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_MoviesList_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
           movies: movies,
+          getMovies: getMovies,
+          series: series,
+          getSeries: getSeries,
           Link: react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Link,
           checkStreaming: checkStreaming,
           sliderPosition: sliderPosition,
@@ -2987,7 +2986,11 @@ var Form = function Form(_ref) {
       setSliderPosition = _ref.setSliderPosition,
       showType = _ref.showType,
       streamingId = _ref.streamingId,
-      noStreaming = _ref.noStreaming;
+      noStreaming = _ref.noStreaming,
+      series = _ref.series,
+      getSeries = _ref.getSeries,
+      movies = _ref.movies,
+      getMovies = _ref.getMovies;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -3039,7 +3042,11 @@ var Form = function Form(_ref) {
         streamingServices: streamingServices,
         showType: showType,
         streamingId: streamingId,
-        noStreaming: noStreaming
+        noStreaming: noStreaming,
+        series: series,
+        getSeries: getSeries,
+        movies: movies,
+        getMovies: getMovies
       })
     })]
   });
@@ -3111,6 +3118,7 @@ var Header = function Header(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
           to: "/",
+          onClick: resetSlider,
           children: "Home"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
@@ -3367,6 +3375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var MoviesList = function MoviesList(_ref) {
   var movies = _ref.movies,
+      getMovies = _ref.getMovies,
       Link = _ref.Link,
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
@@ -3379,6 +3388,8 @@ var MoviesList = function MoviesList(_ref) {
         children: "My Movies"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
         shows: movies,
+        getMovies: getMovies,
+        movies: movies,
         Link: Link,
         sliderPosition: sliderPosition,
         setSliderPosition: setSliderPosition,
@@ -3539,7 +3550,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _SeriesList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SeriesList */ "./resources/js/components/SeriesList.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -3564,6 +3576,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3572,8 +3585,6 @@ var Result = function Result(_ref) {
   var title = _ref.title,
       image = _ref.image,
       id = _ref.id,
-      getShows = _ref.getShows,
-      shows = _ref.shows,
       user = _ref.user,
       loggedInUser = _ref.loggedInUser,
       streamingServices = _ref.streamingServices,
@@ -3581,11 +3592,11 @@ var Result = function Result(_ref) {
       checkStreaming = _ref.checkStreaming,
       showType = _ref.showType,
       streamingId = _ref.streamingId,
-      noStreaming = _ref.noStreaming;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In Result, showType is:");
-    console.log(showType);
-  }, [showType]);
+      noStreaming = _ref.noStreaming,
+      series = _ref.series,
+      getSeries = _ref.getSeries,
+      movies = _ref.movies,
+      getMovies = _ref.getMovies;
 
   var myShow = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
@@ -3595,26 +3606,46 @@ var Result = function Result(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
+              showType = showType.toLowerCase();
               data = {
                 title: title,
                 image_url: image,
-                user_id: loggedInUser.id
+                user_id: loggedInUser.id,
+                imdb_id: id,
+                show_type: showType
               };
               console.log("Data is:");
               console.log(data);
-              _context.next = 6;
+              _context.next = 7;
               return axios.post('api/shows', data).then(function (response) {
-                getShows([].concat(_toConsumableArray(shows), [{
-                  title: title,
-                  image_url: image,
-                  id: response.data
-                }]));
-                getResults([]);
+                console.log("response from .then of myShow is:");
+                console.log(response);
+
+                if (showType == 'series') {
+                  console.log("Knows showType is series.");
+                  getSeries([].concat(_toConsumableArray(series), [{
+                    title: title,
+                    image_url: image,
+                    id: response.data,
+                    imdb_id: id,
+                    show_type: showType
+                  }]));
+                } else if (showType == 'movie') {
+                  console.log("Knows showType is movie");
+                  getMovies([].concat(_toConsumableArray(movies), [{
+                    title: title,
+                    image_url: image,
+                    id: response.data,
+                    imdb_id: id,
+                    show_type: showType
+                  }]));
+                } // getResults([])
+
               })["catch"](function (e) {
                 console.log(e);
               });
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -3627,50 +3658,55 @@ var Result = function Result(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "result",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
       children: title
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       src: image
-    }), streamingServices && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+    }), streamingServices && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
       children: "Streaming on:"
     }), streamingServices && streamingId == id && streamingServices.map(function (service, key) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
         children: service
       }, key);
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       onSubmit: myShow,
       method: "POST",
       action: "/api/shows",
       name: "show-form",
       className: "show-form",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "title",
-        value: title,
-        className: "title"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        value: title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "image_url",
-        value: image,
-        className: "image_url"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        value: image
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        type: "hidden",
+        name: "imdb_id",
+        value: id
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "user_id",
-        value: loggedInUser ? loggedInUser.id : 0,
-        className: "user_id"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        value: loggedInUser ? loggedInUser.id : 0
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        type: "hidden",
+        name: "sbow_type",
+        value: showType
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "_token",
         value: "{{ csrf_token() }}"
-      }), loggedInUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+      }), loggedInUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "submit",
         className: "order",
         name: "addShowBtn",
         value: "Add Show"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       className: "streamCheck",
       show_type: showType,
       imdb_id: id,
@@ -3711,6 +3747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var SeriesList = function SeriesList(_ref) {
   var series = _ref.series,
+      getSeries = _ref.getSeries,
       Link = _ref.Link,
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
@@ -3725,6 +3762,8 @@ var SeriesList = function SeriesList(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
         children: "My Series"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        series: series,
+        getSeries: getSeries,
         shows: series,
         Link: Link,
         sliderPosition: sliderPosition,
@@ -3800,7 +3839,11 @@ var Show = function Show(_ref) {
       streamingServices = _ref.streamingServices,
       streamingId = _ref.streamingId,
       show_type = _ref.show_type,
-      noStreaming = _ref.noStreaming;
+      noStreaming = _ref.noStreaming,
+      series = _ref.series,
+      getSeries = _ref.getSeries,
+      movies = _ref.movies,
+      getMovies = _ref.getMovies;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating || 0]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3812,6 +3855,12 @@ var Show = function Show(_ref) {
       previewRating = _useState4[0],
       setPreviewRating = _useState4[1];
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("In Show, series are:");
+    console.log(series);
+    console.log("Movies are:");
+    console.log(movies);
+  }, [series, movies]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var checkRating = function checkRating(e) {
       var stars = document.querySelectorAll('i');
@@ -3849,12 +3898,18 @@ var Show = function Show(_ref) {
             case 0:
               e.preventDefault();
               axios["delete"]("/api/shows/".concat(id));
-              getSeries(series.filter(function (show) {
-                return show.id !== id;
-              }));
-              getMovies(movies.filter(function (movie) {
-                return movie.id !== id;
-              }));
+
+              if (series) {
+                getSeries(series.filter(function (show) {
+                  return show.id !== id;
+                }));
+              }
+
+              if (movies) {
+                getMovies(movies.filter(function (movie) {
+                  return movie.id !== id;
+                }));
+              }
 
             case 4:
             case "end":
@@ -4187,6 +4242,10 @@ var Slider = function Slider(_ref) {
       fetchResults = _ref.fetchResults,
       results = _ref.results,
       shows = _ref.shows,
+      series = _ref.series,
+      getSeries = _ref.getSeries,
+      movies = _ref.movies,
+      getMovies = _ref.getMovies,
       Link = _ref.Link,
       checkStreaming = _ref.checkStreaming,
       sliderPosition = _ref.sliderPosition,
@@ -4333,7 +4392,11 @@ var Slider = function Slider(_ref) {
             streamingServices: streamingServices,
             streamingId: streamingId,
             show_type: show.show_type,
-            noStreaming: noStreaming
+            noStreaming: noStreaming,
+            series: series,
+            getSeries: getSeries,
+            movies: movies,
+            getMovies: getMovies
           })
         }, show.id);
       }), results && results.map(function (result) {
@@ -4348,7 +4411,11 @@ var Slider = function Slider(_ref) {
             checkStreaming: checkStreaming,
             showType: showType,
             streamingId: streamingId,
-            noStreaming: noStreaming
+            noStreaming: noStreaming,
+            series: series,
+            getSeries: getSeries,
+            movies: movies,
+            getMovies: getMovies
           })
         }, result.id);
       })]
