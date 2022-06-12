@@ -4,7 +4,7 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, rating, shows, getShows }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming }) => {
 
   const [stateRating, setRating] = useState([rating || 0])
   const [previewRating, setPreviewRating] = useState(rating)
@@ -29,7 +29,8 @@ const Show = ({ title, image, id, rating, shows, getShows }) => {
   const deleteShow = async (e) => {
     e.preventDefault();
     axios.delete(`/api/shows/${id}`)
-    getShows(shows.filter((show) => show.id !== id))
+    getSeries(series.filter((show) => show.id !== id))
+    getMovies(movies.filter((movie) => movie.id !== id))
   }
 
   const addRatingPreview = (e) => {      
@@ -79,6 +80,11 @@ const Show = ({ title, image, id, rating, shows, getShows }) => {
     <div className='show'>
       <h3>{title}</h3>
       <img src={image} />
+      {streamingServices && streamingId == imdb_id && streamingServices != noStreaming &&
+      <h4>Streaming on:</h4>}
+      {streamingServices && streamingId == imdb_id && streamingServices.map((service, key) => (
+        <p key={key}>{service}</p>
+      ))}
       <div className='stars-container' id={id}>
         <form action='/api/shows/{id}' method='POST' onSubmit={addRating}>
           <input type="hidden" name="_method" value="PUT" />
@@ -110,6 +116,7 @@ const Show = ({ title, image, id, rating, shows, getShows }) => {
         <input type ='hidden' name='image_url' value={image} />
         <input type='submit' value="Remove" />
       </form>
+      <button className='streamCheck' title={title} imdb_id={imdb_id} show_type={show_type} onClick={checkStreaming}>Stream Check</button>
     </div>
   )
 }

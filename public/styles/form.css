@@ -14,20 +14,22 @@
 
 .form form {
   margin: 20px auto 0 auto;
+}
+
+.form form .radio-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.form form input {
+.form form input[type='text'] {
   width: 250px;
   height: 35px;
+  display: block;
+  margin: 0 auto;
   padding: 0 5px;
   border: none;
   border-radius: 5px;
@@ -37,6 +39,8 @@
 .form form button {
   width: 80px;
   height: 40px;
+  display: block;
+  margin: 0 auto;
   border: none;
   border-radius: 5px;
   background: red;
@@ -112,7 +116,7 @@
   display: flex;
 }
 
-.form .results-container .results {
+.form .results-container .shows {
   width: 900px;
   height: 450px;
   display: -webkit-box;
@@ -125,24 +129,24 @@
   transition: .5s ease-in-out;
 }
 
-.form .results-container .results .result {
+.form .results-container .shows .result {
   width: 225px;
   margin: 0 auto;
   text-align: center;
 }
 
-.form .results-container .results .result h2 {
+.form .results-container .shows .result h2 {
   height: 40px;
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.form .results-container .results .result img {
+.form .results-container .shows .result img {
   width: 150px;
   height: 200px;
 }
 
-.form .results-container .results .result input[type='submit'] {
+.form .results-container .shows .result input[type='submit'] {
   width: 120px;
   height: 50px;
   background: black;
@@ -151,7 +155,7 @@
   cursor: pointer;
 }
 
-.form .results-container .results .result button {
+.form .results-container .shows .result button {
   width: 120px;
   height: 50px;
   background: white;

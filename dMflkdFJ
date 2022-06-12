@@ -1,0 +1,11 @@
+[33m4accd47[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mprocess[m[33m)[m HEAD@{0}: reset: moving to 4accd47
+[33macee95c[m HEAD@{1}: commit (amend): Merge branch 'main' of https://github.com/NirvanaClay/Showtime into process
+[33m4accd47[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mprocess[m[33m)[m HEAD@{2}: merge process: Fast-forward
+[33ma4197c3[m HEAD@{3}: checkout: moving from process to main
+[33m4accd47[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mprocess[m[33m)[m HEAD@{4}: pull origin main: Merge made by the 'recursive' strategy.
+[33m7d48ba7[m HEAD@{5}: commit: Removed comments.
+[33mbd1f4c3[m[33m ([m[1;31morigin/process[m[33m)[m HEAD@{6}: commit: Fixed issue where stream was checking based on keyword. Now checking based on imdbID, so results are accurate.
+[33ma4197c3[m HEAD@{7}: checkout: moving from process to process
+[33ma4197c3[m HEAD@{8}: checkout: moving from main to process
+[33ma4197c3[m HEAD@{9}: Branch: renamed refs/heads/main to refs/heads/main
+[33ma4197c3[m HEAD@{11}: commit (initial): Initial skeleton of app.
