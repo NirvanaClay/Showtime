@@ -2612,6 +2612,8 @@ var App = function App() {
 
               return _context4.abrupt("return", new Promise(function (resolve, reject) {
                 console.log("Inside of initial promise.");
+                console.log("Searching for show with imdb_id of:");
+                console.log(imdb_id);
                 axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
                   params: params,
                   headers: headers
@@ -2622,7 +2624,7 @@ var App = function App() {
                   if (res.data.total_pages > 1) {
                     console.log("Thinks there is more than 1 page.");
 
-                    for (var i = 0; i < res.data.total_pages; i++) {
+                    var _loop = function _loop(i) {
                       var page = i + 1;
                       console.log("In loop, page is:");
                       console.log(page);
@@ -2639,7 +2641,14 @@ var App = function App() {
                         },
                         headers: headers
                       }).then(function (res) {
+                        console.log("This is in then statement with page number of:");
+                        console.log(page);
+                        console.log("With results of:");
+                        console.log(res.data.results);
+
                         if (res.data.results.length > 0) {
+                          var usableResults;
+
                           var _iterator = _createForOfIteratorHelper(res.data.results),
                               _step;
 
@@ -2648,6 +2657,7 @@ var App = function App() {
                               var result = _step.value;
 
                               if (result.imdbID == imdb_id) {
+                                console.log("Found matching show.");
                                 showToCheck = result;
                               }
 
@@ -2655,10 +2665,26 @@ var App = function App() {
                                 for (var _i2 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i2 < _Object$keys.length; _i2++) {
                                   var key = _Object$keys[_i2];
                                   results.push(key);
+                                  var resultsSet = new Set(_toConsumableArray(results));
+                                  console.log("resultsSet is:");
+                                  console.log(resultsSet);
+                                  var resultsArray = Array.from(resultsSet);
+                                  console.log("resultsArray is:");
+                                  console.log(resultsArray);
+                                  usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set(_toConsumableArray(results))); // console.log("usableResults are:")
+                                  // console.log(usableResults)
                                 }
-                              }
 
-                              resolve(results);
+                                console.log("Immediately before resolve, usableResults are:");
+                                console.log(usableResults);
+                                setStreamingServices([usableResults]);
+                                resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                                return;
+                              } else {
+                                resolve();
+                              } // resolve(results)
+
                             }
                           } catch (err) {
                             _iterator.e(err);
@@ -2672,9 +2698,15 @@ var App = function App() {
                         console.log("Catching1, with e:");
                         console.log(e);
                       });
+                    };
+
+                    for (var i = 0; i < res.data.total_pages; i++) {
+                      _loop(i);
                     }
                   } else {
                     if (res.data.results.length > 0) {
+                      var usableResults;
+
                       var _iterator2 = _createForOfIteratorHelper(res.data.results),
                           _step2;
 
@@ -2683,6 +2715,7 @@ var App = function App() {
                           var result = _step2.value;
 
                           if (result.imdbID == imdb_id) {
+                            console.log("Found match for show.");
                             showToCheck = result;
                           }
 
@@ -2690,10 +2723,20 @@ var App = function App() {
                             for (var _i3 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys2.length; _i3++) {
                               var key = _Object$keys2[_i3];
                               results.push(key);
+                              usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set(_toConsumableArray(results))); // console.log("usableResults are:")
+                              // console.log(usableResults)
                             }
-                          }
 
-                          resolve(results);
+                            console.log("Immediately before resolve, usableResults are:");
+                            console.log(usableResults);
+                            setStreamingServices([usableResults]);
+                            resolve(usableResults); // resolve(Array.from(new set([...results])))
+
+                            return;
+                          } else {
+                            resolve();
+                          } // resolve(results)
+
                         }
                       } catch (err) {
                         _iterator2.e(err);
@@ -2743,7 +2786,7 @@ var App = function App() {
 
   var checkStreaming = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(e) {
-      var showType, imdb_id, title, showToCheck, results, streamingServicesList, i, streamingService, theResult;
+      var showType, imdb_id, title, showToCheck, results, streamingServicesList, promises, i, streamingService, theResult;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -2764,43 +2807,30 @@ var App = function App() {
               // console.log("theResult of awaiting in first loop is:")
               // console.log(theResult)
 
+              promises = [];
               i = 0;
 
-            case 9:
+            case 10:
               if (!(i < streamingServicesList.length)) {
-                _context5.next = 21;
+                _context5.next = 20;
                 break;
               }
 
               streamingService = streamingServicesList[i];
               console.log("Running first loop. streamingService is:");
               console.log(streamingService);
-              _context5.next = 15;
+              _context5.next = 16;
               return getStreamingResults(streamingService, imdb_id, title, results, showType);
 
-            case 15:
+            case 16:
               theResult = _context5.sent;
-              console.log("theResult of awaiting in first loop is:");
-              console.log(theResult);
 
-            case 18:
+            case 17:
               i++;
-              _context5.next = 9;
+              _context5.next = 10;
               break;
 
-            case 21:
-              if (results.length > 0) {
-                setStreamingServices([].concat(results));
-              } else {
-                setStreamingServices([noStreaming]);
-              } // setStreamingServices([...results])
-              // console.log("After loop from first function, results are:")
-              // console.log(results)
-              // console.log("With results.length being:")
-              // console.log(results.length)
-
-
-            case 22:
+            case 20:
             case "end":
               return _context5.stop();
           }

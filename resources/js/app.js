@@ -141,6 +141,8 @@ const App = () => {
 
     return new Promise((resolve, reject) => {
       console.log("Inside of initial promise.")
+      console.log("Searching for show with imdb_id of:")
+      console.log(imdb_id)
       Axios.get(url, {
         params: params,
         headers: headers
@@ -166,17 +168,41 @@ const App = () => {
               },
               headers: headers
             }).then(res =>{
+              console.log("This is in then statement with page number of:")
+              console.log(page)
+              console.log("With results of:")
+              console.log(res.data.results)
               if(res.data.results.length > 0){
+                let usableResults
                 for(let result of res.data.results){
                   if(result.imdbID == imdb_id){
+                    console.log("Found matching show.")
                     showToCheck = result
                   }
                   if(showToCheck !== null){
                     for(let key of Object.keys(showToCheck.streamingInfo)){
                       results.push(key)
+                      let resultsSet = new Set([...results])
+                      console.log("resultsSet is:")
+                      console.log(resultsSet)
+                      let resultsArray = Array.from(resultsSet)
+                      console.log("resultsArray is:")
+                      console.log(resultsArray)
+                      usableResults = Array.from(new set([...results]))
+                      // console.log("usableResults are:")
+                      // console.log(usableResults)
                     }
+                    console.log("Immediately before resolve, usableResults are:")
+                    console.log(usableResults)
+                    setStreamingServices([usableResults])
+                    resolve(usableResults)
+                    // resolve(Array.from(new set([...results])))
+                    return
                   }
-                  resolve(results)
+                  else{
+                    resolve()
+                  }
+                  // resolve(results)
                 }
               }
               else{
@@ -191,16 +217,30 @@ const App = () => {
         }
         else{
           if(res.data.results.length > 0){
+            let usableResults
             for(let result of res.data.results){
               if(result.imdbID == imdb_id){
+                console.log("Found match for show.")
                 showToCheck = result
               }
               if(showToCheck !== null){
                 for(let key of Object.keys(showToCheck.streamingInfo)){
                   results.push(key)
+                  usableResults = Array.from(new set([...results]))
+                  // console.log("usableResults are:")
+                  // console.log(usableResults)
                 }
+                console.log("Immediately before resolve, usableResults are:")
+                console.log(usableResults)
+                setStreamingServices([usableResults])
+                resolve(usableResults)
+                // resolve(Array.from(new set([...results])))
+                return
               }
-              resolve(results)
+              else{
+                resolve()
+              }
+              // resolve(results)
             }
           }
           else{
@@ -259,20 +299,32 @@ const App = () => {
     // const theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
     // console.log("theResult of awaiting in first loop is:")
     // console.log(theResult)
+    let promises = []
     for(let i=0; i < streamingServicesList.length; i++){
       let streamingService = streamingServicesList[i]
       console.log("Running first loop. streamingService is:")
       console.log(streamingService)
       let theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
-      console.log("theResult of awaiting in first loop is:")
-      console.log(theResult)
+      // if(theResult != undefined){
+      //   console.log("Knows theResult is not undefined")
+      //   setStreamingServices([...streamingServices, theResult])
+      // }
+      // console.log("theResult of awaiting in first loop is:")
+      // console.log(theResult)
+      // promises.push(theResult)
     }
-    if(results.length > 0){
-      setStreamingServices([...results])
-    }
-    else{
-      setStreamingServices([noStreaming])
-    }
+    // Promise.all(promises)
+    // .then((res) => {
+    //   console.log("res after .then for Promise.all is:")
+    //   console.log(res)
+    //   if(results.length > 0){
+    //     setStreamingServices([...results])
+    //   }
+    //   else{
+    //     setStreamingServices([noStreaming])
+    //   }
+    // }
+    // )
     // setStreamingServices([...results])
     // console.log("After loop from first function, results are:")
     // console.log(results)
