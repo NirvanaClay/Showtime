@@ -42,7 +42,7 @@ const App = () => {
 
   const noStreaming = "This show is not currently available through streaming."
 
-  // const [showType, setShowType] = useState('')
+  const [showType, setShowType] = useState('')
 
   const childToParent = (childData) => {
     console.log("Child data is " + childData)
@@ -92,30 +92,36 @@ const App = () => {
     fetchShows()
   }, [loginStatus])
 
+  useEffect(() => {
+    console.log("showType is:")
+    console.log(showType)
+  }, [showType])
+
   const fetchResults = async (e) => {
     e.preventDefault()
     const theShowType = document.querySelector('input[name="show-type"]:checked').value
+    console.log("theShowType is:")
+    console.log(theShowType)
+    setShowType(theShowType)
     const searchString = `https://imdb-api.com/en/API/Search${theShowType}/k_j0x59844/${e.target[2].value}`
     const res = await fetch(searchString)
     const data = await res.json()
     getResults(data.results)
   }
 
-  const fetchDetails = async (e) => {
-    const res = await fetch(`https://imdb-api.com/en/API/Title/k_j0x59844/${e.target.id}`)
-    const data = await res.json()
-    getResults(results.filter((result) => result.id == e.target.id))
-    getDetails(data.plot)
-  }
-
-  const getStreamingResults = async (streamingService, imdb_id, title, results, showType) => {
+  const getStreamingResults = async (streamingService, imdb_id, title, results, show_type) => {
     // const getStreamingResults = (streamingService, imdb_id, title, showType) => {
     let showToCheck = null
+    console.log("In second stream function, show_type is:")
+    console.log(show_type)
+    show_type = show_type.toLowerCase()
+    console.log("Now using toLowerCase, show_type is:")
+    console.log(show_type)
     const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
     let params = {
       country: 'us',
       service: streamingService,
-      type: showType,
+      type: show_type,
       order_by: 'original_title',
       output_language: 'en',
       language: 'en',
@@ -159,7 +165,7 @@ const App = () => {
               params: {
                 country: 'us',
                 service: streamingService,
-                type: showType,
+                type: show_type,
                 order_by: 'original_title',
                 page: page,
                 output_language: 'en',
@@ -280,8 +286,10 @@ const App = () => {
 
   const checkStreaming = async (e) => {
     setStreamingServices([])
-    const showType = e.target.getAttribute('show_type')
+    const show_type = e.target.getAttribute('show_type')
     const imdb_id = e.target.getAttribute('imdb_id')
+    console.log("In checkStreaming, show_type is:")
+    console.log(show_type)
     const title = e.target.title
     let showToCheck = null
     let results = []
@@ -304,7 +312,7 @@ const App = () => {
       let streamingService = streamingServicesList[i]
       console.log("Running first loop. streamingService is:")
       console.log(streamingService)
-      let theResult = await getStreamingResults(streamingService, imdb_id, title, results, showType)
+      let theResult = await getStreamingResults(streamingService, imdb_id, title, results, show_type)
       // if(theResult != undefined){
       //   console.log("Knows theResult is not undefined")
       //   setStreamingServices([...streamingServices, theResult])
@@ -344,7 +352,7 @@ const App = () => {
     <Router>
       <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
       <Routes>
-        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} />} />
+        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} />} />
 
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />

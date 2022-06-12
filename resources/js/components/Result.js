@@ -1,10 +1,15 @@
-// import '../styles/result.css'
+import { useState, useEffect } from 'react'
 
 const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser, setStreamingServices, streamingServices, getStreamResults, getResults, fetchResults, checkStreaming, showType }) => {
+const Result = ({ title, image, id, getShows, shows, user, loggedInUser, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming }) => {
+
+  useEffect(() => {
+    console.log("In Result, showType is:")
+    console.log(showType)
+  }, [showType])
 
   const myShow = async (e) => {
     e.preventDefault();
@@ -32,9 +37,9 @@ const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser
     <div className='result'>
       <h2>{title}</h2>
       <img src={image}></img>
-      {streamingServices && streamingId == imdb_id && streamingServices != noStreaming &&
+      {streamingServices && streamingId == id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
-      {streamingServices && streamingId == imdb_id && streamingServices.map((service, key) => (
+      {streamingServices && streamingId == id && streamingServices.map((service, key) => (
         <p key={key}>{service}</p>
       ))}
       <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>

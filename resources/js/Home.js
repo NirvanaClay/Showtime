@@ -19,12 +19,12 @@ import Greeting from './components/Greeting.js'
 import $ from 'jquery'
 import axios from 'axios';
 
-const Home = ({ loggedInUser, Link, streamingServices, fetchResults, results, checkStreaming, sliderPosition, setSliderPosition, showType }) => {
+const Home = ({ loggedInUser, Link, streamingServices, fetchResults, results, checkStreaming, sliderPosition, setSliderPosition, showType, streamingId, noStreaming }) => {
 
   return (
     <div className="home">
       <div className='bg-img'></div>
-      <Form  loggedInUser={loggedInUser} Link={Link} results={results} fetchResults={fetchResults} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} />
+      <Form  loggedInUser={loggedInUser} Link={Link} results={results} fetchResults={fetchResults} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} streamingId={streamingId} noStreaming={noStreaming} />
 
     </div>
   );

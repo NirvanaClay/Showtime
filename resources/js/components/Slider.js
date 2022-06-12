@@ -103,7 +103,7 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, Link, checkStreami
       ))}
       {results && results.map((result) => (
         <div key={result.id}>
-          <Result title={result.title} image={result.image} id={result.id} loggedInUser={loggedInUser} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType}/>
+          <Result title={result.title} image={result.image} id={result.id} loggedInUser={loggedInUser} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} />
         </div>))}  
       </div>
     </div>
