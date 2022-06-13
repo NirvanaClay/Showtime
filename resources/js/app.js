@@ -110,6 +110,13 @@ const App = () => {
   
   }
 
+  const removeDuplicates = (results) => {
+    const uniqueResults = new Set(results)
+    console.log("In removeDuplicates, uniqueResults are:")
+    console.log(uniqueResults)
+    // setStreamingServices([...new Set(results)])
+  }
+
   useEffect(() => {
     console.log("streamingServices are:")
     console.log(streamingServices)
@@ -119,15 +126,13 @@ const App = () => {
     setStreamingServices([])
     const show_type = e.target.getAttribute('show_type')
     const imdb_id = e.target.getAttribute('imdb_id')
-    console.log("In checkStreaming, show_type is:")
-    console.log(show_type)
-    console.log("In checkStreaming, imdb_id is:")
-    console.log(imdb_id)
     const title = e.target.title
+    console.log("In checkstreaming, title is:")
+    console.log(title)
     let showToCheck = null
     let results = []
     const streamingServicesList=[
-      // 'peacock',
+      'peacock',
       'netflix',
       'hulu',
       'prime',
@@ -135,6 +140,8 @@ const App = () => {
       'hbo'
     ]
     setStreamingId(imdb_id)
+    console.log("In checkStreaming, we are setting streamingId, which should be:")
+    console.log(imdb_id)
     console.log("In second stream function, show_type is:")
     console.log(show_type)
     const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
@@ -173,8 +180,6 @@ const App = () => {
             console.log("Thinks there is more than 1 page.")
             for(let i=0; i < res.data.total_pages; i++){
               let page = i + 1
-              console.log("In loop, page is:")
-              console.log(page)
               Axios.get(url, {
                 params: {
                   country: 'us',
@@ -202,22 +207,16 @@ const App = () => {
                     if(showToCheck !== null){
                       for(let key of Object.keys(showToCheck.streamingInfo)){
                         results.push(key)
-                        let resultsSet = new Set([...results])
-                        console.log("resultsSet is:")
-                        console.log(resultsSet)
-                        let resultsArray = Array.from(resultsSet)
-                        console.log("resultsArray is:")
-                        console.log(resultsArray)
-                        usableResults = Array.from(new set([...results]))
                         // console.log("usableResults are:")
                         // console.log(usableResults)
                       }
-                      console.log("Immediately before resolve, usableResults are:")
-                      console.log(usableResults)
-                      setStreamingServices([...usableResults])
-                      resolve(usableResults)
+                      // let uniqueResults = [...new set(results)]
+                      // console.log("In loop1, uniqueResults are:")
+                      // console.log(uniqueResults)
+                      // setStreamingServices([...uniqueResults])
+                      return resolve(results)
                       // resolve(Array.from(new set([...results])))
-                      return
+                      
                     }
                     else{
                       resolve()
@@ -246,16 +245,15 @@ const App = () => {
                 if(showToCheck !== null){
                   for(let key of Object.keys(showToCheck.streamingInfo)){
                     results.push(key)
-                    usableResults = Array.from(new set([...results]))
                     // console.log("usableResults are:")
                     // console.log(usableResults)
                   }
-                  console.log("Immediately before resolve, usableResults are:")
-                  console.log(usableResults)
-                  setStreamingServices([...usableResults])
-                  resolve(usableResults)
+                  // let uniqueResults = [...new set(results)]
+                  // console.log("In loop2, uniqueResults are:")
+                  // console.log(uniqueResults)
+                  // setStreamingServices([...uniqueResults])
+                  return resolve(results)
                   // resolve(Array.from(new set([...results])))
-                  return
                 }
                 else{
                   resolve()
@@ -277,16 +275,29 @@ const App = () => {
     Promise.all(promises)
     .then((responses) => {
       let validResponses = []
+      let finalArray
+      let finalResults
       for(let response of responses){
         if(response == undefined){
           console.log("Response is undefined.")
         }
         else{
           validResponses.push(response)
+          // removeDuplicates(uniqueResponses)
         }
       }
       if(validResponses.length == 0){
+        console.log("There are no validResponses")
         setStreamingServices([noStreaming])
+      }
+      else{
+        finalArray = [].concat(...validResponses)
+        console.log("finalArray is:")
+        console.log(finalArray)
+        finalResults = ([...new Set(finalArray)])
+        console.log("finalResults are:")
+        console.log(finalResults)
+        setStreamingServices([...finalResults])
       }
     })
   }
@@ -310,7 +321,7 @@ const App = () => {
 
         <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} changedRating={changedRating} setChangedRating={setChangedRating} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} changedRating={changedRating} setChangedRating={setChangedRating} streamingId={streamingId} />} />
 
       </Routes>
     </Router>

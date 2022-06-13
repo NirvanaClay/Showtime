@@ -10,6 +10,15 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   const [previewRating, setPreviewRating] = useState(rating)
 
   useEffect(() => {
+    if(streamingId == imdb_id){
+      console.log("streamingId and imdb_id match.")
+    }
+    else{
+      console.log("streamingId and imdb_id do not match.")
+    }
+  }, [streamingId])
+
+  useEffect(() => {
     console.log("In Show effect, stateRating is:")
     console.log(stateRating)
     const checkRating = (e) => {

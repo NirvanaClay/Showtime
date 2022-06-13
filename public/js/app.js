@@ -2586,6 +2586,12 @@ var App = function App() {
     };
   }();
 
+  var removeDuplicates = function removeDuplicates(results) {
+    var uniqueResults = new Set(results);
+    console.log("In removeDuplicates, uniqueResults are:");
+    console.log(uniqueResults); // setStreamingServices([...new Set(results)])
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("streamingServices are:");
     console.log(streamingServices);
@@ -2602,16 +2608,15 @@ var App = function App() {
               setStreamingServices([]);
               show_type = e.target.getAttribute('show_type');
               imdb_id = e.target.getAttribute('imdb_id');
-              console.log("In checkStreaming, show_type is:");
-              console.log(show_type);
-              console.log("In checkStreaming, imdb_id is:");
-              console.log(imdb_id);
               title = e.target.title;
+              console.log("In checkstreaming, title is:");
+              console.log(title);
               showToCheck = null;
               results = [];
-              streamingServicesList = [// 'peacock',
-              'netflix', 'hulu', 'prime', 'disney', 'hbo'];
+              streamingServicesList = ['peacock', 'netflix', 'hulu', 'prime', 'disney', 'hbo'];
               setStreamingId(imdb_id);
+              console.log("In checkStreaming, we are setting streamingId, which should be:");
+              console.log(imdb_id);
               console.log("In second stream function, show_type is:");
               console.log(show_type);
               url = 'https://streaming-availability.p.rapidapi.com/search/pro';
@@ -2657,8 +2662,6 @@ var App = function App() {
 
                               var _loop2 = function _loop2(_i2) {
                                 var page = _i2 + 1;
-                                console.log("In loop, page is:");
-                                console.log(page);
                                 axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
                                   params: {
                                     country: 'us',
@@ -2695,23 +2698,15 @@ var App = function App() {
                                         if (showToCheck !== null) {
                                           for (var _i3 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys.length; _i3++) {
                                             var key = _Object$keys[_i3];
-                                            results.push(key);
-                                            var resultsSet = new Set([].concat(results));
-                                            console.log("resultsSet is:");
-                                            console.log(resultsSet);
-                                            var resultsArray = Array.from(resultsSet);
-                                            console.log("resultsArray is:");
-                                            console.log(resultsArray);
-                                            usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                            results.push(key); // console.log("usableResults are:")
                                             // console.log(usableResults)
-                                          }
+                                          } // let uniqueResults = [...new set(results)]
+                                          // console.log("In loop1, uniqueResults are:")
+                                          // console.log(uniqueResults)
+                                          // setStreamingServices([...uniqueResults])
 
-                                          console.log("Immediately before resolve, usableResults are:");
-                                          console.log(usableResults);
-                                          setStreamingServices(_toConsumableArray(usableResults));
-                                          resolve(usableResults); // resolve(Array.from(new set([...results])))
 
-                                          return;
+                                          return resolve(results); // resolve(Array.from(new set([...results])))
                                         } else {
                                           resolve();
                                         } // resolve(results)
@@ -2753,17 +2748,15 @@ var App = function App() {
                                     if (showToCheck !== null) {
                                       for (var _i4 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i4 < _Object$keys2.length; _i4++) {
                                         var key = _Object$keys2[_i4];
-                                        results.push(key);
-                                        usableResults = Array.from(new lodash__WEBPACK_IMPORTED_MODULE_15__.set([].concat(results))); // console.log("usableResults are:")
+                                        results.push(key); // console.log("usableResults are:")
                                         // console.log(usableResults)
-                                      }
+                                      } // let uniqueResults = [...new set(results)]
+                                      // console.log("In loop2, uniqueResults are:")
+                                      // console.log(uniqueResults)
+                                      // setStreamingServices([...uniqueResults])
 
-                                      console.log("Immediately before resolve, usableResults are:");
-                                      console.log(usableResults);
-                                      setStreamingServices(_toConsumableArray(usableResults));
-                                      resolve(usableResults); // resolve(Array.from(new set([...results])))
 
-                                      return;
+                                      return resolve(results); // resolve(Array.from(new set([...results])))
                                     } else {
                                       resolve();
                                     } // resolve(results)
@@ -2815,6 +2808,8 @@ var App = function App() {
             case 25:
               Promise.all(promises).then(function (responses) {
                 var validResponses = [];
+                var finalArray;
+                var finalResults;
 
                 var _iterator = _createForOfIteratorHelper(responses),
                     _step;
@@ -2826,7 +2821,7 @@ var App = function App() {
                     if (response == undefined) {
                       console.log("Response is undefined.");
                     } else {
-                      validResponses.push(response);
+                      validResponses.push(response); // removeDuplicates(uniqueResponses)
                     }
                   }
                 } catch (err) {
@@ -2836,7 +2831,18 @@ var App = function App() {
                 }
 
                 if (validResponses.length == 0) {
+                  console.log("There are no validResponses");
                   setStreamingServices([noStreaming]);
+                } else {
+                  var _ref5;
+
+                  finalArray = (_ref5 = []).concat.apply(_ref5, validResponses);
+                  console.log("finalArray is:");
+                  console.log(finalArray);
+                  finalResults = _toConsumableArray(new Set(finalArray));
+                  console.log("finalResults are:");
+                  console.log(finalResults);
+                  setStreamingServices(_toConsumableArray(finalResults));
                 }
               });
 
@@ -2943,7 +2949,8 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
           changedRating: changedRating,
-          setChangedRating: setChangedRating
+          setChangedRating: setChangedRating,
+          streamingId: streamingId
         })
       })]
     })]
@@ -3418,7 +3425,9 @@ var MoviesList = function MoviesList(_ref) {
       setSliderPosition = _ref.setSliderPosition,
       checkStreaming = _ref.checkStreaming,
       changedRating = _ref.changedRating,
-      setChangedRating = _ref.setChangedRating;
+      setChangedRating = _ref.setChangedRating,
+      streamingId = _ref.streamingId,
+      streamingServices = _ref.streamingServices;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "show-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3434,7 +3443,9 @@ var MoviesList = function MoviesList(_ref) {
         setSliderPosition: setSliderPosition,
         checkStreaming: checkStreaming,
         changedRating: changedRating,
-        setChangedRating: setChangedRating
+        setChangedRating: setChangedRating,
+        streamingId: streamingId,
+        streamingServices: streamingServices
       })]
     })
   });
@@ -3902,6 +3913,13 @@ var Show = function Show(_ref) {
       previewRating = _useState4[0],
       setPreviewRating = _useState4[1];
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (streamingId == imdb_id) {
+      console.log("streamingId and imdb_id match.");
+    } else {
+      console.log("streamingId and imdb_id do not match.");
+    }
+  }, [streamingId]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("In Show effect, stateRating is:");
     console.log(stateRating);
