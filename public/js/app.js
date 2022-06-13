@@ -2444,6 +2444,11 @@ var App = function App() {
       showType = _useState24[0],
       setShowType = _useState24[1];
 
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      changedRating = _useState26[0],
+      setChangedRating = _useState26[1];
+
   var childToParent = function childToParent(childData) {
     console.log("Child data is " + childData);
     setUser(childData);
@@ -2522,11 +2527,7 @@ var App = function App() {
     }();
 
     fetchShows();
-  }, [loginStatus]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("showType is:");
-    console.log(showType);
-  }, [showType]);
+  }, [loginStatus, changedRating]);
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
@@ -2588,20 +2589,7 @@ var App = function App() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("streamingServices are:");
     console.log(streamingServices);
-  }, [streamingServices]); // function resolveAfter2Seconds() {
-  //   return new Promise(resolve => {
-  //     setTimeout(() => {
-  //       resolve('resolved');
-  //     }, 2000);
-  //   });
-  // }
-  // async function asyncCall() {
-  //   console.log('calling');
-  //   const result = await resolveAfter2Seconds();
-  //   console.log(result);
-  //   // expected output: "resolved"
-  // }
-  // asyncCall();
+  }, [streamingServices]);
 
   var checkStreaming = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
@@ -2865,10 +2853,10 @@ var App = function App() {
     };
   }();
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState26 = _slicedToArray(_useState25, 2),
-      sliderPosition = _useState26[0],
-      setSliderPosition = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState28 = _slicedToArray(_useState27, 2),
+      sliderPosition = _useState28[0],
+      setSliderPosition = _useState28[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2938,7 +2926,9 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
           streamingId: streamingId,
-          noStreaming: noStreaming
+          noStreaming: noStreaming,
+          changedRating: changedRating,
+          setChangedRating: setChangedRating
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-movies",
@@ -2951,7 +2941,9 @@ var App = function App() {
           checkStreaming: checkStreaming,
           sliderPosition: sliderPosition,
           setSliderPosition: setSliderPosition,
-          streamingServices: streamingServices
+          streamingServices: streamingServices,
+          changedRating: changedRating,
+          setChangedRating: setChangedRating
         })
       })]
     })]
@@ -3424,7 +3416,9 @@ var MoviesList = function MoviesList(_ref) {
       Link = _ref.Link,
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
-      checkStreaming = _ref.checkStreaming;
+      checkStreaming = _ref.checkStreaming,
+      changedRating = _ref.changedRating,
+      setChangedRating = _ref.setChangedRating;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "show-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3438,7 +3432,9 @@ var MoviesList = function MoviesList(_ref) {
         Link: Link,
         sliderPosition: sliderPosition,
         setSliderPosition: setSliderPosition,
-        checkStreaming: checkStreaming
+        checkStreaming: checkStreaming,
+        changedRating: changedRating,
+        setChangedRating: setChangedRating
       })]
     })
   });
@@ -3799,7 +3795,9 @@ var SeriesList = function SeriesList(_ref) {
       checkStreaming = _ref.checkStreaming,
       streamingServices = _ref.streamingServices,
       streamingId = _ref.streamingId,
-      noStreaming = _ref.noStreaming;
+      noStreaming = _ref.noStreaming,
+      changedRating = _ref.changedRating,
+      setChangedRating = _ref.setChangedRating;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "show-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3816,7 +3814,9 @@ var SeriesList = function SeriesList(_ref) {
         checkStreaming: checkStreaming,
         streamingServices: streamingServices,
         streamingId: streamingId,
-        noStreaming: noStreaming
+        noStreaming: noStreaming,
+        changedRating: changedRating,
+        setChangedRating: setChangedRating
       })]
     })
   });
@@ -3888,7 +3888,9 @@ var Show = function Show(_ref) {
       series = _ref.series,
       getSeries = _ref.getSeries,
       movies = _ref.movies,
-      getMovies = _ref.getMovies;
+      getMovies = _ref.getMovies,
+      changedRating = _ref.changedRating,
+      setChangedRating = _ref.setChangedRating;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating || 0]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3901,12 +3903,9 @@ var Show = function Show(_ref) {
       setPreviewRating = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In Show, series are:");
-    console.log(series);
-    console.log("Movies are:");
-    console.log(movies);
-  }, [series, movies]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("In Show effect, stateRating is:");
+    console.log(stateRating);
+
     var checkRating = function checkRating(e) {
       var stars = document.querySelectorAll('i');
 
@@ -4034,6 +4033,9 @@ var Show = function Show(_ref) {
               });
 
             case 3:
+              setChangedRating(!changedRating);
+
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -4298,7 +4300,9 @@ var Slider = function Slider(_ref) {
       streamingServices = _ref.streamingServices,
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
-      showType = _ref.showType;
+      showType = _ref.showType,
+      changedRating = _ref.changedRating,
+      setChangedRating = _ref.setChangedRating;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4450,7 +4454,9 @@ var Slider = function Slider(_ref) {
             series: series,
             getSeries: getSeries,
             movies: movies,
-            getMovies: getMovies
+            getMovies: getMovies,
+            changedRating: changedRating,
+            setChangedRating: setChangedRating
           })
         }, show.id);
       }), results && results.map(function (result) {

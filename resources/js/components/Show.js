@@ -4,19 +4,14 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, changedRating, setChangedRating }) => {
 
   const [stateRating, setRating] = useState([rating || 0])
   const [previewRating, setPreviewRating] = useState(rating)
 
   useEffect(() => {
-    console.log("In Show, series are:")
-    console.log(series)
-    console.log("Movies are:")
-    console.log(movies)
-  }, [series, movies])
-
-  useEffect(() => {
+    console.log("In Show effect, stateRating is:")
+    console.log(stateRating)
     const checkRating = (e) => {
       let stars = document.querySelectorAll('i')
       for(let star of stars){
@@ -74,13 +69,12 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const addRating = async (e) => {
     e.preventDefault()
-
     await axios.post(`/api/shows/${id}`, {
       _method: 'PUT',
       id: id,
       rating: stateRating
     })
-
+    setChangedRating(!changedRating)
   }
 
   const setRatingValue = async (e) => {

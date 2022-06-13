@@ -43,6 +43,7 @@ const App = () => {
   const noStreaming = "This show is not currently available through streaming."
 
   const [showType, setShowType] = useState('')
+  const [changedRating, setChangedRating] = useState(false)
 
   const childToParent = (childData) => {
     console.log("Child data is " + childData)
@@ -90,12 +91,7 @@ const App = () => {
       }
     }
     fetchShows()
-  }, [loginStatus])
-
-  useEffect(() => {
-    console.log("showType is:")
-    console.log(showType)
-  }, [showType])
+  }, [loginStatus, changedRating])
 
   const fetchResults = async (e) => {
     e.preventDefault()
@@ -118,23 +114,6 @@ const App = () => {
     console.log("streamingServices are:")
     console.log(streamingServices)
   }, [streamingServices])
-
-  // function resolveAfter2Seconds() {
-  //   return new Promise(resolve => {
-  //     setTimeout(() => {
-  //       resolve('resolved');
-  //     }, 2000);
-  //   });
-  // }
-  
-  // async function asyncCall() {
-  //   console.log('calling');
-  //   const result = await resolveAfter2Seconds();
-  //   console.log(result);
-  //   // expected output: "resolved"
-  // }
-  
-  // asyncCall();
 
   const checkStreaming = async (e) => {
     setStreamingServices([])
@@ -329,9 +308,9 @@ const App = () => {
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
+        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 
       </Routes>
     </Router>
