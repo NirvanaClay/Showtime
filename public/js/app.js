@@ -2380,6 +2380,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var App = function App() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2436,45 +2437,52 @@ var App = function App() {
       movies = _useState22[0],
       getMovies = _useState22[1];
 
-  var loggedInUser = JSON.parse(localStorage.getItem("user"));
-  var noStreaming = "This show is not currently available through streaming.";
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState24 = _slicedToArray(_useState23, 2),
-      showType = _useState24[0],
-      setShowType = _useState24[1];
+      loggingIn = _useState24[0],
+      setLoggingIn = _useState24[1]; // let userCheck = document.getElementById('authenticated').value
+  // console.log("userCheck is:")
+  // console.log(userCheck)
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState26 = _slicedToArray(_useState25, 2),
-      changedRating = _useState26[0],
-      setChangedRating = _useState26[1];
-
-  var childToParent = function childToParent(childData) {
-    console.log("Child data is " + childData);
-    setUser(childData);
-
-    if (null !== childData) {
-      setLoginStatus(true);
-      setUserId(childData.id);
-    } else {
-      setLoginStatus(false);
-    }
-  };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (loggedInUser) {
-      // const userData = JSON.parse(loggedInUser)
-      setName(loggedInUser.name);
-      setEmail(loggedInUser.email);
-      setUserId(loggedInUser.id);
-      setLoginStatus(true);
-      console.log("Logged in. User id is " + userId);
-    } else {
-      console.log("No one is logged in.");
-    }
-  }, [user]);
+    console.log("Check auth status in app effect.");
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/authenticated').then(function (res) {
+      var user = res.data;
+      console.log("Which has res.data of:");
+      console.log(user);
+
+      if (user != 'guest') {
+        console.log("There is a user, which is:");
+        console.log(user);
+        setUser(user);
+        setName(user.name);
+        setEmail(user.email);
+        setUserId(user.id);
+        setLoginStatus(true);
+      } else {
+        console.log("There is not a user.");
+        setName('Guest');
+        setEmail('');
+        setUserId(0);
+        setLoginStatus(false);
+      }
+    });
+  }, []);
+  var noStreaming = "This show is not currently available through streaming.";
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState26 = _slicedToArray(_useState25, 2),
+      showType = _useState26[0],
+      setShowType = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      changedRating = _useState28[0],
+      setChangedRating = _useState28[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
-    console.log("On home effect user is " + loggedInUser);
+    console.log("On home effect user is " + user);
 
     var fetchShows = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2483,37 +2491,54 @@ var App = function App() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return fetch('/api/shows');
-
-              case 2:
-                res = _context.sent;
-                _context.next = 5;
-                return res.json();
-
-              case 5:
-                data = _context.sent;
-
-                if (null !== loggedInUser) {
-                  userShows = data.filter(function (datum) {
-                    return datum.user_id == loggedInUser.id;
-                  });
-                  userSeries = userShows.filter(function (show) {
-                    return show.show_type == 'series';
-                  });
-                  userMovies = userShows.filter(function (show) {
-                    return show.show_type == 'movie';
-                  });
-                  getSeries(_toConsumableArray(userSeries));
-                  getMovies(_toConsumableArray(userMovies));
-                  childToParent(loggedInUser);
-                } else {
-                  console.log("On home effect there is no user.");
-                  getSeries([]);
-                  getMovies([]);
+                if (!user) {
+                  _context.next = 16;
+                  break;
                 }
 
-              case 7:
+                _context.next = 3;
+                return fetch('/api/shows');
+
+              case 3:
+                res = _context.sent;
+                _context.next = 6;
+                return res.json();
+
+              case 6:
+                data = _context.sent;
+                console.log("Data from fetchShows is:");
+                console.log(data);
+                userShows = data.filter(function (datum) {
+                  return datum.user_id == user.id;
+                });
+                userSeries = userShows.filter(function (show) {
+                  return show.show_type == 'series';
+                });
+                userMovies = userShows.filter(function (show) {
+                  return show.show_type == 'movie';
+                });
+                getSeries(_toConsumableArray(userSeries));
+                getMovies(_toConsumableArray(userMovies)); // if(null != user){
+                //   // let userShows = data.filter(datum => datum.user_id == user.id)
+                //   // let userSeries = userShows.filter(show => show.show_type == 'series')
+                //   // let userMovies = userShows.filter(show => show.show_type == 'movie')
+                //   // getSeries([...userSeries])
+                //   // getMovies([...userMovies])
+                // }
+
+                _context.next = 23;
+                break;
+
+              case 16:
+                console.log("On home effect there is no user.");
+                getSeries([]);
+                getMovies([]);
+                setName('Guest');
+                setEmail('');
+                setUserId(0);
+                setLoginStatus(false);
+
+              case 23:
               case "end":
                 return _context.stop();
             }
@@ -2527,7 +2552,7 @@ var App = function App() {
     }();
 
     fetchShows();
-  }, [loginStatus, changedRating]);
+  }, [user, changedRating]);
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
@@ -2585,12 +2610,6 @@ var App = function App() {
       return _ref3.apply(this, arguments);
     };
   }();
-
-  var removeDuplicates = function removeDuplicates(results) {
-    var uniqueResults = new Set(results);
-    console.log("In removeDuplicates, uniqueResults are:");
-    console.log(uniqueResults); // setStreamingServices([...new Set(results)])
-  };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("streamingServices are:");
@@ -2859,10 +2878,10 @@ var App = function App() {
     };
   }();
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState28 = _slicedToArray(_useState27, 2),
-      sliderPosition = _useState28[0],
-      setSliderPosition = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState30 = _slicedToArray(_useState29, 2),
+      sliderPosition = _useState30[0],
+      setSliderPosition = _useState30[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2879,13 +2898,12 @@ var App = function App() {
       setEmail: setEmail,
       setUser: setUser,
       setLoginStatus: setLoginStatus,
-      LogoutForm: _components_LogoutForm_js__WEBPACK_IMPORTED_MODULE_12__["default"],
-      childToParent: childToParent
+      LogoutForm: _components_LogoutForm_js__WEBPACK_IMPORTED_MODULE_12__["default"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_Home_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          loggedInUser: loggedInUser,
+          user: user,
           Link: react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Link,
           results: results,
           fetchResults: fetchResults,
@@ -2915,13 +2933,12 @@ var App = function App() {
           setLoginStatus: setLoginStatus,
           loginStatus: loginStatus,
           setUser: setUser,
-          childToParent: childToParent,
           setUserId: setUserId
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-series",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_SeriesList_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          loggedInUser: loggedInUser,
+          user: user,
           series: series,
           getSeries: getSeries,
           movies: movies,
@@ -3154,8 +3171,7 @@ var Header = function Header(_ref) {
       setName = _ref.setName,
       setEmail = _ref.setEmail,
       setUser = _ref.setUser,
-      setLoginStatus = _ref.setLoginStatus,
-      childToParent = _ref.childToParent;
+      setLoginStatus = _ref.setLoginStatus;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "navbar",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
@@ -3185,8 +3201,7 @@ var Header = function Header(_ref) {
           setName: setName,
           setEmail: setEmail,
           setUser: setUser,
-          setLoginStatus: setLoginStatus,
-          childToParent: childToParent
+          setLoginStatus: setLoginStatus
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
           to: "/login",
           children: "Login"
@@ -3232,7 +3247,6 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var LoginForm = function LoginForm(_ref) {
   var setLoginStatus = _ref.setLoginStatus,
       setUser = _ref.setUser,
-      childToParent = _ref.childToParent,
       setUserId = _ref.setUserId;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
 
@@ -3250,13 +3264,17 @@ var LoginForm = function LoginForm(_ref) {
               };
               _context.next = 4;
               return axios.get('/sanctum/csrf-cookie').then(function (res) {
-                axios.post('/login', data).then(function (res) {
-                  var userInfo = JSON.stringify(res.data);
-                  localStorage.setItem('user', userInfo);
-                  childToParent(userInfo);
-                  setUser(userInfo);
-                  setUserId(userInfo.id);
-                  setLoginStatus(true);
+                console.log("In initial sanctum get, res is:");
+                console.log(res); // let token = res.config.headers.X-XSRF-TOKEN
+
+                axios.post('/api/login', data).then(function () {
+                  axios.get('/api/user').then(function (res) {
+                    var userInfo = res.data;
+                    console.log("In login form, userInfo is:");
+                    console.log(userInfo);
+                    setUser(userInfo);
+                    setLoginStatus(true);
+                  });
                 });
               });
 
@@ -3345,8 +3363,7 @@ var LogoutForm = function LogoutForm(_ref) {
   var setName = _ref.setName,
       setEmail = _ref.setEmail,
       setUser = _ref.setUser,
-      setLoginStatus = _ref.setLoginStatus,
-      childToParent = _ref.childToParent;
+      setLoginStatus = _ref.setLoginStatus;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
 
   var logout = /*#__PURE__*/function () {
@@ -3356,16 +3373,11 @@ var LogoutForm = function LogoutForm(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              axios__WEBPACK_IMPORTED_MODULE_0___default().post('/logout');
-              childToParent(null);
-              setName('Guest');
-              setEmail('');
+              axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/logout');
               setUser();
-              setLoginStatus(false);
-              localStorage.clear();
               navigate('/');
 
-            case 9:
+            case 4:
             case "end":
               return _context.stop();
           }

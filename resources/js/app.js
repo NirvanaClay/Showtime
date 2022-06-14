@@ -22,6 +22,7 @@ import Dashboard from './components/Dashboard.js'
 
 import $ from 'jquery'
 import { set } from 'lodash';
+import axios from 'axios';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -38,60 +39,77 @@ const App = () => {
   const [series, getSeries] = useState([])
   const [movies, getMovies] = useState([])
 
-  let loggedInUser = JSON.parse(localStorage.getItem("user"));
+  const [loggingIn, setLoggingIn] = useState(false)
+
+  // let userCheck = document.getElementById('authenticated').value
+  // console.log("userCheck is:")
+  // console.log(userCheck)
+
+  useEffect(() => {
+    console.log("Check auth status in app effect.")
+    axios.get('/authenticated')
+    .then((res) => {
+      const user = res.data
+      console.log("Which has res.data of:")
+      console.log(user)
+      if(user != 'guest'){
+        console.log("There is a user, which is:")
+        console.log(user)
+        setUser(user)
+        setName(user.name)
+        setEmail(user.email)
+        setUserId(user.id)
+        setLoginStatus(true)
+      }
+      else{
+        console.log("There is not a user.")
+        setName('Guest')
+        setEmail('')
+        setUserId(0)
+        setLoginStatus(false)
+      }
+    })
+  }, [])
 
   const noStreaming = "This show is not currently available through streaming."
 
   const [showType, setShowType] = useState('')
   const [changedRating, setChangedRating] = useState(false)
 
-  const childToParent = (childData) => {
-    console.log("Child data is " + childData)
-    setUser(childData)
-    if(null !== childData){
-      setLoginStatus(true)
-      setUserId(childData.id)
-    }
-    else{
-      setLoginStatus(false)
-    }
-  }
-
-  useEffect(() => {
-    if (loggedInUser) {
-      // const userData = JSON.parse(loggedInUser)
-      setName(loggedInUser.name)
-      setEmail(loggedInUser.email)
-      setUserId(loggedInUser.id)
-      setLoginStatus(true)
-      console.log("Logged in. User id is " + userId)
-    }
-    else{
-      console.log("No one is logged in.")
-    }
-  }, [user]);
-
   useEffect((e) => {
-    console.log("On home effect user is " + loggedInUser)
+    console.log("On home effect user is " + user)
     const fetchShows = async () => {
-      const res = await fetch('/api/shows')
-      const data = await res.json()
-      if(null !== loggedInUser){
-        let userShows = data.filter(datum => datum.user_id == loggedInUser.id)
+      if(user){
+        const res = await fetch('/api/shows')
+        const data = await res.json()
+        console.log("Data from fetchShows is:")
+        console.log(data)
+        let userShows = data.filter(datum => datum.user_id == user.id)
         let userSeries = userShows.filter(show => show.show_type == 'series')
         let userMovies = userShows.filter(show => show.show_type == 'movie')
         getSeries([...userSeries])
         getMovies([...userMovies])
-        childToParent(loggedInUser)
+        // if(null != user){
+        //   // let userShows = data.filter(datum => datum.user_id == user.id)
+        //   // let userSeries = userShows.filter(show => show.show_type == 'series')
+        //   // let userMovies = userShows.filter(show => show.show_type == 'movie')
+        //   // getSeries([...userSeries])
+        //   // getMovies([...userMovies])
+        // }
       }
+
       else{
         console.log("On home effect there is no user.")
         getSeries([])
         getMovies([])
+        setName('Guest')
+        setEmail('')
+        setUserId(0)
+        setLoginStatus(false)
       }
     }
     fetchShows()
-  }, [loginStatus, changedRating])
+  }, [user, changedRating])
 
   const fetchResults = async (e) => {
     e.preventDefault()
@@ -108,13 +126,6 @@ const App = () => {
 
   const getStreamingResults = async (streamingService, imdb_id, title, results, show_type) => {
   
-  }
-
-  const removeDuplicates = (results) => {
-    const uniqueResults = new Set(results)
-    console.log("In removeDuplicates, uniqueResults are:")
-    console.log(uniqueResults)
-    // setStreamingServices([...new Set(results)])
   }
 
   useEffect(() => {
@@ -312,14 +323,15 @@ const App = () => {
 
   return (
     <Router>
-      <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} childToParent={childToParent} />
+      <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} />
       <Routes>
-        <Route path="/" element={<Home loggedInUser={loggedInUser} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
+        <Route path="/" element={<Home user={user} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
 
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
-        <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} childToParent={childToParent} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList loggedInUser={loggedInUser} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} changedRating={changedRating} setChangedRating={setChangedRating} />} />
+        <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} />} />
+
+        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 
         <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} changedRating={changedRating} setChangedRating={setChangedRating} streamingId={streamingId} />} />
 

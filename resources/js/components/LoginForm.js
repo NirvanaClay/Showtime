@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const axios = require("axios");
 
-const LoginForm = ({ setLoginStatus, setUser, childToParent, setUserId }) => {
+const LoginForm = ({ setLoginStatus, setUser, setUserId }) => {
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
@@ -15,14 +15,19 @@ const LoginForm = ({ setLoginStatus, setUser, childToParent, setUserId }) => {
     }
     await axios.get('/sanctum/csrf-cookie')
     .then(res => {
-      axios.post('/login', data)
-      .then(res => {
-        const userInfo = JSON.stringify(res.data)
-        localStorage.setItem('user', userInfo)
-        childToParent(userInfo)
-        setUser(userInfo)
-        setUserId(userInfo.id)
-        setLoginStatus(true)
+      console.log("In initial sanctum get, res is:")
+      console.log(res)
+      // let token = res.config.headers.X-XSRF-TOKEN
+      axios.post('/api/login', data)
+      .then(() => {
+        axios.get('/api/user')
+        .then((res) => {
+          const userInfo = res.data
+          console.log("In login form, userInfo is:")
+          console.log(userInfo)
+          setUser(userInfo)
+          setLoginStatus(true)
+        })
       })
     })
     navigate('/')
