@@ -2630,16 +2630,10 @@ var App = function App() {
               show_type = e.target.getAttribute('show_type');
               imdb_id = e.target.getAttribute('imdb_id');
               title = e.target.title;
-              console.log("In checkstreaming, title is:");
-              console.log(title);
               showToCheck = null;
               results = [];
               streamingServicesList = ['peacock', 'netflix', 'hulu', 'prime', 'disney', 'hbo'];
               setStreamingId(imdb_id);
-              console.log("In checkStreaming, we are setting streamingId, which should be:");
-              console.log(imdb_id);
-              console.log("In second stream function, show_type is:");
-              console.log(show_type);
               url = 'https://streaming-availability.p.rapidapi.com/search/pro';
               headers = {
                 'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
@@ -2657,11 +2651,6 @@ var App = function App() {
                         _context4.t0 = promises;
                         _context4.next = 4;
                         return new Promise(function (resolve, reject) {
-                          console.log("Inside of initial promise.");
-                          console.log("Searching for show with imdb_id of:");
-                          console.log(imdb_id);
-                          console.log("To see if it's streaming on:");
-                          console.log(streamingService);
                           var params = {
                             country: 'us',
                             service: streamingService,
@@ -2803,20 +2792,20 @@ var App = function App() {
               });
               i = 0;
 
-            case 20:
+            case 14:
               if (!(i < streamingServicesList.length)) {
-                _context5.next = 25;
+                _context5.next = 19;
                 break;
               }
 
-              return _context5.delegateYield(_loop(i), "t0", 22);
+              return _context5.delegateYield(_loop(i), "t0", 16);
 
-            case 22:
+            case 16:
               i++;
-              _context5.next = 20;
+              _context5.next = 14;
               break;
 
-            case 25:
+            case 19:
               Promise.all(promises).then(function (responses) {
                 var validResponses = [];
                 var finalArray;
@@ -2829,7 +2818,7 @@ var App = function App() {
                   for (_iterator.s(); !(_step = _iterator.n()).done;) {
                     var response = _step.value;
 
-                    if (response == undefined) {
+                    if (response.length == 0) {
                       console.log("Response is undefined.");
                     } else {
                       console.log("There is a valid response, which is:");
@@ -2859,7 +2848,7 @@ var App = function App() {
                 }
               });
 
-            case 26:
+            case 20:
             case "end":
               return _context5.stop();
           }
@@ -3730,9 +3719,9 @@ var Result = function Result(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       id: id,
       src: image
-    }), streamingServices && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+    }), streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
       children: "Streaming on:"
-    }), streamingServices && streamingId == id && streamingServices.map(function (service, key) {
+    }), streamingServices.length > 0 && streamingId == id && streamingServices.map(function (service, key) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
         children: service
       }, key);
@@ -4110,9 +4099,9 @@ var Show = function Show(_ref) {
       children: title
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
       src: image
-    }), streamingServices && streamingId == imdb_id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+    }), streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
       children: "Streaming on:"
-    }), streamingServices && streamingId == imdb_id && streamingServices.map(function (service, key) {
+    }), streamingServices.length > 0 && streamingId == imdb_id && streamingServices.map(function (service, key) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         children: service
       }, key);

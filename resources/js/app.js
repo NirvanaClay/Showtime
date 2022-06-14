@@ -259,7 +259,7 @@ const App = () => {
       let finalArray
       let finalResults
       for(let response of responses){
-        if(response == undefined){
+        if(response.length == 0){
           console.log("Response is undefined.")
         }
         else{

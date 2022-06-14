@@ -94,9 +94,9 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     <div className='show'>
       <h3>{title}</h3>
       <img src={image} />
-      {streamingServices && streamingId == imdb_id && streamingServices != noStreaming &&
+      {streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
-      {streamingServices && streamingId == imdb_id && streamingServices.map((service, key) => (
+      {streamingServices.length > 0 && streamingId == imdb_id && streamingServices.map((service, key) => (
         <p key={key}>{service}</p>
       ))}
       <div className='stars-container' id={id}>
