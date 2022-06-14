@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Show from './Show'
 import Result from './Result'
 
-const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, changedRating, setChangedRating }) => {
+const Slider = ({ user, fetchResults, results, getResults, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, changedRating, setChangedRating }) => {
 
   const [leftArrowVisibility, setLeftArrowVisibility] = useState(false)
   const [rightArrowVisibility, setRightArrowVisibility] = useState(false)
@@ -95,6 +95,11 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries,
     left: sliderPosition + 'px'
   }
 
+  useEffect(() => {
+    console.log("in Slider effect, results are:")
+    console.log(results)
+  }, [results])
+
   return (
     <div className='slider-container'>
       <div className={`left-arrow__container ${leftHover && "inverted-bg"} ${leftArrowVisibility && "visible"}`} onMouseEnter={toggleLeftHover} onMouseLeave={toggleLeftHover} onClick={moveSliderLeft}>
@@ -111,7 +116,7 @@ const Slider = ({ loggedInUser, fetchResults, results, shows, series, getSeries,
       ))}
       {results && results.map((result) => (
         <div key={result.id}>
-          <Result title={result.title} image={result.image} id={result.id} loggedInUser={loggedInUser} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
+          <Result title={result.title} image={result.image} id={result.id} user={user} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
         </div>))}  
       </div>
     </div>

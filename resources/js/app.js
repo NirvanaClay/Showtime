@@ -138,8 +138,6 @@ const App = () => {
     const show_type = e.target.getAttribute('show_type')
     const imdb_id = e.target.getAttribute('imdb_id')
     const title = e.target.title
-    console.log("In checkstreaming, title is:")
-    console.log(title)
     let showToCheck = null
     let results = []
     const streamingServicesList=[
@@ -151,10 +149,6 @@ const App = () => {
       'hbo'
     ]
     setStreamingId(imdb_id)
-    console.log("In checkStreaming, we are setting streamingId, which should be:")
-    console.log(imdb_id)
-    console.log("In second stream function, show_type is:")
-    console.log(show_type)
     const url = 'https://streaming-availability.p.rapidapi.com/search/pro'
 
     const headers = {
@@ -167,11 +161,6 @@ const App = () => {
     for(let i=0; i < streamingServicesList.length; i++){
       let streamingService = streamingServicesList[i]
       promises.push(await new Promise((resolve, reject) => {
-        console.log("Inside of initial promise.")
-        console.log("Searching for show with imdb_id of:")
-        console.log(imdb_id)
-        console.log("To see if it's streaming on:")
-        console.log(streamingService)
         let params = {
           country: 'us',
           service: streamingService,
@@ -218,22 +207,12 @@ const App = () => {
                     if(showToCheck !== null){
                       for(let key of Object.keys(showToCheck.streamingInfo)){
                         results.push(key)
-                        // console.log("usableResults are:")
-                        // console.log(usableResults)
                       }
-                      // let uniqueResults = [...new set(results)]
-                      // console.log("In loop1, uniqueResults are:")
-                      // console.log(uniqueResults)
-                      // setStreamingServices([...uniqueResults])
-                      return resolve(results)
-                      // resolve(Array.from(new set([...results])))
-                      
+                      console.log("About to resolve1 with results of:")
+                      console.log(results)                      
                     }
-                    else{
-                      resolve()
-                    }
-                    // resolve(results)
                   }
+                  return resolve(results)
                 }
                 else{
                   resolve()
@@ -256,21 +235,12 @@ const App = () => {
                 if(showToCheck !== null){
                   for(let key of Object.keys(showToCheck.streamingInfo)){
                     results.push(key)
-                    // console.log("usableResults are:")
-                    // console.log(usableResults)
                   }
-                  // let uniqueResults = [...new set(results)]
-                  // console.log("In loop2, uniqueResults are:")
-                  // console.log(uniqueResults)
-                  // setStreamingServices([...uniqueResults])
-                  return resolve(results)
-                  // resolve(Array.from(new set([...results])))
+                  console.log("About to resolve2 with results of:")
+                  console.log(results)
                 }
-                else{
-                  resolve()
-                }
-                // resolve(results)
               }
+              return resolve(results)
             }
             else{
               console.log("Running resolve with no results.")
@@ -293,6 +263,8 @@ const App = () => {
           console.log("Response is undefined.")
         }
         else{
+          console.log("There is a valid response, which is:")
+          console.log(response)
           validResponses.push(response)
           // removeDuplicates(uniqueResponses)
         }
@@ -325,7 +297,7 @@ const App = () => {
     <Router>
       <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} />
       <Routes>
-        <Route path="/" element={<Home user={user} Link={Link}  results={results} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
+        <Route path="/" element={<Home user={user} Link={Link}  results={results} getResults={getResults} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
 
         <Route path="register" element={<RegisterForm setUser={setUser} />} />
 

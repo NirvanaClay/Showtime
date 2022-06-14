@@ -118,7 +118,7 @@
 
 .form .results-container .shows {
   width: 900px;
-  height: 450px;
+  height: 550px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -131,8 +131,11 @@
 
 .form .results-container .shows .result {
   width: 225px;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .form .results-container .shows .result h2 {

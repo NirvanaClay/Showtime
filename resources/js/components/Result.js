@@ -5,7 +5,7 @@ const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, user, loggedInUser, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies }) => {
+const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies }) => {
 
   const myShow = async (e) => {
     e.preventDefault();
@@ -13,7 +13,7 @@ const Result = ({ title, image, id, user, loggedInUser, streamingServices, getRe
     const data = {
       title: title,
       image_url: image,
-      user_id: loggedInUser.id,
+      user_id: user.id,
       imdb_id: id,
       show_type: showType
     } 
@@ -43,33 +43,32 @@ const Result = ({ title, image, id, user, loggedInUser, streamingServices, getRe
           show_type: showType
         }])
       }
-      // getResults([])
     }).catch((e) => {
       console.log(e)
     })
   }
 
   return (
-    <div className='result'>
-      <h2>{title}</h2>
-      <img src={image}></img>
+    <div id={id} className='result'>
+      <h2 id={id}>{title}</h2>
+      <img id={id} src={image}></img>
       {streamingServices && streamingId == id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
       {streamingServices && streamingId == id && streamingServices.map((service, key) => (
         <p key={key}>{service}</p>
       ))}
-      <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
+      <form id={id} onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
         <input type ='hidden' name='title' value={title} />
         <input type ='hidden' name='image_url' value={image} />
         <input type ='hidden' name='imdb_id' value={id} />
-        <input type ='hidden' name='user_id' value={loggedInUser ? loggedInUser.id : 0} />
+        <input type ='hidden' name='user_id' value={user ? user.id : 0} />
         <input type ='hidden' name='sbow_type' value={showType} />
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        {loggedInUser && 
-          <input type='submit' className='order' name='addShowBtn' value='Add Show' />
+        {user && 
+          <input id={id} type='submit' className='order' name='addShowBtn' value='Add Show' />
         }
       </form>
-      <button className='streamCheck' show_type={showType} imdb_id={id} title={title} onClick={checkStreaming}>Stream Check</button>
+      <button id={id} className='streamCheck' show_type={showType} imdb_id={id} title={title} onClick={checkStreaming}>Stream Check</button>
     </div>
   )
 }

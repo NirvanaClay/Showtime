@@ -2208,11 +2208,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home(_ref) {
-  var loggedInUser = _ref.loggedInUser,
+  var user = _ref.user,
       Link = _ref.Link,
       streamingServices = _ref.streamingServices,
       fetchResults = _ref.fetchResults,
       results = _ref.results,
+      getResults = _ref.getResults,
       checkStreaming = _ref.checkStreaming,
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
@@ -2228,9 +2229,10 @@ var Home = function Home(_ref) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
       className: "bg-img"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      loggedInUser: loggedInUser,
+      user: user,
       Link: Link,
       results: results,
+      getResults: getResults,
       fetchResults: fetchResults,
       sliderPosition: sliderPosition,
       setSliderPosition: setSliderPosition,
@@ -2717,25 +2719,20 @@ var App = function App() {
                                         if (showToCheck !== null) {
                                           for (var _i3 = 0, _Object$keys = Object.keys(showToCheck.streamingInfo); _i3 < _Object$keys.length; _i3++) {
                                             var key = _Object$keys[_i3];
-                                            results.push(key); // console.log("usableResults are:")
-                                            // console.log(usableResults)
-                                          } // let uniqueResults = [...new set(results)]
-                                          // console.log("In loop1, uniqueResults are:")
-                                          // console.log(uniqueResults)
-                                          // setStreamingServices([...uniqueResults])
+                                            results.push(key);
+                                          }
 
-
-                                          return resolve(results); // resolve(Array.from(new set([...results])))
-                                        } else {
-                                          resolve();
-                                        } // resolve(results)
-
+                                          console.log("About to resolve1 with results of:");
+                                          console.log(results);
+                                        }
                                       }
                                     } catch (err) {
                                       _iterator2.e(err);
                                     } finally {
                                       _iterator2.f();
                                     }
+
+                                    return resolve(results);
                                   } else {
                                     resolve();
                                   }
@@ -2767,25 +2764,20 @@ var App = function App() {
                                     if (showToCheck !== null) {
                                       for (var _i4 = 0, _Object$keys2 = Object.keys(showToCheck.streamingInfo); _i4 < _Object$keys2.length; _i4++) {
                                         var key = _Object$keys2[_i4];
-                                        results.push(key); // console.log("usableResults are:")
-                                        // console.log(usableResults)
-                                      } // let uniqueResults = [...new set(results)]
-                                      // console.log("In loop2, uniqueResults are:")
-                                      // console.log(uniqueResults)
-                                      // setStreamingServices([...uniqueResults])
+                                        results.push(key);
+                                      }
 
-
-                                      return resolve(results); // resolve(Array.from(new set([...results])))
-                                    } else {
-                                      resolve();
-                                    } // resolve(results)
-
+                                      console.log("About to resolve2 with results of:");
+                                      console.log(results);
+                                    }
                                   }
                                 } catch (err) {
                                   _iterator3.e(err);
                                 } finally {
                                   _iterator3.f();
                                 }
+
+                                return resolve(results);
                               } else {
                                 console.log("Running resolve with no results.");
                                 resolve();
@@ -2840,6 +2832,8 @@ var App = function App() {
                     if (response == undefined) {
                       console.log("Response is undefined.");
                     } else {
+                      console.log("There is a valid response, which is:");
+                      console.log(response);
                       validResponses.push(response); // removeDuplicates(uniqueResponses)
                     }
                   }
@@ -2906,6 +2900,7 @@ var App = function App() {
           user: user,
           Link: react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Link,
           results: results,
+          getResults: getResults,
           fetchResults: fetchResults,
           streamingServices: streamingServices,
           checkStreaming: checkStreaming,
@@ -3037,9 +3032,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Form = function Form(_ref) {
-  var loggedInUser = _ref.loggedInUser,
+  var user = _ref.user,
       Link = _ref.Link,
       results = _ref.results,
+      getResults = _ref.getResults,
       fetchResults = _ref.fetchResults,
       streamingServices = _ref.streamingServices,
       checkStreaming = _ref.checkStreaming,
@@ -3093,8 +3089,9 @@ var Form = function Form(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "results-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Slider__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        loggedInUser: loggedInUser,
+        user: user,
         results: results,
+        getResults: getResults,
         fetchResults: fetchResults,
         Link: Link,
         sliderPosition: sliderPosition,
@@ -3182,13 +3179,10 @@ var Header = function Header(_ref) {
           children: "Home"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
           to: "/my-series",
           onClick: resetSlider,
           children: "My Series"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
-          to: "/register",
-          children: "Register"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
         children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
@@ -3197,14 +3191,21 @@ var Header = function Header(_ref) {
           children: "My Movies"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(LogoutForm, {
+        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(LogoutForm, {
           setName: setName,
           setEmail: setEmail,
           setUser: setUser,
           setLoginStatus: setLoginStatus
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
           to: "/login",
           children: "Login"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+          to: "/register",
+          children: "Register"
         })
       })]
     })
@@ -3650,7 +3651,6 @@ var Result = function Result(_ref) {
       image = _ref.image,
       id = _ref.id,
       user = _ref.user,
-      loggedInUser = _ref.loggedInUser,
       streamingServices = _ref.streamingServices,
       getResults = _ref.getResults,
       checkStreaming = _ref.checkStreaming,
@@ -3674,7 +3674,7 @@ var Result = function Result(_ref) {
               data = {
                 title: title,
                 image_url: image,
-                user_id: loggedInUser.id,
+                user_id: user.id,
                 imdb_id: id,
                 show_type: showType
               };
@@ -3703,8 +3703,7 @@ var Result = function Result(_ref) {
                     imdb_id: id,
                     show_type: showType
                   }]));
-                } // getResults([])
-
+                }
               })["catch"](function (e) {
                 console.log(e);
               });
@@ -3723,10 +3722,13 @@ var Result = function Result(_ref) {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    id: id,
     className: "result",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+      id: id,
       children: title
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+      id: id,
       src: image
     }), streamingServices && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
       children: "Streaming on:"
@@ -3735,6 +3737,7 @@ var Result = function Result(_ref) {
         children: service
       }, key);
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+      id: id,
       onSubmit: myShow,
       method: "POST",
       action: "/api/shows",
@@ -3755,7 +3758,7 @@ var Result = function Result(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "user_id",
-        value: loggedInUser ? loggedInUser.id : 0
+        value: user ? user.id : 0
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
         name: "sbow_type",
@@ -3764,13 +3767,15 @@ var Result = function Result(_ref) {
         type: "hidden",
         name: "_token",
         value: "{{ csrf_token() }}"
-      }), loggedInUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      }), user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        id: id,
         type: "submit",
         className: "order",
         name: "addShowBtn",
         value: "Add Show"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      id: id,
       className: "streamCheck",
       show_type: showType,
       imdb_id: id,
@@ -4315,9 +4320,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Slider = function Slider(_ref) {
-  var loggedInUser = _ref.loggedInUser,
+  var user = _ref.user,
       fetchResults = _ref.fetchResults,
       results = _ref.results,
+      getResults = _ref.getResults,
       shows = _ref.shows,
       series = _ref.series,
       getSeries = _ref.getSeries,
@@ -4447,6 +4453,10 @@ var Slider = function Slider(_ref) {
   var seriesSliderPosition = {
     left: sliderPosition + 'px'
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log("in Slider effect, results are:");
+    console.log(results);
+  }, [results]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "slider-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -4495,7 +4505,7 @@ var Slider = function Slider(_ref) {
             title: result.title,
             image: result.image,
             id: result.id,
-            loggedInUser: loggedInUser,
+            user: user,
             streamingServices: streamingServices,
             fetchResults: fetchResults,
             checkStreaming: checkStreaming,

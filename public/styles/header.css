@@ -29,7 +29,9 @@
   color: black;
   font-weight: 700;
   text-decoration: none;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .navbar ul li a:hover {
@@ -45,7 +47,9 @@
   color: black;
   font-weight: 700;
   text-decoration: none;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   cursor: pointer;
 }
 
@@ -53,6 +57,10 @@
   color: red;
   -webkit-transition: color .2s ease-in-out;
   transition: color .2s ease-in-out;
+}
+
+.navbar ul li:empty {
+  display: none;
 }
 
 .navbar .sandwich {
