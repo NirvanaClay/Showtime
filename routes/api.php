@@ -47,7 +47,7 @@ Route::post('/logout', function(Request $request){
     return redirect()->route('home');
 });
 
-Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
+Route::get('/userShows', 'App\Http\Controllers\ShowController@userShows');
 
 Route::get('/passwordReset', function() {
     return 'This should be view for password reset form.';

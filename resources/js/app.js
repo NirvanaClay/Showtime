@@ -74,28 +74,26 @@ const App = () => {
   const noStreaming = "This show is not currently available through streaming."
 
   const [showType, setShowType] = useState('')
-  const [changedRating, setChangedRating] = useState(false)
 
   useEffect((e) => {
     console.log("On home effect user is " + user)
     const fetchShows = async () => {
       if(user){
-        const res = await fetch('/api/shows')
-        const data = await res.json()
-        console.log("Data from fetchShows is:")
-        console.log(data)
-        let userShows = data.filter(datum => datum.user_id == user.id)
+        const res = await fetch('/api/userShows')
+        const userShows = await res.json()
+        console.log("userShows are:")
+        console.log(userShows)
         let userSeries = userShows.filter(show => show.show_type == 'series')
         let userMovies = userShows.filter(show => show.show_type == 'movie')
-        getSeries([...userSeries])
-        getMovies([...userMovies])
-        // if(null != user){
-        //   // let userShows = data.filter(datum => datum.user_id == user.id)
-        //   // let userSeries = userShows.filter(show => show.show_type == 'series')
-        //   // let userMovies = userShows.filter(show => show.show_type == 'movie')
-        //   // getSeries([...userSeries])
-        //   // getMovies([...userMovies])
-        // }
+        let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
+        let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
+        console.log("orderedUserSeries is:")
+        console.log(orderedUserSeries)
+        console.log("orderedUserMovies are:")
+        console.log(orderedUserMovies)
+
+        getSeries([...orderedUserSeries])
+        getMovies([...orderedUserMovies])
       }
 
       else{
@@ -109,7 +107,7 @@ const App = () => {
       }
     }
     fetchShows()
-  }, [user, changedRating])
+  }, [user])
 
   const fetchResults = async (e) => {
     e.preventDefault()
@@ -121,6 +119,8 @@ const App = () => {
     const searchString = `https://imdb-api.com/en/API/Search${theShowType}/k_j0x59844/${e.target[2].value}`
     const res = await fetch(searchString)
     const data = await res.json()
+    console.log("In fetchResults, data is:")
+    console.log(data)
     getResults(data.results)
   }
 
@@ -299,13 +299,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home user={user} Link={Link}  results={results} getResults={getResults} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
 
-        <Route path="register" element={<RegisterForm setUser={setUser} />} />
+        <Route path="register" element={<RegisterForm setUser={setUser} setLoginStatus={setLoginStatus} />} />
 
         <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} changedRating={changedRating} setChangedRating={setChangedRating} />} />
+        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} changedRating={changedRating} setChangedRating={setChangedRating} streamingId={streamingId} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} />} />
 
       </Routes>
     </Router>

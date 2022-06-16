@@ -22,7 +22,7 @@ class User extends Authenticatable
     
     public $timestamps = false;
     protected $fillable = [
-        'name', 'email', 'password', 'shows'
+        'email', 'password'
     ];
 
     /**
@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
     public function shows()
     {
-        return $this->hasMany(Show::class);
+        return $this->belongsToMany(Show::class, 'user_shows', 'show_id', 'user_id')->withPivot('rating');
     }
 }

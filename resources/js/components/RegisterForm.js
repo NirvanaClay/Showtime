@@ -1,27 +1,34 @@
 const axios = require("axios");
 import { useNavigate } from 'react-router-dom'
 
-const RegisterForm = ({ setUser }) => {
+const RegisterForm = ({ setUser, setLoginStatus }) => {
   const navigate = useNavigate();
 
   const addUser = async (e) => {
     e.preventDefault();
+    let data = {
+      email: e.target[0].value,
+      password: e.target[1].value
+    }
     await axios.post('/api/register', {
-      name: e.target[0].value,
-      email: e.target[1].value,
-      password: e.target[2].value,
-      password_confirmation: e.target[3].value
+      email: e.target[0].value,
+      password: e.target[1].value,
+      password_confirmation: e.target[2].value
     }).then(
       await axios.get('/sanctum/csrf-cookie')
       .then(res => {
-        axios.post('/login', {
-          email: e.target[1].value,
-          password: e.target[2].value
-        })
-        .then(res => {
-          const userInfo = JSON.stringify(res.data)
-          localStorage.setItem('user', userInfo)
-          setUser(userInfo)
+        axios.post('/login', data)
+        .then((res) => {
+          console.log("in login post, res is:")
+          console.log(res)
+          axios.get('/api/user')
+          .then((res) => {
+            const userInfo = res.data
+            console.log("In register form, userInfo is:")
+            console.log(userInfo)
+            setUser(userInfo)
+            setLoginStatus(true)
+          })
         })
       })
     ).catch(
@@ -33,23 +40,20 @@ const RegisterForm = ({ setUser }) => {
   }
 
   return (
-    <div className='result'>
+    <div className='register'>
+      <h1>Register</h1>
       <form onSubmit={addUser} method="POST" action="/api/register" name='newUserForm' className='newUserForm'>
-        <div className='field'>
-          <label htmlFor='name'>Name</label>
-          <input type ='text' name='name' />
-        </div>
         <div className='field'>
           <label htmlFor='email'>Email</label>
           <input type ='text' name='email' />
         </div>
         <div className='field'>
           <label htmlFor='password'>Password</label>
-          <input type ='text' name='password' />
+          <input type ='password' name='password' autoComplete='off' />
         </div>
         <div className='field'>
           <label htmlFor='password_confirmation'>Confirm Password</label>
-          <input type ='text' name='password_confirmation' />
+          <input type ='password' name='password_confirmation' autoComplete='off' />
         </div>
         <input type='submit' value='Register' />
       </form>

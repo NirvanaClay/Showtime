@@ -2478,28 +2478,23 @@ var App = function App() {
       showType = _useState26[0],
       setShowType = _useState26[1];
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState28 = _slicedToArray(_useState27, 2),
-      changedRating = _useState28[0],
-      setChangedRating = _useState28[1];
-
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
 
     var fetchShows = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var res, data, userShows, userSeries, userMovies;
+        var res, userShows, userSeries, userMovies, orderedUserSeries, orderedUserMovies;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!user) {
-                  _context.next = 16;
+                  _context.next = 21;
                   break;
                 }
 
                 _context.next = 3;
-                return fetch('/api/shows');
+                return fetch('/api/userShows');
 
               case 3:
                 res = _context.sent;
@@ -2507,31 +2502,31 @@ var App = function App() {
                 return res.json();
 
               case 6:
-                data = _context.sent;
-                console.log("Data from fetchShows is:");
-                console.log(data);
-                userShows = data.filter(function (datum) {
-                  return datum.user_id == user.id;
-                });
+                userShows = _context.sent;
+                console.log("userShows are:");
+                console.log(userShows);
                 userSeries = userShows.filter(function (show) {
                   return show.show_type == 'series';
                 });
                 userMovies = userShows.filter(function (show) {
                   return show.show_type == 'movie';
                 });
-                getSeries(_toConsumableArray(userSeries));
-                getMovies(_toConsumableArray(userMovies)); // if(null != user){
-                //   // let userShows = data.filter(datum => datum.user_id == user.id)
-                //   // let userSeries = userShows.filter(show => show.show_type == 'series')
-                //   // let userMovies = userShows.filter(show => show.show_type == 'movie')
-                //   // getSeries([...userSeries])
-                //   // getMovies([...userMovies])
-                // }
-
-                _context.next = 23;
+                orderedUserSeries = userSeries.sort(function (a, b) {
+                  return a.title.localeCompare(b.title);
+                });
+                orderedUserMovies = userMovies.sort(function (a, b) {
+                  return a.title.localeCompare(b.title);
+                });
+                console.log("orderedUserSeries is:");
+                console.log(orderedUserSeries);
+                console.log("orderedUserMovies are:");
+                console.log(orderedUserMovies);
+                getSeries(_toConsumableArray(orderedUserSeries));
+                getMovies(_toConsumableArray(orderedUserMovies));
+                _context.next = 28;
                 break;
 
-              case 16:
+              case 21:
                 console.log("On home effect there is no user.");
                 getSeries([]);
                 getMovies([]);
@@ -2540,7 +2535,7 @@ var App = function App() {
                 setUserId(0);
                 setLoginStatus(false);
 
-              case 23:
+              case 28:
               case "end":
                 return _context.stop();
             }
@@ -2554,7 +2549,7 @@ var App = function App() {
     }();
 
     fetchShows();
-  }, [user, changedRating]);
+  }, [user]);
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
@@ -2580,9 +2575,11 @@ var App = function App() {
 
             case 12:
               data = _context2.sent;
+              console.log("In fetchResults, data is:");
+              console.log(data);
               getResults(data.results);
 
-            case 14:
+            case 16:
             case "end":
               return _context2.stop();
           }
@@ -2861,10 +2858,10 @@ var App = function App() {
     };
   }();
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState30 = _slicedToArray(_useState29, 2),
-      sliderPosition = _useState30[0],
-      setSliderPosition = _useState30[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState28 = _slicedToArray(_useState27, 2),
+      sliderPosition = _useState28[0],
+      setSliderPosition = _useState28[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2906,7 +2903,8 @@ var App = function App() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "register",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          setUser: setUser
+          setUser: setUser,
+          setLoginStatus: setLoginStatus
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "login",
@@ -2933,9 +2931,7 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
           streamingId: streamingId,
-          noStreaming: noStreaming,
-          changedRating: changedRating,
-          setChangedRating: setChangedRating
+          noStreaming: noStreaming
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-movies",
@@ -2949,8 +2945,6 @@ var App = function App() {
           sliderPosition: sliderPosition,
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
-          changedRating: changedRating,
-          setChangedRating: setChangedRating,
           streamingId: streamingId
         })
       })]
@@ -3144,7 +3138,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -3158,41 +3154,45 @@ var Header = function Header(_ref) {
       setEmail = _ref.setEmail,
       setUser = _ref.setUser,
       setLoginStatus = _ref.setLoginStatus;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("In header, loginStatus is:");
+    console.log(loginStatus);
+  }, [loginStatus]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "navbar",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
           to: "/",
           onClick: resetSlider,
           children: "Home"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
           to: "/my-series",
           onClick: resetSlider,
           children: "My Series"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
           to: "/my-movies",
           onClick: resetSlider,
           children: "My Movies"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(LogoutForm, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(LogoutForm, {
           setName: setName,
           setEmail: setEmail,
           setUser: setUser,
           setLoginStatus: setLoginStatus
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
           to: "/login",
           children: "Login"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
           to: "/register",
           children: "Register"
         })
@@ -3287,7 +3287,7 @@ var LoginForm = function LoginForm(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "loginForm",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "Login"
+      children: "Log In"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       onSubmit: loginUser,
       method: "POST",
@@ -3307,8 +3307,9 @@ var LoginForm = function LoginForm(_ref) {
           htmlFor: "password",
           children: "Password"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "text",
-          name: "password"
+          type: "password",
+          name: "password",
+          autoComplete: "off"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
         type: "submit",
@@ -3426,10 +3427,10 @@ var MoviesList = function MoviesList(_ref) {
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
       checkStreaming = _ref.checkStreaming,
-      changedRating = _ref.changedRating,
-      setChangedRating = _ref.setChangedRating,
       streamingId = _ref.streamingId,
-      streamingServices = _ref.streamingServices;
+      streamingServices = _ref.streamingServices,
+      showRatings = _ref.showRatings,
+      setShowRatings = _ref.setShowRatings;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "show-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3447,7 +3448,9 @@ var MoviesList = function MoviesList(_ref) {
         changedRating: changedRating,
         setChangedRating: setChangedRating,
         streamingId: streamingId,
-        streamingServices: streamingServices
+        streamingServices: streamingServices,
+        showRatings: showRatings,
+        setShowRatings: setShowRatings
       })]
     })
   });
@@ -3485,45 +3488,53 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 
 var RegisterForm = function RegisterForm(_ref) {
-  var setUser = _ref.setUser;
+  var setUser = _ref.setUser,
+      setLoginStatus = _ref.setLoginStatus;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
 
   var addUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
+              data = {
+                email: e.target[0].value,
+                password: e.target[1].value
+              };
               _context.t0 = axios.post('/api/register', {
-                name: e.target[0].value,
-                email: e.target[1].value,
-                password: e.target[2].value,
-                password_confirmation: e.target[3].value
+                email: e.target[0].value,
+                password: e.target[1].value,
+                password_confirmation: e.target[2].value
               });
-              _context.next = 4;
+              _context.next = 5;
               return axios.get('/sanctum/csrf-cookie').then(function (res) {
-                axios.post('/login', {
-                  email: e.target[1].value,
-                  password: e.target[2].value
-                }).then(function (res) {
-                  var userInfo = JSON.stringify(res.data);
-                  localStorage.setItem('user', userInfo);
-                  setUser(userInfo);
+                axios.post('/login', data).then(function (res) {
+                  console.log("in login post, res is:");
+                  console.log(res);
+                  axios.get('/api/user').then(function (res) {
+                    var userInfo = res.data;
+                    console.log("In register form, userInfo is:");
+                    console.log(userInfo);
+                    setUser(userInfo);
+                    setLoginStatus(true);
+                  });
                 });
               });
 
-            case 4:
+            case 5:
               _context.t1 = _context.sent;
-              _context.next = 7;
+              _context.next = 8;
               return _context.t0.then.call(_context.t0, _context.t1)["catch"](function (res) {
                 console.log(res);
               });
 
-            case 7:
+            case 8:
               navigate('/');
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -3536,24 +3547,17 @@ var RegisterForm = function RegisterForm(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: "result",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: "register",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
+      children: "Register"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
       onSubmit: addUser,
       method: "POST",
       action: "/api/register",
       name: "newUserForm",
       className: "newUserForm",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "field",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-          htmlFor: "name",
-          children: "Name"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "text",
-          name: "name"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "field",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "email",
@@ -3568,8 +3572,9 @@ var RegisterForm = function RegisterForm(_ref) {
           htmlFor: "password",
           children: "Password"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "text",
-          name: "password"
+          type: "password",
+          name: "password",
+          autoComplete: "off"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "field",
@@ -3577,14 +3582,15 @@ var RegisterForm = function RegisterForm(_ref) {
           htmlFor: "password_confirmation",
           children: "Confirm Password"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "text",
-          name: "password_confirmation"
+          type: "password",
+          name: "password_confirmation",
+          autoComplete: "off"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
         type: "submit",
         value: "Register"
       })]
-    })
+    })]
   });
 };
 
@@ -3663,7 +3669,6 @@ var Result = function Result(_ref) {
               data = {
                 title: title,
                 image_url: image,
-                user_id: user.id,
                 imdb_id: id,
                 show_type: showType
               };
@@ -3746,10 +3751,6 @@ var Result = function Result(_ref) {
         value: id
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "hidden",
-        name: "user_id",
-        value: user ? user.id : 0
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-        type: "hidden",
         name: "sbow_type",
         value: showType
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
@@ -3813,8 +3814,8 @@ var SeriesList = function SeriesList(_ref) {
       streamingServices = _ref.streamingServices,
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
-      changedRating = _ref.changedRating,
-      setChangedRating = _ref.setChangedRating;
+      showRatings = _ref.showRatings,
+      setShowRatings = _ref.setShowRatings;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "show-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3832,8 +3833,8 @@ var SeriesList = function SeriesList(_ref) {
         streamingServices: streamingServices,
         streamingId: streamingId,
         noStreaming: noStreaming,
-        changedRating: changedRating,
-        setChangedRating: setChangedRating
+        showRatings: showRatings,
+        setShowRatings: setShowRatings
       })]
     })
   });
@@ -3906,26 +3907,18 @@ var Show = function Show(_ref) {
       getSeries = _ref.getSeries,
       movies = _ref.movies,
       getMovies = _ref.getMovies,
-      changedRating = _ref.changedRating,
-      setChangedRating = _ref.setChangedRating;
+      setRatingValue = _ref.setRatingValue;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating || 0]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating]),
       _useState2 = _slicedToArray(_useState, 2),
       stateRating = _useState2[0],
-      setRating = _useState2[1];
+      setStateRating = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(rating),
       _useState4 = _slicedToArray(_useState3, 2),
       previewRating = _useState4[0],
       setPreviewRating = _useState4[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (streamingId == imdb_id) {
-      console.log("streamingId and imdb_id match.");
-    } else {
-      console.log("streamingId and imdb_id do not match.");
-    }
-  }, [streamingId]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("In Show effect, stateRating is:");
     console.log(stateRating);
@@ -3958,11 +3951,43 @@ var Show = function Show(_ref) {
     checkRating();
   }, [stateRating]);
 
-  var deleteShow = /*#__PURE__*/function () {
+  var addRating = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var newRating;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              newRating = e.target.getAttribute('value');
+              console.log("newRating is:");
+              console.log(newRating);
+              setStateRating(newRating);
+              _context.next = 7;
+              return axios.post("/api/shows/".concat(id), {
+                _method: 'PUT',
+                id: id,
+                rating: newRating
+              });
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function addRating(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var deleteShow = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
               axios["delete"]("/api/shows/".concat(id));
@@ -3981,14 +4006,14 @@ var Show = function Show(_ref) {
 
             case 4:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function deleteShow(_x) {
-      return _ref2.apply(this, arguments);
+    return function deleteShow(_x2) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
@@ -4042,57 +4067,6 @@ var Show = function Show(_ref) {
     }
   };
 
-  var addRating = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              e.preventDefault();
-              _context2.next = 3;
-              return axios.post("/api/shows/".concat(id), {
-                _method: 'PUT',
-                id: id,
-                rating: stateRating
-              });
-
-            case 3:
-              setChangedRating(!changedRating);
-
-            case 4:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function addRating(_x2) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-
-  var setRatingValue = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              setRating(e.target.getAttribute('value'));
-
-            case 1:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function setRatingValue(_x3) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -4111,7 +4085,6 @@ var Show = function Show(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
         action: "/api/shows/{id}",
         method: "POST",
-        onSubmit: addRating,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "hidden",
           name: "_method",
@@ -4136,7 +4109,7 @@ var Show = function Show(_ref) {
             className: "far fa-star",
             onMouseEnter: addRatingPreview,
             onMouseLeave: removeRatingPreview,
-            onClick: setRatingValue,
+            onClick: addRating,
             value: 1
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -4145,7 +4118,7 @@ var Show = function Show(_ref) {
             className: "far fa-star",
             onMouseEnter: addRatingPreview,
             onMouseLeave: removeRatingPreview,
-            onClick: setRatingValue,
+            onClick: addRating,
             value: 2
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -4154,7 +4127,7 @@ var Show = function Show(_ref) {
             className: "far fa-star",
             onMouseEnter: addRatingPreview,
             onMouseLeave: removeRatingPreview,
-            onClick: setRatingValue,
+            onClick: addRating,
             value: 3
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -4163,7 +4136,7 @@ var Show = function Show(_ref) {
             className: "far fa-star",
             onMouseEnter: addRatingPreview,
             onMouseLeave: removeRatingPreview,
-            onClick: setRatingValue,
+            onClick: addRating,
             value: 4
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -4172,7 +4145,7 @@ var Show = function Show(_ref) {
             className: "far fa-star",
             onMouseEnter: addRatingPreview,
             onMouseLeave: removeRatingPreview,
-            onClick: setRatingValue,
+            onClick: addRating,
             value: 5
           })
         })]
@@ -4283,12 +4256,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Show */ "./resources/js/components/Show.js");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Result */ "./resources/js/components/Result.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show */ "./resources/js/components/Show.js");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result */ "./resources/js/components/Result.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4301,6 +4272,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 
 
@@ -4326,40 +4298,40 @@ var Slider = function Slider(_ref) {
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
       showType = _ref.showType,
-      changedRating = _ref.changedRating,
-      setChangedRating = _ref.setChangedRating;
+      showRatings = _ref.showRatings,
+      setShowRatings = _ref.setShowRatings;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       leftArrowVisibility = _useState2[0],
       setLeftArrowVisibility = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       rightArrowVisibility = _useState4[0],
       setRightArrowVisibility = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState6 = _slicedToArray(_useState5, 2),
       currentPage = _useState6[0],
       setCurrentPage = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
       totalPages = _useState8[0],
       setTotalPages = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
       rightHover = _useState10[0],
       setRightHover = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
       leftHover = _useState12[0],
       setLeftHover = _useState12[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (shows) {
       console.log("shows.length is:");
       console.log(shows.length);
@@ -4442,39 +4414,39 @@ var Slider = function Slider(_ref) {
   var seriesSliderPosition = {
     left: sliderPosition + 'px'
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("in Slider effect, results are:");
     console.log(results);
   }, [results]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "slider-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "left-arrow__container ".concat(leftHover && "inverted-bg", " ").concat(leftArrowVisibility && "visible"),
       onMouseEnter: toggleLeftHover,
       onMouseLeave: toggleLeftHover,
       onClick: moveSliderLeft,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
         className: "fas fa-arrow-left left-arrow ".concat(leftHover && "inverted")
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "right-arrow__container ".concat(rightHover && "inverted-bg", " ").concat(rightArrowVisibility && "visible"),
       onMouseEnter: toggleRightHover,
       onMouseLeave: toggleRightHover,
       onClick: moveSliderRight,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
         className: "fas fa-arrow-right right-arrow ".concat(rightHover && "inverted")
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "shows",
       style: seriesSliderPosition,
       children: [shows && shows.map(function (show) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Show__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Show__WEBPACK_IMPORTED_MODULE_1__["default"], {
             title: show.title,
             image: show.image_url,
             imdb_id: show.imdb_id,
             id: show.id,
-            rating: show.rating,
+            rating: show.pivot.rating ? show.pivot.rating : 0,
             checkStreaming: checkStreaming,
             streamingServices: streamingServices,
             streamingId: streamingId,
@@ -4483,14 +4455,12 @@ var Slider = function Slider(_ref) {
             series: series,
             getSeries: getSeries,
             movies: movies,
-            getMovies: getMovies,
-            changedRating: changedRating,
-            setChangedRating: setChangedRating
+            getMovies: getMovies
           })
         }, show.id);
       }), results && results.map(function (result) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Result__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Result__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: result.title,
             image: result.image,
             id: result.id,

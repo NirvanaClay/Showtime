@@ -1,1 +1,53 @@
-/* No CSS *//*# sourceMappingURL=register.css.map */
+.register {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.register h1 {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  color: #ff0000;
+}
+
+.register form {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.register form .field {
+  display: block;
+  margin: 0 auto;
+}
+
+.register form .field label {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.register form .field input[type='text'], .register form .field input[type='password'] {
+  height: 30px;
+  width: 250px;
+  display: block;
+  padding: 5px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+.register form input[type='submit'] {
+  width: 90px;
+  height: 45px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+/*# sourceMappingURL=register.css.map */

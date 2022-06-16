@@ -1,6 +1,13 @@
+import { useEffect } from "react"
 import { BrowserRouter } from "react-router-dom"
 
 const Header = ({ resetSlider, loginStatus, Link, LogoutForm, setName, setEmail, setUser, setLoginStatus }) => {
+
+  useEffect(() => {
+    console.log("In header, loginStatus is:")
+    console.log(loginStatus)
+  }, [loginStatus])
+
   return (
     <div className='navbar'>
       <ul>

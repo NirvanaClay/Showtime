@@ -13,7 +13,6 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
     const data = {
       title: title,
       image_url: image,
-      user_id: user.id,
       imdb_id: id,
       show_type: showType
     } 
@@ -61,7 +60,6 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
         <input type ='hidden' name='title' value={title} />
         <input type ='hidden' name='image_url' value={image} />
         <input type ='hidden' name='imdb_id' value={id} />
-        <input type ='hidden' name='user_id' value={user ? user.id : 0} />
         <input type ='hidden' name='sbow_type' value={showType} />
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         {user && 

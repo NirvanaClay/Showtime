@@ -35,7 +35,7 @@ const LoginForm = ({ setLoginStatus, setUser, setUserId }) => {
 
   return(
     <div className='loginForm'>
-      <h1>Login</h1>
+      <h1>Log In</h1>
       <form onSubmit={loginUser} method='POST' action='/login'>
         <div className='field'>
           <label htmlFor='email'>Email</label>
@@ -43,7 +43,7 @@ const LoginForm = ({ setLoginStatus, setUser, setUserId }) => {
         </div>
         <div className='field'>
           <label htmlFor='password'>Password</label>
-          <input type ='text' name='password' />
+          <input type ='password' name='password'  autoComplete='off' />
         </div>
         {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
         <input type='submit' value='Login' />

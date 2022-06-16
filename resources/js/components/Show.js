@@ -4,21 +4,12 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, changedRating, setChangedRating }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser }) => {
 
-  const [stateRating, setRating] = useState([rating || 0])
+  const [stateRating, setStateRating] = useState([rating])
   const [previewRating, setPreviewRating] = useState(rating)
 
-  useEffect(() => {
-    if(streamingId == imdb_id){
-      console.log("streamingId and imdb_id match.")
-    }
-    else{
-      console.log("streamingId and imdb_id do not match.")
-    }
-  }, [streamingId])
-
-  useEffect(() => {
+  useEffect(() =>{
     console.log("In Show effect, stateRating is:")
     console.log(stateRating)
     const checkRating = (e) => {
@@ -36,6 +27,19 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
     checkRating()
   }, [stateRating])
+
+  const addRating = async (e) => {
+    e.preventDefault()
+    let newRating = e.target.getAttribute('value')
+    console.log("newRating is:")
+    console.log(newRating)
+    setStateRating(newRating)
+    await axios.post(`/api/shows/${id}`, {
+      _method: 'PUT',
+      id: id,
+      rating: newRating
+    })
+  }
 
   const deleteShow = async (e) => {
     e.preventDefault();
@@ -76,19 +80,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }
 
-  const addRating = async (e) => {
-    e.preventDefault()
-    await axios.post(`/api/shows/${id}`, {
-      _method: 'PUT',
-      id: id,
-      rating: stateRating
-    })
-    setChangedRating(!changedRating)
-  }
 
-  const setRatingValue = async (e) => {
-    setRating(e.target.getAttribute('value'))
-  }
 
   return (
     <div className='show'>
@@ -100,25 +92,25 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
         <p key={key}>{service}</p>
       ))}
       <div className='stars-container' id={id}>
-        <form action='/api/shows/{id}' method='POST' onSubmit={addRating}>
+        <form action='/api/shows/{id}' method='POST'>
           <input type="hidden" name="_method" value="PUT" />
           <input type ='hidden' name='id' value={id} className='id' />
           <input type="hidden" name="_token" value="{{ csrf_token() }}" />
           <input type='hidden' className='rating' name='rating' value={stateRating} />
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={1}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={1}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={2}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={2}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={3}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={3}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={4}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={4}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={5}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={5}></i>
           </button>
         </form>
       </div>

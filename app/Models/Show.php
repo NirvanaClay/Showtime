@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class Show extends Model
 {
     public $timestamps = false;
-    public $fillable = ['title', 'image_url', 'user_id', 'imdb_id', 'show_type'];
-    public function user()
+    public $fillable = ['title', 'image_url', 'imdb_id', 'show_type'];
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'user_shows', 'show_id', 'user_id')->withPivot('rating') ;
     }
 }
