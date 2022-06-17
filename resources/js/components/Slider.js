@@ -111,7 +111,7 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
       <div className='shows' style={seriesSliderPosition}>
       {shows && shows.map((show) => (
         <div key={show.id}>
-          <Show title={show.title} image={show.image_url} imdb_id={show.imdb_id} id={show.id} rating={show.pivot.rating ? show.pivot.rating : 0} pivotId={show.pivot.show_id} pivotUser={show.pivot.user_id} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} show_type={show.show_type} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
+          <Show title={show.title} image={show.image_url} imdb_id={show.imdb_id} id={show.id} rating={show.pivot && show.pivot.rating ? show.pivot.rating : 0} pivotId={show.pivot && show.pivot.show_id} pivotUser={show.pivot && show.pivot.user_id} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} show_type={show.show_type} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
         </div>
       ))}
       {results && results.map((result) => (

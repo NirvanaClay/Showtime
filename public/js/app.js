@@ -3907,7 +3907,9 @@ var Show = function Show(_ref) {
       getSeries = _ref.getSeries,
       movies = _ref.movies,
       getMovies = _ref.getMovies,
-      setRatingValue = _ref.setRatingValue;
+      setRatingValue = _ref.setRatingValue,
+      pivotId = _ref.pivotId,
+      pivotUser = _ref.pivotUser;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3959,18 +3961,20 @@ var Show = function Show(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              newRating = e.target.getAttribute('value');
+              newRating = parseInt(e.target.getAttribute('value'));
+              console.log("id for addRating is:");
+              console.log(id);
               console.log("newRating is:");
               console.log(newRating);
               setStateRating(newRating);
-              _context.next = 7;
+              _context.next = 9;
               return axios.post("/api/shows/".concat(id), {
                 _method: 'PUT',
                 id: id,
                 rating: newRating
               });
 
-            case 7:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -4446,7 +4450,9 @@ var Slider = function Slider(_ref) {
             image: show.image_url,
             imdb_id: show.imdb_id,
             id: show.id,
-            rating: show.pivot.rating ? show.pivot.rating : 0,
+            rating: show.pivot && show.pivot.rating ? show.pivot.rating : 0,
+            pivotId: show.pivot && show.pivot.show_id,
+            pivotUser: show.pivot && show.pivot.user_id,
             checkStreaming: checkStreaming,
             streamingServices: streamingServices,
             streamingId: streamingId,

@@ -30,7 +30,9 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const addRating = async (e) => {
     e.preventDefault()
-    let newRating = e.target.getAttribute('value')
+    const newRating = parseInt(e.target.getAttribute('value'))
+    console.log("id for addRating is:")
+    console.log(id)
     console.log("newRating is:")
     console.log(newRating)
     setStateRating(newRating)

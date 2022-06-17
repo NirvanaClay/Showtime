@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
     public function shows()
     {
-        return $this->belongsToMany(Show::class, 'user_shows', 'show_id', 'user_id')->withPivot('rating');
+        return $this->belongsToMany(Show::class, 'user_shows', 'user_id', 'show_id',)->withPivot('rating');
     }
 }

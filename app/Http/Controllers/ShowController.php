@@ -34,24 +34,25 @@ class ShowController extends Controller
         );
         $user->shows()->attach($show->id);
         // $show->users()->attach($id);
-
-        return $show->id;
     }
     public function edit(Request $request)
     {
-        $id = $request->id;
+        if(Auth::user()){
+            $id = Auth::id();
+            $user = User::find($id);
+        }
+        $show_id = $request->id;
         $rating = $request->rating;
-        $shows = Show::all();
-        $userShow = User_show::find($id);
-        $userShow->rating = $rating;
-        $userShow->save();
-        return $userShow;        
+        $user->shows()->updateExistingPivot($show_id, ['rating' => $rating]);        
     }
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        $show = Show::find($id);
-        $show->delete();
+        if(Auth::user()){
+            $id = Auth::id();
+            $user = User::find($id);
+        }
+        $show_id = $request->id;
+        $user->shows()->detach($show_id);
         // $shows = Show::all();
         // return view('shows/index', ['shows' => $shows]);
     }

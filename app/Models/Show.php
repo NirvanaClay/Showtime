@@ -13,6 +13,6 @@ class Show extends Model
     public $fillable = ['title', 'image_url', 'imdb_id', 'show_type'];
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_shows', 'show_id', 'user_id')->withPivot('rating') ;
+        return $this->belongsToMany(User::class, 'user_shows', 'user_id', 'show_id',)->withPivot('rating') ;
     }
 }
