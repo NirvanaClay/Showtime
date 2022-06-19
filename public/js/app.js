@@ -3714,22 +3714,30 @@ var Result = function Result(_ref) {
 
                 if (showType == 'series') {
                   console.log("Knows showType is series.");
-                  getSeries([].concat(_toConsumableArray(series), [{
-                    title: title,
-                    image_url: image,
-                    id: response.data,
-                    imdb_id: id,
-                    show_type: showType
-                  }]));
+                  series.some(function (show) {
+                    if (show.id == response.data) {
+                      getSeries([].concat(_toConsumableArray(series), [{
+                        title: title,
+                        image_url: image,
+                        id: response.data,
+                        imdb_id: id,
+                        show_type: showType
+                      }]));
+                    }
+                  });
                 } else if (showType == 'movie') {
                   console.log("Knows showType is movie");
-                  getMovies([].concat(_toConsumableArray(movies), [{
-                    title: title,
-                    image_url: image,
-                    id: response.data,
-                    imdb_id: id,
-                    show_type: showType
-                  }]));
+                  movies.some(function (movie) {
+                    if (movie.id == response.data) {
+                      getMovies([].concat(_toConsumableArray(movies), [{
+                        title: title,
+                        image_url: image,
+                        id: response.data,
+                        imdb_id: id,
+                        show_type: showType
+                      }]));
+                    }
+                  });
                 }
               })["catch"](function (e) {
                 console.log(e);

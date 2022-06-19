@@ -26,8 +26,7 @@ class ShowController extends Controller
             // ['title' => $request->title],
             ['title'=> $request->title, 'image_url' => $request->image_url, 'show_type' => $request->show_type]
         );
-        $user->shows()->attach($show->id);
-        // $show->users()->attach($id);
+        $user->shows()->syncWithoutDetaching($show->id);
     }
     public function edit(Request $request)
     {

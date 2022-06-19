@@ -24,23 +24,31 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
       console.log(response)
       if(showType == 'series'){
         console.log("Knows showType is series.")
-        getSeries([...series, {
-          title: title,
-          image_url: image,
-          id: response.data,
-          imdb_id: id,
-          show_type: showType
-        }])
+        series.some(show => {
+          if (show.id == response.data) {
+            getSeries([...series, {
+              title: title,
+              image_url: image,
+              id: response.data,
+              imdb_id: id,
+              show_type: showType
+            }])
+          }
+        });
       }
       else if(showType == 'movie'){
         console.log("Knows showType is movie")
-        getMovies([...movies, {
-          title: title,
-          image_url: image,
-          id: response.data,
-          imdb_id: id,
-          show_type: showType
-        }])
+        movies.some(movie => {
+          if(movie.id == response.data){
+            getMovies([...movies, {
+              title: title,
+              image_url: image,
+              id: response.data,
+              imdb_id: id,
+              show_type: showType
+            }])
+          }
+        })
       }
     }).catch((e) => {
       console.log(e)
