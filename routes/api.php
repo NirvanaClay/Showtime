@@ -25,10 +25,6 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        // // return $request;
-        // return 'bitch';
-
-        // return redirect()->intended('dashboard');
     };
 
     return back()->withErrors([

@@ -26,6 +26,19 @@
   margin-bottom: 10px;
 }
 
+.form form .selection_warning {
+  color: red;
+  font-size: 1.2rem;
+  display: none;
+}
+
+.form form .visible {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  margin: 10px auto;
+}
+
 .form form input[type='text'] {
   width: 250px;
   height: 35px;
@@ -148,6 +161,15 @@
 .form .results-container .shows .result img {
   width: 150px;
   height: 200px;
+}
+
+.form .results-container .shows .result h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.form .results-container .shows .result p {
+  font-size: 1.1rem;
 }
 
 .form .results-container .shows .result input[type='submit'] {

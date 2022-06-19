@@ -39,8 +39,6 @@ const App = () => {
   const [series, getSeries] = useState([])
   const [movies, getMovies] = useState([])
 
-  const [loggingIn, setLoggingIn] = useState(false)
-
   // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
@@ -111,21 +109,19 @@ const App = () => {
 
   const fetchResults = async (e) => {
     e.preventDefault()
-    let theShowType = document.querySelector('input[name="show-type"]:checked').value
-    theShowType = theShowType.toLowerCase()
-    console.log("theShowType is:")
-    console.log(theShowType)
-    setShowType(theShowType)
-    const searchString = `https://imdb-api.com/en/API/Search${theShowType}/k_j0x59844/${e.target[2].value}`
-    const res = await fetch(searchString)
-    const data = await res.json()
-    console.log("In fetchResults, data is:")
-    console.log(data)
-    getResults(data.results)
-  }
-
-  const getStreamingResults = async (streamingService, imdb_id, title, results, show_type) => {
-  
+    if(showType){
+      // let theShowType = document.querySelector('input[name="show-type"]:checked').value
+      // theShowType = theShowType.toLowerCase()
+      // console.log("theShowType is:")
+      // console.log(theShowType)
+      // setShowType(theShowType)
+      const searchString = `https://imdb-api.com/en/API/Search${showType}/k_j0x59844/${e.target[2].value}`
+      const res = await fetch(searchString)
+      const data = await res.json()
+      console.log("In fetchResults, data is:")
+      console.log(data)
+      getResults(data.results)
+    }
   }
 
   useEffect(() => {
@@ -259,14 +255,16 @@ const App = () => {
       let finalArray
       let finalResults
       for(let response of responses){
-        if(response.length == 0){
-          console.log("Response is undefined.")
-        }
-        else{
-          console.log("There is a valid response, which is:")
-          console.log(response)
-          validResponses.push(response)
-          // removeDuplicates(uniqueResponses)
+        if(response){
+          if(response.length == 0){
+            console.log("Response is undefined.")
+          }
+          else{
+            console.log("There is a valid response, which is:")
+            console.log(response)
+            validResponses.push(response)
+            // removeDuplicates(uniqueResponses)
+          }
         }
       }
       if(validResponses.length == 0){
@@ -297,15 +295,15 @@ const App = () => {
     <Router>
       <Header resetSlider={resetSlider} Link={Link} loginStatus={loginStatus} setName={setName} setEmail={setEmail} setUser={setUser} setLoginStatus={setLoginStatus} LogoutForm={LogoutForm} />
       <Routes>
-        <Route path="/" element={<Home user={user} Link={Link}  results={results} getResults={getResults} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
+        <Route path="/" element={<Home user={user} Link={Link}  results={results} getResults={getResults} fetchResults={fetchResults} streamingServices={streamingServices} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingId={streamingId} noStreaming={noStreaming} showType={showType} setShowType={setShowType} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />} />
 
         <Route path="register" element={<RegisterForm setUser={setUser} setLoginStatus={setLoginStatus} />} />
 
-        <Route path="login" element={loginStatus ? <Dashboard name={name} email={email} /> : <LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} />} />
+        <Route path="login" element={<LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} />} />
+        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} loginStatus={loginStatus} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} />} />
 
       </Routes>
     </Router>

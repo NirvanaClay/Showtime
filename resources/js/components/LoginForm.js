@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 
 const axios = require("axios");
 
-const LoginForm = ({ setLoginStatus, setUser, setUserId }) => {
+const LoginForm = ({ setLoginStatus, setUser, loginStatus }) => {
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
@@ -34,21 +34,25 @@ const LoginForm = ({ setLoginStatus, setUser, setUserId }) => {
   }
 
   return(
-    <div className='loginForm'>
-      <h1>Log In</h1>
-      <form onSubmit={loginUser} method='POST' action='/login'>
-        <div className='field'>
-          <label htmlFor='email'>Email</label>
-          <input type ='text' name='email' />
+    <>
+      {!loginStatus ?
+        <div className='loginForm'>
+          <h1>Log In</h1>
+          <form onSubmit={loginUser} method='POST' action='/login'>
+            <div className='field'>
+              <label htmlFor='email'>Email</label>
+              <input type ='text' name='email' />
+            </div>
+            <div className='field'>
+              <label htmlFor='password'>Password</label>
+              <input type ='password' name='password'  autoComplete='off' />
+            </div>
+            {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
+            <input type='submit' value='Login' />
+          </form>
         </div>
-        <div className='field'>
-          <label htmlFor='password'>Password</label>
-          <input type ='password' name='password'  autoComplete='off' />
-        </div>
-        {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
-        <input type='submit' value='Login' />
-      </form>
-    </div>
+      : <Navigate replace to="/" />}
+    </>
   )
 }
 

@@ -13,20 +13,14 @@ class ShowController extends Controller
 {
     public function userShows(Request $request)
     {
-        if(Auth::user()){
-            $id = Auth::id();
-            $user = User::find($id);
-            return $user->shows;
-            // $shows = User::find($id)->shows()->orderBy('title')->get();
-            // return $shows;
-        }
+        $id = Auth::id();
+        $user = User::find($id);
+        return $user->shows;
     }
     public function add(Request $request)
     {
-        if(Auth::user()){
-            $id = Auth::id();
-            $user = User::find($id);
-        }
+        $id = Auth::id();
+        $user = User::find($id);
         $show = Show::firstOrCreate(
             ['imdb_id' => $request->imdb_id],
             // ['title' => $request->title],
@@ -37,10 +31,8 @@ class ShowController extends Controller
     }
     public function edit(Request $request)
     {
-        if(Auth::user()){
-            $id = Auth::id();
-            $user = User::find($id);
-        }
+        $id = Auth::id();
+        $user = User::find($id);
         $show_id = $request->id;
         $rating = $request->rating;
         $user->shows()->updateExistingPivot($show_id, ['rating' => $rating]);        

@@ -2218,6 +2218,7 @@ var Home = function Home(_ref) {
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
       showType = _ref.showType,
+      setShowType = _ref.setShowType,
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
       series = _ref.series,
@@ -2239,6 +2240,7 @@ var Home = function Home(_ref) {
       checkStreaming: checkStreaming,
       streamingServices: streamingServices,
       showType: showType,
+      setShowType: setShowType,
       streamingId: streamingId,
       noStreaming: noStreaming,
       series: series,
@@ -2437,12 +2439,7 @@ var App = function App() {
   var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState22 = _slicedToArray(_useState21, 2),
       movies = _useState22[0],
-      getMovies = _useState22[1];
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState24 = _slicedToArray(_useState23, 2),
-      loggingIn = _useState24[0],
-      setLoggingIn = _useState24[1]; // let userCheck = document.getElementById('authenticated').value
+      getMovies = _useState22[1]; // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
 
@@ -2473,10 +2470,10 @@ var App = function App() {
   }, []);
   var noStreaming = "This show is not currently available through streaming.";
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState26 = _slicedToArray(_useState25, 2),
-      showType = _useState26[0],
-      setShowType = _useState26[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      showType = _useState24[0],
+      setShowType = _useState24[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
@@ -2553,33 +2550,39 @@ var App = function App() {
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
-      var theShowType, searchString, res, data;
+      var searchString, res, data;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              theShowType = document.querySelector('input[name="show-type"]:checked').value;
-              theShowType = theShowType.toLowerCase();
-              console.log("theShowType is:");
-              console.log(theShowType);
-              setShowType(theShowType);
-              searchString = "https://imdb-api.com/en/API/Search".concat(theShowType, "/k_j0x59844/").concat(e.target[2].value);
-              _context2.next = 9;
+
+              if (!showType) {
+                _context2.next = 12;
+                break;
+              }
+
+              // let theShowType = document.querySelector('input[name="show-type"]:checked').value
+              // theShowType = theShowType.toLowerCase()
+              // console.log("theShowType is:")
+              // console.log(theShowType)
+              // setShowType(theShowType)
+              searchString = "https://imdb-api.com/en/API/Search".concat(showType, "/k_j0x59844/").concat(e.target[2].value);
+              _context2.next = 5;
               return fetch(searchString);
 
-            case 9:
+            case 5:
               res = _context2.sent;
-              _context2.next = 12;
+              _context2.next = 8;
               return res.json();
 
-            case 12:
+            case 8:
               data = _context2.sent;
               console.log("In fetchResults, data is:");
               console.log(data);
               getResults(data.results);
 
-            case 16:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -2592,36 +2595,18 @@ var App = function App() {
     };
   }();
 
-  var getStreamingResults = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(streamingService, imdb_id, title, results, show_type) {
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function getStreamingResults(_x2, _x3, _x4, _x5, _x6) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("streamingServices are:");
     console.log(streamingServices);
   }, [streamingServices]);
 
   var checkStreaming = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
       var show_type, imdb_id, title, showToCheck, results, streamingServicesList, url, headers, promises, _loop, i;
 
-      return _regeneratorRuntime().wrap(function _callee4$(_context5) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context4) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               setStreamingServices([]);
               show_type = e.target.getAttribute('show_type');
@@ -2640,13 +2625,13 @@ var App = function App() {
               promises = [];
               _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop(i) {
                 var streamingService;
-                return _regeneratorRuntime().wrap(function _loop$(_context4) {
+                return _regeneratorRuntime().wrap(function _loop$(_context3) {
                   while (1) {
-                    switch (_context4.prev = _context4.next) {
+                    switch (_context3.prev = _context3.next) {
                       case 0:
                         streamingService = streamingServicesList[i];
-                        _context4.t0 = promises;
-                        _context4.next = 4;
+                        _context3.t0 = promises;
+                        _context3.next = 4;
                         return new Promise(function (resolve, reject) {
                           var params = {
                             country: 'us',
@@ -2776,13 +2761,13 @@ var App = function App() {
                         });
 
                       case 4:
-                        _context4.t1 = _context4.sent;
+                        _context3.t1 = _context3.sent;
 
-                        _context4.t0.push.call(_context4.t0, _context4.t1);
+                        _context3.t0.push.call(_context3.t0, _context3.t1);
 
                       case 6:
                       case "end":
-                        return _context4.stop();
+                        return _context3.stop();
                     }
                   }
                 }, _loop);
@@ -2791,15 +2776,15 @@ var App = function App() {
 
             case 14:
               if (!(i < streamingServicesList.length)) {
-                _context5.next = 19;
+                _context4.next = 19;
                 break;
               }
 
-              return _context5.delegateYield(_loop(i), "t0", 16);
+              return _context4.delegateYield(_loop(i), "t0", 16);
 
             case 16:
               i++;
-              _context5.next = 14;
+              _context4.next = 14;
               break;
 
             case 19:
@@ -2815,12 +2800,14 @@ var App = function App() {
                   for (_iterator.s(); !(_step = _iterator.n()).done;) {
                     var response = _step.value;
 
-                    if (response.length == 0) {
-                      console.log("Response is undefined.");
-                    } else {
-                      console.log("There is a valid response, which is:");
-                      console.log(response);
-                      validResponses.push(response); // removeDuplicates(uniqueResponses)
+                    if (response) {
+                      if (response.length == 0) {
+                        console.log("Response is undefined.");
+                      } else {
+                        console.log("There is a valid response, which is:");
+                        console.log(response);
+                        validResponses.push(response); // removeDuplicates(uniqueResponses)
+                      }
                     }
                   }
                 } catch (err) {
@@ -2833,9 +2820,9 @@ var App = function App() {
                   console.log("There are no validResponses");
                   setStreamingServices([noStreaming]);
                 } else {
-                  var _ref5;
+                  var _ref4;
 
-                  finalArray = (_ref5 = []).concat.apply(_ref5, validResponses);
+                  finalArray = (_ref4 = []).concat.apply(_ref4, validResponses);
                   console.log("finalArray is:");
                   console.log(finalArray);
                   finalResults = _toConsumableArray(new Set(finalArray));
@@ -2847,21 +2834,21 @@ var App = function App() {
 
             case 20:
             case "end":
-              return _context5.stop();
+              return _context4.stop();
           }
         }
-      }, _callee4);
+      }, _callee3);
     }));
 
-    return function checkStreaming(_x7) {
-      return _ref4.apply(this, arguments);
+    return function checkStreaming(_x2) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState28 = _slicedToArray(_useState27, 2),
-      sliderPosition = _useState28[0],
-      setSliderPosition = _useState28[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState26 = _slicedToArray(_useState25, 2),
+      sliderPosition = _useState26[0],
+      setSliderPosition = _useState26[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2895,6 +2882,7 @@ var App = function App() {
           streamingId: streamingId,
           noStreaming: noStreaming,
           showType: showType,
+          setShowType: setShowType,
           series: series,
           getSeries: getSeries,
           movies: movies,
@@ -2908,10 +2896,7 @@ var App = function App() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "login",
-        element: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_Dashboard_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
-          name: name,
-          email: email
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_LoginForm_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_LoginForm_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
           setLoginStatus: setLoginStatus,
           loginStatus: loginStatus,
           setUser: setUser,
@@ -2931,7 +2916,8 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
           streamingId: streamingId,
-          noStreaming: noStreaming
+          noStreaming: noStreaming,
+          loginStatus: loginStatus
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-movies",
@@ -2945,7 +2931,8 @@ var App = function App() {
           sliderPosition: sliderPosition,
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
-          streamingId: streamingId
+          streamingId: streamingId,
+          loginStatus: loginStatus
         })
       })]
     })]
@@ -3007,6 +2994,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Result_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result.js */ "./resources/js/components/Result.js");
 /* harmony import */ var _Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Slider */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -3025,12 +3024,30 @@ var Form = function Form(_ref) {
       sliderPosition = _ref.sliderPosition,
       setSliderPosition = _ref.setSliderPosition,
       showType = _ref.showType,
+      setShowType = _ref.setShowType,
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
       series = _ref.series,
       getSeries = _ref.getSeries,
       movies = _ref.movies,
       getMovies = _ref.getMovies;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      failedSearch = _useState2[0],
+      setFailedSearch = _useState2[1];
+
+  var addShowType = function addShowType(e) {
+    var theShowType = e.target.value.toLowerCase();
+    setShowType(theShowType);
+  };
+
+  var checkShowType = function checkShowType() {
+    if (!showType) {
+      setFailedSearch(true);
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -3049,7 +3066,7 @@ var Form = function Form(_ref) {
             id: "Series",
             name: "show-type",
             value: "Series",
-            required: true
+            onClick: addShowType
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "radio-button",
@@ -3061,12 +3078,16 @@ var Form = function Form(_ref) {
             id: "Movie",
             name: "show-type",
             value: "Movie",
-            required: true
+            onClick: addShowType
           })]
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        className: "selection_warning ".concat(failedSearch && !showType && 'visible'),
+        children: "Please select a show type."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
         type: "text"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        onClick: checkShowType,
         children: "Search"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -3232,12 +3253,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var LoginForm = function LoginForm(_ref) {
   var setLoginStatus = _ref.setLoginStatus,
       setUser = _ref.setUser,
-      setUserId = _ref.setUserId;
+      loginStatus = _ref.loginStatus;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
 
   var loginUser = /*#__PURE__*/function () {
@@ -3284,38 +3306,43 @@ var LoginForm = function LoginForm(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "loginForm",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "Log In"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
-      onSubmit: loginUser,
-      method: "POST",
-      action: "/login",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "field",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          htmlFor: "email",
-          children: "Email"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: !loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "loginForm",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        children: "Log In"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+        onSubmit: loginUser,
+        method: "POST",
+        action: "/login",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "field",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+            htmlFor: "email",
+            children: "Email"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+            type: "text",
+            name: "email"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "field",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+            htmlFor: "password",
+            children: "Password"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+            type: "password",
+            name: "password",
+            autoComplete: "off"
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "text",
-          name: "email"
+          type: "submit",
+          value: "Login"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "field",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          htmlFor: "password",
-          children: "Password"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "password",
-          name: "password",
-          autoComplete: "off"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-        type: "submit",
-        value: "Login"
       })]
-    })]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Navigate, {
+      replace: true,
+      to: "/"
+    })
   });
 };
 
@@ -3410,9 +3437,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Show_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Show.js */ "./resources/js/components/Show.js");
-/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -3430,28 +3458,32 @@ var MoviesList = function MoviesList(_ref) {
       streamingId = _ref.streamingId,
       streamingServices = _ref.streamingServices,
       showRatings = _ref.showRatings,
-      setShowRatings = _ref.setShowRatings;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    className: "show-index",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "shows__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        children: "My Movies"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        shows: movies,
-        getMovies: getMovies,
-        movies: movies,
-        Link: Link,
-        sliderPosition: sliderPosition,
-        setSliderPosition: setSliderPosition,
-        checkStreaming: checkStreaming,
-        changedRating: changedRating,
-        setChangedRating: setChangedRating,
-        streamingId: streamingId,
-        streamingServices: streamingServices,
-        showRatings: showRatings,
-        setShowRatings: setShowRatings
-      })]
+      setShowRatings = _ref.setShowRatings,
+      loginStatus = _ref.loginStatus;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "show-index",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "shows__container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "My Movies"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          shows: movies,
+          getMovies: getMovies,
+          movies: movies,
+          Link: Link,
+          sliderPosition: sliderPosition,
+          setSliderPosition: setSliderPosition,
+          checkStreaming: checkStreaming,
+          streamingId: streamingId,
+          streamingServices: streamingServices,
+          showRatings: showRatings,
+          setShowRatings: setShowRatings
+        })]
+      })
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+      replace: true,
+      to: "/login"
     })
   });
 };
@@ -3794,9 +3826,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Show_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Show.js */ "./resources/js/components/Show.js");
-/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -3815,27 +3848,33 @@ var SeriesList = function SeriesList(_ref) {
       streamingId = _ref.streamingId,
       noStreaming = _ref.noStreaming,
       showRatings = _ref.showRatings,
-      setShowRatings = _ref.setShowRatings;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    className: "show-index",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "shows__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        children: "My Series"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        series: series,
-        getSeries: getSeries,
-        shows: series,
-        Link: Link,
-        sliderPosition: sliderPosition,
-        setSliderPosition: setSliderPosition,
-        checkStreaming: checkStreaming,
-        streamingServices: streamingServices,
-        streamingId: streamingId,
-        noStreaming: noStreaming,
-        showRatings: showRatings,
-        setShowRatings: setShowRatings
-      })]
+      setShowRatings = _ref.setShowRatings,
+      loginStatus = _ref.loginStatus;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "show-index",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "shows__container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "My Series"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Slider_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          series: series,
+          getSeries: getSeries,
+          shows: series,
+          Link: Link,
+          sliderPosition: sliderPosition,
+          setSliderPosition: setSliderPosition,
+          checkStreaming: checkStreaming,
+          streamingServices: streamingServices,
+          streamingId: streamingId,
+          noStreaming: noStreaming,
+          showRatings: showRatings,
+          setShowRatings: setShowRatings
+        })]
+      })
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+      replace: true,
+      to: "/login"
     })
   });
 };
@@ -4337,6 +4376,9 @@ var Slider = function Slider(_ref) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (shows) {
+      shows.sort(function (a, b) {
+        return a.title.localeCompare(b.title);
+      });
       console.log("shows.length is:");
       console.log(shows.length);
       var showLength = shows.length;

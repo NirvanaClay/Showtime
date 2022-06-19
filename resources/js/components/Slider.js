@@ -16,6 +16,7 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
 
   useEffect(() => {
     if(shows){
+      shows.sort((a, b) => a.title.localeCompare(b.title))
       console.log("shows.length is:")
       console.log(shows.length)
       const showLength = shows.length
