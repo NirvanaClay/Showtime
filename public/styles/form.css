@@ -189,4 +189,9 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
+
+.form .results-container .shows .single {
+  width: 900px;
+  margin: 0 auto;
+}
 /*# sourceMappingURL=form.css.map */

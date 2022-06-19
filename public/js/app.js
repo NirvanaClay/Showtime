@@ -3687,7 +3687,8 @@ var Result = function Result(_ref) {
       series = _ref.series,
       getSeries = _ref.getSeries,
       movies = _ref.movies,
-      getMovies = _ref.getMovies;
+      getMovies = _ref.getMovies,
+      selectedResult = _ref.selectedResult;
 
   var myShow = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
@@ -3749,7 +3750,7 @@ var Result = function Result(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     id: id,
-    className: "result",
+    className: "result ".concat(selectedResult && 'single'),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
       id: id,
       children: title
@@ -4460,6 +4461,19 @@ var Slider = function Slider(_ref) {
   var seriesSliderPosition = {
     left: sliderPosition + 'px'
   };
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      selectedResult = _useState14[0],
+      setSelectedResult = _useState14[1];
+
+  var chooseResult = function chooseResult(e) {
+    setSelectedResult(true);
+    getResults(results.filter(function (result) {
+      return result.id == e.target.id;
+    }));
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("in Slider effect, results are:");
     console.log(results);
@@ -4508,6 +4522,7 @@ var Slider = function Slider(_ref) {
         }, show.id);
       }), results && results.map(function (result) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          onClick: chooseResult,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Result__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: result.title,
             image: result.image,
@@ -4522,7 +4537,8 @@ var Slider = function Slider(_ref) {
             series: series,
             getSeries: getSeries,
             movies: movies,
-            getMovies: getMovies
+            getMovies: getMovies,
+            selectedResult: selectedResult
           })
         }, result.id);
       })]

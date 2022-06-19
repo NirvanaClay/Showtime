@@ -5,7 +5,7 @@ const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies }) => {
+const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies, selectedResult }) => {
 
   const myShow = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
   }
 
   return (
-    <div id={id} className='result'>
+    <div id={id} className={`result ${selectedResult && 'single'}`}>
       <h2 id={id}>{title}</h2>
       <img id={id} src={image}></img>
       {streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming &&

@@ -96,6 +96,13 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
     left: sliderPosition + 'px'
   }
 
+  const [selectedResult, setSelectedResult] = useState(false)
+
+  const chooseResult = (e) => {
+    setSelectedResult(true)
+    getResults(results.filter((result) => result.id == e.target.id))
+  }
+
   useEffect(() => {
     console.log("in Slider effect, results are:")
     console.log(results)
@@ -116,8 +123,8 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
         </div>
       ))}
       {results && results.map((result) => (
-        <div key={result.id}>
-          <Result title={result.title} image={result.image} id={result.id} user={user} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} />
+        <div key={result.id} onClick={chooseResult}>
+          <Result title={result.title} image={result.image} id={result.id} user={user} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} selectedResult={selectedResult} />
         </div>))}  
       </div>
     </div>
