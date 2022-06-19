@@ -3762,30 +3762,46 @@ var Result = function Result(_ref) {
 
                 if (showType == 'series') {
                   console.log("Knows showType is series.");
-                  series.some(function (show) {
-                    if (show.id == response.data) {
-                      getSeries([].concat(_toConsumableArray(series), [{
-                        title: title,
-                        image_url: image,
-                        id: response.data,
-                        imdb_id: id,
-                        show_type: showType
-                      }]));
-                    }
+                  var seriesCheck = series.some(function (show) {
+                    return show.id == response.data; // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+                    // console.log(movie.id)
                   });
+
+                  if (seriesCheck) {
+                    console.log("There are duplicates.");
+                    return;
+                  } else {
+                    console.log("There are not duplicates.");
+                    getSeries([].concat(_toConsumableArray(series), [{
+                      title: title,
+                      image_url: image,
+                      id: response.data,
+                      imdb_id: id,
+                      show_type: showType
+                    }]));
+                  }
                 } else if (showType == 'movie') {
                   console.log("Knows showType is movie");
-                  movies.some(function (movie) {
-                    if (movie.id == response.data) {
-                      getMovies([].concat(_toConsumableArray(movies), [{
-                        title: title,
-                        image_url: image,
-                        id: response.data,
-                        imdb_id: id,
-                        show_type: showType
-                      }]));
-                    }
+                  console.log("response.data is:");
+                  console.log(response.data);
+                  var moviesCheck = movies.some(function (movie) {
+                    return movie.id == response.data; // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+                    // console.log(movie.id)
                   });
+
+                  if (moviesCheck) {
+                    console.log("There are duplicates.");
+                    return;
+                  } else {
+                    console.log("There are not duplicates.");
+                    getMovies([].concat(_toConsumableArray(movies), [{
+                      title: title,
+                      image_url: image,
+                      id: response.data,
+                      imdb_id: id,
+                      show_type: showType
+                    }]));
+                  }
                 }
               })["catch"](function (e) {
                 console.log(e);
@@ -4015,9 +4031,6 @@ var Show = function Show(_ref) {
       setPreviewRating = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In Show effect, stateRating is:");
-    console.log(stateRating);
-
     var checkRating = function checkRating(e) {
       var stars = document.querySelectorAll('i');
 
@@ -4164,18 +4177,6 @@ var Show = function Show(_ref) {
     }
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In Show, streamingServices are:");
-    console.log(streamingServices);
-    console.log("While noStreaming is:");
-    console.log(noStreaming);
-
-    if (streamingServices == noStreaming) {
-      console.log("So it equals noStreaming");
-    } else {
-      console.log("So it doesn't equal noStreaming.");
-    }
-  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {

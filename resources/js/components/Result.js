@@ -24,31 +24,49 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
       console.log(response)
       if(showType == 'series'){
         console.log("Knows showType is series.")
-        series.some(show => {
-          if (show.id == response.data) {
-            getSeries([...series, {
-              title: title,
-              image_url: image,
-              id: response.data,
-              imdb_id: id,
-              show_type: showType
-            }])
-          }
-        });
+        const seriesCheck = series.some(show => {
+          return show.id == response.data
+          // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+          // console.log(movie.id)
+        })
+        if(seriesCheck){
+          console.log("There are duplicates.")
+          return
+        }
+        else{
+          console.log("There are not duplicates.")
+          getSeries([...series, {
+            title: title,
+            image_url: image,
+            id: response.data,
+            imdb_id: id,
+            show_type: showType
+          }])
+        }
       }
       else if(showType == 'movie'){
         console.log("Knows showType is movie")
-        movies.some(movie => {
-          if(movie.id == response.data){
-            getMovies([...movies, {
-              title: title,
-              image_url: image,
-              id: response.data,
-              imdb_id: id,
-              show_type: showType
-            }])
-          }
+        console.log("response.data is:")
+        console.log(response.data)
+        const moviesCheck = movies.some(movie => {
+          return movie.id == response.data
+          // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+          // console.log(movie.id)
         })
+        if(moviesCheck){
+          console.log("There are duplicates.")
+          return
+        }
+        else{
+          console.log("There are not duplicates.")
+          getMovies([...movies, {
+            title: title,
+            image_url: image,
+            id: response.data,
+            imdb_id: id,
+            show_type: showType
+          }])
+        }
       }
     }).catch((e) => {
       console.log(e)

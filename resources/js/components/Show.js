@@ -10,8 +10,6 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   const [previewRating, setPreviewRating] = useState(rating)
 
   useEffect(() =>{
-    console.log("In Show effect, stateRating is:")
-    console.log(stateRating)
     const checkRating = (e) => {
       let stars = document.querySelectorAll('i')
       for(let star of stars){
@@ -81,19 +79,6 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       }
     }
   }
-
-  useEffect(() => {
-    console.log("In Show, streamingServices are:")
-    console.log(streamingServices)
-    console.log("While noStreaming is:")
-    console.log(noStreaming)
-    if(streamingServices == noStreaming){
-      console.log("So it equals noStreaming")
-    }
-    else{
-      console.log("So it doesn't equal noStreaming.")
-    }
-  })
 
   return (
     <div className='show'>
