@@ -2675,12 +2675,12 @@ var App = function App() {
                                   if (res.data.results.length > 0) {
                                     var usableResults;
 
-                                    var _iterator2 = _createForOfIteratorHelper(res.data.results),
-                                        _step2;
+                                    var _iterator3 = _createForOfIteratorHelper(res.data.results),
+                                        _step3;
 
                                     try {
-                                      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                                        var result = _step2.value;
+                                      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                                        var result = _step3.value;
 
                                         if (result.imdbID == imdb_id) {
                                           console.log("Found matching show.");
@@ -2693,14 +2693,16 @@ var App = function App() {
                                             results.push(key);
                                           }
 
+                                          results = _toConsumableArray(new Set(results));
                                           console.log("About to resolve1 with results of:");
                                           console.log(results);
+                                          break;
                                         }
                                       }
                                     } catch (err) {
-                                      _iterator2.e(err);
+                                      _iterator3.e(err);
                                     } finally {
-                                      _iterator2.f();
+                                      _iterator3.f();
                                     }
 
                                     return resolve(results);
@@ -2720,12 +2722,12 @@ var App = function App() {
                               if (res.data.results.length > 0) {
                                 var usableResults;
 
-                                var _iterator3 = _createForOfIteratorHelper(res.data.results),
-                                    _step3;
+                                var _iterator4 = _createForOfIteratorHelper(res.data.results),
+                                    _step4;
 
                                 try {
-                                  for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                                    var result = _step3.value;
+                                  for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                                    var result = _step4.value;
 
                                     if (result.imdbID == imdb_id) {
                                       console.log("Found match for show.");
@@ -2740,12 +2742,14 @@ var App = function App() {
 
                                       console.log("About to resolve2 with results of:");
                                       console.log(results);
+                                      results = _toConsumableArray(new Set(results));
+                                      break;
                                     }
                                   }
                                 } catch (err) {
-                                  _iterator3.e(err);
+                                  _iterator4.e(err);
                                 } finally {
-                                  _iterator3.f();
+                                  _iterator4.f();
                                 }
 
                                 return resolve(results);
@@ -2792,6 +2796,8 @@ var App = function App() {
                 var validResponses = [];
                 var finalArray;
                 var finalResults;
+                console.log("Before final loop/check, responses are:");
+                console.log(responses);
 
                 var _iterator = _createForOfIteratorHelper(responses),
                     _step;
@@ -2804,9 +2810,45 @@ var App = function App() {
                       if (response.length == 0) {
                         console.log("Response is undefined.");
                       } else {
-                        console.log("There is a valid response, which is:");
-                        console.log(response);
-                        validResponses.push(response); // removeDuplicates(uniqueResponses)
+                        var _iterator2 = _createForOfIteratorHelper(response),
+                            _step2;
+
+                        try {
+                          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                            var singleResponse = _step2.value;
+
+                            if (singleResponse) {
+                              console.log("There is a valid singleResponse, which is:");
+                              console.log(singleResponse);
+
+                              if (singleResponse == 'prime') {
+                                singleResponse = "../../../img/prime-logo.jpg";
+                                validResponses.push(singleResponse);
+                              } else if (singleResponse == 'netflix') {
+                                singleResponse = "../../../img/netflix-logo.jpg";
+                                validResponses.push(singleResponse);
+                              } else if (singleResponse == 'hulu') {
+                                singleResponse = "../../../img/hulu-logo.jpg";
+                                validResponses.push(singleResponse);
+                              } else if (singleResponse == 'disney') {
+                                singleResponse = "../../../img/disney-logo.jpg";
+                                validResponses.push(singleResponse);
+                              } else if (singleResponse == 'hbo') {
+                                singleResponse = "../../../img/hbo-logo.jpg";
+                                validResponses.push(singleResponse);
+                              } else if (singleResponse == 'peacock') {
+                                singleResponse = "../../../img/peacock-logo.jpg";
+                                validResponses.push(singleResponse);
+                              }
+
+                              validResponses = _toConsumableArray(new Set(validResponses));
+                            }
+                          }
+                        } catch (err) {
+                          _iterator2.e(err);
+                        } finally {
+                          _iterator2.f();
+                        }
                       }
                     }
                   }
@@ -2816,13 +2858,18 @@ var App = function App() {
                   _iterator.f();
                 }
 
+                console.log("validResponses are:");
+                console.log(validResponses);
+
                 if (validResponses.length == 0) {
                   console.log("There are no validResponses");
                   setStreamingServices([noStreaming]);
                 } else {
                   var _ref4;
 
-                  finalArray = (_ref4 = []).concat.apply(_ref4, validResponses);
+                  console.log("validResponses are:");
+                  console.log(validResponses);
+                  finalArray = (_ref4 = []).concat.apply(_ref4, _toConsumableArray(validResponses));
                   console.log("finalArray is:");
                   console.log(finalArray);
                   finalResults = _toConsumableArray(new Set(finalArray));
@@ -2932,7 +2979,9 @@ var App = function App() {
           setSliderPosition: setSliderPosition,
           streamingServices: streamingServices,
           streamingId: streamingId,
-          loginStatus: loginStatus
+          loginStatus: loginStatus,
+          user: user,
+          noStreaming: noStreaming
         })
       })]
     })]
@@ -3089,6 +3138,9 @@ var Form = function Form(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
         onClick: checkShowType,
         children: "Search"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        className: "streaming-list",
+        children: "*We search Netflix, Hulu, Amazon Prime, HBO, Disney+, and Peacock."
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "results-container",
@@ -3307,7 +3359,7 @@ var LoginForm = function LoginForm(_ref) {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: !loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "loginForm",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         children: "Log In"
@@ -3339,9 +3391,6 @@ var LoginForm = function LoginForm(_ref) {
           value: "Login"
         })]
       })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Navigate, {
-      replace: true,
-      to: "/"
     })
   });
 };
@@ -3437,7 +3486,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -3459,9 +3507,11 @@ var MoviesList = function MoviesList(_ref) {
       streamingServices = _ref.streamingServices,
       showRatings = _ref.showRatings,
       setShowRatings = _ref.setShowRatings,
-      loginStatus = _ref.loginStatus;
+      loginStatus = _ref.loginStatus,
+      user = _ref.user,
+      noStreaming = _ref.noStreaming;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "shows__container",
@@ -3478,12 +3528,10 @@ var MoviesList = function MoviesList(_ref) {
           streamingId: streamingId,
           streamingServices: streamingServices,
           showRatings: showRatings,
-          setShowRatings: setShowRatings
+          setShowRatings: setShowRatings,
+          noStreaming: noStreaming
         })]
       })
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
-      replace: true,
-      to: "/login"
     })
   });
 };
@@ -3768,8 +3816,9 @@ var Result = function Result(_ref) {
     }), streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
       children: "Streaming on:"
     }), streamingServices.length > 0 && streamingId == id && streamingServices.map(function (service, key) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: service
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+        src: service,
+        className: "streaming-image"
       }, key);
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       id: id,
@@ -3835,7 +3884,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -3860,7 +3908,7 @@ var SeriesList = function SeriesList(_ref) {
       setShowRatings = _ref.setShowRatings,
       loginStatus = _ref.loginStatus;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: loginStatus ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "shows__container",
@@ -3881,9 +3929,6 @@ var SeriesList = function SeriesList(_ref) {
           setShowRatings: setShowRatings
         })]
       })
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
-      replace: true,
-      to: "/login"
     })
   });
 };
@@ -4119,6 +4164,18 @@ var Show = function Show(_ref) {
     }
   };
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("In Show, streamingServices are:");
+    console.log(streamingServices);
+    console.log("While noStreaming is:");
+    console.log(noStreaming);
+
+    if (streamingServices == noStreaming) {
+      console.log("So it equals noStreaming");
+    } else {
+      console.log("So it doesn't equal noStreaming.");
+    }
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -4127,10 +4184,13 @@ var Show = function Show(_ref) {
       src: image
     }), streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
       children: "Streaming on:"
-    }), streamingServices.length > 0 && streamingId == imdb_id && streamingServices.map(function (service, key) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-        children: service
+    }), streamingServices.length > 0 && streamingServices != noStreaming && streamingId == imdb_id && streamingServices.map(function (service, key) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: service,
+        className: "streaming-image"
       }, key);
+    }), streamingServices == noStreaming && streamingId == imdb_id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: streamingServices
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "stars-container",
       id: id,

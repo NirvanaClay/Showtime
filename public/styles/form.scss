@@ -20,7 +20,7 @@
       margin-bottom: 10px;
     }
     .selection_warning{
-      color: red;
+      color: #fbff00;
       font-size: 1.2rem;
       display: none;
     }
@@ -50,6 +50,11 @@
       background: red;
       font-size: 1.2rem;
       cursor: pointer;
+    }
+    .streaming-list{
+      margin-top: 10px;
+      text-align: center;
+      color: white;
     }
   }
   .results-container{
@@ -130,6 +135,10 @@
         }
         p{
           font-size: 1.1rem;
+        }
+        .streaming-image{
+          width: 120px;
+          height: 60px;
         }
         input[type='submit']{
           width: 120px;

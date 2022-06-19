@@ -204,8 +204,10 @@ const App = () => {
                       for(let key of Object.keys(showToCheck.streamingInfo)){
                         results.push(key)
                       }
+                      results = ([...new Set(results)])
                       console.log("About to resolve1 with results of:")
-                      console.log(results)                      
+                      console.log(results) 
+                      break                     
                     }
                   }
                   return resolve(results)
@@ -234,6 +236,8 @@ const App = () => {
                   }
                   console.log("About to resolve2 with results of:")
                   console.log(results)
+                  results = ([...new Set(results)])
+                  break
                 }
               }
               return resolve(results)
@@ -254,24 +258,57 @@ const App = () => {
       let validResponses = []
       let finalArray
       let finalResults
+      console.log("Before final loop/check, responses are:")
+      console.log(responses)
       for(let response of responses){
         if(response){
           if(response.length == 0){
             console.log("Response is undefined.")
           }
           else{
-            console.log("There is a valid response, which is:")
-            console.log(response)
-            validResponses.push(response)
-            // removeDuplicates(uniqueResponses)
+            for(let singleResponse of response){
+              if(singleResponse){
+                console.log("There is a valid singleResponse, which is:")
+                console.log(singleResponse)
+                if(singleResponse == 'prime'){
+                  singleResponse = "../../../img/prime-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                else if(singleResponse == 'netflix'){
+                  singleResponse = "../../../img/netflix-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                else if(singleResponse == 'hulu'){
+                  singleResponse = "../../../img/hulu-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                else if(singleResponse == 'disney'){
+                  singleResponse = "../../../img/disney-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                else if(singleResponse == 'hbo'){
+                  singleResponse = "../../../img/hbo-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                else if(singleResponse == 'peacock'){
+                  singleResponse = "../../../img/peacock-logo.jpg"
+                  validResponses.push(singleResponse)
+                }
+                validResponses = ([...new Set(validResponses)])
+              }
+            }
           }
         }
       }
+      console.log("validResponses are:")
+      console.log(validResponses)
       if(validResponses.length == 0){
         console.log("There are no validResponses")
         setStreamingServices([noStreaming])
       }
       else{
+        console.log("validResponses are:")
+        console.log(validResponses)
         finalArray = [].concat(...validResponses)
         console.log("finalArray is:")
         console.log(finalArray)
@@ -303,7 +340,7 @@ const App = () => {
 
         <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} loginStatus={loginStatus} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} user={user} noStreaming={noStreaming} />} />
 
       </Routes>
     </Router>

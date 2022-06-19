@@ -38,6 +38,7 @@ const Form = ({ user, Link, results, getResults, fetchResults, streamingServices
         <p className={`selection_warning ${failedSearch && !showType && 'visible'}`}>Please select a show type.</p>
         <input type='text'></input>
         <button onClick={checkShowType}>Search</button>
+        <p className='streaming-list'>*We search Netflix, Hulu, Amazon Prime, HBO, Disney+, and Peacock.</p>
       </form>
       <div className='results-container'>
           <Slider user={user} results={results} getResults={getResults} fetchResults={fetchResults} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} /> 

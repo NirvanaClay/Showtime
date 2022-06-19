@@ -82,7 +82,18 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }
 
-
+  useEffect(() => {
+    console.log("In Show, streamingServices are:")
+    console.log(streamingServices)
+    console.log("While noStreaming is:")
+    console.log(noStreaming)
+    if(streamingServices == noStreaming){
+      console.log("So it equals noStreaming")
+    }
+    else{
+      console.log("So it doesn't equal noStreaming.")
+    }
+  })
 
   return (
     <div className='show'>
@@ -90,9 +101,12 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       <img src={image} />
       {streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
-      {streamingServices.length > 0 && streamingId == imdb_id && streamingServices.map((service, key) => (
-        <p key={key}>{service}</p>
+      {streamingServices.length > 0 && streamingServices != noStreaming && streamingId == imdb_id && streamingServices.map((service, key) => (
+        <img key={key} src={service} className='streaming-image'></img>
       ))}
+      {streamingServices == noStreaming && streamingId == imdb_id &&
+        <p>{streamingServices}</p>
+      }
       <div className='stars-container' id={id}>
         <form action='/api/shows/{id}' method='POST'>
           <input type="hidden" name="_method" value="PUT" />

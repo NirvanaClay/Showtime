@@ -9,14 +9,12 @@ const SeriesList = ({ series, getSeries, Link, sliderPosition, setSliderPosition
 
   return (
     <>
-    {loginStatus ? 
-         <div className='show-index'>
-         <div className='shows__container'>
-           <h2>My Series</h2>
-           <Slider series={series} getSeries={getSeries} shows={series} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming}  showRatings={showRatings} setShowRatings={setShowRatings} />
-         </div>
-       </div> 
-    : <Navigate replace to="/login" />}
+      <div className='show-index'>
+        <div className='shows__container'>
+          <h2>My Series</h2>
+          <Slider series={series} getSeries={getSeries} shows={series} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming}  showRatings={showRatings} setShowRatings={setShowRatings} />
+        </div>
+      </div> 
     </>
   )
 }
