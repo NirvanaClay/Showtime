@@ -3161,6 +3161,12 @@ var Form = function Form(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
         onClick: checkShowType,
         children: "Search"
+      }), !user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+        className: "register-pitch",
+        children: ["Not a member? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Link, {
+          to: "/register",
+          children: "Register"
+        }), " to save and rate the shows that capture your attention."]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         className: "streaming-list",
         children: "*We search Netflix, Hulu, Amazon Prime, HBO, Disney+, and Peacock."

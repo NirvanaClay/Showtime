@@ -57,9 +57,19 @@
   margin: 0 auto;
   border: none;
   border-radius: 5px;
-  background: red;
+  background: #df0c0c;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.form form .register-pitch {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.form form .register-pitch a {
+  color: #00c3ff;
 }
 
 .form form .streaming-list {
@@ -203,20 +213,28 @@
 }
 
 .form .results-container .shows .result input[type='submit'] {
-  width: 120px;
-  height: 50px;
+  width: 90px;
+  height: 45px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
   background: black;
   color: white;
-  font-size: 1.2rem;
   cursor: pointer;
 }
 
-.form .results-container .shows .result button {
-  width: 120px;
-  height: 50px;
+.form .results-container .shows .streamCheck {
+  width: 90px;
+  height: 45px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
   background: white;
   color: black;
-  font-size: 1.2rem;
   cursor: pointer;
 }
 

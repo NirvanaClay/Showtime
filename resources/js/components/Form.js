@@ -46,6 +46,9 @@ const Form = ({ user, Link, results, getResults, fetchResults, streamingServices
         <p className={`selection_warning ${failedSearch && !showType && 'visible'}`}>Please select a show type.</p>
         <input type='text'></input>
         <button onClick={checkShowType}>Search</button>
+        {!user && 
+        <p className='register-pitch'>Not a member? <Link to='/register'>Register</Link> to save and rate the shows that capture your attention.</p>
+        }
         <p className='streaming-list'>*We search Netflix, Hulu, Amazon Prime, HBO, Disney+, and Peacock.</p>
       </form>
       <div className='results-container'>
