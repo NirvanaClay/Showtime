@@ -109,6 +109,20 @@
   height: 200px;
 }
 
+.show-index .shows__container .shows .show .loading {
+  display: none;
+}
+
+.show-index .shows__container .shows .show .loading i {
+  font-size: 24px;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+}
+
+.show-index .shows__container .shows .show .visible {
+  display: block;
+}
+
 .show-index .shows__container .shows .show h4 {
   font-size: 1.3rem;
   margin-bottom: 10px;

@@ -5,14 +5,14 @@ import { Navigate } from 'react-router-dom'
 
 import Slider from './Slider.js'
 
-const SeriesList = ({ series, getSeries, Link, sliderPosition, setSliderPosition, checkStreaming, streamingServices, streamingId, noStreaming, showRatings, setShowRatings, loginStatus }) => {
+const SeriesList = ({ series, getSeries, Link, sliderPosition, setSliderPosition, checkStreaming, streamingServices, streamingId, noStreaming, showRatings, setShowRatings, loginStatus, isLoading }) => {
 
   return (
     <>
       <div className='show-index'>
         <div className='shows__container'>
           <h2>My Series</h2>
-          <Slider series={series} getSeries={getSeries} shows={series} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming}  showRatings={showRatings} setShowRatings={setShowRatings} />
+          <Slider series={series} getSeries={getSeries} shows={series} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} showRatings={showRatings} setShowRatings={setShowRatings} isLoading={isLoading} />
         </div>
       </div> 
     </>

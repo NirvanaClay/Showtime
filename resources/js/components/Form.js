@@ -20,6 +20,14 @@ const Form = ({ user, Link, results, getResults, fetchResults, streamingServices
     }
   }
 
+  const [isLoading, setIsLoading] = useState(false)
+  const [spinnerDegree, setSpinnerDegree] = useState(0)
+
+  useEffect(() => {
+    console.log("spinnerDegree is:")
+    console.log(spinnerDegree)
+  }, [spinnerDegree])
+
   return (
     <div className='form'>
       <h1>Search Shows And Find Where To Stream Them</h1>

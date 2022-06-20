@@ -56,6 +56,18 @@
       text-align: center;
       color: white;
     }
+    .loading{
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      i{
+        font-size: 24px;
+        // transform: rotate(0);
+        transition: 1s ease-in-out;
+      }
+    }
   }
   .results-container{
     width: 900px;

@@ -2439,7 +2439,12 @@ var App = function App() {
   var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState22 = _slicedToArray(_useState21, 2),
       movies = _useState22[0],
-      getMovies = _useState22[1]; // let userCheck = document.getElementById('authenticated').value
+      getMovies = _useState22[1];
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      isLoading = _useState24[0],
+      setIsLoading = _useState24[1]; // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
 
@@ -2470,10 +2475,10 @@ var App = function App() {
   }, []);
   var noStreaming = "This show is not currently available through streaming.";
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState24 = _slicedToArray(_useState23, 2),
-      showType = _useState24[0],
-      setShowType = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState26 = _slicedToArray(_useState25, 2),
+      showType = _useState26[0],
+      setShowType = _useState26[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
@@ -2609,6 +2614,7 @@ var App = function App() {
           switch (_context4.prev = _context4.next) {
             case 0:
               setStreamingServices([]);
+              setIsLoading(true);
               show_type = e.target.getAttribute('show_type');
               imdb_id = e.target.getAttribute('imdb_id');
               title = e.target.title;
@@ -2778,20 +2784,20 @@ var App = function App() {
               });
               i = 0;
 
-            case 14:
+            case 15:
               if (!(i < streamingServicesList.length)) {
-                _context4.next = 19;
+                _context4.next = 20;
                 break;
               }
 
-              return _context4.delegateYield(_loop(i), "t0", 16);
+              return _context4.delegateYield(_loop(i), "t0", 17);
 
-            case 16:
+            case 17:
               i++;
-              _context4.next = 14;
+              _context4.next = 15;
               break;
 
-            case 19:
+            case 20:
               Promise.all(promises).then(function (responses) {
                 var validResponses = [];
                 var finalArray;
@@ -2841,6 +2847,7 @@ var App = function App() {
                                 validResponses.push(singleResponse);
                               }
 
+                              setIsLoading(false);
                               validResponses = _toConsumableArray(new Set(validResponses));
                             }
                           }
@@ -2879,7 +2886,7 @@ var App = function App() {
                 }
               });
 
-            case 20:
+            case 21:
             case "end":
               return _context4.stop();
           }
@@ -2892,10 +2899,10 @@ var App = function App() {
     };
   }();
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState26 = _slicedToArray(_useState25, 2),
-      sliderPosition = _useState26[0],
-      setSliderPosition = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState28 = _slicedToArray(_useState27, 2),
+      sliderPosition = _useState28[0],
+      setSliderPosition = _useState28[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2964,7 +2971,8 @@ var App = function App() {
           streamingServices: streamingServices,
           streamingId: streamingId,
           noStreaming: noStreaming,
-          loginStatus: loginStatus
+          loginStatus: loginStatus,
+          isLoading: isLoading
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-movies",
@@ -2981,7 +2989,8 @@ var App = function App() {
           streamingId: streamingId,
           loginStatus: loginStatus,
           user: user,
-          noStreaming: noStreaming
+          noStreaming: noStreaming,
+          isLoading: isLoading
         })
       })]
     })]
@@ -3097,6 +3106,20 @@ var Form = function Form(_ref) {
     }
   };
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoading = _useState4[0],
+      setIsLoading = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      spinnerDegree = _useState6[0],
+      setSpinnerDegree = _useState6[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log("spinnerDegree is:");
+    console.log(spinnerDegree);
+  }, [spinnerDegree]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -3922,7 +3945,8 @@ var SeriesList = function SeriesList(_ref) {
       noStreaming = _ref.noStreaming,
       showRatings = _ref.showRatings,
       setShowRatings = _ref.setShowRatings,
-      loginStatus = _ref.loginStatus;
+      loginStatus = _ref.loginStatus,
+      isLoading = _ref.isLoading;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
@@ -3942,7 +3966,8 @@ var SeriesList = function SeriesList(_ref) {
           streamingId: streamingId,
           noStreaming: noStreaming,
           showRatings: showRatings,
-          setShowRatings: setShowRatings
+          setShowRatings: setShowRatings,
+          isLoading: isLoading
         })]
       })
     })
@@ -4018,7 +4043,8 @@ var Show = function Show(_ref) {
       getMovies = _ref.getMovies,
       setRatingValue = _ref.setRatingValue,
       pivotId = _ref.pivotId,
-      pivotUser = _ref.pivotUser;
+      pivotUser = _ref.pivotUser,
+      isLoading = _ref.isLoading;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4177,12 +4203,37 @@ var Show = function Show(_ref) {
     }
   };
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      spinnerDegree = _useState6[0],
+      setSpinnerDegree = _useState6[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isLoading) {
+      var interval = setInterval(function () {
+        setSpinnerDegree(spinnerDegree + 90);
+        console.log("set spinner degree, which should be:");
+        console.log(spinnerDegree + 90);
+      }, 1);
+      return function () {
+        return clearInterval(interval);
+      };
+    } else {}
+  }, [spinnerDegree, isLoading]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
       children: title
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
       src: image
+    }), streamingId == imdb_id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "loading ".concat(isLoading && 'visible'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+        className: "fas fa-spinner",
+        style: {
+          transform: "rotate(".concat(spinnerDegree, "deg)")
+        }
+      })
     }), streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
       children: "Streaming on:"
     }), streamingServices.length > 0 && streamingServices != noStreaming && streamingId == imdb_id && streamingServices.map(function (service, key) {
@@ -4412,7 +4463,8 @@ var Slider = function Slider(_ref) {
       noStreaming = _ref.noStreaming,
       showType = _ref.showType,
       showRatings = _ref.showRatings,
-      setShowRatings = _ref.setShowRatings;
+      setShowRatings = _ref.setShowRatings,
+      isLoading = _ref.isLoading;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4586,7 +4638,8 @@ var Slider = function Slider(_ref) {
             series: series,
             getSeries: getSeries,
             movies: movies,
-            getMovies: getMovies
+            getMovies: getMovies,
+            isLoading: isLoading
           })
         }, show.id);
       }), results && results.map(function (result) {

@@ -38,6 +38,8 @@ const App = () => {
 
   const [series, getSeries] = useState([])
   const [movies, getMovies] = useState([])
+  
+  const [isLoading, setIsLoading] = useState(false)
 
   // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
@@ -131,6 +133,7 @@ const App = () => {
 
   const checkStreaming = async (e) => {
     setStreamingServices([])
+    setIsLoading(true)
     const show_type = e.target.getAttribute('show_type')
     const imdb_id = e.target.getAttribute('imdb_id')
     const title = e.target.title
@@ -294,6 +297,7 @@ const App = () => {
                   singleResponse = "../../../img/peacock-logo.jpg"
                   validResponses.push(singleResponse)
                 }
+                setIsLoading(false)
                 validResponses = ([...new Set(validResponses)])
               }
             }
@@ -338,9 +342,9 @@ const App = () => {
 
         <Route path="login" element={<LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} />} />
 
-        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} loginStatus={loginStatus} />} />
+        <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} loginStatus={loginStatus} isLoading={isLoading} />} />
 
-        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} user={user} noStreaming={noStreaming} />} />
+        <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} user={user} noStreaming={noStreaming}isLoading={isLoading} />} />
 
       </Routes>
     </Router>
