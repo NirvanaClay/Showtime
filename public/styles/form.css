@@ -1,11 +1,11 @@
 .form {
-  padding: 20px 100px;
+  padding: 0 100px;
   z-index: 11;
 }
 
 .form h1 {
   width: 50%;
-  margin: 0 auto;
+  margin: 20px auto;
   text-align: center;
   color: white;
   font-size: 2.5rem;
@@ -181,11 +181,8 @@
 
 .form .results-container .shows .result {
   width: 225px;
-  height: 100%;
   margin: 0 auto;
   text-align: center;
-  -webkit-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
 }
 
 .form .results-container .shows .result h2 {
@@ -208,8 +205,10 @@
 }
 
 .form .results-container .shows .result .streaming-image {
+  display: block;
   width: 120px;
   height: 60px;
+  margin: 0 auto;
 }
 
 .form .results-container .shows .result input[type='submit'] {
@@ -223,6 +222,25 @@
   background: black;
   color: white;
   cursor: pointer;
+}
+
+.form .results-container .shows .result .loading {
+  display: none;
+}
+
+.form .results-container .shows .result .loading i {
+  font-size: 24px;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+}
+
+.form .results-container .shows .result .visible {
+  display: block;
+}
+
+.form .results-container .shows .result .streaming-image {
+  width: 120px;
+  height: 60px;
 }
 
 .form .results-container .shows .streamCheck {

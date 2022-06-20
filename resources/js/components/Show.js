@@ -80,30 +80,14 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }
 
-  const [spinnerDegree, setSpinnerDegree] = useState(0)
-
-  useEffect(() => {
-    if(isLoading){
-      const interval = setInterval(() => {
-        setSpinnerDegree(spinnerDegree + 90)
-        console.log("set spinner degree, which should be:")
-        console.log(spinnerDegree + 90)
-      }, 1);
-      return () => clearInterval(interval);
-    }
-    else{
-
-    }
-  }, [spinnerDegree, isLoading]);
-
   return (
     <div className='show'>
       <h3>{title}</h3>
       <img src={image} />
       {streamingId == imdb_id &&
-          <div className={`loading ${isLoading && 'visible'}`}>
-            <i className="fas fa-spinner" style={{transform: `rotate(${spinnerDegree}deg)`}}></i>
-          </div>
+        <div className={`loading ${isLoading && 'visible'}`}>
+          <i className="fas fa-spinner" style={{transform: `rotate(${spinnerDegree}deg)`}}></i>
+        </div>
       }
       {streamingServices.length > 0 && streamingId == imdb_id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}

@@ -133,8 +133,10 @@
 }
 
 .show-index .shows__container .shows .show .streaming-image {
+  display: block;
   width: 120px;
   height: 60px;
+  margin: 0 auto;
 }
 
 .show-index .shows__container .shows .show .stars-container {

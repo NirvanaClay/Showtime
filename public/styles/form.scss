@@ -1,9 +1,9 @@
 .form{
-  padding: 20px 100px;
+  padding: 0 100px;
   z-index: 11;
   h1{
     width: 50%;
-    margin: 0 auto;
+    margin: 20px auto;
     text-align: center;
     color: white;
     font-size: 2.5rem;
@@ -136,10 +136,8 @@
       transition: .5s ease-in-out;
       .result{
         width: 225px;
-        height: 100%;
         margin: 0 auto;
         text-align: center;
-        transition: .5s ease-in-out;
         h2{
           font-size: 1.5rem;
           margin-bottom: 10px;
@@ -156,8 +154,10 @@
           font-size: 1.1rem;
         }
         .streaming-image{
+          display: block;
           width: 120px;
           height: 60px;
+          margin: 0 auto;
         }
         input[type='submit']{
           width: 90px;
@@ -170,6 +170,20 @@
           background: black;
           color: white;
           cursor: pointer;
+        }
+        .loading{
+          display: none;
+          i{
+            font-size: 24px;
+            transition: 1s ease-in-out;
+          }
+        }
+        .visible{
+          display: block;
+        }
+        .streaming-image{
+          width: 120px;
+          height: 60px;
         }
       }
       .streamCheck{

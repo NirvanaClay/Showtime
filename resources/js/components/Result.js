@@ -5,7 +5,7 @@ const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies, selectedResult }) => {
+const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies, selectedResult, isLoading, spinnerDegree, setSpinnerDegree }) => {
 
   const myShow = async (e) => {
     e.preventDefault();
@@ -73,10 +73,29 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
     })
   }
 
+  useEffect(() => {
+    if(isLoading){
+      const interval = setInterval(() => {
+        setSpinnerDegree(spinnerDegree + 90)
+        console.log("set spinner degree, which should be:")
+        console.log(spinnerDegree + 90)
+      }, 1);
+      return () => clearInterval(interval);
+    }
+    else{
+
+    }
+  }, [spinnerDegree, isLoading]);
+
   return (
     <div id={id} className={`result ${selectedResult && 'single'}`}>
       <h2 id={id}>{title}</h2>
       <img id={id} src={image}></img>
+      {streamingId == id &&
+        <div className={`loading ${isLoading && 'visible'}`}>
+          <i className="fas fa-spinner" style={{transform: `rotate(${spinnerDegree}deg)`}}></i>
+        </div>
+      }
       {streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
       {streamingServices.length > 0 && streamingId == id && streamingServices.map((service, key) => (

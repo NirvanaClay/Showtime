@@ -2224,7 +2224,10 @@ var Home = function Home(_ref) {
       series = _ref.series,
       getSeries = _ref.getSeries,
       movies = _ref.movies,
-      getMovies = _ref.getMovies;
+      getMovies = _ref.getMovies,
+      isLoading = _ref.isLoading,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
     className: "home",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
@@ -2246,7 +2249,10 @@ var Home = function Home(_ref) {
       series: series,
       getSeries: getSeries,
       movies: movies,
-      getMovies: getMovies
+      getMovies: getMovies,
+      isLoading: isLoading,
+      spinnerDegree: spinnerDegree,
+      setSpinnerDegree: setSpinnerDegree
     })]
   });
 };
@@ -2444,7 +2450,12 @@ var App = function App() {
   var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState24 = _slicedToArray(_useState23, 2),
       isLoading = _useState24[0],
-      setIsLoading = _useState24[1]; // let userCheck = document.getElementById('authenticated').value
+      setIsLoading = _useState24[1];
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState26 = _slicedToArray(_useState25, 2),
+      spinnerDegree = _useState26[0],
+      setSpinnerDegree = _useState26[1]; // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
 
@@ -2475,10 +2486,10 @@ var App = function App() {
   }, []);
   var noStreaming = "This show is not currently available through streaming.";
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState26 = _slicedToArray(_useState25, 2),
-      showType = _useState26[0],
-      setShowType = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState28 = _slicedToArray(_useState27, 2),
+      showType = _useState28[0],
+      setShowType = _useState28[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
@@ -2899,10 +2910,10 @@ var App = function App() {
     };
   }();
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState28 = _slicedToArray(_useState27, 2),
-      sliderPosition = _useState28[0],
-      setSliderPosition = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState30 = _slicedToArray(_useState29, 2),
+      sliderPosition = _useState30[0],
+      setSliderPosition = _useState30[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2940,7 +2951,10 @@ var App = function App() {
           series: series,
           getSeries: getSeries,
           movies: movies,
-          getMovies: getMovies
+          getMovies: getMovies,
+          isLoading: isLoading,
+          spinnerDegree: spinnerDegree,
+          setSpinnerDegree: setSpinnerDegree
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "register",
@@ -2972,7 +2986,9 @@ var App = function App() {
           streamingId: streamingId,
           noStreaming: noStreaming,
           loginStatus: loginStatus,
-          isLoading: isLoading
+          isLoading: isLoading,
+          spinnerDegree: spinnerDegree,
+          setSpinnerDegree: setSpinnerDegree
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "my-movies",
@@ -2990,7 +3006,9 @@ var App = function App() {
           loginStatus: loginStatus,
           user: user,
           noStreaming: noStreaming,
-          isLoading: isLoading
+          isLoading: isLoading,
+          spinnerDegree: spinnerDegree,
+          setSpinnerDegree: setSpinnerDegree
         })
       })]
     })]
@@ -3088,7 +3106,10 @@ var Form = function Form(_ref) {
       series = _ref.series,
       getSeries = _ref.getSeries,
       movies = _ref.movies,
-      getMovies = _ref.getMovies;
+      getMovies = _ref.getMovies,
+      isLoading = _ref.isLoading,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3106,20 +3127,6 @@ var Form = function Form(_ref) {
     }
   };
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isLoading = _useState4[0],
-      setIsLoading = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      spinnerDegree = _useState6[0],
-      setSpinnerDegree = _useState6[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log("spinnerDegree is:");
-    console.log(spinnerDegree);
-  }, [spinnerDegree]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -3189,7 +3196,10 @@ var Form = function Form(_ref) {
         series: series,
         getSeries: getSeries,
         movies: movies,
-        getMovies: getMovies
+        getMovies: getMovies,
+        isLoading: isLoading,
+        spinnerDegree: spinnerDegree,
+        setSpinnerDegree: setSpinnerDegree
       })
     })]
   });
@@ -3538,7 +3548,9 @@ var MoviesList = function MoviesList(_ref) {
       setShowRatings = _ref.setShowRatings,
       loginStatus = _ref.loginStatus,
       user = _ref.user,
-      noStreaming = _ref.noStreaming;
+      noStreaming = _ref.noStreaming,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
@@ -3558,7 +3570,9 @@ var MoviesList = function MoviesList(_ref) {
           streamingServices: streamingServices,
           showRatings: showRatings,
           setShowRatings: setShowRatings,
-          noStreaming: noStreaming
+          noStreaming: noStreaming,
+          spinnerDegree: spinnerDegree,
+          setSpinnerDegree: setSpinnerDegree
         })]
       })
     })
@@ -3765,7 +3779,10 @@ var Result = function Result(_ref) {
       getSeries = _ref.getSeries,
       movies = _ref.movies,
       getMovies = _ref.getMovies,
-      selectedResult = _ref.selectedResult;
+      selectedResult = _ref.selectedResult,
+      isLoading = _ref.isLoading,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
 
   var myShow = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
@@ -3849,6 +3866,18 @@ var Result = function Result(_ref) {
     };
   }();
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isLoading) {
+      var interval = setInterval(function () {
+        setSpinnerDegree(spinnerDegree + 90);
+        console.log("set spinner degree, which should be:");
+        console.log(spinnerDegree + 90);
+      }, 1);
+      return function () {
+        return clearInterval(interval);
+      };
+    } else {}
+  }, [spinnerDegree, isLoading]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     id: id,
     className: "result ".concat(selectedResult && 'single'),
@@ -3858,6 +3887,14 @@ var Result = function Result(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       id: id,
       src: image
+    }), streamingId == id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "loading ".concat(isLoading && 'visible'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+        className: "fas fa-spinner",
+        style: {
+          transform: "rotate(".concat(spinnerDegree, "deg)")
+        }
+      })
     }), streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
       children: "Streaming on:"
     }), streamingServices.length > 0 && streamingId == id && streamingServices.map(function (service, key) {
@@ -3952,7 +3989,9 @@ var SeriesList = function SeriesList(_ref) {
       showRatings = _ref.showRatings,
       setShowRatings = _ref.setShowRatings,
       loginStatus = _ref.loginStatus,
-      isLoading = _ref.isLoading;
+      isLoading = _ref.isLoading,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
@@ -3973,7 +4012,9 @@ var SeriesList = function SeriesList(_ref) {
           noStreaming: noStreaming,
           showRatings: showRatings,
           setShowRatings: setShowRatings,
-          isLoading: isLoading
+          isLoading: isLoading,
+          spinnerDegree: spinnerDegree,
+          setSpinnerDegree: setSpinnerDegree
         })]
       })
     })
@@ -4209,23 +4250,6 @@ var Show = function Show(_ref) {
     }
   };
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      spinnerDegree = _useState6[0],
-      setSpinnerDegree = _useState6[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (isLoading) {
-      var interval = setInterval(function () {
-        setSpinnerDegree(spinnerDegree + 90);
-        console.log("set spinner degree, which should be:");
-        console.log(spinnerDegree + 90);
-      }, 1);
-      return function () {
-        return clearInterval(interval);
-      };
-    } else {}
-  }, [spinnerDegree, isLoading]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -4470,7 +4494,9 @@ var Slider = function Slider(_ref) {
       showType = _ref.showType,
       showRatings = _ref.showRatings,
       setShowRatings = _ref.setShowRatings,
-      isLoading = _ref.isLoading;
+      isLoading = _ref.isLoading,
+      spinnerDegree = _ref.spinnerDegree,
+      setSpinnerDegree = _ref.setSpinnerDegree;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4645,7 +4671,9 @@ var Slider = function Slider(_ref) {
             getSeries: getSeries,
             movies: movies,
             getMovies: getMovies,
-            isLoading: isLoading
+            isLoading: isLoading,
+            spinnerDegree: spinnerDegree,
+            setSpinnerDegree: setSpinnerDegree
           })
         }, show.id);
       }), results && results.map(function (result) {
@@ -4666,7 +4694,10 @@ var Slider = function Slider(_ref) {
             getSeries: getSeries,
             movies: movies,
             getMovies: getMovies,
-            selectedResult: selectedResult
+            selectedResult: selectedResult,
+            isLoading: isLoading,
+            spinnerDegree: spinnerDegree,
+            setSpinnerDegree: setSpinnerDegree
           })
         }, result.id);
       })]
