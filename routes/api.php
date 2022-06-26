@@ -18,19 +18,19 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::post('/login', function(Request $request) {
-    // $credentials = $request->validate([
-    //     'email' => ['required', 'email'],
-    //     'password' => ['required'],
-    // ]);
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-    // if (Auth::attempt($credentials)) {
-    //     $request->session()->regenerate();
-    // };
+    if (Auth::attempt($credentials)) {
+        return $credentials;
+        $request->session()->regenerate();
+    };
 
-    // return back()->withErrors([
-    //     'email' => 'The provided credentials do not match our records.',
-    // ]);
-    return "Fuck you!";
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
