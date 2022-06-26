@@ -3,39 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Show;
+use App\Models\User;
+use App\Models\User_show;
 
 class ShowController extends Controller
 {
-    public function index(Request $request)
+    public function userShows(Request $request)
     {
-        $shows = Show::all();
-        // $shows = Show::where('user_id', $request->user_id)->get();
-        // return view('shows/index', ['shows' => $shows]);
-        return $shows;
+        $id = Auth::id();
+        $user = User::find($id);
+        return $user->shows;
     }
     public function add(Request $request)
     {
+        $id = Auth::id();
+        $user = User::find($id);
         $show = Show::firstOrCreate(
-            ['title' => $request->title],
-            ['image_url' => $request->image_url, 'user_id' => $request->user_id]
+            ['imdb_id' => $request->imdb_id],
+            // ['title' => $request->title],
+            ['title'=> $request->title, 'image_url' => $request->image_url, 'show_type' => $request->show_type]
         );
+        $user->shows()->syncWithoutDetaching($show->id);
         return $show->id;
     }
     public function edit(Request $request)
     {
-        $id = $request->id;
+        $id = Auth::id();
+        $user = User::find($id);
+        $show_id = $request->id;
         $rating = $request->rating;
-        $show = Show::find($id);
-        $show->rating = $rating;
-        $show->save();
+        $user->shows()->updateExistingPivot($show_id, ['rating' => $rating]);        
     }
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        $show = Show::find($id);
-        $show->delete();
+        if(Auth::user()){
+            $id = Auth::id();
+            $user = User::find($id);
+        }
+        $show_id = $request->id;
+        $user->shows()->detach($show_id);
         // $shows = Show::all();
         // return view('shows/index', ['shows' => $shows]);
     }

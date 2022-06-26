@@ -17,32 +17,33 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::post('/login', function() {
-    return('w/e');
+Route::post('/login', function(Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+    };
+
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
 });
-    // $credentials = $request->validate([
-    //     'email' => ['required', 'email'],
-    //     'password' => ['required'],
-    // ]);
 
-    // if (Auth::attempt($credentials)) {
-    //     return('here?');
-        // $request->session()->regenerate();
-        // return $request;
-
-        // return redirect()->intended('dashboard');
-    // });
-
-//     return back()->withErrors([
-//         'email' => 'The provided credentials do not match our records.',
-//     ]);
-// });
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
+Route::post('/logout', function(Request $request){
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('home');
+});
+
+Route::get('/userShows', 'App\Http\Controllers\ShowController@userShows');
 
 Route::get('/passwordReset', function() {
     return 'This should be view for password reset form.';

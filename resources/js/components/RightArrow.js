@@ -4,18 +4,6 @@ import { useEffect } from 'react'
 
 const RightArrow = ({ isRightHovering, setIsRightHovering, results, shows, rightArrowVisibility, setRightArrowVisibility, moveSliderRight, sliderPosition }) => {
 
-  useEffect(() => {
-    if(sliderPosition <= -900){
-      setRightArrowVisibility(true)
-    }
-    else{
-      setRightArrowVisibility(false)
-      console.log(`slider position is ${sliderPosition}`)
-      console.log("Right arrow visibility should be false. It is:")
-      console.log(rightArrowVisibility)
-    }
-  }, [rightArrowVisibility, sliderPosition])
-
   const toggleHover = () => {
     setIsRightHovering(!isRightHovering)
   }

@@ -17,8 +17,8 @@ class CreateShowsTable extends Migration
             $table->id();
             $table->text('title');
             $table->text('image_url');
-            $table->integer('user_id');
-            $table->integer('rating')->nullable();
+            $table->text('imdb_id');
+            $table->text('show_type');
         });
     }
 

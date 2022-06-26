@@ -3,13 +3,23 @@ import Axios from 'axios'
 import { useEffect, useState } from 'react'
 
 import Result from './Result.js'
-import LeftArrow from './LeftArrow'
-import RightArrow from './RightArrow'
+import Slider from './Slider'
 
-const Form = ({ results, details, fetchResults, getResults, getDetails, shows, getShows, userId, loggedInUser, setStreamingServices, streamingServices, getStreamResults, isLeftHovering, setIsLeftHovering, isRightHovering, setIsRightHovering, leftArrowVisibility, setLeftArrowVisibility, rightArrowVisibility, setRightArrowVisibility, moveSliderLeft, moveSliderRight, sliderPosition } ) => {
+const Form = ({ user, Link, results, getResults, fetchResults, streamingServices, checkStreaming, sliderPosition, setSliderPosition, showType, setShowType, streamingId, noStreaming, series, getSeries, movies, getMovies, isLoading, spinnerDegree, setSpinnerDegree, failedSearch, setFailedSearch, resizeResetSlider }) => {
 
-  let leftPosition = {
-    left: sliderPosition + 'px'
+  const [selectedResult, setSelectedResult] = useState(false)
+
+  const addShowType = (e) => {
+    const theShowType = (e.target.value).toLowerCase();
+    setFailedSearch(false)
+    setShowType(theShowType)
+  }
+
+  const checkShowType = () => {
+    setSelectedResult(false)
+    if(!showType){
+      setFailedSearch(true)
+    }
   }
 
   return (
@@ -17,21 +27,27 @@ const Form = ({ results, details, fetchResults, getResults, getDetails, shows, g
       <h1>Search Shows And Find Where To Stream Them</h1>
       <form 
         onSubmit={fetchResults}>
+        <div className='radio-buttons'>
+          <div className='radio-button'>
+            <label htmlFor='series'>Series</label>
+            <input type='radio' id='Series' name='show-type' value="Series" onClick={addShowType}></input>
+          </div>
+          <div className='radio-button'>
+            <label htmlFor='movies'>Movie</label>
+            <input type='radio' id='Movie' name='show-type' value="Movie" onClick={addShowType}></input>
+          </div>
+        </div>
+        <p className={`selection_warning ${failedSearch && !showType && 'visible'}`}>Please select a show type.</p>
+        <p className={`selection_warning ${failedSearch && showType && 'visible'}`}>There were no shows found. Try a different search term.</p>
         <input type='text'></input>
-        <button>Search</button>
+        <button onClick={checkShowType}>Search</button>
+        {!user && 
+        <p className='register-pitch'><Link to='/login'>Login</Link> or <Link to='/register'>Register</Link> to save and rate the shows that capture your attention.</p>
+        }
+        <p className='streaming-list'>*We search Netflix, Hulu, Amazon Prime, HBO, Disney+, and Peacock.</p>
       </form>
       <div className='results-container'>
-        <>
-          <LeftArrow isLeftHovering={isLeftHovering} setIsLeftHovering={setIsLeftHovering} results={results} leftArrowVisibility={leftArrowVisibility} setLeftArrowVisibility={setLeftArrowVisibility} rightArrowVisibility={rightArrowVisibility} setRightArrowVisibility={setRightArrowVisibility} moveSliderLeft={moveSliderLeft} moveSliderRight={moveSliderRight} sliderPosition={sliderPosition} />
-          <RightArrow isRightHovering={isRightHovering} setIsRightHovering={setIsRightHovering} results={results} leftArrowVisibility={leftArrowVisibility} setLeftArrowVisibility={setLeftArrowVisibility} rightArrowVisibility={rightArrowVisibility} setRightArrowVisibility={setRightArrowVisibility} moveSliderLeft={moveSliderLeft} moveSliderRight={moveSliderRight} sliderPosition={sliderPosition} />
-        </>
-        <div className='results slider' style={leftPosition}>
-          {results && results.map((result) => (
-            <div key={result.id} onClick={getDetails} id={result.id}>
-              <Result title={result.title} image={result.image} id={result.id} details={details} shows={shows} getShows={getShows} userId={userId} loggedInUser={loggedInUser} setStreamingServices={setStreamingServices} streamingServices={streamingServices} getStreamResults={getStreamResults} fetchResults={fetchResults} getResults={getResults} />
-            </div>
-          ))}  
-        </div>
+          <Slider user={user} results={results} getResults={getResults} fetchResults={fetchResults} Link={Link} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} checkStreaming={checkStreaming} streamingServices={streamingServices} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} isLoading={isLoading} spinnerDegree={spinnerDegree} setSpinnerDegree={setSpinnerDegree} selectedResult={selectedResult} setSelectedResult={setSelectedResult} resizeResetSlider={resizeResetSlider} /> 
       </div>
     </div>
   )

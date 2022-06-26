@@ -22,9 +22,27 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/authenticated', function () {
+    if(Auth::user()){
+        $id = Auth::id();
+        $user = User::find($id);
+        return($user);
+    }
+    else{
+        return 'guest'; 
+    }
 });
+
+Route::get('/', function () {
+    $userCheck = Auth::user();
+    return view('welcome', ['userCheck' => $userCheck]);
+    // if(Auth::user()){
+    //     return 'user';
+    // }
+    // else{
+    //     return 'bitch';
+    // }
+})->name('home');
 
 Route::get('/{route}', function () {
     return view('welcome');
@@ -56,8 +74,8 @@ Route::post('/login', function(Request $request) {
 Route::post('/logout', function(Request $request){
     Auth::logout();
     $request->session()->invalidate();
-    $request->session()->regenerateToken(); 
-    return redirect('/');
+    $request->session()->regenerateToken();
+    return redirect()->route('home');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

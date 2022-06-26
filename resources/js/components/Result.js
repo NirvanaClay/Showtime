@@ -1,115 +1,117 @@
-// import '../styles/result.css'
+import { useState, useEffect } from 'react'
+import SeriesList from './SeriesList';
 
 const $ = require( "jquery" );
 
 const axios = require("axios");
 
-const Result = ({ title, image, id, details, getShows, shows, user, loggedInUser, setStreamingServices, streamingServices, getStreamResults, getResults, fetchResults }) => {
+const Result = ({ title, image, id, user, streamingServices, getResults, checkStreaming, showType, streamingId, noStreaming, series, getSeries, movies, getMovies, selectedResult, isLoading, spinnerDegree, setSpinnerDegree }) => {
 
-  console.log("id is " + id)
   const myShow = async (e) => {
     e.preventDefault();
+    showType = showType.toLowerCase()
     const data = {
       title: title,
       image_url: image,
-      user_id: loggedInUser.id
+      imdb_id: id,
+      show_type: showType
     } 
     console.log("Data is:")
     console.log(data)
     await axios.post('api/shows', data)
     .then(function(response){
-      getShows([...shows, {
-        title: title,
-        image_url: image,
-        id: response.data
-      }])
-      getResults([])
+      console.log("response from .then of myShow is:")
+      console.log(response)
+      if(showType == 'series'){
+        console.log("Knows showType is series.")
+        const seriesCheck = series.some(show => {
+          return show.id == response.data
+          // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+          // console.log(movie.id)
+        })
+        if(seriesCheck){
+          console.log("There are duplicates.")
+          return
+        }
+        else{
+          console.log("There are not duplicates.")
+          getSeries([...series, {
+            title: title,
+            image_url: image,
+            id: response.data,
+            imdb_id: id,
+            show_type: showType
+          }])
+        }
+      }
+      else if(showType == 'movie'){
+        console.log("Knows showType is movie")
+        console.log("response.data is:")
+        console.log(response.data)
+        const moviesCheck = movies.some(movie => {
+          return movie.id == response.data
+          // console.log("Inside of some function, movie.id, which we're comparing to response.data, is:")
+          // console.log(movie.id)
+        })
+        if(moviesCheck){
+          console.log("There are duplicates.")
+          return
+        }
+        else{
+          console.log("There are not duplicates.")
+          getMovies([...movies, {
+            title: title,
+            image_url: image,
+            id: response.data,
+            imdb_id: id,
+            show_type: showType
+          }])
+        }
+      }
     }).catch((e) => {
       console.log(e)
     })
   }
 
-  const checkStreaming = async (e) => {
-    e.preventDefault()
-    console.log(`Keyword for stream check is ${title}`)
-    // const streamLocations=[]
-    let showToCheck = null
-    let results = []
-    const streamingServicesList=[
-      'peacock',
-      'netflix',
-      'hulu',
-      'prime',
-      'disney', 
-      'hbo'
-    ]
-    for(let i=0; i < streamingServicesList.length; i++){
-      axios.get('https://streaming-availability.p.rapidapi.com/search/basic', {
-        params: {
-          country: 'us',
-          // service: 'netflix',
-          service: streamingServicesList[i],
-          type: 'series',
-          // genre: '18',
-          // page: '1',
-          output_language: 'en',
-          language: 'en',
-          keyword: `${title}`
-        },
-        headers: {
-          'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com',
-          'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90'
-        }
-      }).then(res =>{
-        if(res.data.results.length > 0){
-          for(let result of res.data.results){
-            if(result.imdbID == id){
-              showToCheck = result
-              console.log("Show to check info:")
-              console.log(showToCheck)
-              console.log(result)
-            }
-            console.log("After confirming show to check:")
-            console.log(showToCheck)
-            if(showToCheck !== null){
-              for(let key of Object.keys(showToCheck.streamingInfo)){
-                results.push(key)
-              }
-            }
-          }
-          results = [...new Set(results)]
-          const usableResults = results.filter(result => streamingServicesList.includes(result))
-          if(results.length > 0){
-            getStreamResults(usableResults)
-          }
-          // else{
-          //   getStreamResults("Not currently available through streaming.")
-          // }
-        }
-        else{
-          getStreamResults("Not currently available through streaming.")
-        }
-      })
-      .catch("error")
+  useEffect(() => {
+    if(isLoading){
+      const interval = setInterval(() => {
+        setSpinnerDegree(spinnerDegree + 90)
+        console.log("set spinner degree, which should be:")
+        console.log(spinnerDegree + 90)
+      }, 1);
+      return () => clearInterval(interval);
     }
-    console.log("This should be after loop.")
-  }
+    else{
+
+    }
+  }, [spinnerDegree, isLoading]);
 
   return (
-    <div className='result'>
-      <h2>{title}</h2>
-      <img src={image}></img>
-      <p>{details}</p>
-      <form onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
-        <input type ='hidden' name='title' value={title} className='title' />
-        <input type ='hidden' name='image_url' value={image} className='image_url' />
-        <input type ='hidden' name='user_id' value={loggedInUser ? loggedInUser.id : 0} className='user_id' />
+    <div id={id} className={`result ${selectedResult && 'single'}`}>
+      <h2 id={id}>{title}</h2>
+      <img id={id} src={image}></img>
+      {streamingId == id &&
+        <div className={`loading ${isLoading && 'visible'}`}>
+          <i className="fas fa-spinner" style={{transform: `rotate(${spinnerDegree}deg)`}}></i>
+        </div>
+      }
+      {streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming &&
+      <h4>Streaming on:</h4>}
+      {streamingServices.length > 0 && streamingId == id && streamingServices.map((service, key) => (
+        <img key={key} src={service} className='streaming-image'></img>
+      ))}
+      <form id={id} onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
+        <input type ='hidden' name='title' value={title} />
+        <input type ='hidden' name='image_url' value={image} />
+        <input type ='hidden' name='imdb_id' value={id} />
+        <input type ='hidden' name='sbow_type' value={showType} />
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        {loggedInUser && 
-          <input type='submit' className='order' name='addShowBtn' value='Add Show' />
+        {user && 
+          <input id={id} type='submit' className='order' name='addShowBtn' value='Add Show' />
         }
       </form>
-      <button className='streamCheck' onClick={checkStreaming}>Stream Check</button>
+      <button id={id} className='streamCheck' show_type={showType} imdb_id={id} title={title} onClick={checkStreaming}>Stream Check</button>
     </div>
   )
 }
