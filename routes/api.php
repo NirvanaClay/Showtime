@@ -24,7 +24,6 @@ Route::post('/login', function(Request $request) {
     ]);
 
     if (Auth::attempt($credentials)) {
-        return $credentials;
         $request->session()->regenerate();
     };
 
