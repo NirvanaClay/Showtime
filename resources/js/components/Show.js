@@ -4,7 +4,7 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree }) => {
 
   const [stateRating, setStateRating] = useState([rating])
   const [previewRating, setPreviewRating] = useState(rating)
@@ -79,6 +79,20 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       }
     }
   }
+
+  useEffect(() => {
+    if(isLoading){
+      const interval = setInterval(() => {
+        setSpinnerDegree(spinnerDegree + 90)
+        console.log("set spinner degree, which should be:")
+        console.log(spinnerDegree + 90)
+      }, 1);
+      return () => clearInterval(interval);
+    }
+    else{
+
+    }
+  }, [spinnerDegree, isLoading]);
 
   return (
     <div className='show'>

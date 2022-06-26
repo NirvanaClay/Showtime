@@ -61,7 +61,8 @@
       display: flex;
     }
     .shows{
-      width: 900px;
+      width: 100%;
+      // width: 900px;
       // height: 100%;
       display: flex;
       position: relative;
@@ -88,6 +89,7 @@
         }
         .visible{
           display: block;
+          margin-top: 10px;
         }
         h4{
           font-size: 1.3rem;
@@ -100,13 +102,13 @@
           display: block;
           width: 120px;
           height: 60px;
-          margin: 0 auto;
+          margin: 0 auto 10px auto;
         }
         .stars-container{
           width: 150px;
           margin: 10px auto;
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           .fa-star{
             font-size: 1.5rem;
             color: #ffe600;
@@ -141,6 +143,114 @@
           background: white;
           color: black;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 992px){
+  .show-index{
+    padding: 10px 20px;
+    .shows__container{
+      width: 750px;
+      .left-arrow__container{
+        left: 25px;
+      }
+      .right-arrow__container{
+        right: 25px;
+      }
+      .inverted{
+        color: white;
+      }
+      .inverted-bg{
+        background:rgba(0, 0, 0, 0.5)
+      }
+      .shows{
+        .show{
+          width: 250px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 768px){
+  .show-index{
+    .shows__container{
+      width: 600px;
+      .shows{
+        .show{
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px){
+  .show-index{
+    padding: 10px;
+    .shows__container{
+      width: 320px;
+      .left-arrow__container{
+        top: 175px;
+        left: 5px;
+        width: 40px;
+        height: 40px;
+        .left-arrow{
+          font-size: 26px;
+        }
+      }
+      .right-arrow__container{
+        top: 175px;
+        right: 5px;
+        width: 40px;
+        height: 40px;
+        .right-arrow{
+          font-size: 26px;
+        }
+      }
+      .shows{
+        .show{
+          width: 160px;
+          img{
+            width: 100px;
+            height: 150px;
+          }
+          .stars-container{
+            .fa-star{
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 320px){
+  .show-index{
+    .shows__container{
+      width: 240px;
+      // .left-arrow__container{
+      //   left: -5px;
+      // }
+      // .right-arrow__container{
+      //   right: -5px;
+      // }
+      .shows{
+        .show{
+          width: 120px;
+          img{
+            width: 80px;
+            height: 120px;
+          }
+          .stars-container{
+            width: 110px;
+            .fa-star{
+              font-size: 1.1rem;
+            }
+          }
         }
       }
     }

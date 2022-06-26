@@ -4,7 +4,7 @@
   margin: 0 auto;
   text-align: center;
   h1{
-    margin-bottom: 20px;
+    margin: 10px 0 20px 0;
     font-size: 3rem;
     color: white;
   }
@@ -13,8 +13,9 @@
     justify-content: center;
     .field{
       display: block;
+      position: relative;
       margin: 0 auto;
-      // width: 300px;
+      width: 300px;
       label{
         display: block;
         font-size: 1.2rem;
@@ -28,6 +29,15 @@
         border: none;
         border-radius: 5px;
         font-size: 1.1rem;
+      }
+      .visibility-container{
+        display: flex;
+        i{
+          position: absolute;
+          right: -10px;
+          top: 40px;
+          font-size: 18px;
+        }
       }
     }
     input[type='submit']{
@@ -44,3 +54,35 @@
     }
   }
 }
+
+@media(max-width: 768px){
+  .register{
+    form{
+      .field{
+        input[type='text'], input[type='password']{
+        }
+      }
+    }
+  }
+}
+@media(max-width: 480px){
+  .register{
+    form{
+      h1{
+        margin-top: 10px;
+      }
+      .field{
+        width: 175px;
+        input[type='text'], input[type='password']{
+          width: 175px;
+        }
+        .visibility-container{
+          i{
+            right: -40px;
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 320px){}

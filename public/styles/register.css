@@ -6,7 +6,7 @@
 }
 
 .register h1 {
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
   font-size: 3rem;
   color: white;
 }
@@ -19,7 +19,9 @@
 
 .register form .field {
   display: block;
+  position: relative;
   margin: 0 auto;
+  width: 300px;
 }
 
 .register form .field label {
@@ -38,6 +40,19 @@
   font-size: 1.1rem;
 }
 
+.register form .field .visibility-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.register form .field .visibility-container i {
+  position: absolute;
+  right: -10px;
+  top: 40px;
+  font-size: 18px;
+}
+
 .register form input[type='submit'] {
   width: 90px;
   height: 45px;
@@ -49,5 +64,20 @@
   background: black;
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .register form h1 {
+    margin-top: 10px;
+  }
+  .register form .field {
+    width: 175px;
+  }
+  .register form .field input[type='text'], .register form .field input[type='password'] {
+    width: 175px;
+  }
+  .register form .field .visibility-container i {
+    right: -40px;
+  }
 }
 /*# sourceMappingURL=register.css.map */

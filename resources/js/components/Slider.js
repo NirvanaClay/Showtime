@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Show from './Show'
 import Result from './Result'
 
-const Slider = ({ user, fetchResults, results, getResults, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, showRatings, setShowRatings, isLoading, spinnerDegree, setSpinnerDegree }) => {
+const Slider = ({ user, fetchResults, results, getResults, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, showRatings, setShowRatings, isLoading, spinnerDegree, setSpinnerDegree, selectedResult, setSelectedResult, resizeResetSlider }) => {
 
   const [leftArrowVisibility, setLeftArrowVisibility] = useState(false)
   const [rightArrowVisibility, setRightArrowVisibility] = useState(false)
@@ -14,19 +14,79 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
   const [rightHover, setRightHover] = useState(false)
   const [leftHover, setLeftHover] = useState(false)
 
+  const [dimensions, setDimensions] = useState({ 
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+
+  useEffect(() => {
+    function handleResize() {
+      console.log("Running resize screen effect.")
+      resizeResetSlider()
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })  
+    }
+    window.addEventListener('resize', handleResize)
+    return _ => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
+    
+
+  const large = window.matchMedia('(max-width: 992px)');
+  const medium = window.matchMedia('(max-width: 768px)');
+  const small = window.matchMedia('(max-width: 576px)');
+  const xSmall = window.matchMedia('(max-width: 320px)');
+
+  let sliderWidth
+  let showsPerPage
+
+  if(large.matches && !medium.matches && !small.matches && !xSmall.matches){
+    sliderWidth = 750
+    showsPerPage = 3
+    console.log("large matches, with a sliderWidth of:")
+    console.log(sliderWidth)
+  }
+  else if (medium.matches && !small.matches && !xSmall.matches){
+    sliderWidth=600
+    showsPerPage = 3
+    console.log("medium matches, with a sliderWidth of:")
+    console.log(sliderWidth)
+  } 
+  else if(small.matches && !xSmall.matches){
+    sliderWidth=320;
+    showsPerPage = 2
+    console.log("small matches, with a sliderWidth of:")
+    console.log(sliderWidth)
+  } 
+  else if(xSmall.matches){
+    sliderWidth=240; 
+    showsPerPage = 2
+    console.log("xSmall matches, with a sliderWidth of:")
+    console.log(sliderWidth)
+  }  
+  else {
+    sliderWidth=900;
+    showsPerPage = 4
+    console.log("Desktop matches, with a sliderWidth of:")
+    console.log(sliderWidth)
+  }
+
   useEffect(() => {
     if(shows){
       shows.sort((a, b) => a.title.localeCompare(b.title))
       console.log("shows.length is:")
       console.log(shows.length)
       const showLength = shows.length
-      if(showLength % 4 != 0){
-        setTotalPages(Math.floor(shows.length / 4) + 1)
+      if(showLength % showsPerPage != 0){
+        setTotalPages(Math.floor(shows.length / showsPerPage) + 1)
       }
       else{
-        setTotalPages(Math.floor(shows.length / 4))
+        setTotalPages(Math.floor(shows.length / showsPerPage))
       }
-      setCurrentPage((sliderPosition / -900) + 1)
+      setCurrentPage((sliderPosition / -sliderWidth) + 1)
       console.log("totalPages is:")
       console.log(totalPages)
       console.log("currentPage is:")
@@ -51,8 +111,14 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
     if(results){
       console.log("results.length is:")
       console.log(results.length)
-      setTotalPages(Math.floor(results.length / 4) + 1)
-      setCurrentPage((sliderPosition / -900) + 1)
+      const showLength = results.length
+      if(showLength % showsPerPage != 0){
+        setTotalPages(Math.floor(results.length / showsPerPage) + 1)
+      }
+      else{
+        setTotalPages(Math.floor(results.length / showsPerPage))
+      }
+      setCurrentPage((sliderPosition / -sliderWidth) + 1)
       console.log("totalPages is:")
       console.log(totalPages)
       console.log("currentPage is:")
@@ -83,22 +149,21 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
   }
 
   const moveSliderLeft = (e) => {
-    setSliderPosition(sliderPosition + 900)
+    setSliderPosition(sliderPosition + sliderWidth)
   }
 
   const moveSliderRight = (e) => {
     console.log("Moving slider right.")
-    console.log("Setting new value as sliderPosition - 900, which is:")
-    console.log(sliderPosition - 900)
-    setSliderPosition(sliderPosition - 900)
+    console.log("With a sliderWidth of:")
+    console.log(sliderWidth)
+    setSliderPosition(sliderPosition - sliderWidth)
   }
   let seriesSliderPosition = {
     left: sliderPosition + 'px'
   }
 
-  const [selectedResult, setSelectedResult] = useState(false)
-
   const chooseResult = (e) => {
+    setSliderPosition(0)
     setSelectedResult(true)
     getResults(results.filter((result) => result.id == e.target.id))
   }

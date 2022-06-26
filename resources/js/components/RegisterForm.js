@@ -1,7 +1,8 @@
 const axios = require("axios");
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-const RegisterForm = ({ setUser, setLoginStatus }) => {
+const RegisterForm = ({ setUser, setLoginStatus, passwordVisibility, setPasswordVisibility, changePasswordVisibility }) => {
   const navigate = useNavigate();
 
   const addUser = async (e) => {
@@ -39,6 +40,11 @@ const RegisterForm = ({ setUser, setLoginStatus }) => {
     navigate('/')
   }
 
+  useEffect(() => {
+    console.log("passwordVisibility is:")
+    console.log(passwordVisibility)
+  }, [passwordVisibility])
+
   return (
     <div className='register'>
       <h1>Register</h1>
@@ -49,11 +55,14 @@ const RegisterForm = ({ setUser, setLoginStatus }) => {
         </div>
         <div className='field'>
           <label htmlFor='password'>Password</label>
-          <input type ='password' name='password' autoComplete='off' />
+         <input type = {`${!passwordVisibility ? 'password' : 'text'}`} name='password'  autoComplete='off' />
+          <div className='visibility-container'>
+            <i className={`fas fa-eye${!passwordVisibility ? '-slash' : ''}`} onClick={changePasswordVisibility}></i>
+          </div>
         </div>
         <div className='field'>
           <label htmlFor='password_confirmation'>Confirm Password</label>
-          <input type ='password' name='password_confirmation' autoComplete='off' />
+          <input type = {`${!passwordVisibility ? 'password' : 'text'}`} name='password'  autoComplete='off' />
         </div>
         <input type='submit' value='Register' />
       </form>

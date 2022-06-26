@@ -84,6 +84,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 10px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -100,7 +101,6 @@
 
 .form .results-container {
   width: 900px;
-  height: 450px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -167,8 +167,7 @@
 }
 
 .form .results-container .shows {
-  width: 900px;
-  height: 550px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -183,6 +182,8 @@
   width: 225px;
   margin: 0 auto;
   text-align: center;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .form .results-container .shows .result h2 {
@@ -208,7 +209,7 @@
   display: block;
   width: 120px;
   height: 60px;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
 }
 
 .form .results-container .shows .result input[type='submit'] {
@@ -259,5 +260,90 @@
 .form .results-container .shows .single {
   width: 900px;
   margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .form {
+    padding: 0;
+  }
+  .form .results-container {
+    width: 750px;
+  }
+  .form .results-container .left-arrow__container {
+    left: 25px;
+  }
+  .form .results-container .right-arrow__container {
+    right: 25px;
+  }
+  .form .results-container .inverted {
+    color: white;
+  }
+  .form .results-container .inverted-bg {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .form .results-container .shows .result {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form h1 {
+    font-size: 2rem;
+  }
+  .form form input[type='text'] {
+    width: 200px;
+  }
+  .form .results-container {
+    width: 600px;
+  }
+  .form .results-container .shows .result {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 10px;
+  }
+  .form h1 {
+    width: 80%;
+  }
+  .form .results-container {
+    width: 300px;
+  }
+  .form .results-container .left-arrow__container {
+    width: 40px;
+    height: 40px;
+  }
+  .form .results-container .left-arrow__container .left-arrow {
+    font-size: 26px;
+  }
+  .form .results-container .right-arrow__container {
+    width: 40px;
+    height: 40px;
+  }
+  .form .results-container .right-arrow__container .right-arrow {
+    font-size: 26px;
+  }
+  .form .results-container .shows .result {
+    width: 150px;
+  }
+  .form .results-container .shows .result img {
+    width: 100px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 320px) {
+  .form .results-container {
+    width: 200px;
+  }
+  .form .results-container .shows .result {
+    width: 100px;
+  }
+  .form .results-container .shows .result img {
+    width: 75px;
+    height: 125px;
+  }
 }
 /*# sourceMappingURL=form.css.map */

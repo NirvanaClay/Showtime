@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="{{ asset('styles/login.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/form.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/header.css') }}"> 
-        <link rel="stylesheet" href="{{ asset('styles/result.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/shows.css') }}"> 
         <link rel="stylesheet" href="{{ asset('styles/register.css') }}"> 
 
