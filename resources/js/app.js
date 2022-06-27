@@ -310,6 +310,9 @@ const App = () => {
                 setIsLoading(false)
                 validResponses = ([...new Set(validResponses)])
               }
+              else{
+                setIsLoading(false)
+              }
             }
           }
         }
