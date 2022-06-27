@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes, Switch, BrowserRouter } from 'r
 
 import './index.css';
 import App from './app';
-import RegisterForm from './components/RegisterForm.js'
 
 import RegisterForm from './components/RegisterForm';
 import reportWebVitals from './reportWebVitals';
