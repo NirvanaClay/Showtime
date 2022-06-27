@@ -41,10 +41,11 @@
       }
     }
     input[type='submit']{
-      padding: 90px 45px;
-      // width: 90px;
-      // height: 45px;
-      display: block;
+      width: 90px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 10px auto;
       border: none;
       border-radius: 10px;
