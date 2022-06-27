@@ -16,10 +16,14 @@
   button{
     color: white;
     text-align: center;
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   input[type='submit']{
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
