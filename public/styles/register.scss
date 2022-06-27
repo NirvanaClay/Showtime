@@ -41,8 +41,9 @@
       }
     }
     input[type='submit']{
-      width: 90px;
-      height: 45px;
+      padding: 10px 20px;
+      // width: 90px;
+      // height: 45px;
       display: block;
       margin: 10px auto;
       border: none;
@@ -56,15 +57,16 @@
 }
 
 @media(max-width: 768px){
-  .register{
-    form{
-      .field{
-        input[type='text'], input[type='password']{
-        }
-      }
-    }
-  }
+  // .register{
+  //   form{
+  //     .field{
+  //       input[type='text'], input[type='password']{
+  //       }
+  //     }
+  //   }
+  // }
 }
+
 @media(max-width: 480px){
   .register{
     form{
