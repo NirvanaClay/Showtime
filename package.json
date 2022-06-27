@@ -1,7 +1,6 @@
 {
     "private": true,
     "scripts": {
-        "build": "webpack --mode production",
         "dev": "npm run development",
         "development": "mix",
         "watch": "npm run development -- --watch",
@@ -31,7 +30,6 @@
         "@types/react-router-dom": "^5.3.3",
         "heroku": "^7.60.2",
         "jquery": "^3.6.0",
-        "react-router-dom": "^6.2.2",
-        "react-scripts": "^5.0.1"
+        "react-router-dom": "^6.2.2"
     }
 }

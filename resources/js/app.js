@@ -318,6 +318,7 @@ const App = () => {
       if(validResponses.length == 0){
         console.log("There are no validResponses")
         setStreamingServices([noStreaming])
+        setIsLoading(false)
       }
       else{
         console.log("validResponses are:")
