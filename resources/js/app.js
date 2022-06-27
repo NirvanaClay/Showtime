@@ -270,10 +270,10 @@ const App = () => {
       let validResponses = []
       let finalArray
       let finalResults
-      console.log("Before final loop/check, responses are:")
-      console.log(responses)
       console.log('FUCKING HELLO')
       console.log("Setting isLoading to false.")
+      console.log("Before final loop/check, responses are:")
+      console.log(responses)
       setIsLoading(false)
       for(let response of responses){
         if(response){
