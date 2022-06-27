@@ -48,6 +48,8 @@ const App = () => {
   // console.log("userCheck is:")
   // console.log(userCheck)
 
+  console.log("In app, hello hello.")
+
   useEffect(() => {
     console.log("Check auth status in app effect.")
     axios.get('/authenticated')
