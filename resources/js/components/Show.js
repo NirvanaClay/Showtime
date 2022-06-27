@@ -86,7 +86,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
         setSpinnerDegree(spinnerDegree + 90)
         console.log("set spinner degree, which should be:")
         console.log(spinnerDegree + 90)
-      }, 1);
+      }, 100);
       return () => clearInterval(interval);
     }
     else{
