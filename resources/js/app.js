@@ -272,6 +272,8 @@ const App = () => {
       let finalResults
       console.log("Before final loop/check, responses are:")
       console.log(responses)
+      console.log("Setting isLoading to false.")
+      setIsLoading(false)
       for(let response of responses){
         if(response){
           if(response.length == 0){
@@ -306,13 +308,8 @@ const App = () => {
                   singleResponse = "../../../img/peacock-logo.jpg"
                   validResponses.push(singleResponse)
                 }
-                console.log("Setting isLoading to false.")
-                setIsLoading(false)
+
                 validResponses = ([...new Set(validResponses)])
-              }
-              else{
-                console.log("setting isLoading to false.")
-                setIsLoading(false)
               }
             }
           }
