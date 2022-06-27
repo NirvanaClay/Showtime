@@ -311,6 +311,7 @@ const App = () => {
                 validResponses = ([...new Set(validResponses)])
               }
               else{
+                console.log("setting isLoading to false.")
                 setIsLoading(false)
               }
             }
