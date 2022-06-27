@@ -3584,7 +3584,7 @@
                 "symfony/serializer": "^4.4|^5.0|^6.0"
             },
             "bin": [
-                "src/bin/patch-type-declarations"
+                "Resources/bin/patch-type-declarations"
             ],
             "type": "library",
             "autoload": {
@@ -4496,7 +4496,7 @@
                     "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
                 },
                 "classmap": [
-                    "src/stubs"
+                    "Resources/stubs"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4736,7 +4736,7 @@
                     "Symfony\\Polyfill\\Php73\\": ""
                 },
                 "classmap": [
-                    "src/stubs"
+                    "Resources/stubs"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4815,7 +4815,7 @@
                     "Symfony\\Polyfill\\Php80\\": ""
                 },
                 "classmap": [
-                    "src/stubs"
+                    "Resources/stubs"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4898,7 +4898,7 @@
                     "Symfony\\Polyfill\\Php81\\": ""
                 },
                 "classmap": [
-                    "src/stubs"
+                    "Resources/stubs"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5214,7 +5214,7 @@
                     "Symfony\\Component\\String\\": ""
                 },
                 "files": [
-                    "src/functions.php"
+                    "Resources/functions.php"
                 ],
                 "exclude-from-classmap": [
                     "/Tests/"
@@ -5316,7 +5316,7 @@
             "type": "library",
             "autoload": {
                 "files": [
-                    "src/functions.php"
+                    "Resources/functions.php"
                 ],
                 "psr-4": {
                     "Symfony\\Component\\Translation\\": ""
@@ -5474,12 +5474,12 @@
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
             "bin": [
-                "src/bin/var-dump-server"
+                "Resources/bin/var-dump-server"
             ],
             "type": "library",
             "autoload": {
                 "files": [
-                    "src/functions/dump.php"
+                    "Resources/functions/dump.php"
                 ],
                 "psr-4": {
                     "Symfony\\Component\\VarDumper\\": ""
@@ -8053,7 +8053,7 @@
                     "email": "sebastian@phpunit.de"
                 }
             ],
-            "description": "Provides a list of PHP built-in functions that operate on src",
+            "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/resource-operations/issues",

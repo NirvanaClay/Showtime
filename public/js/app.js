@@ -2164,9 +2164,9 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./src/js/Home.js":
+/***/ "./resources/js/Home.js":
 /*!******************************!*\
-  !*** ./src/js/Home.js ***!
+  !*** ./resources/js/Home.js ***!
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2179,13 +2179,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_Form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Form.js */ "./src/js/components/Form.js");
-/* harmony import */ var _components_StreamService_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/StreamService.js */ "./src/js/components/StreamService.js");
-/* harmony import */ var _components_Result_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Result.js */ "./src/js/components/Result.js");
-/* harmony import */ var _components_ShowUser_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ShowUser.js */ "./src/js/components/ShowUser.js");
-/* harmony import */ var _components_ShowGuest_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ShowGuest.js */ "./src/js/components/ShowGuest.js");
-/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./src/js/components/RegisterForm.js");
-/* harmony import */ var _components_Greeting_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Greeting.js */ "./src/js/components/Greeting.js");
+/* harmony import */ var _components_Form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Form.js */ "./resources/js/components/Form.js");
+/* harmony import */ var _components_StreamService_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/StreamService.js */ "./resources/js/components/StreamService.js");
+/* harmony import */ var _components_Result_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Result.js */ "./resources/js/components/Result.js");
+/* harmony import */ var _components_ShowUser_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ShowUser.js */ "./resources/js/components/ShowUser.js");
+/* harmony import */ var _components_ShowGuest_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ShowGuest.js */ "./resources/js/components/ShowGuest.js");
+/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./resources/js/components/RegisterForm.js");
+/* harmony import */ var _components_Greeting_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Greeting.js */ "./resources/js/components/Greeting.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -2267,9 +2267,9 @@ var Home = function Home(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/Routing.js":
+/***/ "./resources/js/Routing.js":
 /*!*********************************!*\
-  !*** ./src/js/Routing.js ***!
+  !*** ./resources/js/Routing.js ***!
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2282,8 +2282,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./src/js/Home.js");
-/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./src/js/components/RegisterForm.js");
+/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./resources/js/Home.js");
+/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./resources/js/components/RegisterForm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -2311,9 +2311,9 @@ var Routing = function Routing() {
 
 /***/ }),
 
-/***/ "./src/js/app.js":
+/***/ "./resources/js/app.js":
 /*!*****************************!*\
-  !*** ./src/js/app.js ***!
+  !*** ./resources/js/app.js ***!
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2328,17 +2328,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Routing_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Routing.js */ "./src/js/Routing.js");
-/* harmony import */ var _Home_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Home.js */ "./src/js/Home.js");
-/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Header.js */ "./src/js/components/Header.js");
-/* harmony import */ var _components_Form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Form.js */ "./src/js/components/Form.js");
-/* harmony import */ var _components_Result_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Result.js */ "./src/js/components/Result.js");
-/* harmony import */ var _components_SeriesList_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/SeriesList.js */ "./src/js/components/SeriesList.js");
-/* harmony import */ var _components_MoviesList_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/MoviesList.js */ "./src/js/components/MoviesList.js");
-/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./src/js/components/RegisterForm.js");
-/* harmony import */ var _components_LoginForm_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/LoginForm.js */ "./src/js/components/LoginForm.js");
-/* harmony import */ var _components_LogoutForm_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/LogoutForm.js */ "./src/js/components/LogoutForm.js");
-/* harmony import */ var _components_Dashboard_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Dashboard.js */ "./src/js/components/Dashboard.js");
+/* harmony import */ var _Routing_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Routing.js */ "./resources/js/Routing.js");
+/* harmony import */ var _Home_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Home.js */ "./resources/js/Home.js");
+/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Header.js */ "./resources/js/components/Header.js");
+/* harmony import */ var _components_Form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Form.js */ "./resources/js/components/Form.js");
+/* harmony import */ var _components_Result_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Result.js */ "./resources/js/components/Result.js");
+/* harmony import */ var _components_SeriesList_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/SeriesList.js */ "./resources/js/components/SeriesList.js");
+/* harmony import */ var _components_MoviesList_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/MoviesList.js */ "./resources/js/components/MoviesList.js");
+/* harmony import */ var _components_RegisterForm_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/RegisterForm.js */ "./resources/js/components/RegisterForm.js");
+/* harmony import */ var _components_LoginForm_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/LoginForm.js */ "./resources/js/components/LoginForm.js");
+/* harmony import */ var _components_LogoutForm_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/LogoutForm.js */ "./resources/js/components/LogoutForm.js");
+/* harmony import */ var _components_Dashboard_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Dashboard.js */ "./resources/js/components/Dashboard.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
@@ -3065,9 +3065,9 @@ if (document.getElementById('root')) {
 
 /***/ }),
 
-/***/ "./src/js/components/Dashboard.js":
+/***/ "./resources/js/components/Dashboard.js":
 /*!**********************************************!*\
-  !*** ./src/js/components/Dashboard.js ***!
+  !*** ./resources/js/components/Dashboard.js ***!
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3095,9 +3095,9 @@ var Dashboard = function Dashboard(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/Form.js":
+/***/ "./resources/js/components/Form.js":
 /*!*****************************************!*\
-  !*** ./src/js/components/Form.js ***!
+  !*** ./resources/js/components/Form.js ***!
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3109,8 +3109,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Result_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result.js */ "./src/js/components/Result.js");
-/* harmony import */ var _Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Slider */ "./src/js/components/Slider.js");
+/* harmony import */ var _Result_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result.js */ "./resources/js/components/Result.js");
+/* harmony import */ var _Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Slider */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -3266,9 +3266,9 @@ var Form = function Form(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/Greeting.js":
+/***/ "./resources/js/components/Greeting.js":
 /*!*********************************************!*\
-  !*** ./src/js/components/Greeting.js ***!
+  !*** ./resources/js/components/Greeting.js ***!
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3277,8 +3277,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ShowUser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowUser.js */ "./src/js/components/ShowUser.js");
-/* harmony import */ var _ShowGuest_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowGuest.js */ "./src/js/components/ShowGuest.js");
+/* harmony import */ var _ShowUser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowUser.js */ "./resources/js/components/ShowUser.js");
+/* harmony import */ var _ShowGuest_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowGuest.js */ "./resources/js/components/ShowGuest.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -3296,9 +3296,9 @@ var Greeting = function Greeting(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/Header.js":
+/***/ "./resources/js/components/Header.js":
 /*!*******************************************!*\
-  !*** ./src/js/components/Header.js ***!
+  !*** ./resources/js/components/Header.js ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3377,9 +3377,9 @@ var Header = function Header(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/LoginForm.js":
+/***/ "./resources/js/components/LoginForm.js":
 /*!**********************************************!*\
-  !*** ./src/js/components/LoginForm.js ***!
+  !*** ./resources/js/components/LoginForm.js ***!
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3518,9 +3518,9 @@ var LoginForm = function LoginForm(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/LogoutForm.js":
+/***/ "./resources/js/components/LogoutForm.js":
 /*!***********************************************!*\
-  !*** ./src/js/components/LogoutForm.js ***!
+  !*** ./resources/js/components/LogoutForm.js ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3591,9 +3591,9 @@ var LogoutForm = function LogoutForm(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/MoviesList.js":
+/***/ "./resources/js/components/MoviesList.js":
 /*!***********************************************!*\
-  !*** ./src/js/components/MoviesList.js ***!
+  !*** ./resources/js/components/MoviesList.js ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3605,7 +3605,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./src/js/components/Slider.js");
+/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -3667,9 +3667,9 @@ var MoviesList = function MoviesList(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/RegisterForm.js":
+/***/ "./resources/js/components/RegisterForm.js":
 /*!*************************************************!*\
-  !*** ./src/js/components/RegisterForm.js ***!
+  !*** ./resources/js/components/RegisterForm.js ***!
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3820,9 +3820,9 @@ var RegisterForm = function RegisterForm(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/Result.js":
+/***/ "./resources/js/components/Result.js":
 /*!*******************************************!*\
-  !*** ./src/js/components/Result.js ***!
+  !*** ./resources/js/components/Result.js ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3832,7 +3832,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _SeriesList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SeriesList */ "./src/js/components/SeriesList.js");
+/* harmony import */ var _SeriesList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SeriesList */ "./resources/js/components/SeriesList.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -4051,9 +4051,9 @@ var Result = function Result(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/SeriesList.js":
+/***/ "./resources/js/components/SeriesList.js":
 /*!***********************************************!*\
-  !*** ./src/js/components/SeriesList.js ***!
+  !*** ./resources/js/components/SeriesList.js ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4065,7 +4065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./src/js/components/Slider.js");
+/* harmony import */ var _Slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slider.js */ "./resources/js/components/Slider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4126,9 +4126,9 @@ var SeriesList = function SeriesList(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/Show.js":
+/***/ "./resources/js/components/Show.js":
 /*!*****************************************!*\
-  !*** ./src/js/components/Show.js ***!
+  !*** ./resources/js/components/Show.js ***!
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4502,9 +4502,9 @@ var Show = function Show(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/ShowGuest.js":
+/***/ "./resources/js/components/ShowGuest.js":
 /*!**********************************************!*\
-  !*** ./src/js/components/ShowGuest.js ***!
+  !*** ./resources/js/components/ShowGuest.js ***!
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4528,9 +4528,9 @@ var ShowGuest = function ShowGuest() {
 
 /***/ }),
 
-/***/ "./src/js/components/ShowUser.js":
+/***/ "./resources/js/components/ShowUser.js":
 /*!*********************************************!*\
-  !*** ./src/js/components/ShowUser.js ***!
+  !*** ./resources/js/components/ShowUser.js ***!
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4554,9 +4554,9 @@ var ShowUser = function ShowUser() {
 
 /***/ }),
 
-/***/ "./src/js/components/Slider.js":
+/***/ "./resources/js/components/Slider.js":
 /*!*******************************************!*\
-  !*** ./src/js/components/Slider.js ***!
+  !*** ./resources/js/components/Slider.js ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4566,8 +4566,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show */ "./src/js/components/Show.js");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result */ "./src/js/components/Result.js");
+/* harmony import */ var _Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show */ "./resources/js/components/Show.js");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Result */ "./resources/js/components/Result.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -4887,9 +4887,9 @@ var Slider = function Slider(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/components/StreamService.js":
+/***/ "./resources/js/components/StreamService.js":
 /*!**************************************************!*\
-  !*** ./src/js/components/StreamService.js ***!
+  !*** ./resources/js/components/StreamService.js ***!
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31441,7 +31441,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * // Use the `sourceURL` option to specify a custom sourceURL for the template.
      * var compiled = _.template('hello <%= user %>!', { 'sourceURL': '/basic/greeting.jst' });
      * compiled(data);
-     * // => Find the source of "greeting.jst" under the Sources tab or src panel of the web inspector.
+     * // => Find the source of "greeting.jst" under the Sources tab or Resources panel of the web inspector.
      *
      * // Use the `variable` option to ensure a with-statement isn't used in the compiled template.
      * var compiled = _.template('hi <%= data.user %>!', { 'variable': 'data' });
@@ -34499,7 +34499,7 @@ reservedProps.forEach(function (name) {
 // these aren't boolean attributes (they are coerced to strings).
 // Since these are SVG attributes, their attribute names are case-sensitive.
 
-['autoReverse', 'externalsrcRequired', 'focusable', 'preserveAlpha'].forEach(function (name) {
+['autoReverse', 'externalResourcesRequired', 'focusable', 'preserveAlpha'].forEach(function (name) {
   properties[name] = new PropertyInfoRecord(name, BOOLEANISH_STRING, false, // mustUseProperty
   name, // attributeName
   null, // attributeNamespace
@@ -37117,7 +37117,7 @@ var possibleStandardNames = {
   'enable-background': 'enableBackground',
   end: 'end',
   exponent: 'exponent',
-  externalsrcrequired: 'externalsrcRequired',
+  externalresourcesrequired: 'externalResourcesRequired',
   fill: 'fill',
   fillopacity: 'fillOpacity',
   'fill-opacity': 'fillOpacity',
@@ -66734,7 +66734,7 @@ function _extends() {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./src/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./public/sass/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
