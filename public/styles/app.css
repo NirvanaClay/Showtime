@@ -13,4 +13,9 @@
   background-repeat: no-repeat;
   color: white;
 }
+
+#root button {
+  color: white;
+  text-align: center;
+}
 /*# sourceMappingURL=app.css.map */
