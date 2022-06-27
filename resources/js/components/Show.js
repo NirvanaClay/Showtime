@@ -85,20 +85,20 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }
 
-  useEffect(() => {
-    if(isLoading){
-      console.log("ISLOADING IS TRUE.")
-      const interval = setInterval(() => {
-        setSpinnerDegree(spinnerDegree + 90)
-        console.log("set spinner degree, which should be:")
-        console.log(spinnerDegree + 90)
-      }, 100);
-      return () => clearInterval(interval);
-    }
-    else{
-      console.log("ISLOADING IS FALSE.")
-    }
-  }, [spinnerDegree, isLoading]);
+  // useEffect(() => {
+  //   if(isLoading){
+  //     console.log("ISLOADING IS TRUE.")
+  //     const interval = setInterval(() => {
+  //       setSpinnerDegree(spinnerDegree + 90)
+  //       console.log("set spinner degree, which should be:")
+  //       console.log(spinnerDegree + 90)
+  //     }, 100);
+  //     return () => clearInterval(interval);
+  //   }
+  //   else{
+  //     console.log("ISLOADING IS FALSE.")
+  //   }
+  // }, [spinnerDegree, isLoading]);
 
   return (
     <div className='show'>
