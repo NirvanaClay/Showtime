@@ -306,6 +306,7 @@ const App = () => {
                   singleResponse = "../../../img/peacock-logo.jpg"
                   validResponses.push(singleResponse)
                 }
+                console.log("Setting isLoading to false.")
                 setIsLoading(false)
                 validResponses = ([...new Set(validResponses)])
               }
@@ -318,7 +319,6 @@ const App = () => {
       if(validResponses.length == 0){
         console.log("There are no validResponses")
         setStreamingServices([noStreaming])
-        setIsLoading(false)
       }
       else{
         console.log("validResponses are:")
