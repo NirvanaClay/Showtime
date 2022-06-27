@@ -78,6 +78,8 @@ const App = () => {
 
   const [showType, setShowType] = useState('')
 
+  console.log("In app, FUCK YOU!")
+
   useEffect((e) => {
     console.log("On home effect user is " + user)
     const fetchShows = async () => {
