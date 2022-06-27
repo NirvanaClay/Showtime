@@ -87,6 +87,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   useEffect(() => {
     if(isLoading){
+      console.log("ISLOADING IS TRUE.")
       const interval = setInterval(() => {
         setSpinnerDegree(spinnerDegree + 90)
         console.log("set spinner degree, which should be:")
@@ -95,7 +96,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       return () => clearInterval(interval);
     }
     else{
-
+      console.log("ISLOADING IS FALSE.")
     }
   }, [spinnerDegree, isLoading]);
 
