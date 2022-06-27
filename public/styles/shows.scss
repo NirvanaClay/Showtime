@@ -109,13 +109,16 @@
           margin: 10px auto;
           display: flex;
           justify-content: center;
-          .fa-star{
-            font-size: 1.5rem;
-            color: #ffe600;
-          }
-          button{
+          form{
             display: flex;
-            all: unset;
+            .fa-star{
+              font-size: 1.5rem;
+              color: #ffe600;
+            }
+            button{
+              display: flex;
+              all: unset;
+            }
           }
         }
         form{
