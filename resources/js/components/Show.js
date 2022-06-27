@@ -9,10 +9,13 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   const [stateRating, setStateRating] = useState([rating])
   const [previewRating, setPreviewRating] = useState(rating)
 
+  useEffect(() => {
+    console.log("In show effect, stateRating is:")
+    console.log(stateRating)
+  }, [stateRating])
+
   useEffect(() =>{
     const checkRating = (e) => {
-      console.log("In checkRating, stateRating is:")
-      console.log(stateRating)
       let stars = document.querySelectorAll('i')
       for(let star of stars){
         if(star.parentElement.parentElement.parentElement.id == id){
