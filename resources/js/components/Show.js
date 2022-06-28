@@ -6,7 +6,7 @@ import { set } from 'lodash';
 
 const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree }) => {
 
-  const [previewRating, setPreviewRating] = useState(rating)
+  const [previewRating, setPreviewRating] = useState([rating || 0])
   const [stateRating, setStateRating] = useState(rating)
 
   useEffect(() => {
