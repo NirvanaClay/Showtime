@@ -4210,12 +4210,12 @@ var Show = function Show(_ref) {
       changedRating = _ref.changedRating,
       setChangedRating = _ref.setChangedRating;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([rating || 0]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
       _useState2 = _slicedToArray(_useState, 2),
       previewRating = _useState2[0],
       setPreviewRating = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([rating || 0]),
       _useState4 = _slicedToArray(_useState3, 2),
       stateRating = _useState4[0],
       setStateRating = _useState4[1];

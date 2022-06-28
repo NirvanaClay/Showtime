@@ -6,8 +6,8 @@ import { set } from 'lodash';
 
 const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree, changedRating, setChangedRating }) => {
 
-  const [previewRating, setPreviewRating] = useState([rating || 0])
-  const [stateRating, setStateRating] = useState(rating)
+  const [previewRating, setPreviewRating] = useState(rating)
+  const [stateRating, setStateRating] = useState([rating || 0])
 
   useEffect(() => {
     console.log("In show effect, stateRating is:")
