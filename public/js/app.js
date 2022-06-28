@@ -4216,6 +4216,7 @@ var Show = function Show(_ref) {
       previewRating = _useState2[0],
       setPreviewRating = _useState2[1];
 
+  setStateRating(rating);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("In show effect, stateRating is:");
     console.log(stateRating);

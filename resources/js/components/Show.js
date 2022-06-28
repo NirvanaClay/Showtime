@@ -8,6 +8,8 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const [previewRating, setPreviewRating] = useState(rating)
 
+  setStateRating(rating)
+
   useEffect(() => {
     console.log("In show effect, stateRating is:")
     console.log(stateRating)
