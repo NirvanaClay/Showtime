@@ -4273,7 +4273,8 @@ var Show = function Show(_ref) {
               return axios.post("/api/shows/".concat(id), {
                 _method: 'PUT',
                 id: id,
-                rating: stateRating
+                rating: stateRating,
+                showType: show_type
               });
 
             case 3:

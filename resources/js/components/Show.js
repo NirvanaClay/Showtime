@@ -43,7 +43,8 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     await axios.post(`/api/shows/${id}`, {
       _method: 'PUT',
       id: id,
-      rating: stateRating
+      rating: stateRating,
+      showType: show_type
     })
     setChangedRating(!changedRating)
   }

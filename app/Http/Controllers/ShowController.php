@@ -34,6 +34,9 @@ class ShowController extends Controller
         $id = Auth::id();
         $user = User::find($id);
         $show_id = $request->id;
+        $show = Show::find($show_id);
+        $show->show_type = $request->showType;
+        $show->save();
         $rating = $request->rating;
         $user->shows()->updateExistingPivot($show_id, ['rating' => $rating]);        
     }
