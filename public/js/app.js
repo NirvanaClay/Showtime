@@ -4213,6 +4213,8 @@ var Show = function Show(_ref) {
   }, [stateRating]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var checkRating = function checkRating(e) {
+      console.log("In checkRating, stateRating is:");
+      console.log(stateRating);
       var stars = document.querySelectorAll('i');
 
       var _iterator = _createForOfIteratorHelper(stars),
