@@ -98,7 +98,7 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
       }
       {streamingServices.length > 0 && streamingId == id && streamingServices != noStreaming &&
       <h4>Streaming on:</h4>}
-      {streamingServices.length > 0 && streamingId == id && streamingServices.map((service, key) => (
+      {streamingServices.length > 0 && streamingServices != noStreaming && streamingId == id && streamingServices.map((service, key) => (
         <img key={key} src={service} className='streaming-image'></img>
       ))}
       {streamingServices == noStreaming && streamingId == id &&
