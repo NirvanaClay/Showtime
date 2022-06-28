@@ -130,6 +130,7 @@
 }
 
 .show-index .shows__container .shows .show p {
+  width: 100%;
   font-size: 1.1rem;
 }
 
