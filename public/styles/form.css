@@ -318,7 +318,7 @@
     width: 300px;
   }
   .form .results-container .left-arrow__container {
-    top: 175px;
+    top: 125px;
     left: 5px;
     width: 40px;
     height: 40px;
@@ -327,7 +327,7 @@
     font-size: 26px;
   }
   .form .results-container .right-arrow__container {
-    top: 175px;
+    top: 125px;
     right: 5px;
     width: 40px;
     height: 40px;
