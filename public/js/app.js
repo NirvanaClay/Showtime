@@ -4192,7 +4192,7 @@ var Show = function Show(_ref) {
       spinnerDegree = _ref.spinnerDegree,
       setSpinnerDegree = _ref.setSpinnerDegree;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating || stateRating),
       _useState2 = _slicedToArray(_useState, 2),
       stateRating = _useState2[0],
       setStateRating = _useState2[1];
