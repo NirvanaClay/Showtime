@@ -2462,12 +2462,7 @@ var App = function App() {
   var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState28 = _slicedToArray(_useState27, 2),
       failedSearch = _useState28[0],
-      setFailedSearch = _useState28[1];
-
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState30 = _slicedToArray(_useState29, 2),
-      stateRating = _useState30[0],
-      setStateRating = _useState30[1]; // let userCheck = document.getElementById('authenticated').value
+      setFailedSearch = _useState28[1]; // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
 
@@ -2498,10 +2493,10 @@ var App = function App() {
   }, []);
   var noStreaming = "This show is not currently available through streaming.";
 
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
-      _useState32 = _slicedToArray(_useState31, 2),
-      showType = _useState32[0],
-      setShowType = _useState32[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState30 = _slicedToArray(_useState29, 2),
+      showType = _useState30[0],
+      setShowType = _useState30[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
@@ -2928,10 +2923,10 @@ var App = function App() {
     };
   }();
 
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState34 = _slicedToArray(_useState33, 2),
-      sliderPosition = _useState34[0],
-      setSliderPosition = _useState34[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState32 = _slicedToArray(_useState31, 2),
+      sliderPosition = _useState32[0],
+      setSliderPosition = _useState32[1];
 
   var resetSlider = function resetSlider() {
     setSliderPosition(0);
@@ -2943,10 +2938,10 @@ var App = function App() {
     setSliderPosition(0);
   };
 
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState36 = _slicedToArray(_useState35, 2),
-      passwordVisibility = _useState36[0],
-      setPasswordVisibility = _useState36[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState34 = _slicedToArray(_useState33, 2),
+      passwordVisibility = _useState34[0],
+      setPasswordVisibility = _useState34[1];
 
   var changePasswordVisibility = function changePasswordVisibility() {
     setPasswordVisibility(!passwordVisibility);
@@ -3030,9 +3025,7 @@ var App = function App() {
           isLoading: isLoading,
           spinnerDegree: spinnerDegree,
           setSpinnerDegree: setSpinnerDegree,
-          resizeResetSlider: resizeResetSlider,
-          stateRating: stateRating,
-          setStateRating: setStateRating
+          resizeResetSlider: resizeResetSlider
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_17__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
         path: "my-movies",
@@ -3053,9 +3046,7 @@ var App = function App() {
           isLoading: isLoading,
           spinnerDegree: spinnerDegree,
           setSpinnerDegree: setSpinnerDegree,
-          resizeResetSlider: resizeResetSlider,
-          stateRating: stateRating,
-          setStateRating: setStateRating
+          resizeResetSlider: resizeResetSlider
         })
       })]
     })]
@@ -3637,9 +3628,7 @@ var MoviesList = function MoviesList(_ref) {
       spinnerDegree = _ref.spinnerDegree,
       setSpinnerDegree = _ref.setSpinnerDegree,
       isLoading = _ref.isLoading,
-      resizeResetSlider = _ref.resizeResetSlider,
-      stateRating = _ref.stateRating,
-      setStateRating = _ref.setStateRating;
+      resizeResetSlider = _ref.resizeResetSlider;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
@@ -3663,9 +3652,7 @@ var MoviesList = function MoviesList(_ref) {
           spinnerDegree: spinnerDegree,
           setSpinnerDegree: setSpinnerDegree,
           isLoading: isLoading,
-          resizeResetSlider: resizeResetSlider,
-          stateRating: stateRating,
-          setStateRating: setStateRating
+          resizeResetSlider: resizeResetSlider
         })]
       })
     })
@@ -4100,9 +4087,7 @@ var SeriesList = function SeriesList(_ref) {
       isLoading = _ref.isLoading,
       spinnerDegree = _ref.spinnerDegree,
       setSpinnerDegree = _ref.setSpinnerDegree,
-      resizeResetSlider = _ref.resizeResetSlider,
-      stateRating = _ref.stateRating,
-      setStateRating = _ref.setStateRating;
+      resizeResetSlider = _ref.resizeResetSlider;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "show-index",
@@ -4126,9 +4111,7 @@ var SeriesList = function SeriesList(_ref) {
           isLoading: isLoading,
           spinnerDegree: spinnerDegree,
           setSpinnerDegree: setSpinnerDegree,
-          resizeResetSlider: resizeResetSlider,
-          stateRating: stateRating,
-          setStateRating: setStateRating
+          resizeResetSlider: resizeResetSlider
         })]
       })
     })
@@ -4207,14 +4190,17 @@ var Show = function Show(_ref) {
       pivotUser = _ref.pivotUser,
       isLoading = _ref.isLoading,
       spinnerDegree = _ref.spinnerDegree,
-      setSpinnerDegree = _ref.setSpinnerDegree,
-      stateRating = _ref.stateRating,
-      setStateRating = _ref.setStateRating;
+      setSpinnerDegree = _ref.setSpinnerDegree;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
       _useState2 = _slicedToArray(_useState, 2),
       previewRating = _useState2[0],
       setPreviewRating = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
+      _useState4 = _slicedToArray(_useState3, 2),
+      stateRating = _useState4[0],
+      setStateRating = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("In show effect, stateRating is:");
@@ -4613,9 +4599,7 @@ var Slider = function Slider(_ref) {
       setSpinnerDegree = _ref.setSpinnerDegree,
       selectedResult = _ref.selectedResult,
       setSelectedResult = _ref.setSelectedResult,
-      resizeResetSlider = _ref.resizeResetSlider,
-      stateRating = _ref.stateRating,
-      setStateRating = _ref.setStateRating;
+      resizeResetSlider = _ref.resizeResetSlider;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4852,9 +4836,7 @@ var Slider = function Slider(_ref) {
             getMovies: getMovies,
             isLoading: isLoading,
             spinnerDegree: spinnerDegree,
-            setSpinnerDegree: setSpinnerDegree,
-            stateRating: stateRating,
-            setStateRating: setStateRating
+            setSpinnerDegree: setSpinnerDegree
           })
         }, show.id);
       }), results && results.map(function (result) {
