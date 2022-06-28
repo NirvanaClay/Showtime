@@ -2934,6 +2934,7 @@ var App = function App() {
       setSliderPosition = _useState34[1];
 
   var resetSlider = function resetSlider() {
+    console.log("Running resetSlider, so should be resetting results.");
     setSliderPosition(0);
     getResults([]);
     setStreamingServices([]);

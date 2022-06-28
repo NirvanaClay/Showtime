@@ -339,6 +339,7 @@ const App = () => {
   const [sliderPosition, setSliderPosition] = useState(0)
 
   const resetSlider = () => {
+    console.log("Running resetSlider, so should be resetting results.")
     setSliderPosition(0)
     getResults([])
     setStreamingServices([])
