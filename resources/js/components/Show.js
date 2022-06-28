@@ -45,6 +45,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       id: id,
       rating: stateRating
     })
+    setChangedRating(true)
   }
 
   const deleteShow = async (e) => {
@@ -100,8 +101,8 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }, [spinnerDegree, isLoading]);
 
-  const setRatingValue = () => {
-    setChangedRating(!changedRating)
+  const setRatingValue = (e) => {
+    setStateRating(e.target.value)
   }
 
   return (

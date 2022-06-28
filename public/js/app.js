@@ -4266,6 +4266,7 @@ var Show = function Show(_ref) {
       id: id,
       rating: stateRating
     });
+    setChangedRating(true);
   };
 
   var deleteShow = /*#__PURE__*/function () {
@@ -4367,8 +4368,8 @@ var Show = function Show(_ref) {
     }
   }, [spinnerDegree, isLoading]);
 
-  var setRatingValue = function setRatingValue() {
-    setChangedRating(!changedRating);
+  var setRatingValue = function setRatingValue(e) {
+    setStateRating(e.target.value);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
