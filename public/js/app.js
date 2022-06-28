@@ -4251,45 +4251,26 @@ var Show = function Show(_ref) {
     checkRating();
   }, [stateRating]);
 
-  var addRating = /*#__PURE__*/function () {
+  var addRating = function addRating(e) {
+    e.preventDefault();
+    var newRating = parseInt(e.target.getAttribute('value'));
+    console.log("id for addRating is:");
+    console.log(id);
+    console.log("newRating is:");
+    console.log(newRating);
+    setStateRating(newRating);
+    axios.post("/api/shows/".concat(id), {
+      _method: 'PUT',
+      id: id,
+      rating: newRating
+    });
+  };
+
+  var deleteShow = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
-      var newRating;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault();
-              newRating = parseInt(e.target.getAttribute('value'));
-              console.log("id for addRating is:");
-              console.log(id);
-              console.log("newRating is:");
-              console.log(newRating);
-              setStateRating(newRating);
-              _context.next = 9;
-              return axios.post("/api/shows/".concat(id), {
-                _method: 'PUT',
-                id: id,
-                rating: newRating
-              });
-
-            case 9:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function addRating(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var deleteShow = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
               axios["delete"]("/api/shows/".concat(id));
@@ -4308,14 +4289,14 @@ var Show = function Show(_ref) {
 
             case 4:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2);
+      }, _callee);
     }));
 
-    return function deleteShow(_x2) {
-      return _ref3.apply(this, arguments);
+    return function deleteShow(_x) {
+      return _ref2.apply(this, arguments);
     };
   }();
 
