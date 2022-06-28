@@ -2569,7 +2569,7 @@ var App = function App() {
     }();
 
     fetchShows();
-  }, [user, stateRating]);
+  }, [user]);
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {

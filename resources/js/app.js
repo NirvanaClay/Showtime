@@ -110,7 +110,7 @@ const App = () => {
       }
     }
     fetchShows()
-  }, [user, stateRating])
+  }, [user])
 
   const fetchResults = async (e) => {
     e.preventDefault()
