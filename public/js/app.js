@@ -4369,6 +4369,8 @@ var Show = function Show(_ref) {
   }, [spinnerDegree, isLoading]);
 
   var setRatingValue = function setRatingValue(e) {
+    console.log("Trying to set stateRating to e.target.value. e is:");
+    console.log(e);
     setStateRating(e.target.value);
   };
 

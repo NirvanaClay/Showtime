@@ -102,6 +102,8 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   }, [spinnerDegree, isLoading]);
 
   const setRatingValue = (e) => {
+    console.log("Trying to set stateRating to e.target.value. e is:")
+    console.log(e)
     setStateRating(e.target.value)
   }
 
