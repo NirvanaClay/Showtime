@@ -315,7 +315,7 @@
     width: 80%;
   }
   .form .results-container {
-    width: 300px;
+    width: 320px;
   }
   .form .results-container .left-arrow__container {
     top: 115px;
@@ -349,7 +349,7 @@
 
 @media (max-width: 320px) {
   .form .results-container {
-    width: 200px;
+    width: 240px;
   }
   .form .results-container .shows .result {
     width: 120px;
