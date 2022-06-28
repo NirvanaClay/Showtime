@@ -4257,16 +4257,10 @@ var Show = function Show(_ref) {
 
   var addRating = function addRating(e) {
     e.preventDefault();
-    var newRating = parseInt(e.target.getAttribute('value'));
-    console.log("id for addRating is:");
-    console.log(id);
-    console.log("newRating is:");
-    console.log(newRating);
-    setStateRating(newRating);
     axios.post("/api/shows/".concat(id), {
       _method: 'PUT',
       id: id,
-      rating: newRating
+      rating: stateRating
     });
     setChangedRating(!changedRating);
   };
