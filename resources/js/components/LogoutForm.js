@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useNavigate } from 'react-router-dom'
 
-const LogoutForm = ({ setName, setEmail, setUser, setLoginStatus }) => {
+const LogoutForm = ({ setName, setEmail, setUser, setLoginStatus, resetSlider }) => {
   const navigate = useNavigate();
 
   const logout = async (e) => {
@@ -12,7 +12,7 @@ const LogoutForm = ({ setName, setEmail, setUser, setLoginStatus }) => {
     navigate('/')
   }
   return (
-    <form method='POST' action='/logout' onSubmit={logout}>
+    <form method='POST' action='/logout' onClick={resetSlider} onSubmit={logout}>
       <input type='submit' value='Log Out' />
     </form>
   )

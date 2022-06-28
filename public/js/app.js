@@ -3360,7 +3360,7 @@ var Header = function Header(_ref) {
           setEmail: setEmail,
           setUser: setUser,
           setLoginStatus: setLoginStatus,
-          onClick: resetSlider
+          resetSlider: resetSlider
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
         children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
@@ -3555,7 +3555,8 @@ var LogoutForm = function LogoutForm(_ref) {
   var setName = _ref.setName,
       setEmail = _ref.setEmail,
       setUser = _ref.setUser,
-      setLoginStatus = _ref.setLoginStatus;
+      setLoginStatus = _ref.setLoginStatus,
+      resetSlider = _ref.resetSlider;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = /*#__PURE__*/function () {
@@ -3585,6 +3586,7 @@ var LogoutForm = function LogoutForm(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("form", {
     method: "POST",
     action: "/logout",
+    onClick: resetSlider,
     onSubmit: logout,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "submit",
@@ -3981,7 +3983,7 @@ var Result = function Result(_ref) {
         setSpinnerDegree(spinnerDegree + 90);
         console.log("set spinner degree, which should be:");
         console.log(spinnerDegree + 90);
-      }, 100);
+      }, 1);
       return function () {
         return clearInterval(interval);
       };
@@ -4380,7 +4382,7 @@ var Show = function Show(_ref) {
         setSpinnerDegree(spinnerDegree + 90);
         console.log("set spinner degree, which should be:");
         console.log(spinnerDegree + 90);
-      }, 10);
+      }, 1);
       return function () {
         return clearInterval(interval);
       };
