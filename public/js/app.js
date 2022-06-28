@@ -4216,7 +4216,12 @@ var Show = function Show(_ref) {
       previewRating = _useState2[0],
       setPreviewRating = _useState2[1];
 
-  setStateRating(rating);
+  if (stateRating == rating) {
+    setStateRating(rating);
+  } else {
+    setStateRating(0);
+  }
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("In show effect, stateRating is:");
     console.log(stateRating);
@@ -4376,7 +4381,7 @@ var Show = function Show(_ref) {
         setSpinnerDegree(spinnerDegree + 90);
         console.log("set spinner degree, which should be:");
         console.log(spinnerDegree + 90);
-      }, 100);
+      }, 10);
       return function () {
         return clearInterval(interval);
       };

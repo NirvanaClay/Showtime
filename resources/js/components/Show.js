@@ -8,7 +8,12 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const [previewRating, setPreviewRating] = useState(rating)
 
-  setStateRating(rating)
+  if(stateRating == rating){
+    setStateRating(rating)
+  }
+  else{
+    setStateRating(0)
+  }
 
   useEffect(() => {
     console.log("In show effect, stateRating is:")
@@ -94,7 +99,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
         setSpinnerDegree(spinnerDegree + 90)
         console.log("set spinner degree, which should be:")
         console.log(spinnerDegree + 90)
-      }, 100);
+      }, 10);
       return () => clearInterval(interval);
     }
     else{
