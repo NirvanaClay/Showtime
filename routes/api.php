@@ -49,6 +49,10 @@ Route::get('/passwordReset', function() {
     return 'This should be view for password reset form.';
 })->name('password.reset');
 
+Route::get('/fuck', function() {
+    return "Fuck you.";
+});
+
 Route::post('/shows', 'App\Http\Controllers\ShowController@add');
 
 Route::put('/shows/{id}', 'App\Http\Controllers\ShowController@edit');
