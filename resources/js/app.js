@@ -82,9 +82,9 @@ const App = () => {
 
   useEffect((e) => {
     console.log("On home effect user is " + user)
-    const fetchShows = () => {
+    const fetchShows = async () => {
       if(user){
-        const res = fetch('/api/userShows')
+        const res = await fetch('/api/userShows')
         const userShows = res.json()
         console.log("userShows are:")
         console.log(userShows)

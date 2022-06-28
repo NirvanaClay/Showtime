@@ -2346,10 +2346,6 @@ function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol 
 
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2357,6 +2353,10 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -2506,55 +2506,83 @@ var App = function App() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
 
-    var fetchShows = function fetchShows() {
-      if (user) {
-        var res = fetch('/api/userShows');
-        var userShows = res.json();
-        console.log("userShows are:");
-        console.log(userShows);
-        var userSeries = userShows.filter(function (show) {
-          return show.show_type == 'series';
-        });
-        var userMovies = userShows.filter(function (show) {
-          return show.show_type == 'movie';
-        });
-        var orderedUserSeries = userSeries.sort(function (a, b) {
-          return a.title.localeCompare(b.title);
-        });
-        var orderedUserMovies = userMovies.sort(function (a, b) {
-          return a.title.localeCompare(b.title);
-        });
-        console.log("orderedUserSeries is:");
-        console.log(orderedUserSeries);
-        console.log("orderedUserMovies are:");
-        console.log(orderedUserMovies);
-        getSeries(_toConsumableArray(orderedUserSeries));
-        getMovies(_toConsumableArray(orderedUserMovies));
-      } else {
-        console.log("On home effect there is no user.");
-        getSeries([]);
-        getMovies([]);
-        setName('Guest');
-        setEmail('');
-        setUserId(0);
-        setLoginStatus(false);
-      }
-    };
+    var fetchShows = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res, userShows, userSeries, userMovies, orderedUserSeries, orderedUserMovies;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!user) {
+                  _context.next = 19;
+                  break;
+                }
+
+                _context.next = 3;
+                return fetch('/api/userShows');
+
+              case 3:
+                res = _context.sent;
+                userShows = res.json();
+                console.log("userShows are:");
+                console.log(userShows);
+                userSeries = userShows.filter(function (show) {
+                  return show.show_type == 'series';
+                });
+                userMovies = userShows.filter(function (show) {
+                  return show.show_type == 'movie';
+                });
+                orderedUserSeries = userSeries.sort(function (a, b) {
+                  return a.title.localeCompare(b.title);
+                });
+                orderedUserMovies = userMovies.sort(function (a, b) {
+                  return a.title.localeCompare(b.title);
+                });
+                console.log("orderedUserSeries is:");
+                console.log(orderedUserSeries);
+                console.log("orderedUserMovies are:");
+                console.log(orderedUserMovies);
+                getSeries(_toConsumableArray(orderedUserSeries));
+                getMovies(_toConsumableArray(orderedUserMovies));
+                _context.next = 26;
+                break;
+
+              case 19:
+                console.log("On home effect there is no user.");
+                getSeries([]);
+                getMovies([]);
+                setName('Guest');
+                setEmail('');
+                setUserId(0);
+                setLoginStatus(false);
+
+              case 26:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function fetchShows() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
     fetchShows();
   }, [user, stateRating]);
 
   var fetchResults = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
       var searchString, res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
 
               if (!showType) {
-                _context.next = 11;
+                _context2.next = 11;
                 break;
               }
 
@@ -2565,16 +2593,16 @@ var App = function App() {
               // setShowType(theShowType)
 
               searchString = "https://imdb-api.com/en/API/Search".concat(showType, "/k_j0x59844/").concat(e.target[2].value);
-              _context.next = 6;
+              _context2.next = 6;
               return fetch(searchString);
 
             case 6:
-              res = _context.sent;
-              _context.next = 9;
+              res = _context2.sent;
+              _context2.next = 9;
               return res.json();
 
             case 9:
-              data = _context.sent;
+              data = _context2.sent;
 
               if (data.results) {
                 console.log("In fetchResults, data.results is:");
@@ -2586,14 +2614,14 @@ var App = function App() {
 
             case 11:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
     return function fetchResults(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -2603,12 +2631,12 @@ var App = function App() {
   }, [streamingServices]);
 
   var checkStreaming = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(e) {
       var show_type, imdb_id, title, showToCheck, results, streamingServicesList, url, headers, promises, _loop, i;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context3) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               setStreamingServices([]);
               setIsLoading(true);
@@ -2628,13 +2656,13 @@ var App = function App() {
               promises = [];
               _loop = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _loop(i) {
                 var streamingService;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _loop$(_context2) {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _loop$(_context3) {
                   while (1) {
-                    switch (_context2.prev = _context2.next) {
+                    switch (_context3.prev = _context3.next) {
                       case 0:
                         streamingService = streamingServicesList[i];
-                        _context2.t0 = promises;
-                        _context2.next = 4;
+                        _context3.t0 = promises;
+                        _context3.next = 4;
                         return new Promise(function (resolve, reject) {
                           var params = {
                             country: 'us',
@@ -2768,13 +2796,13 @@ var App = function App() {
                         });
 
                       case 4:
-                        _context2.t1 = _context2.sent;
+                        _context3.t1 = _context3.sent;
 
-                        _context2.t0.push.call(_context2.t0, _context2.t1);
+                        _context3.t0.push.call(_context3.t0, _context3.t1);
 
                       case 6:
                       case "end":
-                        return _context2.stop();
+                        return _context3.stop();
                     }
                   }
                 }, _loop);
@@ -2783,15 +2811,15 @@ var App = function App() {
 
             case 15:
               if (!(i < streamingServicesList.length)) {
-                _context3.next = 20;
+                _context4.next = 20;
                 break;
               }
 
-              return _context3.delegateYield(_loop(i), "t0", 17);
+              return _context4.delegateYield(_loop(i), "t0", 17);
 
             case 17:
               i++;
-              _context3.next = 15;
+              _context4.next = 15;
               break;
 
             case 20:
@@ -2869,11 +2897,11 @@ var App = function App() {
                   console.log("There are no validResponses");
                   setStreamingServices([noStreaming]);
                 } else {
-                  var _ref3;
+                  var _ref4;
 
                   console.log("validResponses are:");
                   console.log(validResponses);
-                  finalArray = (_ref3 = []).concat.apply(_ref3, _toConsumableArray(validResponses));
+                  finalArray = (_ref4 = []).concat.apply(_ref4, _toConsumableArray(validResponses));
                   console.log("finalArray is:");
                   console.log(finalArray);
                   finalResults = _toConsumableArray(new Set(finalArray));
@@ -2885,14 +2913,14 @@ var App = function App() {
 
             case 21:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
     return function checkStreaming(_x2) {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
 
