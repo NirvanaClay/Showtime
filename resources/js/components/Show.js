@@ -38,9 +38,9 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     checkRating()
   }, [stateRating])
 
-  const addRating = (e) => {
+  const addRating = async (e) => {
     e.preventDefault()
-    axios.post(`/api/shows/${id}`, {
+    await axios.post(`/api/shows/${id}`, {
       _method: 'PUT',
       id: id,
       rating: stateRating

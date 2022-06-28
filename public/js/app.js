@@ -4259,21 +4259,41 @@ var Show = function Show(_ref) {
     checkRating();
   }, [stateRating]);
 
-  var addRating = function addRating(e) {
-    e.preventDefault();
-    axios.post("/api/shows/".concat(id), {
-      _method: 'PUT',
-      id: id,
-      rating: stateRating
-    });
-    setChangedRating(!changedRating);
-  };
-
-  var deleteShow = /*#__PURE__*/function () {
+  var addRating = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.next = 3;
+              return axios.post("/api/shows/".concat(id), {
+                _method: 'PUT',
+                id: id,
+                rating: stateRating
+              });
+
+            case 3:
+              setChangedRating(!changedRating);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function addRating(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var deleteShow = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
               axios["delete"]("/api/shows/".concat(id));
@@ -4292,14 +4312,14 @@ var Show = function Show(_ref) {
 
             case 4:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function deleteShow(_x) {
-      return _ref2.apply(this, arguments);
+    return function deleteShow(_x2) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
