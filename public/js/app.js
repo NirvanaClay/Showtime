@@ -4225,6 +4225,10 @@ var Show = function Show(_ref) {
     console.log(stateRating);
   }, [stateRating]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log("In show effect, changedRating is:");
+    console.log(changedRating);
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var checkRating = function checkRating(e) {
       console.log("In checkRating, stateRating is:");
       console.log(stateRating);
@@ -4262,7 +4266,6 @@ var Show = function Show(_ref) {
       id: id,
       rating: stateRating
     });
-    setChangedRating(!changedRating);
   };
 
   var deleteShow = /*#__PURE__*/function () {
