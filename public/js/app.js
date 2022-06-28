@@ -4013,7 +4013,7 @@ var Result = function Result(_ref) {
         src: service,
         className: "streaming-image"
       }, key);
-    }), streamingServices == noStreaming && streamingId == imdb_id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+    }), streamingServices == noStreaming && streamingId == id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
       children: streamingServices
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       id: id,

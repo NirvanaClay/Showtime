@@ -101,7 +101,7 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
       {streamingServices.length > 0 && streamingId == id && streamingServices.map((service, key) => (
         <img key={key} src={service} className='streaming-image'></img>
       ))}
-      {streamingServices == noStreaming && streamingId == imdb_id &&
+      {streamingServices == noStreaming && streamingId == id &&
         <p>{streamingServices}</p>
       }
       <form id={id} onSubmit={myShow} method="POST" action="/api/shows" name='show-form' className='show-form'>
