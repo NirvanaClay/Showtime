@@ -101,7 +101,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   }, [spinnerDegree, isLoading]);
 
   const setRatingValue = () => {
-
+    setChangedRating(!changedRating)
   }
 
   return (

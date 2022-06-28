@@ -4367,7 +4367,9 @@ var Show = function Show(_ref) {
     }
   }, [spinnerDegree, isLoading]);
 
-  var setRatingValue = function setRatingValue() {};
+  var setRatingValue = function setRatingValue() {
+    setChangedRating(!changedRating);
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "show",
