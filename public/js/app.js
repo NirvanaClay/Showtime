@@ -4234,7 +4234,7 @@ var Show = function Show(_ref) {
           var star = _step.value;
 
           if (star.parentElement.parentElement.parentElement.id == id) {
-            if (star.getAttribute('value') <= rating) {
+            if (star.getAttribute('value') <= stateRating) {
               star.classList.add('fas');
             } else {
               star.classList.remove('fas');

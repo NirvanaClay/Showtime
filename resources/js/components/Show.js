@@ -20,7 +20,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       let stars = document.querySelectorAll('i')
       for(let star of stars){
         if(star.parentElement.parentElement.parentElement.id == id){
-          if(star.getAttribute('value') <= rating){
+          if(star.getAttribute('value') <= stateRating){
             star.classList.add('fas')
           }
           else{
