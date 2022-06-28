@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="{{ secure_asset('styles/shows.css') }}"> 
         <link rel="stylesheet" href="{{ secure_asset('styles/register.css') }}"> 
 
-        <title>Laravel</title>
+        <title>ShowCheck</title>
 
     </head>
     <body class="antialiased">
