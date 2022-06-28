@@ -44,7 +44,7 @@ const App = () => {
 
   const [failedSearch, setFailedSearch] = useState(false)
 
-  const [stateRating, setStateRating] = useState(rating)
+  const [stateRating, setStateRating] = useState()
 
   // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")

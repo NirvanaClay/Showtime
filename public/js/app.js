@@ -2464,7 +2464,7 @@ var App = function App() {
       failedSearch = _useState28[0],
       setFailedSearch = _useState28[1];
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState30 = _slicedToArray(_useState29, 2),
       stateRating = _useState30[0],
       setStateRating = _useState30[1]; // let userCheck = document.getElementById('authenticated').value
