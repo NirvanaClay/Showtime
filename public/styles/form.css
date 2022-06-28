@@ -203,7 +203,8 @@
 }
 
 .form .results-container .shows .result p {
-  width: 100%;
+  width: 225px;
+  margin: 0 auto;
   font-size: 1.1rem;
 }
 
@@ -301,6 +302,9 @@
   .form .results-container .shows .result {
     width: 200px;
   }
+  .form .results-container .shows .result p {
+    width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -328,11 +332,14 @@
     font-size: 26px;
   }
   .form .results-container .shows .result {
-    width: 150px;
+    width: 160px;
   }
   .form .results-container .shows .result img {
     width: 100px;
     height: 150px;
+  }
+  .form .results-container .shows .result p {
+    width: 160px;
   }
 }
 
@@ -341,11 +348,14 @@
     width: 200px;
   }
   .form .results-container .shows .result {
-    width: 100px;
+    width: 120px;
   }
   .form .results-container .shows .result img {
     width: 75px;
     height: 125px;
+  }
+  .form .results-container .shows .result p {
+    width: 120px;
   }
 }
 /*# sourceMappingURL=form.css.map */

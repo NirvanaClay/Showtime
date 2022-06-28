@@ -130,7 +130,8 @@
 }
 
 .show-index .shows__container .shows .show p {
-  width: 100%;
+  width: 225px;
+  margin: 0 auto;
   font-size: 1.1rem;
 }
 
@@ -235,6 +236,9 @@
   .show-index .shows__container .shows .show {
     width: 200px;
   }
+  .show-index .shows__container .shows .show p {
+    width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -269,6 +273,9 @@
     width: 100px;
     height: 150px;
   }
+  .show-index .shows__container .shows .show p {
+    width: 160px;
+  }
   .show-index .shows__container .shows .show .stars-container .fa-star {
     font-size: 1.3rem;
   }
@@ -284,6 +291,9 @@
   .show-index .shows__container .shows .show img {
     width: 80px;
     height: 120px;
+  }
+  .show-index .shows__container .shows .show p {
+    width: 120px;
   }
   .show-index .shows__container .shows .show .stars-container {
     width: 110px;

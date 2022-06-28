@@ -151,7 +151,8 @@
           margin-bottom: 10px;
         }
         p{
-          width: 100%;
+          width: 225px;
+          margin: 0 auto;
           font-size: 1.1rem;
         }
         .streaming-image{
@@ -248,6 +249,9 @@
       .shows{
         .result{
           width: 200px;
+          p{
+            width: 200px;
+          }
         }
       }
     }
@@ -281,10 +285,13 @@
       }
       .shows{
         .result{
-          width: 150px;
+          width: 160px;
           img{
             width: 100px;
             height: 150px;
+          }
+          p{
+            width: 160px;
           }
         }
       }
@@ -297,10 +304,13 @@
       width: 200px;
       .shows{
         .result{
-          width: 100px;
+          width: 120px;
           img{
             width: 75px;
             height: 125px;
+          }
+          p{
+            width: 120px;
           }
         }
       }
