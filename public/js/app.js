@@ -4356,22 +4356,22 @@ var Show = function Show(_ref) {
     } finally {
       _iterator3.f();
     }
-  }; // useEffect(() => {
-  //   if(isLoading){
-  //     console.log("ISLOADING IS TRUE.")
-  //     const interval = setInterval(() => {
-  //       setSpinnerDegree(spinnerDegree + 90)
-  //       console.log("set spinner degree, which should be:")
-  //       console.log(spinnerDegree + 90)
-  //     }, 100);
-  //     return () => clearInterval(interval);
-  //   }
-  //   else{
-  //     console.log("ISLOADING IS FALSE.")
-  //   }
-  // }, [spinnerDegree, isLoading]);
+  };
 
-
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (isLoading) {
+      var interval = setInterval(function () {
+        setSpinnerDegree(spinnerDegree + 90);
+        console.log("set spinner degree, which should be:");
+        console.log(spinnerDegree + 90);
+      }, 100);
+      return function () {
+        return clearInterval(interval);
+      };
+    } else {
+      console.log("ISLOADING IS FALSE.");
+    }
+  }, [spinnerDegree, isLoading]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "show",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {

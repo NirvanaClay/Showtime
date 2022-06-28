@@ -33,7 +33,6 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
       window.removeEventListener('resize', handleResize)
     }
   })
-    
 
   const large = window.matchMedia('(max-width: 992px)');
   const medium = window.matchMedia('(max-width: 768px)');
