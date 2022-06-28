@@ -48,8 +48,6 @@ const App = () => {
   // console.log("userCheck is:")
   // console.log(userCheck)
 
-  console.log("In app, hello hello.")
-
   useEffect(() => {
     console.log("Check auth status in app effect.")
     axios.get('/authenticated')
@@ -79,8 +77,6 @@ const App = () => {
   const noStreaming = "This show is not currently available through streaming."
 
   const [showType, setShowType] = useState('')
-
-  console.log("In app, FUCK YOU!")
 
   useEffect((e) => {
     console.log("On home effect user is " + user)
@@ -145,7 +141,6 @@ const App = () => {
   }, [streamingServices])
 
   const checkStreaming = async (e) => {
-    console.log("FUCKING HELLO BITCH WTF IN CHECKSTREAMING")
     setStreamingServices([])
     setIsLoading(true)
     const show_type = e.target.getAttribute('show_type')
@@ -275,8 +270,6 @@ const App = () => {
       let validResponses = []
       let finalArray
       let finalResults
-      console.log('FUCKING HELLO')
-      console.log("Setting isLoading to false.")
       console.log("Before final loop/check, responses are:")
       console.log(responses)
       setIsLoading(false)

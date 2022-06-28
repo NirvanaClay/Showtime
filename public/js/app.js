@@ -2467,7 +2467,6 @@ var App = function App() {
   // console.log(userCheck)
 
 
-  console.log("In app, hello hello.");
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("Check auth status in app effect.");
     axios__WEBPACK_IMPORTED_MODULE_3___default().get('/authenticated').then(function (res) {
@@ -2499,7 +2498,6 @@ var App = function App() {
       showType = _useState30[0],
       setShowType = _useState30[1];
 
-  console.log("In app, FUCK YOU!");
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function (e) {
     console.log("On home effect user is " + user);
 
@@ -2639,7 +2637,6 @@ var App = function App() {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              console.log("FUCKING HELLO BITCH WTF IN CHECKSTREAMING");
               setStreamingServices([]);
               setIsLoading(true);
               show_type = e.target.getAttribute('show_type');
@@ -2811,26 +2808,24 @@ var App = function App() {
               });
               i = 0;
 
-            case 16:
+            case 15:
               if (!(i < streamingServicesList.length)) {
-                _context4.next = 21;
+                _context4.next = 20;
                 break;
               }
 
-              return _context4.delegateYield(_loop(i), "t0", 18);
+              return _context4.delegateYield(_loop(i), "t0", 17);
 
-            case 18:
+            case 17:
               i++;
-              _context4.next = 16;
+              _context4.next = 15;
               break;
 
-            case 21:
+            case 20:
               Promise.all(promises).then(function (responses) {
                 var validResponses = [];
                 var finalArray;
                 var finalResults;
-                console.log('FUCKING HELLO');
-                console.log("Setting isLoading to false.");
                 console.log("Before final loop/check, responses are:");
                 console.log(responses);
                 setIsLoading(false);
@@ -2915,7 +2910,7 @@ var App = function App() {
                 }
               });
 
-            case 22:
+            case 21:
             case "end":
               return _context4.stop();
           }
@@ -4197,7 +4192,7 @@ var Show = function Show(_ref) {
       spinnerDegree = _ref.spinnerDegree,
       setSpinnerDegree = _ref.setSpinnerDegree;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([rating || stateRating]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(rating),
       _useState2 = _slicedToArray(_useState, 2),
       stateRating = _useState2[0],
       setStateRating = _useState2[1];
