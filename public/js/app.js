@@ -2514,7 +2514,7 @@ var App = function App() {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!user) {
-                  _context.next = 19;
+                  _context.next = 21;
                   break;
                 }
 
@@ -2523,7 +2523,11 @@ var App = function App() {
 
               case 3:
                 res = _context.sent;
-                userShows = res.json();
+                _context.next = 6;
+                return res.json();
+
+              case 6:
+                userShows = _context.sent;
                 console.log("userShows are:");
                 console.log(userShows);
                 userSeries = userShows.filter(function (show) {
@@ -2544,10 +2548,10 @@ var App = function App() {
                 console.log(orderedUserMovies);
                 getSeries(_toConsumableArray(orderedUserSeries));
                 getMovies(_toConsumableArray(orderedUserMovies));
-                _context.next = 26;
+                _context.next = 28;
                 break;
 
-              case 19:
+              case 21:
                 console.log("On home effect there is no user.");
                 getSeries([]);
                 getMovies([]);
@@ -2556,7 +2560,7 @@ var App = function App() {
                 setUserId(0);
                 setLoginStatus(false);
 
-              case 26:
+              case 28:
               case "end":
                 return _context.stop();
             }

@@ -85,7 +85,7 @@ const App = () => {
     const fetchShows = async () => {
       if(user){
         const res = await fetch('/api/userShows')
-        const userShows = res.json()
+        const userShows = await res.json()
         console.log("userShows are:")
         console.log(userShows)
         let userSeries = userShows.filter(show => show.show_type == 'series')
