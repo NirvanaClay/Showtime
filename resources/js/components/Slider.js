@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Show from './Show'
 import Result from './Result'
 
-const Slider = ({ user, fetchResults, results, getResults, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, showRatings, setShowRatings, isLoading, spinnerDegree, setSpinnerDegree, selectedResult, setSelectedResult, resizeResetSlider }) => {
+const Slider = ({ user, fetchResults, results, getResults, shows, series, getSeries, movies, getMovies, Link, checkStreaming, sliderPosition, setSliderPosition, streamingServices, streamingId, noStreaming, showType, showRatings, setShowRatings, isLoading, spinnerDegree, setSpinnerDegree, selectedResult, setSelectedResult, resizeResetSlider, changedRating, setChangedRating }) => {
 
   const [leftArrowVisibility, setLeftArrowVisibility] = useState(false)
   const [rightArrowVisibility, setRightArrowVisibility] = useState(false)
@@ -188,7 +188,7 @@ const Slider = ({ user, fetchResults, results, getResults, shows, series, getSer
       ))}
       {results && results.map((result) => (
         <div key={result.id} onClick={chooseResult}>
-          <Result title={result.title} image={result.image} id={result.id} user={user} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} selectedResult={selectedResult} isLoading={isLoading} spinnerDegree={spinnerDegree} setSpinnerDegree={setSpinnerDegree} />
+          <Result title={result.title} image={result.image} id={result.id} user={user} streamingServices={streamingServices} fetchResults={fetchResults} checkStreaming={checkStreaming} showType={showType} streamingId={streamingId} noStreaming={noStreaming} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} selectedResult={selectedResult} isLoading={isLoading} spinnerDegree={spinnerDegree} setSpinnerDegree={setSpinnerDegree} changedRating={changedRating} setChangedRating={setChangedRating} />
         </div>))}  
       </div>
     </div>

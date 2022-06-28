@@ -4,7 +4,7 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree, changedRating, setChangedRating }) => {
 
   const [previewRating, setPreviewRating] = useState([rating || 0])
   const [stateRating, setStateRating] = useState(rating)
@@ -46,6 +46,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       id: id,
       rating: newRating
     })
+    setChangedRating(!changedRating)
   }
 
   const deleteShow = async (e) => {
@@ -101,6 +102,10 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }, [spinnerDegree, isLoading]);
 
+  const setRatingValue = () => {
+
+  }
+
   return (
     <div className='show'>
       <h3>{title}</h3>
@@ -119,25 +124,25 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
         <p>{streamingServices}</p>
       }
       <div className='stars-container' id={id}>
-        <form action='/api/shows/{id}' method='POST'>
+        <form action='/api/shows/{id}' method='POST' onSubmit={addRating}>
           <input type="hidden" name="_method" value="PUT" />
           <input type ='hidden' name='id' value={id} className='id' />
           <input type="hidden" name="_token" value="{{ csrf_token() }}" />
           <input type='hidden' className='rating' name='rating' value={stateRating} />
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={1}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={1}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={2}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={2}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={3}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={3}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={4}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={4}></i>
           </button>
           <button type='submit'>
-            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={addRating} value={5}></i>
+            <i className="far fa-star" onMouseEnter={addRatingPreview} onMouseLeave={removeRatingPreview} onClick={setRatingValue} value={5}></i>
           </button>
         </form>
       </div>
