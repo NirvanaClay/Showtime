@@ -4,9 +4,8 @@ const axios = require("axios");
 import $ from 'jquery'
 import { set } from 'lodash';
 
-const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree }) => {
+const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServices, streamingId, show_type, noStreaming, series, getSeries, movies, getMovies, setRatingValue, pivotId, pivotUser, isLoading, spinnerDegree, setSpinnerDegree, stateRating, setStateRating }) => {
 
-  const [stateRating, setStateRating] = useState(rating || stateRating)
   const [previewRating, setPreviewRating] = useState(rating)
 
   useEffect(() => {
