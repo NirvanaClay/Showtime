@@ -4860,7 +4860,9 @@ var Slider = function Slider(_ref) {
             getMovies: getMovies,
             isLoading: isLoading,
             spinnerDegree: spinnerDegree,
-            setSpinnerDegree: setSpinnerDegree
+            setSpinnerDegree: setSpinnerDegree,
+            changedRating: changedRating,
+            setChangedRating: setChangedRating
           })
         }, show.id);
       }), results && results.map(function (result) {
@@ -4884,9 +4886,7 @@ var Slider = function Slider(_ref) {
             selectedResult: selectedResult,
             isLoading: isLoading,
             spinnerDegree: spinnerDegree,
-            setSpinnerDegree: setSpinnerDegree,
-            changedRating: changedRating,
-            setChangedRating: setChangedRating
+            setSpinnerDegree: setSpinnerDegree
           })
         }, result.id);
       })]
