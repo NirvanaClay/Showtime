@@ -17,7 +17,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   useEffect(() => {
     console.log("In show effect, changedRating is:")
     console.log(changedRating)
-  })
+  }, [changedRating])
 
   useEffect(() =>{
     const checkRating = (e) => {
@@ -45,7 +45,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       id: id,
       rating: stateRating
     })
-    setChangedRating(true)
+    setChangedRating(!changedRating)
   }
 
   const deleteShow = async (e) => {
