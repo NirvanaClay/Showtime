@@ -4216,12 +4216,6 @@ var Show = function Show(_ref) {
       previewRating = _useState2[0],
       setPreviewRating = _useState2[1];
 
-  if (stateRating == rating) {
-    setStateRating(rating);
-  } else {
-    setStateRating(0);
-  }
-
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log("In show effect, stateRating is:");
     console.log(stateRating);
@@ -4240,7 +4234,7 @@ var Show = function Show(_ref) {
           var star = _step.value;
 
           if (star.parentElement.parentElement.parentElement.id == id) {
-            if (star.getAttribute('value') <= stateRating) {
+            if (star.getAttribute('value') <= rating) {
               star.classList.add('fas');
             } else {
               star.classList.remove('fas');

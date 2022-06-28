@@ -8,13 +8,6 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const [previewRating, setPreviewRating] = useState(rating)
 
-  if(stateRating == rating){
-    setStateRating(rating)
-  }
-  else{
-    setStateRating(0)
-  }
-
   useEffect(() => {
     console.log("In show effect, stateRating is:")
     console.log(stateRating)
@@ -27,7 +20,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       let stars = document.querySelectorAll('i')
       for(let star of stars){
         if(star.parentElement.parentElement.parentElement.id == id){
-          if(star.getAttribute('value') <= stateRating){
+          if(star.getAttribute('value') <= rating){
             star.classList.add('fas')
           }
           else{
