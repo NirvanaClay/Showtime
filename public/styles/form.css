@@ -319,7 +319,7 @@
   }
   .form .results-container .left-arrow__container {
     top: 115px;
-    left: -10px;
+    left: 5px;
     width: 40px;
     height: 40px;
   }
@@ -328,7 +328,7 @@
   }
   .form .results-container .right-arrow__container {
     top: 115px;
-    right: -10px;
+    right: 5px;
     width: 40px;
     height: 40px;
   }
