@@ -17,12 +17,12 @@ const RegisterForm = ({ setUser, setLoginStatus, passwordVisibility, setPassword
       password_confirmation: e.target[2].value
     }).then(
       await axios.get('/sanctum/csrf-cookie')
-      .then(res => {
-        axios.post('/login', data)
-        .then((res) => {
+      .then(async (res) => {
+        await axios.post('/login', data)
+        .then(async (res) => {
           console.log("in login post, res is:")
           console.log(res)
-          axios.get('/api/user')
+          await axios.get('/api/user')
           .then((res) => {
             const userInfo = res.data
             console.log("In register form, userInfo is:")

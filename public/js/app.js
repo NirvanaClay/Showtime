@@ -3717,41 +3717,77 @@ var RegisterForm = function RegisterForm(_ref) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var addUser = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(e) {
       var data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
               data = {
                 email: e.target[0].value,
                 password: e.target[1].value
               };
-              _context.t0 = axios.post('/api/register', {
+              _context3.t0 = axios.post('/api/register', {
                 email: e.target[0].value,
                 password: e.target[1].value,
                 password_confirmation: e.target[2].value
               });
-              _context.next = 5;
-              return axios.get('/sanctum/csrf-cookie').then(function (res) {
-                axios.post('/login', data).then(function (res) {
-                  console.log("in login post, res is:");
-                  console.log(res);
-                  axios.get('/api/user').then(function (res) {
-                    var userInfo = res.data;
-                    console.log("In register form, userInfo is:");
-                    console.log(userInfo);
-                    setUser(userInfo);
-                    setLoginStatus(true);
-                  });
-                });
-              });
+              _context3.next = 5;
+              return axios.get('/sanctum/csrf-cookie').then( /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(res) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          _context2.next = 2;
+                          return axios.post('/login', data).then( /*#__PURE__*/function () {
+                            var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
+                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                                while (1) {
+                                  switch (_context.prev = _context.next) {
+                                    case 0:
+                                      console.log("in login post, res is:");
+                                      console.log(res);
+                                      _context.next = 4;
+                                      return axios.get('/api/user').then(function (res) {
+                                        var userInfo = res.data;
+                                        console.log("In register form, userInfo is:");
+                                        console.log(userInfo);
+                                        setUser(userInfo);
+                                        setLoginStatus(true);
+                                      });
+
+                                    case 4:
+                                    case "end":
+                                      return _context.stop();
+                                  }
+                                }
+                              }, _callee);
+                            }));
+
+                            return function (_x3) {
+                              return _ref4.apply(this, arguments);
+                            };
+                          }());
+
+                        case 2:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2);
+                }));
+
+                return function (_x2) {
+                  return _ref3.apply(this, arguments);
+                };
+              }());
 
             case 5:
-              _context.t1 = _context.sent;
-              _context.next = 8;
-              return _context.t0.then.call(_context.t0, _context.t1)["catch"](function (res) {
+              _context3.t1 = _context3.sent;
+              _context3.next = 8;
+              return _context3.t0.then.call(_context3.t0, _context3.t1)["catch"](function (res) {
                 console.log(res);
               });
 
@@ -3760,10 +3796,10 @@ var RegisterForm = function RegisterForm(_ref) {
 
             case 9:
             case "end":
-              return _context.stop();
+              return _context3.stop();
           }
         }
-      }, _callee);
+      }, _callee3);
     }));
 
     return function addUser(_x) {
