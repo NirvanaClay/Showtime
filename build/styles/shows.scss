@@ -109,24 +109,20 @@
           margin: 10px auto;
           display: flex;
           justify-content: center;
-          form{
+          .fa-star{
+            font-size: 1.5rem;
+            color: #ffe600;
+          }
+          button{
             display: flex;
-            .fa-star{
-              font-size: 1.5rem;
-              color: #ffe600;
-            }
-            button{
-              display: flex;
-              all: unset;
-            }
+            all: unset;
           }
         }
         form{
-          display: flex;
           input[type='submit']{
             width: 90px;
             height: 45px;
-            display: flex;
+            display: block;
             margin: 10px auto;
             border: none;
             border-radius: 10px;

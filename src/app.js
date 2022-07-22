@@ -377,8 +377,8 @@ const App = () => {
   )
 }
 
-if (document.getElementById('root')) {
-  ReactDOM.render(<App />, document.getElementById('root'));
-}
+// if (document.getElementById('root')) {
+//   ReactDOM.render(<App />, document.getElementById('root'));
+// }
 
 export default App;
