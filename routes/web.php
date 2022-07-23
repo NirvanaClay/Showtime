@@ -34,15 +34,14 @@ Route::get('/authenticated', function () {
 });
 
 Route::get('/', function () {
-    return "Hello is this thing on?";
-    // $userCheck = Auth::user();
-    // return view('welcome', ['userCheck' => $userCheck]);
-    // if(Auth::user()){
-    //     return 'user';
-    // }
-    // else{
-    //     return 'bitch';
-    // }
+    $userCheck = Auth::user();
+    return view('welcome', ['userCheck' => $userCheck]);
+    if(Auth::user()){
+        return 'user';
+    }
+    else{
+        return 'bitch';
+    }
 })->name('home');
 
 Route::get('/{route}', function () {
