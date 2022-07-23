@@ -51,13 +51,15 @@ const App = () => {
   // console.log(userCheck)
 
   useEffect(() => {
-    console.log("Check auth status in app effect.")
-    axios.get('/authenticated')
-    .then((res) => {
-      const user = res.data
-      console.log("Which has res.data of:")
-      console.log(user)
-      if(user != 'guest'){
+    console.log("Check auth status in app effect, with user of:.")
+    console.log(user)
+    if(user){
+      console.log("user != 'Guest'")
+      axios.get('/authenticated')
+      .then((res) => {
+        const user = res.data
+        console.log("Which has res.data of:")
+        console.log(user)
         console.log("There is a user, which is:")
         console.log(user)
         setUser(user)
@@ -65,15 +67,16 @@ const App = () => {
         setEmail(user.email)
         setUserId(user.id)
         setLoginStatus(true)
-      }
-      else{
-        console.log("There is not a user.")
-        setName('Guest')
-        setEmail('')
-        setUserId(0)
-        setLoginStatus(false)
-      }
-    })
+      })
+    }
+    else{
+      console.log("user == Guest")
+      console.log("There is not a user.")
+      setName('Guest')
+      setEmail('')
+      setUserId(0)
+      setLoginStatus(false)
+    }
   }, [])
 
   const noStreaming = "This show is not currently available through streaming."
@@ -143,6 +146,7 @@ const App = () => {
   }, [streamingServices])
 
   const checkStreaming = async (e) => {
+    console.log("FUCKING HELLO BITCH WTF IN CHECKSTREAMING")
     setStreamingServices([])
     setIsLoading(true)
     const show_type = e.target.getAttribute('show_type')
@@ -272,6 +276,8 @@ const App = () => {
       let validResponses = []
       let finalArray
       let finalResults
+      console.log('FUCKING HELLO')
+      console.log("Setting isLoading to false.")
       console.log("Before final loop/check, responses are:")
       console.log(responses)
       setIsLoading(false)
@@ -374,8 +380,8 @@ const App = () => {
   )
 }
 
-if (document.getElementById('root')) {
-  ReactDOM.render(<App />, document.getElementById('root'));
-}
+// if (document.getElementById('root')) {
+//   ReactDOM.render(<App />, document.getElementById('root'));
+// }
 
 export default App;

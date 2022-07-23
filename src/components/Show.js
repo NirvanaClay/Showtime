@@ -19,6 +19,11 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     console.log(changedRating)
   }, [changedRating])
 
+  useEffect(() => {
+    console.log("In show effect, stateRating is:")
+    console.log(stateRating)
+  }, [stateRating])
+
   useEffect(() =>{
     const checkRating = (e) => {
       console.log("In checkRating, stateRating is:")
@@ -88,6 +93,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
     }
   }
 
+<<<<<<< HEAD:resources/js/components/Show.js
   useEffect(() => {
     if(isLoading){
       const interval = setInterval(() => {
@@ -101,6 +107,22 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
       console.log("ISLOADING IS FALSE.")
     }
   }, [spinnerDegree, isLoading]);
+=======
+  // useEffect(() => {
+  //   if(isLoading){
+  //     console.log("ISLOADING IS TRUE.")
+  //     const interval = setInterval(() => {
+  //       setSpinnerDegree(spinnerDegree + 90)
+  //       console.log("set spinner degree, which should be:")
+  //       console.log(spinnerDegree + 90)
+  //     }, 100);
+  //     return () => clearInterval(interval);
+  //   }
+  //   else{
+  //     console.log("ISLOADING IS FALSE.")
+  //   }
+  // }, [spinnerDegree, isLoading]);
+>>>>>>> process:src/components/Show.js
 
   const setRatingValue = (e) => {
     setStateRating(e.target.getAttribute('value'))

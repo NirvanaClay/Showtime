@@ -34,8 +34,9 @@ Route::get('/authenticated', function () {
 });
 
 Route::get('/', function () {
-    $userCheck = Auth::user();
-    return view('welcome', ['userCheck' => $userCheck]);
+    return "Hello is this thing on?";
+    // $userCheck = Auth::user();
+    // return view('welcome', ['userCheck' => $userCheck]);
     // if(Auth::user()){
     //     return 'user';
     // }

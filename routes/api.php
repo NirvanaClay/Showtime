@@ -36,6 +36,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/fuck', function(){
+    return "Fuck you!";
+});
+
 Route::post('/logout', function(Request $request){
     Auth::logout();
     $request->session()->invalidate();
@@ -48,6 +52,10 @@ Route::get('/userShows', 'App\Http\Controllers\ShowController@userShows');
 Route::get('/passwordReset', function() {
     return 'This should be view for password reset form.';
 })->name('password.reset');
+
+Route::get('/fuck', function() {
+    return "Fuck you.";
+});
 
 Route::post('/shows', 'App\Http\Controllers\ShowController@add');
 
