@@ -18,7 +18,7 @@
 
     </head>
     <body class="antialiased">
-        {{-- <div id='root'></div> --}}
+        <div id='root'></div>
         <script src="https://kit.fontawesome.com/93227efa85.js" crossorigin="anonymous"></script>
         <script src={{mix("js/app.js")}}></script>
     </body>

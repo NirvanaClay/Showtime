@@ -78,4 +78,4 @@ Route::post('/logout', function(Request $request){
     return redirect()->route('home');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
