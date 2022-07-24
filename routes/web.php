@@ -40,7 +40,7 @@ Route::get('/', function () {
         return 'user';
     }
     else{
-        return 'bitch';
+        return 'Youza bitch';
     }
 })->name('home');
 
