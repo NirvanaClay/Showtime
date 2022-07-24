@@ -1,3 +1,5 @@
+//Questionable if this is needed. Copied from Medium article, trying to get production build.
+
 const express = require('express');
 const favicon = require('express-favicon');
 const path = require('path');
