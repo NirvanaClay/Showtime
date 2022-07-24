@@ -43,7 +43,9 @@
     input[type='submit']{
       width: 90px;
       height: 45px;
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 10px auto;
       border: none;
       border-radius: 10px;
@@ -56,15 +58,16 @@
 }
 
 @media(max-width: 768px){
-  .register{
-    form{
-      .field{
-        input[type='text'], input[type='password']{
-        }
-      }
-    }
-  }
+  // .register{
+  //   form{
+  //     .field{
+  //       input[type='text'], input[type='password']{
+  //       }
+  //     }
+  //   }
+  // }
 }
+
 @media(max-width: 480px){
   .register{
     form{

@@ -96,6 +96,8 @@
           margin-bottom: 10px;
         }
         p{
+          width: 225px;
+          margin: 0 auto;
           font-size: 1.1rem;
         }
         .streaming-image{
@@ -109,20 +111,24 @@
           margin: 10px auto;
           display: flex;
           justify-content: center;
-          .fa-star{
-            font-size: 1.5rem;
-            color: #ffe600;
-          }
-          button{
+          form{
             display: flex;
-            all: unset;
+            .fa-star{
+              font-size: 1.5rem;
+              color: #ffe600;
+            }
+            button{
+              display: flex;
+              all: unset;
+            }
           }
         }
         form{
+          display: flex;
           input[type='submit']{
             width: 90px;
             height: 45px;
-            display: block;
+            display: flex;
             margin: 10px auto;
             border: none;
             border-radius: 10px;
@@ -182,6 +188,9 @@
       .shows{
         .show{
           width: 200px;
+          p{
+            width: 200px;
+          }
         }
       }
     }
@@ -218,6 +227,9 @@
             width: 100px;
             height: 150px;
           }
+          p{
+            width: 160px;
+          }
           .stars-container{
             .fa-star{
               font-size: 1.3rem;
@@ -244,6 +256,9 @@
           img{
             width: 80px;
             height: 120px;
+          }
+          p{
+            width: 120px;
           }
           .stars-container{
             width: 110px;

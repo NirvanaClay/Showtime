@@ -130,6 +130,8 @@
 }
 
 .show-index .shows__container .shows .show p {
+  width: 225px;
+  margin: 0 auto;
   font-size: 1.1rem;
 }
 
@@ -151,22 +153,36 @@
           justify-content: center;
 }
 
-.show-index .shows__container .shows .show .stars-container .fa-star {
+.show-index .shows__container .shows .show .stars-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.show-index .shows__container .shows .show .stars-container form .fa-star {
   font-size: 1.5rem;
   color: #ffe600;
 }
 
-.show-index .shows__container .shows .show .stars-container button {
+.show-index .shows__container .shows .show .stars-container form button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   all: unset;
 }
 
+.show-index .shows__container .shows .show form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .show-index .shows__container .shows .show form input[type='submit'] {
   width: 90px;
   height: 45px;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin: 10px auto;
   border: none;
   border-radius: 10px;
@@ -220,6 +236,9 @@
   .show-index .shows__container .shows .show {
     width: 200px;
   }
+  .show-index .shows__container .shows .show p {
+    width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -254,6 +273,9 @@
     width: 100px;
     height: 150px;
   }
+  .show-index .shows__container .shows .show p {
+    width: 160px;
+  }
   .show-index .shows__container .shows .show .stars-container .fa-star {
     font-size: 1.3rem;
   }
@@ -269,6 +291,9 @@
   .show-index .shows__container .shows .show img {
     width: 80px;
     height: 120px;
+  }
+  .show-index .shows__container .shows .show p {
+    width: 120px;
   }
   .show-index .shows__container .shows .show .stars-container {
     width: 110px;
