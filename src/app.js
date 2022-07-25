@@ -167,7 +167,9 @@ const App = () => {
 
     const headers = {
       'X-RapidAPI-Key': '153541ba38msh3a4675a0a844ccdp1a6a0cjsnc83d7caf9c90',
-      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com',
+      // 'Access-Control-Allow-Origin':'*',
+      // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'
     }
 
     console.log("Running getStreamingResults")
