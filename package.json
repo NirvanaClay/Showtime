@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "heroku-prebuild": "npm install -g serve",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
