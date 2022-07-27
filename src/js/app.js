@@ -8,17 +8,17 @@ import ReactDOM from 'react-dom';
 
 import Axios from 'axios'
 
-import Routing from './Routing.js'
-import Home from './Home.js'
-import Header from './components/Header.js'
-import Form from './components/Form.js'
-import Result from './components/Result.js'
-import SeriesList from './components/SeriesList.js'
-import MoviesList from './components/MoviesList.js'
-import RegisterForm from './components/RegisterForm.js'
-import LoginForm from './components/LoginForm.js'
-import LogoutForm from './components/LogoutForm.js'
-import Dashboard from './components/Dashboard.js'
+import Routing from "../Routing"
+import Home from '../Home.js'
+import Header from '../components/Header.js'
+import Form from '../components/Form.js'
+import Result from '../components/Result.js'
+import SeriesList from '../components/SeriesList.js'
+import MoviesList from '../components/MoviesList.js'
+import RegisterForm from '../components/RegisterForm.js'
+import LoginForm from '../components/LoginForm.js'
+import LogoutForm from '../components/LogoutForm.js'
+import Dashboard from '../components/Dashboard.js'
 
 import $ from 'jquery'
 import { set } from 'lodash';
