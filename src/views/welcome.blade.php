@@ -20,6 +20,6 @@
     <body class="antialiased">
         <div id='root'></div>
         <script src="https://kit.fontawesome.com/93227efa85.js" crossorigin="anonymous"></script>
-        <script src={{mix("app.js")}}></script>
+        <script src={{mix("src/app.js")}}></script>
     </body>
 </html>
