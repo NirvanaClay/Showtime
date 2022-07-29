@@ -146,7 +146,6 @@ const App = () => {
   }, [streamingServices])
 
   const checkStreaming = async (e) => {
-    console.log("FUCKING HELLO BITCH WTF IN CHECKSTREAMING")
     setStreamingServices([])
     setIsLoading(true)
     const show_type = e.target.getAttribute('show_type')
