@@ -8,7 +8,7 @@ import RegisterForm from './components/RegisterForm.js';
 
 const Routing = () => {
   return(
-    <Router>
+    <Router basename={"/build"}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterForm />} />
