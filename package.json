@@ -6,7 +6,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cd build && npm install && npm run build"
+    "heroku-postbuild": "cd build && npm run build"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.13.13",
