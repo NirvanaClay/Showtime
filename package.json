@@ -2,12 +2,11 @@
   "private": true,
   "homepage": "https://showcheck.herokuapp.com",
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build && npm run start"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.13.13",
