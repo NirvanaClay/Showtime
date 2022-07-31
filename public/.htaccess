@@ -22,7 +22,7 @@
     RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
     RewriteRule ^ %1 [L,NE,R=302]
 
-    RewriteRule ^((?!build/).*)$ build/$1 [L,NC]
+    RewriteRule ^((?!../build/).*)$ build/$1 [L,NC]
 
     FallbackResource ./index.html
 </IfModule>
