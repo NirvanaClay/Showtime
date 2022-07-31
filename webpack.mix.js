@@ -11,6 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('build/bullshit/js/main.4addf85a.js', 'public/js')
+mix.js('fuckthis', 'public/js')
     .react()
     .sass('public/sass/app.scss', 'public/css');
