@@ -15,7 +15,8 @@ class ShowController extends Controller
     {
         $id = Auth::id();
         $user = User::find($id);
-        return $user->shows;
+        return $user;
+        // return $user->shows;
     }
     public function add(Request $request)
     {
