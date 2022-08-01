@@ -33,20 +33,20 @@ Route::get('/authenticated', function () {
     }
 });
 
-// Route::get('/', function () {
-//     $userCheck = Auth::user();
-//     return view('welcome', ['userCheck' => $userCheck]);
-//     if(Auth::user()){
-//         return 'user';
-//     }
-//     else{
-//         return 'Youza bitch 4 real';
-//     }
-// })->name('home');
+Route::get('/', function () {
+    $userCheck = Auth::user();
+    return view('welcome', ['userCheck' => $userCheck]);
+    if(Auth::user()){
+        return 'user';
+    }
+    else{
+        return 'Youza bitch 4 real';
+    }
+})->name('home');
 
-// Route::get('/{route}', function () {
-//     return view('welcome');
-// });
+Route::get('/{route}', function () {
+    return view('welcome');
+});
 
 // Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
 
