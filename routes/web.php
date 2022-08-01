@@ -44,8 +44,6 @@ Route::get('/', function () {
     }
 })->name('home');
 
-Route::get('/userShows', 'App\Http\Controllers\ShowController@userShows');
-
 // Route::get('/{route}', function () {
 //     return view('welcome');
 // });
