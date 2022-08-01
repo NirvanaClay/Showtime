@@ -44,9 +44,9 @@ Route::get('/', function () {
     }
 })->name('home');
 
-Route::get('/{route}', function () {
-    return view('welcome');
-});
+// Route::get('/{route}', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
 
