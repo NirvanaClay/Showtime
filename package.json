@@ -1,6 +1,5 @@
 {
   "private": true,
-  "homepage": "https://showcheck.herokuapp.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
