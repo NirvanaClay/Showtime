@@ -38,9 +38,13 @@ Route::post('/login', function(Request $request) {
     }
 });
 
-Route::get('/user', function() {
-    return "Should be user.";
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
+
+// Route::get('/user', function() {
+//     return "Should be user.";
+// });
 
 Route::get('/fuck', function(){
     return "Fuck you!";
