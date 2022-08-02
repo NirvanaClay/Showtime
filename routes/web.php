@@ -33,7 +33,7 @@ Route::get('/authenticated', function () {
     }
 });
 
-Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
+// Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::get('/', function () {
     $userCheck = Auth::user();
