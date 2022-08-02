@@ -20,7 +20,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       // let token = res.config.headers.X-XSRF-TOKEN
       axios.post('/api/login', data)
       .then(() => {
-        axios.get('/api/user')
+        axios.get('/user')
         .then((res) => {
           const userInfo = res.data
           console.log("In login form, userInfo is:")
