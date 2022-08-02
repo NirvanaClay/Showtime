@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Show;
 use App\Models\User;
 
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +35,7 @@ Route::get('/authenticated', function () {
     }
 });
 
-// Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
+Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::get('/', function () {
     $userCheck = Auth::user();
@@ -73,9 +75,9 @@ Route::post('/login', function(Request $request) {
     ]);
 });
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 // Route::get('/user', function() {
 //     return "Should be user.";
