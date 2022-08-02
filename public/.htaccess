@@ -21,6 +21,6 @@
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.html [QSA,L]
+    RewriteRule ^ index.php [QSA,L]
 
 </IfModule>
