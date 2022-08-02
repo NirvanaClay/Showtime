@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes();
+
+Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::post('/login', function(Request $request) {
     $credentials = $request->validate([
