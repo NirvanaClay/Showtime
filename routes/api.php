@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
+use App\Models\Show;
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,11 +32,10 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-    };
-
-    return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ]);
+        $id = Auth::id();
+        $user = User::find($id);
+        return($user);
+    }
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
