@@ -21,10 +21,6 @@ Auth::routes();
 
 // Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
-Route::get('/sanctum/csrf-cookie', function() {
-    return "CSRF ROUTE SEE, MEH";
-});
-
 Route::post('/login', function(Request $request) {
     $credentials = $request->validate([
         'email' => ['required', 'email'],
