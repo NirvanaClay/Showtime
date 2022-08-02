@@ -18,7 +18,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       console.log("In initial sanctum get, res is:")
       console.log(res)
       // let token = res.config.headers.X-XSRF-TOKEN
-      axios.post('/api/login', data)
+      await axios.post('/api/login', data)
       .then(() => {
         axios.get('/api/user')
         .then((res) => {
