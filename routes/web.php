@@ -54,24 +54,24 @@ Route::get('/', function () {
 
 // Auth::routes();
 
-// Route::post('/login', function(Request $request) {
-//     $credentials = $request->validate([
-//         'email' => ['required', 'email'],
-//         'password' => ['required'],
-//     ]);
+Route::post('/login', function(Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-//     if (Auth::attempt($credentials)) {
-//         $request->session()->regenerate();
-//         $id = Auth::id();
-//         $user = User::find($id);
-//         return($user);
-//         // return redirect()->intended('dashboard');
-//     }
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        $id = Auth::id();
+        $user = User::find($id);
+        return($user);
+        // return redirect()->intended('dashboard');
+    }
 
-//     return back()->withErrors([
-//         'email' => 'The provided credentials do not match our records.',
-//     ]);
-// });
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
+});
 
 Route::post('/logout', function(Request $request){
     Auth::logout();
