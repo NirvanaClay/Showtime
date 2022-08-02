@@ -13,24 +13,25 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       email: e.target[0].value,
       password: e.target[1].value
     }
-    await axios.get('/sanctum/csrf-cookie')
-    .then(res => {
-      console.log("In initial sanctum get, res is:")
-      console.log(res)
-      // let token = res.config.headers.X-XSRF-TOKEN
-      axios.post('/login', data)
-      .then(() => {
-        axios.get('/user')
-        .then((res) => {
-          const userInfo = res.data
-          console.log("In login form, userInfo is:")
-          console.log(userInfo)
-          setUser(userInfo)
-          setLoginStatus(true)
-        })
-      })
-    })
-    navigate('/')
+    axios.get('/fuck')
+    // await axios.get('/sanctum/csrf-cookie')
+    // .then(res => {
+    //   console.log("In initial sanctum get, res is:")
+    //   console.log(res)
+    //   // let token = res.config.headers.X-XSRF-TOKEN
+    //   axios.post('/login', data)
+    //   .then(() => {
+    //     axios.get('/user')
+    //     .then((res) => {
+    //       const userInfo = res.data
+    //       console.log("In login form, userInfo is:")
+    //       console.log(userInfo)
+    //       setUser(userInfo)
+    //       setLoginStatus(true)
+    //     })
+    //   })
+    // })
+    // navigate('/')
   }
 
   useEffect(() => {
