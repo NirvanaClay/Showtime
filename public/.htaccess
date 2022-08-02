@@ -5,6 +5,8 @@
 
     RewriteEngine On
 
+    RewriteBase /
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -22,9 +24,5 @@
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.html [QSA,L]
-
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.+)$ index.html?url=$1 [QSA,L]
 
 </IfModule>
