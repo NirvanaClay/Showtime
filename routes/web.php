@@ -25,7 +25,7 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 */
 
 Route::get('/fuck', function(){
-    return "Fuck you!";
+    return "Fuck you!!";
 });
 
 Route::get('/authenticated', function () {
