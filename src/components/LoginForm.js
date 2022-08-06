@@ -13,6 +13,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       email: e.target[0].value,
       password: e.target[1].value
     }
+    axios.get('/fuck')
     // await axios.get('/sanctum/csrf-cookie')
     // .then(res => {
     //   console.log("In initial sanctum get, res is:")
