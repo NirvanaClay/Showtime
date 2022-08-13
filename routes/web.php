@@ -13,6 +13,8 @@ use App\Models\User;
 
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
