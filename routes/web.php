@@ -24,8 +24,25 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
+Route::get('/', function () {
+    return "Home route.";
+    // $userCheck = Auth::user();
+    // return view('welcome', ['userCheck' => $userCheck]);
+    // if(Auth::user()){
+    //     return 'user';
+    // }
+    // else{
+    //     return 'Youza bitch 4 real';
+    // }
+})->name('home');
+
 Route::get('/fuck', function(){
     return "Fuck you!";
+});
+
+Route::get('/allShows', function() {
+    $shows = Show::all();
+    return $shows;
 });
 
 Route::get('/authenticated', function () {
@@ -40,17 +57,6 @@ Route::get('/authenticated', function () {
 });
 
 Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
-
-Route::get('/', function () {
-    $userCheck = Auth::user();
-    return view('welcome', ['userCheck' => $userCheck]);
-    if(Auth::user()){
-        return 'user';
-    }
-    else{
-        return 'Youza bitch 4 real';
-    }
-})->name('home');
 
 // Route::get('/{route}', function () {
 //     return view('welcome');

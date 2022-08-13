@@ -32,12 +32,12 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        $request->session()->reflash();
-        $request->session()->keep(['username', 'email']);
-        $value = $request->session()->get('key');
         $id = Auth::id();
         $user = User::find($id);
         return($user);
+    }
+    else{
+        return "Didn't work.";
     }
 });
 

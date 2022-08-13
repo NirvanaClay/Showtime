@@ -155,8 +155,7 @@ return [
     |
     */
 
-    // 'domain' => env('SESSION_DOMAIN', null),
-    'domain' => '.showcheck.herokuapp.com',
+    'domain' => env('SESSION_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------

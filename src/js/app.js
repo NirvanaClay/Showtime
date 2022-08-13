@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom';
 
 import Axios from 'axios'
 
-import Routing from "../Routing"
 import Home from '../Home.js'
 import Header from '../components/Header.js'
 import Form from '../components/Form.js'
@@ -19,10 +18,13 @@ import RegisterForm from '../components/RegisterForm.js'
 import LoginForm from '../components/LoginForm.js'
 import LogoutForm from '../components/LogoutForm.js'
 import Dashboard from '../components/Dashboard.js'
+import Example from '../components/Example.js'
 
 import $ from 'jquery'
 import { set } from 'lodash';
 import axios from 'axios';
+
+import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -55,19 +57,19 @@ const App = () => {
     console.log(user)
     if(user){
       console.log("user != 'Guest'")
-      axios.get('/authenticated')
-      .then((res) => {
-        const user = res.data
-        console.log("Which has res.data of:")
-        console.log(user)
-        console.log("There is a user, which is:")
-        console.log(user)
-        setUser(user)
-        setName(user.name)
-        setEmail(user.email)
-        setUserId(user.id)
-        setLoginStatus(true)
-      })
+      console.log("In app effect, there is a user.")
+      // .then((res) => {
+      //   const user = res.data
+      //   console.log("Which has res.data of:")
+      //   console.log(user)
+      //   console.log("There is a user, which is:")
+      //   console.log(user)
+      //   setUser(user)
+      //   setName(user.name)
+      //   setEmail(user.email)
+      //   setUserId(user.id)
+      //   setLoginStatus(true)
+      // })
     }
     else{
       console.log("user == Guest")
@@ -83,39 +85,39 @@ const App = () => {
 
   const [showType, setShowType] = useState('')
 
-  useEffect((e) => {
-    console.log("On home effect user is " + user)
-    const fetchShows = async () => {
-      if(user){
-        const res = await fetch('/api/userShows')
-        const userShows = await res.json()
-        console.log("userShows are:")
-        console.log(userShows)
-        let userSeries = userShows.filter(show => show.show_type == 'series')
-        let userMovies = userShows.filter(show => show.show_type == 'movie')
-        let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
-        let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
-        console.log("orderedUserSeries is:")
-        console.log(orderedUserSeries)
-        console.log("orderedUserMovies are:")
-        console.log(orderedUserMovies)
+  // useEffect((e) => {
+  //   console.log("On home effect user is " + user)
+  //   const fetchShows = async () => {
+  //     if(user){
+  //       const res = await fetch('/api/userShows')
+  //       const userShows = await res.json()
+  //       console.log("userShows are:")
+  //       console.log(userShows)
+  //       let userSeries = userShows.filter(show => show.show_type == 'series')
+  //       let userMovies = userShows.filter(show => show.show_type == 'movie')
+  //       let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
+  //       let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
+  //       console.log("orderedUserSeries is:")
+  //       console.log(orderedUserSeries)
+  //       console.log("orderedUserMovies are:")
+  //       console.log(orderedUserMovies)
 
-        getSeries([...orderedUserSeries])
-        getMovies([...orderedUserMovies])
-      }
+  //       getSeries([...orderedUserSeries])
+  //       getMovies([...orderedUserMovies])
+  //     }
 
-      else{
-        console.log("On home effect there is no user.")
-        getSeries([])
-        getMovies([])
-        setName('Guest')
-        setEmail('')
-        setUserId(0)
-        setLoginStatus(false)
-      }
-    }
-    fetchShows()
-  }, [user, changedRating])
+  //     else{
+  //       console.log("On home effect there is no user.")
+  //       getSeries([])
+  //       getMovies([])
+  //       setName('Guest')
+  //       setEmail('')
+  //       setUserId(0)
+  //       setLoginStatus(false)
+  //     }
+  //   }
+  //   fetchShows()
+  // }, [user, changedRating])
 
   const fetchResults = async (e) => {
     e.preventDefault()
@@ -376,6 +378,8 @@ const App = () => {
 
         <Route path='my-movies' element={<MoviesList movies={movies} getMovies={getMovies} series={series} getSeries={getSeries} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices}streamingId={streamingId} loginStatus={loginStatus} user={user} noStreaming={noStreaming}isLoading={isLoading} spinnerDegree={spinnerDegree} setSpinnerDegree={setSpinnerDegree} resizeResetSlider={resizeResetSlider} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 
+        <Route path='example' element={<Example />} />
+
       </Routes>
     </Router>
   )
@@ -384,5 +388,10 @@ const App = () => {
 // if (document.getElementById('root')) {
 //   ReactDOM.render(<App />, document.getElementById('root'));
 // }
+
+// // If you want to start measuring performance in your app, pass a function
+// // to log results (for example: reportWebVitals(console.log))
+// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 export default App;

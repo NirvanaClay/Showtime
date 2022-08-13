@@ -7,21 +7,23 @@ const axios = require("axios");
 const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, setPasswordVisibility, changePasswordVisibility }) => {
   const navigate = useNavigate();
 
+  console.log("LoginForm comment that should show.")
+  
   const loginUser = async (e) => {
     e.preventDefault();
     let data = {
       email: e.target[0].value,
       password: e.target[1].value
     }
-    axios.get('/fuck')
-    // await axios.get('/sanctum/csrf-cookie')
+    console.log("Running loginUser function.")
+    // axios.get(`/fuck`)
+    // await axios.get(`/sanctum/csrf-cookie`)
     // .then(res => {
     //   console.log("In initial sanctum get, res is:")
     //   console.log(res)
-    //   // let token = res.config.headers.X-XSRF-TOKEN
-    //   axios.post('/login', data)
+    //   axios.post(`/api/login`, data)
     //   .then(() => {
-    //     axios.get('/user')
+    //     axios.get(`/api/user`)
     //     .then((res) => {
     //       const userInfo = res.data
     //       console.log("In login form, userInfo is:")
@@ -31,7 +33,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     //     })
     //   })
     // })
-    // navigate('/')
+    navigate('/')
   }
 
   useEffect(() => {
@@ -50,8 +52,9 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
   return(
     <>
       <div className='loginForm'>
-        <h1>Log In</h1>
-        <form onSubmit={loginUser} method='POST' action='/login'>
+        <h1>Log In YYY</h1>
+        <form>
+        {/* <form onSubmit={loginUser} method='POST' action='/login'> */}
           <div className='field'>
             <label htmlFor='email'>Email</label>
             <input type ='text' name='email' />
