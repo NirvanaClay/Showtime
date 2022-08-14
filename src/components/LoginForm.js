@@ -17,22 +17,22 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     }
     console.log("Running loginUser function fff.")
     // axios.get(`/fuck`)
-    // await axios.get(`/sanctum/csrf-cookie`)
-    // .then(res => {
-    //   console.log("In initial sanctum get, res is:")
-    //   console.log(res)
-    //   axios.post(`/api/login`, data)
-    //   .then(() => {
-    //     axios.get(`/api/user`)
-    //     .then((res) => {
-    //       const userInfo = res.data
-    //       console.log("In login form, userInfo is:")
-    //       console.log(userInfo)
-    //       setUser(userInfo)
-    //       setLoginStatus(true)
-    //     })
-    //   })
-    // })
+    await axios.get(`/sanctum/csrf-cookie`)
+    .then(res => {
+      console.log("In initial sanctum get, res is:")
+      console.log(res)
+      axios.post(`/api/login`, data)
+      .then(() => {
+        axios.get(`/api/user`)
+        .then((res) => {
+          const userInfo = res.data
+          console.log("In login form, userInfo is:")
+          console.log(userInfo)
+          setUser(userInfo)
+          setLoginStatus(true)
+        })
+      })
+    })
     navigate('/')
   }
 
