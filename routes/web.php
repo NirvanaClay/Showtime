@@ -25,15 +25,14 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 */
 
 Route::get('/', function () {
-    return "Home route.";
-    // $userCheck = Auth::user();
-    // return view('welcome', ['userCheck' => $userCheck]);
-    // if(Auth::user()){
-    //     return 'user';
-    // }
-    // else{
-    //     return 'Youza bitch 4 real';
-    // }
+    $userCheck = Auth::user();
+    return view('welcome', ['userCheck' => $userCheck]);
+    if(Auth::user()){
+        return 'user';
+    }
+    else{
+        return 'Youza bitch 4 real';
+    }
 })->name('home');
 
 Route::get('/fuck', function(){
