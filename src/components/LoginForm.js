@@ -15,7 +15,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       email: e.target[0].value,
       password: e.target[1].value
     }
-    console.log("Running loginUser function.")
+    console.log("Running loginUser function fff.")
     // axios.get(`/fuck`)
     // await axios.get(`/sanctum/csrf-cookie`)
     // .then(res => {
