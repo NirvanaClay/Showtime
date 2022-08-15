@@ -3425,7 +3425,7 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               _context.next = 4;
-              return axios.get('/api/sanctum/csrf-cookie').then(function (res) {
+              return axios.get('/sanctum/csrf-cookie').then(function (res) {
                 console.log("In initial sanctum get, res is:");
                 console.log(res);
                 axios.post('/api/login', data).then(function () {
