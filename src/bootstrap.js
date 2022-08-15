@@ -13,6 +13,8 @@ try {
 window.axios = require('axios');
 
 let token = document.getElementById('token')
+console.log("In bootstrap doc, token is:")
+console.log(token)
 
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['XSRF-TOKEN'] = token;
