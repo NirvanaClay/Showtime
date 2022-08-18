@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::post('/login', function(Request $request) {
-    return "Trying login route."
+    return "Trying login route.";
     // $credentials = $request->validate([
     //     'email' => ['required', 'email'],
     //     'password' => ['required'],
