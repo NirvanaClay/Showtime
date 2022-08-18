@@ -3428,8 +3428,8 @@ var LoginForm = function LoginForm(_ref) {
               return axios.get('/sanctum/csrf-cookie').then(function (res) {
                 console.log("In initial sanctum get, res is:");
                 console.log(res);
-                axios.post('/api/login', data).then(function () {
-                  axios.get('/api/user').then(function (res) {
+                axios.post('/login', data).then(function () {
+                  axios.get('/user').then(function (res) {
                     var userInfo = res.data;
                     console.log("In login form, userInfo is:");
                     console.log(userInfo);
