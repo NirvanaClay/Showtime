@@ -49,15 +49,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return "Should be user.";
 // });
 
-Route::get('/fuck', function(){
-    return "Fuck you!";
-});
-
-Route::get('/allShows', function() {
-    $shows = Show::all();
-    return $shows;
-});
-
 Route::post('/logout', function(Request $request){
     Auth::logout();
     $request->session()->invalidate();
