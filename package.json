@@ -1,6 +1,5 @@
 {
   "private": true,
-  "proxy": "https://showcheck.herokuapp.com/api",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
