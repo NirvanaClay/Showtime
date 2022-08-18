@@ -3425,17 +3425,13 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               _context.next = 4;
-              axios.get('/sanctum/csrf-cookie').then(function (res) {
-                console.log("In initial sanctum get, res is:");
-                console.log(res);
-                axios.post('/login', data).then(function () {
-                  axios.get('/user').then(function (res) {
-                    var userInfo = res.data;
-                    console.log("In login form, userInfo is:");
-                    console.log(userInfo);
-                    setUser(userInfo);
-                    setLoginStatus(true);
-                  });
+              axios.post('/login', data).then(function () {
+                axios.get('/user').then(function (res) {
+                  var userInfo = res.data;
+                  console.log("In login form, userInfo is:");
+                  console.log(userInfo);
+                  setUser(userInfo);
+                  setLoginStatus(true);
                 });
               });
 
