@@ -1,6 +1,6 @@
 {
   "private": true,
-  "proxy": "http://us-cdbr-east-05.cleardb.net",
+  "proxy": "https://showcheck.herokuapp.com/api",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
