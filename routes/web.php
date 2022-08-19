@@ -27,15 +27,14 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return "Home route.";
-    // $userCheck = Auth::user();
-    // return view('welcome', ['userCheck' => $userCheck]);
-    // if(Auth::user()){
-    //     return 'user';
-    // }
-    // else{
-    //     return 'Youza bitch 4 real';
-    // }
+    $userCheck = Auth::user();
+    return view('welcome', ['userCheck' => $userCheck]);
+    if(Auth::user()){
+        return 'user';
+    }
+    else{
+        return 'Youza bitch 4 real';
+    }
 })->name('home');
 
 Route::get('/fuck', function(){
@@ -76,10 +75,7 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        $id = Auth::id();
-        $user = User::find($id);
-        return($user);
-        // return redirect()->intended('dashboard');
+        return redirect()->intended('/');
     }
 
     return back()->withErrors([
@@ -87,8 +83,10 @@ Route::post('/login', function(Request $request) {
     ]);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/user', function (Request $request) {
+    $id = Auth::id();
+    $user = User::find($id);
+    return $user;
 });
 
 // Route::get('/user', function() {

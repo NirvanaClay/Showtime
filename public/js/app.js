@@ -3174,7 +3174,7 @@ var Form = function Form(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-      children: "Search Shows And Find Where To Stream Them fff"
+      children: "Search Shows And Find Where To Stream Them vvv"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       onSubmit: fetchResults,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3425,18 +3425,13 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               _context.next = 4;
-              return axios.get('/sanctum/csrf-cookie').then(function (res) {
-                console.log("In initial sanctum get, res is:");
-                console.log(res); // let token = res.config.headers.X-XSRF-TOKEN
-
-                axios.post('/api/login', data).then(function () {
-                  axios.get('/api/user').then(function (res) {
-                    var userInfo = res.data;
-                    console.log("In login form, userInfo is:");
-                    console.log(userInfo);
-                    setUser(userInfo);
-                    setLoginStatus(true);
-                  });
+              axios.post('/login', data).then(function () {
+                axios.get('/user').then(function (res) {
+                  var userInfo = res.data;
+                  console.log("In login form, userInfo is:");
+                  console.log(userInfo);
+                  setUser(userInfo);
+                  setLoginStatus(true);
                 });
               });
 
