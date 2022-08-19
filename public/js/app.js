@@ -3425,7 +3425,7 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               _context.next = 4;
-              axios.post('/login', data).then((res) => {
+              axios.post('/api/login', data).then((res) => {
                 var userInfo = res.data;
                 console.log("In login form, userInfo is:");
                 console.log(userInfo);

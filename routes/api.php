@@ -25,24 +25,24 @@ Auth::routes();
 Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::post('/login', function(Request $request) {
-    return "Trying login route.";
-    // $credentials = $request->validate([
-    //     'email' => ['required', 'email'],
-    //     'password' => ['required'],
-    // ]);
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-    // if (Auth::attempt($credentials)) {
-    //     $request->session()->regenerate();
-    //     $id = Auth::id();
-    //     $user = User::find($id);
-    //     return($user);
-    // }
-    // else{
-    //     return "Didn't work.";
-    // }
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        $id = Auth::id();
+        $user = User::find($id);
+        return $user;
+    }
+
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
