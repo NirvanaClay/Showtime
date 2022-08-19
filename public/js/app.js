@@ -3426,13 +3426,18 @@ var LoginForm = function LoginForm(_ref) {
               };
               _context.next = 4;
               axios.post('/login', data).then(function () {
-                axios.get('/user').then(function (res) {
-                  var userInfo = res.data;
-                  console.log("In login form, userInfo is:");
-                  console.log(userInfo);
-                  setUser(userInfo);
-                  setLoginStatus(true);
-                });
+                var userInfo = res.data;
+                console.log("In login form, userInfo is:");
+                console.log(userInfo);
+                setUser(userInfo);
+                setLoginStatus(true);
+                // axios.get('/user').then(function (res) {
+                //   var userInfo = res.data;
+                //   console.log("In login form, userInfo is:");
+                //   console.log(userInfo);
+                //   setUser(userInfo);
+                //   setLoginStatus(true);
+                // });
               });
 
             case 4:
