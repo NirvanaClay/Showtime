@@ -82,9 +82,10 @@ Route::post('/login', function(Request $request) {
 });
 
 Route::get('/user', function (Request $request) {
-    $id = Auth::id();
-    $user = User::find($id);
-    return $user;
+    return "This is user route.";
+    // $id = Auth::id();
+    // $user = User::find($id);
+    // return $user;
 });
 
 // Route::get('/user', function() {
