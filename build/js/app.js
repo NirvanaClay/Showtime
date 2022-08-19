@@ -2462,28 +2462,29 @@ var App = function App() {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log("Check auth status in app effect.");
-    axios__WEBPACK_IMPORTED_MODULE_3___default().get('/authenticated').then(function (res) {
-      var user = res.data;
-      console.log("Which has res.data of:");
-      console.log(user);
+    console.log("Manually edited public app.js to get rid of authenticated request.")
+  //   console.log("Check auth status in app effect.");
+  //   axios__WEBPACK_IMPORTED_MODULE_3___default().get('/authenticated').then(function (res) {
+  //     var user = res.data;
+  //     console.log("Which has res.data of:");
+  //     console.log(user);
 
-      if (user != 'guest') {
-        console.log("There is a user, which is:");
-        console.log(user);
-        setUser(user);
-        setName(user.name);
-        setEmail(user.email);
-        setUserId(user.id);
-        setLoginStatus(true);
-      } else {
-        console.log("There is not a user.");
-        setName('Guest');
-        setEmail('');
-        setUserId(0);
-        setLoginStatus(false);
-      }
-    });
+  //     if (user != 'guest') {
+  //       console.log("There is a user, which is:");
+  //       console.log(user);
+  //       setUser(user);
+  //       setName(user.name);
+  //       setEmail(user.email);
+  //       setUserId(user.id);
+  //       setLoginStatus(true);
+  //     } else {
+  //       console.log("There is not a user.");
+  //       setName('Guest');
+  //       setEmail('');
+  //       setUserId(0);
+  //       setLoginStatus(false);
+  //     }
+  //   });
   }, []);
   var noStreaming = "This show is not currently available through streaming.";
 
@@ -3173,7 +3174,7 @@ var Form = function Form(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-      children: "Search Shows And Find Where To Stream Them qqq"
+      children: "Search Shows And Find Where To Stream Them vvv"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       onSubmit: fetchResults,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3424,19 +3425,19 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               _context.next = 4;
-              return axios.get('/sanctum/csrf-cookie').then(function (res) {
-                console.log("In initial sanctum get, res is:");
-                console.log(res); // let token = res.config.headers.X-XSRF-TOKEN
-
-                axios.post('/api/login', data).then(function () {
-                  axios.get('/api/user').then(function (res) {
-                    var userInfo = res.data;
-                    console.log("In login form, userInfo is:");
-                    console.log(userInfo);
-                    setUser(userInfo);
-                    setLoginStatus(true);
-                  });
-                });
+              axios.post('/login', data).then((res) => {
+                var userInfo = res.data;
+                console.log("In login form, userInfo is:");
+                console.log(userInfo);
+                setUser(userInfo);
+                setLoginStatus(true);
+                // axios.get('/user').then(function (res) {
+                //   var userInfo = res.data;
+                //   console.log("In login form, userInfo is:");
+                //   console.log(userInfo);
+                //   setUser(userInfo);
+                //   setLoginStatus(true);
+                // });
               });
 
             case 4:
