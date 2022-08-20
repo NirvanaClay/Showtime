@@ -2231,6 +2231,7 @@ var Home = function Home(_ref) {
       failedSearch = _ref.failedSearch,
       setFailedSearch = _ref.setFailedSearch,
       resizeResetSlider = _ref.resizeResetSlider;
+  console.log("Home component.");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
     className: "home",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {

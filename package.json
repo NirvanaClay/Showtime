@@ -1,8 +1,6 @@
 {
   "private": true,
-  "homepage": ".",
   "scripts": {
-    "dev": "npm run development",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
