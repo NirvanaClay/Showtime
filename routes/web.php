@@ -73,9 +73,10 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        $id = Auth::id();
-        $user = User::find($id);
-        Auth::attempt($user);
+        return redirect()->intended('/');
+        // $id = Auth::id();
+        // $user = User::find($id);
+        // Auth::attempt($user);
     }
 
     return back()->withErrors([
