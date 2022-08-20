@@ -2664,18 +2664,24 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               console.log("Running loginUser function.");
-              axios.post("/login", data).then(function () {
-                axios.get("/user").then(function (res) {
-                  var userInfo = res.data;
-                  console.log("In login form, userInfo is:");
-                  console.log(userInfo);
-                  setUser(userInfo);
-                  setLoginStatus(true);
-                });
-              });
-              navigate('/');
+              _context.next = 5;
+              return axios.post("/login", data);
 
             case 5:
+              axios.get('/user'); // .then(() => {
+              //   axios.get(`/user`)
+              //   .then((res) => {
+              //     const userInfo = res.data
+              //     console.log("In login form, userInfo is:")
+              //     console.log(userInfo)
+              //     setUser(userInfo)
+              //     setLoginStatus(true)
+              //   })
+              //   })
+
+              navigate('/');
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -2703,11 +2709,11 @@ var LoginForm = function LoginForm(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "loginForm",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        children: "Log In YYY"
+        children: "Log In"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
         onSubmit: loginUser,
         method: "POST",
-        action: "/api/login",
+        action: "/login",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "field",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
