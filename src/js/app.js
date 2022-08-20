@@ -24,7 +24,7 @@ import $ from 'jquery'
 import { set } from 'lodash';
 import axios from 'axios';
 
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from '../reportWebVitals';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);

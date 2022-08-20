@@ -43,7 +43,9 @@ Route::post('/login', function(Request $request) {
 });
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    $id = Auth::id();
+    $user = User::find($id);
+    return $user;
 });
 
 // Route::get('/user', function() {
