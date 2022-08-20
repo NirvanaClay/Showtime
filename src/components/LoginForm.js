@@ -48,7 +48,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     <>
       <div className='loginForm'>
         <h1>Log In</h1>
-        <form onSubmit={loginUser} method='POST' action='/api/login'>
+        <form onSubmit={loginUser} method='POST' action='/login'>
           <div className='field'>
             <label htmlFor='email'>Email</label>
             <input type ='text' name='email' />
