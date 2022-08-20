@@ -3354,7 +3354,7 @@ var Header = function Header(_ref) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
         children: !loginStatus && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Link, {
-          to: "/login",
+          to: "/api/login",
           onClick: resetSlider,
           children: "Login"
         })
