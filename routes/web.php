@@ -24,6 +24,8 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     $userCheck = Auth::user();
     return view('welcome', ['userCheck' => $userCheck]);
@@ -62,8 +64,6 @@ Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 // });
 
 // Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
-
-// Auth::routes();
 
 Route::post('/login', function(Request $request) {
     $credentials = $request->validate([
