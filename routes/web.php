@@ -75,7 +75,7 @@ Route::post('/login', function(Request $request) {
         $request->session()->regenerate();
         $id = Auth::id();
         $user = User::find($id);
-        return $user;
+        Auth::login($user);
     }
 
     return back()->withErrors([
