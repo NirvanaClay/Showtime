@@ -86,9 +86,10 @@ Route::post('/login', function(Request $request) {
 
 Route::get('/user', function (Request $request) {
     if(Auth::user()){
-        $id = Auth::id();
-        $user = User::find($id);
-        return($user);
+        return Auth::user();
+        // $id = Auth::id();
+        // $user = User::find($id);
+        // return($user);
     }
     else{
         return 'guest'; 
