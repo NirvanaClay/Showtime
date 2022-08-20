@@ -385,9 +385,10 @@ const App = () => {
   )
 }
 
-// if (document.getElementById('root')) {
-//   ReactDOM.render(<App />, document.getElementById('root'));
-// }
+if (document.getElementById('root')) {
+  console.log("Found element with Id of root.")
+  ReactDOM.render(<App />, document.getElementById('root'));
+}
 
 // // If you want to start measuring performance in your app, pass a function
 // // to log results (for example: reportWebVitals(console.log))

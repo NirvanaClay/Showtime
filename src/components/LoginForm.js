@@ -16,9 +16,9 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       password: e.target[1].value
     }
     console.log("Running loginUser function.")
-    axios.post(`/api/login`, data)
+    axios.post(`/login`, data)
     .then(() => {
-      axios.get(`/api/user`)
+      axios.get(`/user`)
       .then((res) => {
         const userInfo = res.data
         console.log("In login form, userInfo is:")
@@ -47,8 +47,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     <>
       <div className='loginForm'>
         <h1>Log In YYY</h1>
-        <form>
-        {/* <form onSubmit={loginUser} method='POST' action='/login'> */}
+        <form onSubmit={loginUser} method='POST' action='/api/login'>
           <div className='field'>
             <label htmlFor='email'>Email</label>
             <input type ='text' name='email' />

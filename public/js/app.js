@@ -2664,8 +2664,8 @@ var LoginForm = function LoginForm(_ref) {
                 password: e.target[1].value
               };
               console.log("Running loginUser function.");
-              axios.post("/api/login", data).then(function () {
-                axios.get("/api/user").then(function (res) {
+              axios.post("/login", data).then(function () {
+                axios.get("/user").then(function (res) {
                   var userInfo = res.data;
                   console.log("In login form, userInfo is:");
                   console.log(userInfo);
@@ -2705,6 +2705,9 @@ var LoginForm = function LoginForm(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         children: "Log In YYY"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+        onSubmit: loginUser,
+        method: "POST",
+        action: "/api/login",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "field",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
@@ -4934,10 +4937,12 @@ var App = function App() {
       })]
     })]
   });
-}; // if (document.getElementById('root')) {
-//   ReactDOM.render(<App />, document.getElementById('root'));
-// }
-// // If you want to start measuring performance in your app, pass a function
+};
+
+if (document.getElementById('root')) {
+  console.log("Found element with Id of root.");
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_17__.jsx)(App, {}), document.getElementById('root'));
+} // // If you want to start measuring performance in your app, pass a function
 // // to log results (for example: reportWebVitals(console.log))
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 

@@ -17,7 +17,7 @@ window.axios = require('axios');
 // console.log(token)
 
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-// window.axios.defaults.headers.common['XSRF-TOKEN'] = token;
+// window.axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 windows.axios.defaults.withCredentials = true;
 
