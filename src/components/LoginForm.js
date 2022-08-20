@@ -16,17 +16,18 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       password: e.target[1].value
     }
     console.log("Running loginUser function.")
-    axios.post(`/login`, data)
-    .then(() => {
-      axios.get(`/user`)
-      .then((res) => {
-        const userInfo = res.data
-        console.log("In login form, userInfo is:")
-        console.log(userInfo)
-        setUser(userInfo)
-        setLoginStatus(true)
-      })
-      })
+    await axios.post(`/login`, data)
+    axios.get('/user')
+    // .then(() => {
+    //   axios.get(`/user`)
+    //   .then((res) => {
+    //     const userInfo = res.data
+    //     console.log("In login form, userInfo is:")
+    //     console.log(userInfo)
+    //     setUser(userInfo)
+    //     setLoginStatus(true)
+    //   })
+    //   })
     navigate('/')
   }
 
