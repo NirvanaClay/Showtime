@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -73,7 +74,8 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return Auth::user();
+        Session::save();
+        return "Updated user route.";
         // return redirect()->intended('/');
         // $id = Auth::id();
         // $user = User::find($id);
