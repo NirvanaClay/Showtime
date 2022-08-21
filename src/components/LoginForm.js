@@ -47,7 +47,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
   return(
     <>
       <div className='loginForm'>
-        <h1>Log In HHH</h1>
+        <h1>Log In</h1>
         <form onSubmit={loginUser} method='POST' action='/login'>
           <div className='field'>
             <label htmlFor='email'>Email</label>
