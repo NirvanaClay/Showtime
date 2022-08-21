@@ -66,37 +66,41 @@ Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 // Route::get('/shows', 'App\Http\Controllers\ShowController@index')->name('shows');
 
-Route::post('/login', function(Request $request) {
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
-
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        Session::save();
-        return "Updated user route.";
-        // return redirect()->intended('/');
-        // $id = Auth::id();
-        // $user = User::find($id);
-        // Auth::attempt($user);
-    }
-
-    return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ]);
+Route::group(['middleware' => ['web']], function () {
+    Route::post('/login', function(Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            Session::save();
+            return "Updated user route.";
+            // return redirect()->intended('/');
+            // $id = Auth::id();
+            // $user = User::find($id);
+            // Auth::attempt($user);
+        }
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    });
 });
 
-Route::get('/user', function (Request $request) {
-    if(Auth::user()){
-        return Auth::user();
-        // $id = Auth::id();
-        // $user = User::find($id);
-        // return($user);
-    }
-    else{
-        return 'guest'; 
-    }
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/user', function (Request $request) {
+        if(Auth::user()){
+            return Auth::user();
+            // $id = Auth::id();
+            // $user = User::find($id);
+            // return($user);
+        }
+        else{
+            return 'guest'; 
+        }
+    });
 });
 
 // Route::get('/user', function() {
