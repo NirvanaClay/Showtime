@@ -74,9 +74,7 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        Session::save();
-        return Auth::check();
-        // return redirect()->intended('/');
+        return redirect()->intended('/');
         // $id = Auth::id();
         // $user = User::find($id);
         // Auth::attempt($user);
@@ -88,7 +86,7 @@ Route::post('/login', function(Request $request) {
 });
 
 Route::get('/user', function (Request $request) {
-    if(!Auth::guest()){
+    if(Auth::user()){
         return "User.";
     }
     else{
