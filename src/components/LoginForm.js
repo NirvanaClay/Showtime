@@ -17,7 +17,9 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     }
     console.log("Running loginUser function.")
     await axios.post(`/login`, data)
-    axios.get('/user')
+    .then(() => {
+      axios.get('/user')
+    })
     // .then(() => {
     //   axios.get(`/user`)
     //   .then((res) => {
