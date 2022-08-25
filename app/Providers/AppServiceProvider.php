@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+            //compose all the views....
+        view()->composer('*', function ($view) 
+        {
+        auth()->user();
+        });  
     }
 }
