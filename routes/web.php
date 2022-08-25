@@ -87,10 +87,10 @@ Route::post('/login', function(Request $request) {
 
 Route::get('/user', function (Request $request) {
     if(Auth::user()){
-        return "User.";
+        return "USING .THEN, User.";
     }
     else{
-        return "Guest.";
+        return "USING .THEN, Guest.";
     }
     // if(Auth::user()){
     //     return Auth::user();
