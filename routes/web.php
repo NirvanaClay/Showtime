@@ -87,10 +87,10 @@ Route::post('/login', function(Request $request) {
 
 Route::get('/user', function (Request $request) {
     if(Auth::user()){
-        return "USING .THEN, User.";
+        return "USING .THEN WITH NEW SESSION DOMAIN, User.";
     }
     else{
-        return "USING .THEN, Guest.";
+        return "USING .THEN WITH NEW SESSION DOMAIN, Guest.";
     }
     // if(Auth::user()){
     //     return Auth::user();
