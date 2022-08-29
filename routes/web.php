@@ -74,7 +74,7 @@ Route::post('/login', function(Request $request) {
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return Auth::user();
+        // return Auth::user();
         // $id = Auth::id();
         // $user = User::find($id);
         // Auth::attempt($user);
@@ -87,10 +87,10 @@ Route::post('/login', function(Request $request) {
 
 Route::get('/user', function (Request $request) {
     if(Auth::user()){
-        return "Without .then, User.";
+        return "Without returning a value on login, User.";
     }
     else{
-        return "Without .then, Guest.";
+        return "Without returning a value on login, Guest.";
     }
     // if(Auth::user()){
     //     return Auth::user();
