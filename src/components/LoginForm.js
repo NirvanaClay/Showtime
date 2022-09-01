@@ -31,7 +31,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     //     setLoginStatus(true)
     //   })
     //   })
-    navigate('/')
+    // navigate('/')
   }
 
   useEffect(() => {
