@@ -2669,6 +2669,9 @@ var LoginForm = function LoginForm(_ref) {
 
             case 5:
               axios.get('/user'); // .then(() => {
+              //   axios.get('/user')
+              // })
+              // .then(() => {
               //   axios.get(`/user`)
               //   .then((res) => {
               //     const userInfo = res.data
@@ -2678,10 +2681,9 @@ var LoginForm = function LoginForm(_ref) {
               //     setLoginStatus(true)
               //   })
               //   })
+              // navigate('/')
 
-              navigate('/');
-
-            case 7:
+            case 6:
             case "end":
               return _context.stop();
           }

@@ -87,10 +87,10 @@ Route::post('/login', function(Request $request) {
 
 Route::get('/user', function (Request $request) {
     if(Auth::user()){
-        return "Without returning a value on login, WITHOUT NAVIGATE, User.";
+        return "Without returning a value on login, WITHOUT NAVIGATE AFTER MIX, User.";
     }
     else{
-        return "Without returning a value on login, WITHOUT NAVIGATE, Guest.";
+        return "Without returning a value on login, WITHOUT NAVIGATE AFTER MIX, Guest.";
     }
     // if(Auth::user()){
     //     return Auth::user();
