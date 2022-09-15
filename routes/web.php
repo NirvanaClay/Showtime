@@ -27,7 +27,10 @@ Route::get('/dashboard', function () {
 Route::get('/user', function (Request $request) {
     if(Auth::User()){
         return $request->user();
-    };
+    }
+    else{
+        "There is no user.";
+    }
 });
 
 require __DIR__.'/auth.php';
