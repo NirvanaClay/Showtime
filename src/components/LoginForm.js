@@ -15,9 +15,19 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       email: e.target[0].value,
       password: e.target[1].value
     }
+    let header = {
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
+    }
     console.log("Running loginUser function.")
-    await axios.post(`/login`, data)
-    axios.get('/user')
+    // axios.post(`/login`, {
+    //   params: data,
+    //   headers: header
+    // })
+    axios.post('/login', data)
+    // axios.get('/user')
+    .then(() => {
+      axios.get('/user')
+    })
     // .then(() => {
     //   axios.get('/user')
     // })

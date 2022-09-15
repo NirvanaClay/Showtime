@@ -2653,7 +2653,9 @@ var LoginForm = function LoginForm(_ref) {
 
   var loginUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var data;
+      var _document$querySelect, _document$querySelect2;
+
+      var data, header;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2663,12 +2665,18 @@ var LoginForm = function LoginForm(_ref) {
                 email: e.target[0].value,
                 password: e.target[1].value
               };
-              console.log("Running loginUser function.");
-              _context.next = 5;
-              return axios.post("/login", data);
+              header = {
+                'X-CSRF-TOKEN': (_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : (_document$querySelect2 = _document$querySelect.getAttribute('content')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.toString()
+              };
+              console.log("Running loginUser function."); // axios.post(`/login`, {
+              //   params: data,
+              //   headers: header
+              // })
 
-            case 5:
-              axios.get('/user'); // .then(() => {
+              axios.post('/login', data) // axios.get('/user')
+              .then(function () {
+                axios.get('/user');
+              }); // .then(() => {
               //   axios.get('/user')
               // })
               // .then(() => {
@@ -2683,7 +2691,7 @@ var LoginForm = function LoginForm(_ref) {
               //   })
               // navigate('/')
 
-            case 6:
+            case 5:
             case "end":
               return _context.stop();
           }
