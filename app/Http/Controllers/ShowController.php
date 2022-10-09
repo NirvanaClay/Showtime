@@ -11,12 +11,17 @@ use App\Models\User_show;
 
 class ShowController extends Controller
 {
-    public function userShows(Request $request)
-    {
-        $id = Auth::id();
-        $user = User::find($id);
-        return $user->shows;
-    }
+    // public function userShows(Request $request)
+    // {
+    //     $id = Auth::id();
+    //     $user = User::find($id);
+    //     if($user){
+    //         return "There is a user.";
+    //     }
+    //     else{
+    //         return "There is not a user";
+    //     }
+    // }
     public function add(Request $request)
     {
         $id = Auth::id();

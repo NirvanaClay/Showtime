@@ -7,7 +7,10 @@ const axios = require("axios");
 const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, setPasswordVisibility, changePasswordVisibility }) => {
   const navigate = useNavigate();
 
-  console.log("LoginForm comment that should show.")
+  useEffect(() => {
+    console.log("In loginForm, loginStatus is:")
+    console.log(loginStatus)
+  })
   
   const loginUser = async (e) => {
     e.preventDefault();
@@ -24,22 +27,18 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
     //   headers: header
     // })
     axios.post('/login', data)
-    // axios.get('/user')
-    .then(() => {
-      axios.get('/user')
+    .then((res) => {
+      axios.get('/userShows')
+      // .then((res) => {
+      //   console.log("The response from userShows is:")
+      //   console.log(res)
+      // })
+      // const userInfo = res.data
+      // console.log("In login form, userInfo is:")
+      // console.log(userInfo)
+      // setUser(userInfo)
+      // setLoginStatus(true)
     })
-    // .then(() => {
-    //   axios.get('/user')
-    // })
-    // .then(() => {
-    //   axios.get(`/user`)
-    //   .then((res) => {
-    //     const userInfo = res.data
-    //     console.log("In login form, userInfo is:")
-    //     console.log(userInfo)
-    //     setUser(userInfo)
-    //     setLoginStatus(true)
-    //   })
     //   })
     // navigate('/')
   }

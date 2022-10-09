@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -23,14 +22,5 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-Route::get('/user', function (Request $request) {
-    if(Auth::User()){
-        return $request->user();
-    }
-    else{
-        "There is no user.";
-    }
-});
 
 require __DIR__.'/auth.php';

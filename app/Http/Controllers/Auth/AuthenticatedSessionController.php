@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,21 +29,41 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $user = Auth::User();
+            $shows = $user->shows;
+            return [$user, $shows];
+        }
+ 
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
-        return $user;
-
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function user(Request $request)
+    public function userShows(Request $request)
     {
-        return "Testing.";
-        // return Auth::user();
+        $id = Auth::id();
+        $user = User::find($id);
+        if($user){
+            return "There is a user.";
+        }
+        else{
+            return "There is not a user";
+        }
     }
+
     /**
      * Destroy an authenticated session.
      *

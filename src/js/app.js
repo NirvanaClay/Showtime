@@ -79,45 +79,42 @@ const App = () => {
       setUserId(0)
       setLoginStatus(false)
     }
-  }, [])
+  }, [user])
 
   const noStreaming = "This show is not currently available through streaming."
 
   const [showType, setShowType] = useState('')
 
-  // useEffect((e) => {
-  //   console.log("On home effect user is " + user)
-  //   const fetchShows = async () => {
-  //     if(user){
-  //       const res = await fetch('/api/userShows')
-  //       const userShows = await res.json()
-  //       console.log("userShows are:")
-  //       console.log(userShows)
-  //       let userSeries = userShows.filter(show => show.show_type == 'series')
-  //       let userMovies = userShows.filter(show => show.show_type == 'movie')
-  //       let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
-  //       let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
-  //       console.log("orderedUserSeries is:")
-  //       console.log(orderedUserSeries)
-  //       console.log("orderedUserMovies are:")
-  //       console.log(orderedUserMovies)
+  useEffect((e) => {
+    const fetchShows = async () => {
+      if(user){
+        const userShows = user[1]
+        console.log("userShows are:")
+        console.log(userShows)
+        let userSeries = userShows.filter(show => show.show_type == 'series')
+        let userMovies = userShows.filter(show => show.show_type == 'movie')
+        let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
+        let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
+        console.log("orderedUserSeries is:")
+        console.log(orderedUserSeries)
+        console.log("orderedUserMovies are:")
+        console.log(orderedUserMovies)
+        getSeries([...orderedUserSeries])
+        getMovies([...orderedUserMovies])
+      }
 
-  //       getSeries([...orderedUserSeries])
-  //       getMovies([...orderedUserMovies])
-  //     }
-
-  //     else{
-  //       console.log("On home effect there is no user.")
-  //       getSeries([])
-  //       getMovies([])
-  //       setName('Guest')
-  //       setEmail('')
-  //       setUserId(0)
-  //       setLoginStatus(false)
-  //     }
-  //   }
-  //   fetchShows()
-  // }, [user, changedRating])
+      else{
+        console.log("On home effect there is no user.")
+        getSeries([])
+        getMovies([])
+        setName('Guest')
+        setEmail('')
+        setUserId(0)
+        setLoginStatus(false)
+      }
+    }
+    fetchShows()
+  }, [user, changedRating])
 
   const fetchResults = async (e) => {
     e.preventDefault()
