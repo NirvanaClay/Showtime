@@ -18,7 +18,7 @@ const Result = ({ title, image, id, user, streamingServices, getResults, checkSt
     } 
     console.log("Data is:")
     console.log(data)
-    await axios.post('api/shows', data)
+    await axios.post('/shows', data)
     .then(function(response){
       console.log("response from .then of myShow is:")
       console.log(response)

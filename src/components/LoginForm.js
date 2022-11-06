@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-
 const axios = require("axios");
 
-const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, setPasswordVisibility, changePasswordVisibility }) => {
+const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, setPasswordVisibility, changePasswordVisibility, userShows, setUserShows }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("In loginForm, loginStatus is:")
     console.log(loginStatus)
-  })
+    console.log("and in loginForm, userShows are:")
+    console.log(userShows)
+  }, [userShows])
   
   const loginUser = async (e) => {
     e.preventDefault();
@@ -18,29 +19,74 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
       email: e.target[0].value,
       password: e.target[1].value
     }
-    let header = {
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
-    }
+    // let header = {
+    //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
+    // }
     console.log("Running loginUser function.")
-    // axios.post(`/login`, {
-    //   params: data,
-    //   headers: header
-    // })
-    axios.post('/login', data)
+    axios.get('/sanctum/csrf-cookie')
     .then((res) => {
-      axios.get('/userShows')
-      // .then((res) => {
-      //   console.log("The response from userShows is:")
-      //   console.log(res)
-      // })
-      // const userInfo = res.data
-      // console.log("In login form, userInfo is:")
-      // console.log(userInfo)
-      // setUser(userInfo)
-      // setLoginStatus(true)
-    })
+      // axios.get('/testing')
+      axios.post('/login', data)
+        .then((res) => {
+          axios.get('/api/user')
+        })
+      })
+    //   axios.post('/login', data)
+    //   .then((res) => {
+    //     axios.get('/user')
     //   })
-    // navigate('/')
+    // })
+    // axios.post(`/login`, data)
+    // .then((res) => {
+    //   axios.post('/tokens/create')
+    //   .then((res) => {
+    //     axios.get('/userShows', res.data)
+    //   })
+    // })
+    // axios.post('/api/auth/login', data)
+    // .then(() => {
+    //   axios.post('/tokens/create')
+    // })
+    // .then((res) => {
+    //   const user = res.data
+    //   setUser(user)
+    //   // setName(user.name)
+    //   // setEmail(user.email)
+    //   // setUserId(user.id)
+    //   setLoginStatus(true)
+    //   axios.get('/userShows')
+    //   .then((res) => {
+    //     setUserShows([...res.data])
+    //     // let userShows = res.data
+    //     // console.log("userShows are:")
+    //     // console.log(userShows)
+    //     // let userSeries = userShows.filter(show => show.show_type == 'series')
+    //     // let userMovies = userShows.filter(show => show.show_type == 'movie')
+    //     // let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
+    //     // let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
+    //     // console.log("orderedUserSeries is:")
+    //     // console.log(orderedUserSeries)
+    //     // console.log("orderedUserMovies are:")
+    //     // console.log(orderedUserMovies)
+    //     // getSeries([...orderedUserSeries])
+    //     // getMovies([...orderedUserMovies])
+    //   })
+    //   // .then((res) => {
+    //   //   let shows = res.data;
+    //   //   for(let show of shows){
+
+    //   //   }
+    //   //   console.log("The response from userShows is:")
+    //   //   console.log(res)
+    //   // })
+    //   // const userInfo = res.data
+    //   // console.log("In login form, userInfo is:")
+    //   // console.log(userInfo)
+    //   // setUser(userInfo)
+    //   // setLoginStatus(true)
+    // })
+    // //   })
+    // // navigate('/')
   }
 
   useEffect(() => {

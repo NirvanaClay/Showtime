@@ -16,22 +16,25 @@ return [
     */
 
     'paths' => [
-        // 'api/*',
+        'api/*',
+        'sanctum/csrf-cookie',
         // 'fuck',
-        // 'login',
-        // 'logout',
-        // 'register',
-        // 'user/password',
-        // 'forgot-password',
-        // 'reset-password',
-        // 'sanctum/csrf-cookie',
-        // 'user/profile-information',
-        // 'email/verification-notification',
+        'login',
+        'logout',
+        'register',
+        'user/password',
+        'forgot-password',
+        'reset-password',
+        'user/profile-information',
+        'email/verification-notification',
+        'testing',
+        'user',
+        'checkAuth'
     ],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000'],
 
     'allowed_origins_patterns' => [],
 

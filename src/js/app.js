@@ -26,6 +26,8 @@ import axios from 'axios';
 
 import reportWebVitals from '../reportWebVitals';
 
+require('../bootstrap');
+
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
   const [user, setUser] = useState();
@@ -48,9 +50,30 @@ const App = () => {
 
   const [changedRating, setChangedRating] = useState(false)
 
+  const token = document.getElementById('token');
+  console.log("The token is:")
+  console.log(token.content)
+
   // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
+
+  useEffect(() => {
+    axios.get('/checkAuth')
+    .then((res) => {
+      if(res.data != false){
+        setLoginStatus(true)
+        setUser(res.data)
+        console.log("In checkAuth effect, set user as:")
+        console.log(res.data)
+      }
+      else{
+        console.log("There is false on res.data")
+      }
+      // console.log("checkAuth res is:")
+      // console.log(res)
+    })
+  }, [loginStatus])
 
   useEffect(() => {
     console.log("Check auth status in app effect, with user of:.")
@@ -58,17 +81,19 @@ const App = () => {
     if(user){
       console.log("user != 'Guest'")
       console.log("In app effect, there is a user.")
-      // .then((res) => {
+      setName(user.name)
+      setEmail(user.email)
+      setUserId(user.id)
       //   const user = res.data
       //   console.log("Which has res.data of:")
       //   console.log(user)
       //   console.log("There is a user, which is:")
       //   console.log(user)
-      //   setUser(user)
-      //   setName(user.name)
-      //   setEmail(user.email)
-      //   setUserId(user.id)
-      //   setLoginStatus(true)
+        // setUser(user)
+        // setName(user.name)
+        // setEmail(user.email)
+        // setUserId(user.id)
+        // setLoginStatus(true)
       // })
     }
     else{
@@ -85,12 +110,16 @@ const App = () => {
 
   const [showType, setShowType] = useState('')
 
+  const [userShows, setUserShows] = useState([])
+
   useEffect((e) => {
     const fetchShows = async () => {
       if(user){
-        const userShows = user[1]
-        console.log("userShows are:")
+        console.log("When fetching shows, userShows are:")
         console.log(userShows)
+        // const userShows = user[1]
+        // console.log("userShows are:")
+        // console.log(userShows)
         let userSeries = userShows.filter(show => show.show_type == 'series')
         let userMovies = userShows.filter(show => show.show_type == 'movie')
         let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
@@ -114,7 +143,7 @@ const App = () => {
       }
     }
     fetchShows()
-  }, [user, changedRating])
+  }, [user, changedRating, userShows])
 
   const fetchResults = async (e) => {
     e.preventDefault()
@@ -369,7 +398,7 @@ const App = () => {
 
         <Route path="register" element={<RegisterForm setUser={setUser} setLoginStatus={setLoginStatus} passwordVisibility={passwordVisibility} setPasswordVisibility={setPasswordVisibility} changePasswordVisibility={changePasswordVisibility} />} />
 
-        <Route path="login" element={<LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} passwordVisibility={passwordVisibility} setPasswordVisibility={setPasswordVisibility} changePasswordVisibility={changePasswordVisibility} resetSlider={resetSlider} />} />
+        <Route path="login" element={<LoginForm setLoginStatus={setLoginStatus} loginStatus={loginStatus} setUser={setUser} setUserId={setUserId} passwordVisibility={passwordVisibility} setPasswordVisibility={setPasswordVisibility} changePasswordVisibility={changePasswordVisibility} resetSlider={resetSlider} userShows={userShows} setUserShows={setUserShows} />} />
 
         <Route path='my-series' element={<SeriesList user={user} series={series} getSeries={getSeries} movies={movies} getMovies={getMovies} Link={Link} checkStreaming={checkStreaming} sliderPosition={sliderPosition} setSliderPosition={setSliderPosition} streamingServices={streamingServices} streamingId={streamingId} noStreaming={noStreaming} loginStatus={loginStatus} isLoading={isLoading} spinnerDegree={spinnerDegree} setSpinnerDegree={setSpinnerDegree} resizeResetSlider={resizeResetSlider} changedRating={changedRating} setChangedRating={setChangedRating} />} />
 

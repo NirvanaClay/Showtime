@@ -9,25 +9,23 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
   const [previewRating, setPreviewRating] = useState(rating)
   const [stateRating, setStateRating] = useState([rating || 0])
 
-  useEffect(() => {
-    console.log("In show effect, stateRating is:")
-    console.log(stateRating)
-  }, [stateRating])
+  // useEffect(() => {
+  //   console.log("In show effect, stateRating is:")
+  //   console.log(stateRating)
+  // }, [stateRating])
 
-  useEffect(() => {
-    console.log("In show effect, changedRating is:")
-    console.log(changedRating)
-  }, [changedRating])
+  // useEffect(() => {
+  //   console.log("In show effect, changedRating is:")
+  //   console.log(changedRating)
+  // }, [changedRating])
 
-  useEffect(() => {
-    console.log("In show effect, stateRating is:")
-    console.log(stateRating)
-  }, [stateRating])
+  // useEffect(() => {
+  //   console.log("In show effect, stateRating is:")
+  //   console.log(stateRating)
+  // }, [stateRating])
 
   useEffect(() =>{
     const checkRating = (e) => {
-      console.log("In checkRating, stateRating is:")
-      console.log(stateRating)
       let stars = document.querySelectorAll('i')
       for(let star of stars){
         if(star.parentElement.parentElement.parentElement.id == id){
@@ -45,7 +43,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const addRating = async (e) => {
     e.preventDefault()
-    await axios.post(`/api/shows/${id}`, {
+    await axios.post(`/shows/${id}`, {
       _method: 'PUT',
       id: id,
       rating: stateRating,
@@ -56,7 +54,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
 
   const deleteShow = async (e) => {
     e.preventDefault();
-    axios.delete(`/api/shows/${id}`)
+    axios.delete(`/shows/${id}`)
     if(series){
       getSeries(series.filter((show) => show.id !== id))
     }
@@ -130,7 +128,7 @@ const Show = ({ title, image, id, imdb_id, rating, checkStreaming, streamingServ
         <p>{streamingServices}</p>
       }
       <div className='stars-container' id={id}>
-        <form action='/api/shows/{id}' method='POST' onSubmit={addRating}>
+        <form action='/shows/{id}' method='POST' onSubmit={addRating}>
           <input type="hidden" name="_method" value="PUT" />
           <input type ='hidden' name='id' value={id} className='id' />
           <input type="hidden" name="_token" value="{{ csrf_token() }}" />

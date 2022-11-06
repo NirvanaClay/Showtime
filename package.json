@@ -1,6 +1,5 @@
 {
     "private": true,
-    "proxy": "http://localhost:8888",
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",

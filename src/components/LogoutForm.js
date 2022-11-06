@@ -7,7 +7,7 @@ const LogoutForm = ({ setName, setEmail, setUser, setLoginStatus, resetSlider })
 
   const logout = async (e) => {
     e.preventDefault()
-    axios.post('/api/logout')
+    axios.post('/logout')
     setUser()
     navigate('/')
   }

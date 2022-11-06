@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+use Laravel\Sanctum\Contracts\HasApiTokens;
+
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
+    // /**
+    //  * Display the login view.
+    //  *
+    //  * @return \Illuminate\View\View
+    //  */
     public function create()
     {
         return view('auth.login');
@@ -29,7 +31,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -37,32 +38,37 @@ class AuthenticatedSessionController extends Controller
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $user = Auth::User();
-            $shows = $user->shows;
-            return [$user, $shows];
+            $user = $request->user();
+            return $user;
+            // $token = $user->createToken($request->token_name);
+            // $token = $user->createToken('My_App');
+
+            // return ['token' => $token->plainTextToken];
+            // return $token;
+            // $shows = $user->shows;
+            // return [$user, $shows];
         }
  
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
-        $request->authenticate();
+        // $request->authenticate();
 
-        $request->session()->regenerate();
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
+        // $request->session()->regenerate();
     }
 
-    public function userShows(Request $request)
-    {
-        $id = Auth::id();
-        $user = User::find($id);
-        if($user){
-            return "There is a user.";
-        }
-        else{
-            return "There is not a user";
-        }
-    }
+    // public function userShows(Request $request)
+    // {
+    //     $request->authenticate();
+    //     $id = Auth::id();
+    //     $user = User::find($id);
+    //     if($user){
+    //         return "There is a user.";
+    //     }
+    //     else{
+    //         return "There is not a user";
+    //     }
+    // }
 
     /**
      * Destroy an authenticated session.

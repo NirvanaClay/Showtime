@@ -15,29 +15,30 @@ const RegisterForm = ({ setUser, setLoginStatus, passwordVisibility, setPassword
       email: e.target[0].value,
       password: e.target[1].value,
       password_confirmation: e.target[2].value
-    }).then(
-      await axios.get('/sanctum/csrf-cookie')
-      .then(async (res) => {
-        await axios.post('/login', data)
-        .then(async (res) => {
-          console.log("in login post, res is:")
-          console.log(res)
-          await axios.get('/api/user')
-          .then((res) => {
-            const userInfo = res.data
-            console.log("In register form, userInfo is:")
-            console.log(userInfo)
-            setUser(userInfo)
-            setLoginStatus(true)
-          })
-        })
-      })
-    ).catch(
-      res => {
-        console.log(res)
-      }
-    )
-    navigate('/')
+    })
+    // }).then(
+    //   await axios.get('/sanctum/csrf-cookie')
+    //   .then(async (res) => {
+    //     await axios.post('/login', data)
+    //     .then(async (res) => {
+    //       console.log("in login post, res is:")
+    //       console.log(res)
+    //       await axios.get('/api/user')
+    //       .then((res) => {
+    //         const userInfo = res.data
+    //         console.log("In register form, userInfo is:")
+    //         console.log(userInfo)
+    //         setUser(userInfo)
+    //         setLoginStatus(true)
+    //       })
+    //     })
+    //   })
+    // ).catch(
+    //   res => {
+    //     console.log(res)
+    //   }
+    // )
+    // navigate('/')
   }
 
   useEffect(() => {

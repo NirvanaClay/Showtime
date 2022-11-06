@@ -2647,18 +2647,20 @@ var LoginForm = function LoginForm(_ref) {
       loginStatus = _ref.loginStatus,
       passwordVisibility = _ref.passwordVisibility,
       setPasswordVisibility = _ref.setPasswordVisibility,
-      changePasswordVisibility = _ref.changePasswordVisibility;
+      changePasswordVisibility = _ref.changePasswordVisibility,
+      userShows = _ref.userShows,
+      setUserShows = _ref.setUserShows;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("In loginForm, loginStatus is:");
     console.log(loginStatus);
-  });
+    console.log("and in loginForm, userShows are:");
+    console.log(userShows);
+  }, [userShows]);
 
   var loginUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var _document$querySelect, _document$querySelect2;
-
-      var data, header;
+      var data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2667,29 +2669,60 @@ var LoginForm = function LoginForm(_ref) {
               data = {
                 email: e.target[0].value,
                 password: e.target[1].value
-              };
-              header = {
-                'X-CSRF-TOKEN': (_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : (_document$querySelect2 = _document$querySelect.getAttribute('content')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.toString()
-              };
+              }; // let header = {
+              //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
+              // }
+
               console.log("Running loginUser function."); // axios.post(`/login`, {
               //   params: data,
               //   headers: header
               // })
 
-              axios.post('/login', data).then(function (res) {
-                axios.get('/userShows'); // .then((res) => {
-                //   console.log("The response from userShows is:")
-                //   console.log(res)
-                // })
-                // const userInfo = res.data
-                // console.log("In login form, userInfo is:")
-                // console.log(userInfo)
-                // setUser(userInfo)
-                // setLoginStatus(true)
-              }); //   })
-              // navigate('/')
+              axios.get('/api/register'); // axios.post('/api/auth/login', data)
+              // .then(() => {
+              //   axios.post('/tokens/create')
+              // })
+              // .then((res) => {
+              //   const user = res.data
+              //   setUser(user)
+              //   // setName(user.name)
+              //   // setEmail(user.email)
+              //   // setUserId(user.id)
+              //   setLoginStatus(true)
+              //   axios.get('/userShows')
+              //   .then((res) => {
+              //     setUserShows([...res.data])
+              //     // let userShows = res.data
+              //     // console.log("userShows are:")
+              //     // console.log(userShows)
+              //     // let userSeries = userShows.filter(show => show.show_type == 'series')
+              //     // let userMovies = userShows.filter(show => show.show_type == 'movie')
+              //     // let orderedUserSeries = userSeries.sort((a, b) => a.title.localeCompare(b.title))
+              //     // let orderedUserMovies = userMovies.sort((a, b) => a.title.localeCompare(b.title))
+              //     // console.log("orderedUserSeries is:")
+              //     // console.log(orderedUserSeries)
+              //     // console.log("orderedUserMovies are:")
+              //     // console.log(orderedUserMovies)
+              //     // getSeries([...orderedUserSeries])
+              //     // getMovies([...orderedUserMovies])
+              //   })
+              //   // .then((res) => {
+              //   //   let shows = res.data;
+              //   //   for(let show of shows){
+              //   //   }
+              //   //   console.log("The response from userShows is:")
+              //   //   console.log(res)
+              //   // })
+              //   // const userInfo = res.data
+              //   // console.log("In login form, userInfo is:")
+              //   // console.log(userInfo)
+              //   // setUser(userInfo)
+              //   // setLoginStatus(true)
+              // })
+              // //   })
+              // // navigate('/')
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -2802,7 +2835,7 @@ var LogoutForm = function LogoutForm(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/logout');
+              axios__WEBPACK_IMPORTED_MODULE_0___default().post('/logout');
               setUser();
               navigate('/');
 
@@ -2953,89 +2986,30 @@ var RegisterForm = function RegisterForm(_ref) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
 
   var addUser = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
       var data;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
               data = {
                 email: e.target[0].value,
                 password: e.target[1].value
               };
-              _context3.t0 = axios.post('/api/register', {
+              _context.next = 4;
+              return axios.post('/api/register', {
                 email: e.target[0].value,
                 password: e.target[1].value,
                 password_confirmation: e.target[2].value
               });
-              _context3.next = 5;
-              return axios.get('/sanctum/csrf-cookie').then( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(res) {
-                  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          _context2.next = 2;
-                          return axios.post('/login', data).then( /*#__PURE__*/function () {
-                            var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(res) {
-                              return _regeneratorRuntime().wrap(function _callee$(_context) {
-                                while (1) {
-                                  switch (_context.prev = _context.next) {
-                                    case 0:
-                                      console.log("in login post, res is:");
-                                      console.log(res);
-                                      _context.next = 4;
-                                      return axios.get('/api/user').then(function (res) {
-                                        var userInfo = res.data;
-                                        console.log("In register form, userInfo is:");
-                                        console.log(userInfo);
-                                        setUser(userInfo);
-                                        setLoginStatus(true);
-                                      });
 
-                                    case 4:
-                                    case "end":
-                                      return _context.stop();
-                                  }
-                                }
-                              }, _callee);
-                            }));
-
-                            return function (_x3) {
-                              return _ref4.apply(this, arguments);
-                            };
-                          }());
-
-                        case 2:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _callee2);
-                }));
-
-                return function (_x2) {
-                  return _ref3.apply(this, arguments);
-                };
-              }());
-
-            case 5:
-              _context3.t1 = _context3.sent;
-              _context3.next = 8;
-              return _context3.t0.then.call(_context3.t0, _context3.t1)["catch"](function (res) {
-                console.log(res);
-              });
-
-            case 8:
-              navigate('/');
-
-            case 9:
+            case 4:
             case "end":
-              return _context3.stop();
+              return _context.stop();
           }
         }
-      }, _callee3);
+      }, _callee);
     }));
 
     return function addUser(_x) {
@@ -3185,7 +3159,7 @@ var Result = function Result(_ref) {
               console.log("Data is:");
               console.log(data);
               _context.next = 7;
-              return axios.post('api/shows', data).then(function (response) {
+              return axios.post('/shows', data).then(function (response) {
                 console.log("response from .then of myShow is:");
                 console.log(response);
 
@@ -3495,24 +3469,22 @@ var Show = function Show(_ref) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([rating || 0]),
       _useState4 = _slicedToArray(_useState3, 2),
       stateRating = _useState4[0],
-      setStateRating = _useState4[1];
+      setStateRating = _useState4[1]; // useEffect(() => {
+  //   console.log("In show effect, stateRating is:")
+  //   console.log(stateRating)
+  // }, [stateRating])
+  // useEffect(() => {
+  //   console.log("In show effect, changedRating is:")
+  //   console.log(changedRating)
+  // }, [changedRating])
+  // useEffect(() => {
+  //   console.log("In show effect, stateRating is:")
+  //   console.log(stateRating)
+  // }, [stateRating])
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In show effect, stateRating is:");
-    console.log(stateRating);
-  }, [stateRating]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In show effect, changedRating is:");
-    console.log(changedRating);
-  }, [changedRating]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("In show effect, stateRating is:");
-    console.log(stateRating);
-  }, [stateRating]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var checkRating = function checkRating(e) {
-      console.log("In checkRating, stateRating is:");
-      console.log(stateRating);
       var stars = document.querySelectorAll('i');
 
       var _iterator = _createForOfIteratorHelper(stars),
@@ -3548,7 +3520,7 @@ var Show = function Show(_ref) {
             case 0:
               e.preventDefault();
               _context.next = 3;
-              return axios.post("/api/shows/".concat(id), {
+              return axios.post("/shows/".concat(id), {
                 _method: 'PUT',
                 id: id,
                 rating: stateRating,
@@ -3578,7 +3550,7 @@ var Show = function Show(_ref) {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              axios["delete"]("/api/shows/".concat(id));
+              axios["delete"]("/shows/".concat(id));
 
               if (series) {
                 getSeries(series.filter(function (show) {
@@ -3700,7 +3672,7 @@ var Show = function Show(_ref) {
       className: "stars-container",
       id: id,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-        action: "/api/shows/{id}",
+        action: "/shows/{id}",
         method: "POST",
         onSubmit: addRating,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
@@ -4389,28 +4361,47 @@ var App = function App() {
   var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState30 = _slicedToArray(_useState29, 2),
       changedRating = _useState30[0],
-      setChangedRating = _useState30[1]; // let userCheck = document.getElementById('authenticated').value
+      setChangedRating = _useState30[1];
+
+  var token = document.getElementById('token');
+  console.log("The token is:");
+  console.log(token); // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/checkAuth').then(function (res) {
+      if (res.data != false) {
+        setLoginStatus(true);
+        setUser(res.data);
+        console.log("In checkAuth effect, set user as:");
+        console.log(res.data);
+      } else {
+        console.log("There is false on res.data");
+      } // console.log("checkAuth res is:")
+      // console.log(res)
 
+    });
+  }, [loginStatus]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("Check auth status in app effect, with user of:.");
     console.log(user);
 
     if (user) {
       console.log("user != 'Guest'");
-      console.log("In app effect, there is a user."); // .then((res) => {
-      //   const user = res.data
+      console.log("In app effect, there is a user.");
+      setName(user.name);
+      setEmail(user.email);
+      setUserId(user.id); //   const user = res.data
       //   console.log("Which has res.data of:")
       //   console.log(user)
       //   console.log("There is a user, which is:")
       //   console.log(user)
-      //   setUser(user)
-      //   setName(user.name)
-      //   setEmail(user.email)
-      //   setUserId(user.id)
-      //   setLoginStatus(true)
+      // setUser(user)
+      // setName(user.name)
+      // setEmail(user.email)
+      // setUserId(user.id)
+      // setLoginStatus(true)
       // })
     } else {
       console.log("user == Guest");
@@ -4428,18 +4419,25 @@ var App = function App() {
       showType = _useState32[0],
       setShowType = _useState32[1];
 
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState34 = _slicedToArray(_useState33, 2),
+      userShows = _useState34[0],
+      setUserShows = _useState34[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function (e) {
     var fetchShows = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var userShows, userSeries, userMovies, orderedUserSeries, orderedUserMovies;
+        var userSeries, userMovies, orderedUserSeries, orderedUserMovies;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (user) {
-                  userShows = user[1];
-                  console.log("userShows are:");
-                  console.log(userShows);
+                  console.log("When fetching shows, userShows are:");
+                  console.log(userShows); // const userShows = user[1]
+                  // console.log("userShows are:")
+                  // console.log(userShows)
+
                   userSeries = userShows.filter(function (show) {
                     return show.show_type == 'series';
                   });
@@ -4482,7 +4480,7 @@ var App = function App() {
     }();
 
     fetchShows();
-  }, [user, changedRating]);
+  }, [user, changedRating, userShows]);
 
   var fetchResults = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
@@ -4840,10 +4838,10 @@ var App = function App() {
     };
   }();
 
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState34 = _slicedToArray(_useState33, 2),
-      sliderPosition = _useState34[0],
-      setSliderPosition = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState36 = _slicedToArray(_useState35, 2),
+      sliderPosition = _useState36[0],
+      setSliderPosition = _useState36[1];
 
   var resetSlider = function resetSlider() {
     console.log("Running resetSlider, so should be resetting results.");
@@ -4856,10 +4854,10 @@ var App = function App() {
     setSliderPosition(0);
   };
 
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState36 = _slicedToArray(_useState35, 2),
-      passwordVisibility = _useState36[0],
-      setPasswordVisibility = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState38 = _slicedToArray(_useState37, 2),
+      passwordVisibility = _useState38[0],
+      setPasswordVisibility = _useState38[1];
 
   var changePasswordVisibility = function changePasswordVisibility() {
     setPasswordVisibility(!passwordVisibility);
@@ -4922,7 +4920,9 @@ var App = function App() {
           passwordVisibility: passwordVisibility,
           setPasswordVisibility: setPasswordVisibility,
           changePasswordVisibility: changePasswordVisibility,
-          resetSlider: resetSlider
+          resetSlider: resetSlider,
+          userShows: userShows,
+          setUserShows: setUserShows
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_17__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
         path: "my-series",

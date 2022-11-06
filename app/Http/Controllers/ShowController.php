@@ -22,6 +22,20 @@ class ShowController extends Controller
     //         return "There is not a user";
     //     }
     // }
+    public function login(Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $user = Auth::User();
+            return $user;
+            // $shows = $user->shows;
+            // return [$user, $shows];
+        }
+    }
     public function add(Request $request)
     {
         $id = Auth::id();
