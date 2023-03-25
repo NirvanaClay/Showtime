@@ -29,33 +29,33 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+    // public function store(LoginRequest $request)
+    // {
+        // $credentials = $request->validate([
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
  
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $user = $request->user();
-            return $user;
-            // $token = $user->createToken($request->token_name);
-            // $token = $user->createToken('My_App');
+        // if (Auth::attempt($credentials)) {
+        //     // $request->session()->regenerate();
+        //     $user = $request->user();
+        //     return $user;
+        //     // $token = $user->createToken($request->token_name);
+        //     // $token = $user->createToken('My_App');
 
-            // return ['token' => $token->plainTextToken];
-            // return $token;
-            // $shows = $user->shows;
-            // return [$user, $shows];
-        }
+        //     // return ['token' => $token->plainTextToken];
+        //     // return $token;
+        //     // $shows = $user->shows;
+        //     // return [$user, $shows];
+        // }
  
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-        // $request->authenticate();
+    //     return back()->withErrors([
+    //         'email' => 'The provided credentials do not match our records.',
+    //     ]);
+    //     // $request->authenticate();
 
-        // $request->session()->regenerate();
-    }
+    //     // $request->session()->regenerate();
+    // }
 
     // public function userShows(Request $request)
     // {

@@ -15,22 +15,44 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
   
   const loginUser = async (e) => {
     e.preventDefault();
+    const theAxios = axios.create({
+      baseURL: 'http://localhost:8888',
+      withCredentials: true
+    });
     let data = {
       email: e.target[0].value,
       password: e.target[1].value
     }
-    // let header = {
-    //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
-    // }
-    console.log("Running loginUser function.")
-    axios.get('/sanctum/csrf-cookie')
-    .then((res) => {
-      // axios.get('/testing')
-      axios.post('/login', data)
-        .then((res) => {
-          axios.get('/api/user')
-        })
+    theAxios.get('sanctum/csrf-cookie')
+      .then((res) => {
+        theAxios.post('login', data)
+          .then((res) => {
+            theAxios.get('api/userShows')
+          })
       })
+  //   const theAxios = axios.create({
+  //     baseURL: 'http://localhost:8888',
+  //     // headers: {
+  //     //     // 'X-Requested-With': 'XMLHttpRequest',
+  //     //     // 'Accept': 'application/json',
+  //     //     // 'credentials': 'include'
+  //     //     'X-XSRF-TOKEN': getCookieValue('XSRF-TOKEN')
+  //     // },
+  //     // withCredentials: true,
+  // })
+    // let data = {
+    //   email: e.target[0].value,
+    //   password: e.target[1].value
+    // }
+    // theAxios.get('sanctum/csrf-cookie')
+    // .then((res) => {
+    //   // theAxios.get('testing')
+    //   theAxios.post('login', data)
+    //   // axios.get('http://localhost:8888/login')
+    //   .then((res) => {
+    //     theAxios.get('api/userShows')
+    //   })
+    // })
     //   axios.post('/login', data)
     //   .then((res) => {
     //     axios.get('/user')

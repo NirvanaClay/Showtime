@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'cookie',
+            'driver' => 'sanctum',
             'provider' => 'users',
             'hash' => false,
         ],

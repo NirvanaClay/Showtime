@@ -1,8 +1,10 @@
 window._ = require('lodash');
+import axios from 'axios';
 
-try {
-    require('bootstrap');
-} catch (e) {}
+
+// try {
+//     require('bootstrap');
+// } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -15,16 +17,12 @@ try {
 // console.log("In bootstrap doc, token is:")
 // console.log(token)
 
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// axios.defaults.headers.common['Accept'] = 'application/json';
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-console.log("Calling you a dipshit from bootstrap.js");
-
-window.axios = require('axios');
-
-window.axios.defaults.headers.common['Accept'] = 'application/json';
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
-window.axios.defaults.withCredentials = true;
+console.log('Setting withCredentials to true');
+axios.defaults.withCredentials = true;
+console.log('withCredentials is now', axios.defaults.withCredentials);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

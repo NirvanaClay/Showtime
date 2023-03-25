@@ -58,22 +58,22 @@ const App = () => {
   // console.log("userCheck is:")
   // console.log(userCheck)
 
-  useEffect(() => {
-    axios.get('/checkAuth')
-    .then((res) => {
-      if(res.data != false){
-        setLoginStatus(true)
-        setUser(res.data)
-        console.log("In checkAuth effect, set user as:")
-        console.log(res.data)
-      }
-      else{
-        console.log("There is false on res.data")
-      }
-      // console.log("checkAuth res is:")
-      // console.log(res)
-    })
-  }, [loginStatus])
+  // useEffect(() => {
+  //   axios.get('/checkAuth')
+  //   .then((res) => {
+  //     if(res.data != false){
+  //       setLoginStatus(true)
+  //       setUser(res.data)
+  //       console.log("In checkAuth effect, set user as:")
+  //       console.log(res.data)
+  //     }
+  //     else{
+  //       console.log("There is false on res.data")
+  //     }
+  //     // console.log("checkAuth res is:")
+  //     // console.log(res)
+  //   })
+  // }, [loginStatus])
 
   useEffect(() => {
     console.log("Check auth status in app effect, with user of:.")

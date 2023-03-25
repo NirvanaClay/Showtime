@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+
+use Illuminate\Http\Request;
 
 use App\Models\User;
 
 use App\Http\Controllers\Auth\ShowController;
+
+use Illuminate\Validation\Rules;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,29 +24,45 @@ use App\Http\Controllers\Auth\ShowController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return "Hello?";
 });
 
 Route::get('/testing', function () {
-    return "Testing testing.";
+    return "Testing.";
+});
+
+Route::get('sanctum/csrf-cookie', function () {
+    $response = new \Illuminate\Http\Response('Set CSRF cookie');
+    $response->cookie(
+      'XSRF-TOKEN', csrf_token(), 999999, '/', null, false, true
+    );
+    return $response;
+  });
+  
+
+Route::post('/login', function (Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        $id = Auth::id();
+        $user = User::find($id);
+        return $user->shows;
+        // return $user;
+    }
+
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth:api'])->name('dashboard');
-
-Route::post('/tokens/create', function (Request $request) {
-    // if(Auth::User()){
-    //     return Auth::User();
-    // }
-    // else{
-    //     return "No user, sorry.";
-    // }
-    $token = Session::token();
-    return $token;
-    // $token = $request->user()->createToken($request->token_name);
-    // return ['token' => $token->plainTextToken];
-});
 
 Route::get('/userShows', function()
 {
@@ -54,9 +73,7 @@ Route::get('/userShows', function()
     }
     else{
         return "There is not a user";
-//     }});
-// // }})->middleware(['auth.basic']);
-}})->middleware(['auth']);
+}})->middleware(['auth:sanctum']);
 
 Route::post('/shows', 'App\Http\Controllers\ShowController@add')->middleware(['auth.basic']);
 ;
@@ -76,4 +93,4 @@ Route::get('/checkAuth', function() {
 // })->middleware(['auth']);
 // })->middleware(['auth.basic']);
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

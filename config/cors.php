@@ -18,8 +18,8 @@ return [
     'paths' => [
         'api/*',
         'sanctum/csrf-cookie',
-        // 'fuck',
         'login',
+        'userShows',
         'logout',
         'register',
         'user/password',
@@ -29,12 +29,12 @@ return [
         'email/verification-notification',
         'testing',
         'user',
-        'checkAuth'
+        'checkAuth',
     ],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [env('CLIENT_URL')],
 
     'allowed_origins_patterns' => [],
 

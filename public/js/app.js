@@ -5520,9 +5520,14 @@ var Home = function Home(_ref) {
 /*!**************************!*\
   !*** ./src/bootstrap.js ***!
   \**************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
 
 try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
@@ -5535,15 +5540,13 @@ try {
 // let token = document.getElementById('token')
 // console.log("In bootstrap doc, token is:")
 // console.log(token)
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// axios.defaults.headers.common['Accept'] = 'application/json';
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-console.log("Calling you a dipshit from bootstrap.js");
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['Accept'] = 'application/json';
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
-window.axios.defaults.withCredentials = true;
+console.log('Setting withCredentials to true');
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.withCredentials) = true;
+console.log('withCredentials is now', (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.withCredentials));
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5952,26 +5955,48 @@ var LoginForm = function LoginForm(_ref) {
 
   var loginUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var data;
+      var theAxios, data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
+              theAxios = axios.create({
+                baseURL: 'http://localhost:8888',
+                withCredentials: true
+              });
               data = {
                 email: e.target[0].value,
                 password: e.target[1].value
-              }; // let header = {
-              //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')?.toString()
-              // }
-
-              console.log("Running loginUser function.");
-              axios.get('/sanctum/csrf-cookie').then(function (res) {
-                // axios.get('/testing')
-                axios.post('/login', data).then(function (res) {
-                  axios.get('/api/user');
+              };
+              theAxios.get('sanctum/csrf-cookie').then(function (res) {
+                theAxios.post('login', data).then(function (res) {
+                  theAxios.get('api/userShows');
                 });
-              }); //   axios.post('/login', data)
+              }); //   const theAxios = axios.create({
+              //     baseURL: 'http://localhost:8888',
+              //     // headers: {
+              //     //     // 'X-Requested-With': 'XMLHttpRequest',
+              //     //     // 'Accept': 'application/json',
+              //     //     // 'credentials': 'include'
+              //     //     'X-XSRF-TOKEN': getCookieValue('XSRF-TOKEN')
+              //     // },
+              //     // withCredentials: true,
+              // })
+              // let data = {
+              //   email: e.target[0].value,
+              //   password: e.target[1].value
+              // }
+              // theAxios.get('sanctum/csrf-cookie')
+              // .then((res) => {
+              //   // theAxios.get('testing')
+              //   theAxios.post('login', data)
+              //   // axios.get('http://localhost:8888/login')
+              //   .then((res) => {
+              //     theAxios.get('api/userShows')
+              //   })
+              // })
+              //   axios.post('/login', data)
               //   .then((res) => {
               //     axios.get('/user')
               //   })
@@ -7675,21 +7700,23 @@ var App = function App() {
   console.log(token.content); // let userCheck = document.getElementById('authenticated').value
   // console.log("userCheck is:")
   // console.log(userCheck)
+  // useEffect(() => {
+  //   axios.get('/checkAuth')
+  //   .then((res) => {
+  //     if(res.data != false){
+  //       setLoginStatus(true)
+  //       setUser(res.data)
+  //       console.log("In checkAuth effect, set user as:")
+  //       console.log(res.data)
+  //     }
+  //     else{
+  //       console.log("There is false on res.data")
+  //     }
+  //     // console.log("checkAuth res is:")
+  //     // console.log(res)
+  //   })
+  // }, [loginStatus])
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/checkAuth').then(function (res) {
-      if (res.data != false) {
-        setLoginStatus(true);
-        setUser(res.data);
-        console.log("In checkAuth effect, set user as:");
-        console.log(res.data);
-      } else {
-        console.log("There is false on res.data");
-      } // console.log("checkAuth res is:")
-      // console.log(res)
-
-    });
-  }, [loginStatus]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log("Check auth status in app effect, with user of:.");
     console.log(user);
