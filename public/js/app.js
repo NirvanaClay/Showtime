@@ -5962,7 +5962,7 @@ var LoginForm = function LoginForm(_ref) {
             case 0:
               e.preventDefault();
               theAxios = axios.create({
-                baseURL: 'http://localhost:8888',
+                // baseURL: 'http://localhost:8888',
                 withCredentials: true
               });
               data = {
