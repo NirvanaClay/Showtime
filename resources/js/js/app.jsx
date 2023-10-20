@@ -8,17 +8,17 @@ import ReactDOM from 'react-dom';
 
 import Axios from 'axios'
 
-import Home from '../Home.js'
-import Header from '../components/Header.js'
-import Form from '../components/Form.js'
-import Result from '../components/Result.js'
-import SeriesList from '../components/SeriesList.js'
-import MoviesList from '../components/MoviesList.js'
-import RegisterForm from '../components/RegisterForm.js'
-import LoginForm from '../components/LoginForm.js'
-import LogoutForm from '../components/LogoutForm.js'
-import Dashboard from '../components/Dashboard.js'
-import Example from '../components/Example.js'
+import Home from '../Home.jsx'
+import Header from '../components/Header.jsx'
+import Form from '../components/Form.jsx'
+import Result from '../components/Result.jsx'
+import SeriesList from '../components/SeriesList.jsx'
+import MoviesList from '../components/MoviesList.jsx'
+import RegisterForm from '../components/RegisterForm.jsx'
+import LoginForm from '../components/LoginForm.jsx'
+import LogoutForm from '../components/LogoutForm.jsx'
+import Dashboard from '../components/Dashboard.jsx'
+import Example from '../components/Example.jsx'
 
 import $ from 'jquery'
 import { set } from 'lodash';
@@ -27,8 +27,6 @@ import axios from 'axios';
 import reportWebVitals from '../reportWebVitals';
 
 require('../bootstrap');
-
-console.log("Testing to make sure we're working from the right folder.")
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);

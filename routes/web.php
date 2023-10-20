@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 use App\Models\User;
 
@@ -24,8 +25,9 @@ use Illuminate\Validation\Rules;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return "Hello?";
+    // return Inertia::render('YourComponentName');
+    return view('welcome');
+    // return "Hello?";
 });
 
 Route::get('/testing', function () {

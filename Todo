@@ -1,0 +1,4 @@
+1. Investigate why some stream checks work, while at other times it says not available even though it is. 
+2. Remove console logs. 
+3. Add disclaimer about not being able to 100% guarantee accuracy. 
+4. Check performance on google.
