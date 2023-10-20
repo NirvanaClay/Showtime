@@ -16,7 +16,7 @@ const LoginForm = ({ setLoginStatus, setUser, loginStatus, passwordVisibility, s
   const loginUser = async (e) => {
     e.preventDefault();
     const theAxios = axios.create({
-      baseURL: 'http://localhost:8888',
+      // baseURL: 'http://localhost:8888',
       withCredentials: true
     });
     let data = {
